@@ -1,2 +1,2 @@
-# http
-Http foundation
+# Http
+Vanilla Javascript Http foundation
