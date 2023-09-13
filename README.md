@@ -8,11 +8,10 @@ Need to do some searches
 0. Implement Request class
 1. File
 2. UploadedFile
-3. BinaryFileResponse
+3. Implement BinaryFileResponse
 4. SreamedResponse for stream download
-5. Server info in request get the in metadata infos
+5. Put Server info in request get the in metadata infos
 6. File Exception
-7. Http Exceptions
-8. Create MetadataResponse
-9. Middleware
-10. Implement laravel http concern in Request class
+7. Http File Exceptions
+8. Implement Middleware
+9. Implement laravel http concern in Request class
