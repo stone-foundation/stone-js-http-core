@@ -1,9 +1,9 @@
-import { Response } from "./Response.mjs"
-import { InvalidArgumentException } from "./exceptions/InvalidArgumentException.mjs"
+import { Response } from './Response.mjs'
+import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
 
 export class JsonResponse extends Response {
   _data
- 
+
   constructor (data = null, status = 200, headers = {}, json = false) {
     super('', status, headers)
 

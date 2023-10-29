@@ -7,7 +7,7 @@ export class Cookie {
   #sameSite
   #secureDefault
 
-  constructor({
+  constructor ({
     name,
     path,
     value,

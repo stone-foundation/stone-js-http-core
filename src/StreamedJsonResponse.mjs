@@ -1,3 +1,3 @@
-import { StreamedResponse } from "./StreamedResponse.mjs"
+import { StreamedResponse } from './StreamedResponse.mjs'
 
 export class StreamedJsonResponse extends StreamedResponse {}

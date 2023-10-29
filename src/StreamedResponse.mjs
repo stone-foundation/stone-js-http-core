@@ -1,3 +1,3 @@
-import { Response } from "./Response.mjs";
+import { Response } from './Response.mjs'
 
 export class StreamedResponse extends Response {}

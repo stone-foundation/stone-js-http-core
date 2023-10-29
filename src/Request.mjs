@@ -1,7 +1,7 @@
-import { LogicException } from "./exceptions/LogicException.mjs"
-import { RuntimeException } from "./exceptions/RuntimeException.mjs"
-import { NodeJSRequestMapper } from "./mappers/NodeJSRequestMapper.mjs"
-import { URIMapper } from "./mappers/URIMapper.mjs"
+import { LogicException } from './exceptions/LogicException.mjs'
+import { RuntimeException } from './exceptions/RuntimeException.mjs'
+import { NodeJSRequestMapper } from './mappers/NodeJSRequestMapper.mjs'
+import { URIMapper } from './mappers/URIMapper.mjs'
 
 export class Request {
   static FORMATS = {}
@@ -21,7 +21,7 @@ export class Request {
     X_FORWARDED_FOR: 'for',
     X_FORWARDED_HOST: 'host',
     X_FORWARDED_PORT: 'host',
-    X_FORWARDED_PROTO: 'proto',
+    X_FORWARDED_PROTO: 'proto'
   }
 
   static TRUSTED_HEADERS = [
@@ -30,7 +30,7 @@ export class Request {
     'X_FORWARDED_HOST',
     'X_FORWARDED_PORT',
     'X_FORWARDED_PROTO',
-    'X_FORWARDED_PREFIX',
+    'X_FORWARDED_PREFIX'
   ]
 
   static #mappers = new Map()
@@ -136,7 +136,7 @@ export class Request {
     if (this.route().hasParameter(key)) {
       return this.route().parameter(key)
     }
-    
+
     // Get from payload
     if (this.payload.has(key)) {
       return this.payload.get(key)
@@ -167,7 +167,7 @@ export class Request {
     if (!route) {
       throw new RuntimeException('Unable to generate fingerprint. Route unavailable.')
     }
-    
+
     return btoa([].concat(route.methods, [route.getDomain(), route.uri, this.ip]).join('|'))
   }
 
@@ -208,7 +208,7 @@ export class Request {
   }
 
   filterFiles (files) {}
-  
+
   get scheme () {}
 
   get contentTypeFormat () {}
@@ -222,7 +222,6 @@ export class Request {
   get segments () {}
 
   get decodedPath () {}
-
 
   get path () {}
   get query () {}
@@ -267,7 +266,7 @@ export class Request {
       rdf: ['application/rdf+xml'],
       atom: ['application/atom+xml'],
       rss: ['application/rss+xml'],
-      form: ['application/x-www-form-urlencoded', 'multipart/form-data'],
+      form: ['application/x-www-form-urlencoded', 'multipart/form-data']
     }
   }
 }

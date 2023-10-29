@@ -1,7 +1,5 @@
-import { assert } from 'chai'
-
 describe('Request', () => {
-  beforeEach(() => {
-    assert(true).ok()
+  it('params', function () {
+    this.assert.equal(1, 1)
   })
 })

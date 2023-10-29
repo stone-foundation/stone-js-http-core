@@ -1,8 +1,8 @@
-import { Response } from "./Response.mjs"
+import { Response } from './Response.mjs'
 
 export class MetaResponse extends Response {
   #metadata
- 
+
   constructor (content = null, status = 200, headers = {}, metadata = {}) {
     super(content, status, headers)
 

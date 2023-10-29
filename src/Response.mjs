@@ -1,5 +1,5 @@
-import { HttpResponseException } from "./exceptions/HttpResponseException.mjs"
-import { InvalidArgumentException } from "./exceptions/InvalidArgumentException.mjs"
+import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
+import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
 
 /**
  * InspiredBy: Symfony and Laravel
@@ -8,8 +8,8 @@ import { InvalidArgumentException } from "./exceptions/InvalidArgumentException.
 export class Response {
   static HTTP_CONTINUE = 100
   static HTTP_SWITCHING_PROTOCOLS = 101
-  static HTTP_PROCESSING = 102            // RFC2518
-  static HTTP_EARLY_HINTS = 103           // RFC8297
+  static HTTP_PROCESSING = 102 // RFC2518
+  static HTTP_EARLY_HINTS = 103 // RFC8297
   static HTTP_OK = 200
   static HTTP_CREATED = 201
   static HTTP_ACCEPTED = 202
@@ -17,9 +17,9 @@ export class Response {
   static HTTP_NO_CONTENT = 204
   static HTTP_RESET_CONTENT = 205
   static HTTP_PARTIAL_CONTENT = 206
-  static HTTP_MULTI_STATUS = 207          // RFC4918
-  static HTTP_ALREADY_REPORTED = 208      // RFC5842
-  static HTTP_IM_USED = 226               // RFC3229
+  static HTTP_MULTI_STATUS = 207 // RFC4918
+  static HTTP_ALREADY_REPORTED = 208 // RFC5842
+  static HTTP_IM_USED = 226 // RFC3229
   static HTTP_MULTIPLE_CHOICES = 300
   static HTTP_MOVED_PERMANENTLY = 301
   static HTTP_FOUND = 302
@@ -28,7 +28,7 @@ export class Response {
   static HTTP_USE_PROXY = 305
   static HTTP_RESERVED = 306
   static HTTP_TEMPORARY_REDIRECT = 307
-  static HTTP_PERMANENTLY_REDIRECT = 308  // RFC7238
+  static HTTP_PERMANENTLY_REDIRECT = 308 // RFC7238
   static HTTP_BAD_REQUEST = 400
   static HTTP_UNAUTHORIZED = 401
   static HTTP_PAYMENT_REQUIRED = 402
@@ -47,53 +47,53 @@ export class Response {
   static HTTP_UNSUPPORTED_MEDIA_TYPE = 415
   static HTTP_REQUESTED_RANGE_NOT_SATISFIABLE = 416
   static HTTP_EXPECTATION_FAILED = 417
-  static HTTP_I_AM_A_TEAPOT = 418                                               // RFC2324
-  static HTTP_MISDIRECTED_REQUEST = 421                                         // RFC7540
-  static HTTP_UNPROCESSABLE_ENTITY = 422                                        // RFC4918
-  static HTTP_LOCKED = 423                                                      // RFC4918
-  static HTTP_FAILED_DEPENDENCY = 424                                           // RFC4918
-  static HTTP_TOO_EARLY = 425                                                   // RFC-ietf-httpbis-replay-04
-  static HTTP_UPGRADE_REQUIRED = 426                                            // RFC2817
-  static HTTP_PRECONDITION_REQUIRED = 428                                       // RFC6585
-  static HTTP_TOO_MANY_REQUESTS = 429                                           // RFC6585
-  static HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431                             // RFC6585
-  static HTTP_UNAVAILABLE_FOR_LEGAL_REASONS = 451                               // RFC7725
+  static HTTP_I_AM_A_TEAPOT = 418 // RFC2324
+  static HTTP_MISDIRECTED_REQUEST = 421 // RFC7540
+  static HTTP_UNPROCESSABLE_ENTITY = 422 // RFC4918
+  static HTTP_LOCKED = 423 // RFC4918
+  static HTTP_FAILED_DEPENDENCY = 424 // RFC4918
+  static HTTP_TOO_EARLY = 425 // RFC-ietf-httpbis-replay-04
+  static HTTP_UPGRADE_REQUIRED = 426 // RFC2817
+  static HTTP_PRECONDITION_REQUIRED = 428 // RFC6585
+  static HTTP_TOO_MANY_REQUESTS = 429 // RFC6585
+  static HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431 // RFC6585
+  static HTTP_UNAVAILABLE_FOR_LEGAL_REASONS = 451 // RFC7725
   static HTTP_INTERNAL_SERVER_ERROR = 500
   static HTTP_NOT_IMPLEMENTED = 501
   static HTTP_BAD_GATEWAY = 502
   static HTTP_SERVICE_UNAVAILABLE = 503
   static HTTP_GATEWAY_TIMEOUT = 504
   static HTTP_VERSION_NOT_SUPPORTED = 505
-  static HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506                        // RFC2295
-  static HTTP_INSUFFICIENT_STORAGE = 507                                        // RFC4918
-  static HTTP_LOOP_DETECTED = 508                                               // RFC5842
-  static HTTP_NOT_EXTENDED = 510                                                // RFC2774
-  static HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511                             // RFC6585
+  static HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506 // RFC2295
+  static HTTP_INSUFFICIENT_STORAGE = 507 // RFC4918
+  static HTTP_LOOP_DETECTED = 508 // RFC5842
+  static HTTP_NOT_EXTENDED = 510 // RFC2774
+  static HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511 // RFC6585
 
   /**
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
    */
   static #HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES = {
-    'must_revalidate': false,
-    'no_cache': false,
-    'no_store': false,
-    'no_transform': false,
-    'public': false,
-    'private': false,
-    'proxy_revalidate': false,
-    'max_age': true,
-    's_maxage': true,
-    'stale_if_error': true,         // RFC5861
-    'stale_while_revalidate': true, // RFC5861
-    'immutable': false,
-    'last_modified': true,
-    'etag': true,
+    must_revalidate: false,
+    no_cache: false,
+    no_store: false,
+    no_transform: false,
+    public: false,
+    private: false,
+    proxy_revalidate: false,
+    max_age: true,
+    s_maxage: true,
+    stale_if_error: true, // RFC5861
+    stale_while_revalidate: true, // RFC5861
+    immutable: false,
+    last_modified: true,
+    etag: true
   }
 
   static STATUS_TEXTS = {
     100: 'Continue',
     101: 'Switching Protocols',
-    102: 'Processing',            // RFC2518
+    102: 'Processing', // RFC2518
     103: 'Early Hints',
     200: 'OK',
     201: 'Created',
@@ -102,9 +102,9 @@ export class Response {
     204: 'No Content',
     205: 'Reset Content',
     206: 'Partial Content',
-    207: 'Multi-Status',          // RFC4918
-    208: 'Already Reported',      // RFC5842
-    226: 'IM Used',               // RFC3229
+    207: 'Multi-Status', // RFC4918
+    208: 'Already Reported', // RFC5842
+    226: 'IM Used', // RFC3229
     300: 'Multiple Choices',
     301: 'Moved Permanently',
     302: 'Found',
@@ -112,7 +112,7 @@ export class Response {
     304: 'Not Modified',
     305: 'Use Proxy',
     307: 'Temporary Redirect',
-    308: 'Permanent Redirect',    // RFC7238
+    308: 'Permanent Redirect', // RFC7238
     400: 'Bad Request',
     401: 'Unauthorized',
     402: 'Payment Required',
@@ -126,33 +126,33 @@ export class Response {
     410: 'Gone',
     411: 'Length Required',
     412: 'Precondition Failed',
-    413: 'Content Too Large',                                           // RFC-ietf-httpbis-semantics
+    413: 'Content Too Large', // RFC-ietf-httpbis-semantics
     414: 'URI Too Long',
     415: 'Unsupported Media Type',
     416: 'Range Not Satisfiable',
     417: 'Expectation Failed',
-    418: 'I\'m a teapot',                                               // RFC2324
-    421: 'Misdirected Request',                                         // RFC7540
-    422: 'Unprocessable Content',                                       // RFC-ietf-httpbis-semantics
-    423: 'Locked',                                                      // RFC4918
-    424: 'Failed Dependency',                                           // RFC4918
-    425: 'Too Early',                                                   // RFC-ietf-httpbis-replay-04
-    426: 'Upgrade Required',                                            // RFC2817
-    428: 'Precondition Required',                                       // RFC6585
-    429: 'Too Many Requests',                                           // RFC6585
-    431: 'Request Header Fields Too Large',                             // RFC6585
-    451: 'Unavailable For Legal Reasons',                               // RFC7725
+    418: 'I\'m a teapot', // RFC2324
+    421: 'Misdirected Request', // RFC7540
+    422: 'Unprocessable Content', // RFC-ietf-httpbis-semantics
+    423: 'Locked', // RFC4918
+    424: 'Failed Dependency', // RFC4918
+    425: 'Too Early', // RFC-ietf-httpbis-replay-04
+    426: 'Upgrade Required', // RFC2817
+    428: 'Precondition Required', // RFC6585
+    429: 'Too Many Requests', // RFC6585
+    431: 'Request Header Fields Too Large', // RFC6585
+    451: 'Unavailable For Legal Reasons', // RFC7725
     500: 'Internal Server Error',
     501: 'Not Implemented',
     502: 'Bad Gateway',
     503: 'Service Unavailable',
     504: 'Gateway Timeout',
     505: 'HTTP Version Not Supported',
-    506: 'Variant Also Negotiates',                                     // RFC2295
-    507: 'Insufficient Storage',                                        // RFC4918
-    508: 'Loop Detected',                                               // RFC5842
-    510: 'Not Extended',                                                // RFC2774
-    511: 'Network Authentication Required',                             // RFC6585
+    506: 'Variant Also Negotiates', // RFC2295
+    507: 'Insufficient Storage', // RFC4918
+    508: 'Loop Detected', // RFC5842
+    510: 'Not Extended', // RFC2774
+    511: 'Network Authentication Required' // RFC6585
   }
 
   _headers
@@ -172,7 +172,7 @@ export class Response {
       .setStatusCode(status)
       .setProtocolVersion('1.0')
   }
-  
+
   get status () {
     return this.statusCode
   }
@@ -224,7 +224,7 @@ export class Response {
     } else {
       this._content = value ?? ''
     }
-    
+
     this.#originalContent = value
 
     return this
@@ -241,20 +241,20 @@ export class Response {
       throw new InvalidArgumentException(error)
     }
   }
-  
+
   get protocolVersion () {
     return this._version
   }
-  
+
   setProtocolVersion (value) {
     this._version = value
     return this
   }
-  
+
   get charset () {
     return this._charset
   }
-  
+
   setCharset (value) {
     this._charset = value
     return this
@@ -319,7 +319,7 @@ export class Response {
         mimeType && this._headers.set('Content-Type', mimeType)
       }
 
-      $charset = this._charset ?? 'UTF-8'
+      const charset = this._charset ?? 'UTF-8'
       if (!this._headers.has('Content-Type')) {
         this._headers.set('Content-Type', `text/html; charset=${charset}`)
       } else if (!(this._headers.get('Content-Type') ?? '').includes('text/') && !(this._headers.get('Content-Type') ?? '').includes('charset')) {
@@ -340,11 +340,11 @@ export class Response {
       }
     }
 
-    if ('HTTP/1.0' != request.server.get('SERVER_PROTOCOL')) {
+    if (request.server.get('SERVER_PROTOCOL') !== 'HTTP/1.0') {
       this.setProtocolVersion('1.1')
     }
 
-    if ('1.0' == this.getProtocolVersion() && (this._headers.get('pragma') ?? '').includes('no-cache')) {
+    if (this.getProtocolVersion() === '1.0' && (this._headers.get('pragma') ?? '').includes('no-cache')) {
       this._headers.set('pragma', 'no-cache')
       this._headers.set('expires', -1)
     }
@@ -361,7 +361,7 @@ export class Response {
     return this
   }
 
-  setContentSafe(safe = true) {
+  setContentSafe (safe = true) {
     if (safe) {
       this._headers.set('Preference-Applied', 'safe')
     } else if (this._headers.get('Preference-Applied') === 'safe') {
@@ -373,12 +373,12 @@ export class Response {
     return this
   }
 
-  header(key, value) {
+  header (key, value) {
     this._headers.set(key, value)
     return this
   }
 
-  withHeaders(headers) {
+  withHeaders (headers) {
     return Object.entries(headers).reduce((prev, [key, value]) => {
       this._headers.set(key, value)
       return prev
@@ -416,7 +416,7 @@ export class Response {
     return Math.max(new Date().getTime() - parseInt(this.getDate().getTime()), 0)
   }
 
-  expire() {
+  expire () {
     if (this.isFresh()) {
       this._headers.set('Age', this.getMaxAge())
       this._headers.remove('Expires')
@@ -466,23 +466,23 @@ export class Response {
     return this.getTtl() > 0
   }
 
-  isValidateable() {
+  isValidateable () {
     return this._headers.has('Last-Modified') || this._headers.has('ETag')
   }
 
-  setPrivate() {
+  setPrivate () {
     this.removeHeaderCacheControlDirective('public')
     this.addHeaderCacheControlDirective('private')
     return this
   }
 
-  setPublic() {
+  setPublic () {
     this.removeHeaderCacheControlDirective('private')
     this.addHeaderCacheControlDirective('public')
     return this
   }
 
-  setImmutable(immutable = true) {
+  setImmutable (immutable = true) {
     immutable
       ? this.addHeaderCacheControlDirective('immutable')
       : this.removeHeaderCacheControlDirective('immutable')
@@ -545,7 +545,7 @@ export class Response {
     return this
   }
 
-  getMaxAge() {
+  getMaxAge () {
     if (this.hasHeaderCacheControlDirective('s-maxage')) {
       return parseInt(this.getHeaderCacheControlDirective('s-maxage'))
     }
@@ -561,22 +561,22 @@ export class Response {
     return null
   }
 
-  setMaxAge(value) {
+  setMaxAge (value) {
     this.addHeaderCacheControlDirective('max-age', value)
     return this
   }
 
-  setStaleIfError(value) {
+  setStaleIfError (value) {
     this.addHeaderCacheControlDirective('stale-if-error', value)
     return this
   }
 
-  setStaleWhileRevalidate(value) {
+  setStaleWhileRevalidate (value) {
     this.addHeaderCacheControlDirective('stale-while-revalidate', value)
     return this
   }
 
-  setSharedMaxAge(value) {
+  setSharedMaxAge (value) {
     this.setPublic()
     this.addHeaderCacheControlDirective('s-maxage', value)
     return this
@@ -584,7 +584,7 @@ export class Response {
 
   getTtl () {
     const maxAge = this.getMaxAge()
-    return null !== maxAge ? Math.max(maxAge - this.getAge(), 0) : null
+    return maxAge !== null ? Math.max(maxAge - this.getAge(), 0) : null
   }
 
   setTtl (seconds) {
@@ -614,16 +614,10 @@ export class Response {
   setNotModified () {
     this.setStatusCode(304)
     this.setContent(null)
-    
-    [
-      'Allow',
-      'Content-Encoding',
-      'Content-Language',
-      'Content-Length',
-      'Content-MD5',
-      'Content-Type',
-      'Last-Modified'
-    ].forEach(v => this._headers.delete(v))
+
+    const headers = ['Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified']
+
+    headers.forEach(v => this._headers.delete(v))
 
     return this
   }
@@ -640,28 +634,28 @@ export class Response {
       throw new InvalidArgumentException(`Response does not support the following options: "${diff.join(', ')}".`)
     }
 
-    if (options['etag']) {
-      this.setEtag(options['etag'])
+    if (options.etag) {
+      this.setEtag(options.etag)
     }
 
-    if (options['last_modified']) {
-      this.setLastModfied(options['last_modified'])
+    if (options.last_modified) {
+      this.setLastModfied(options.last_modified)
     }
 
-    if (options['max_age']) {
-      this.setMaxAge(options['max_age'])
+    if (options.max_age) {
+      this.setMaxAge(options.max_age)
     }
 
-    if (options['s_maxage']) {
-      this.setSharedMaxAge(options['s_maxage'])
+    if (options.s_maxage) {
+      this.setSharedMaxAge(options.s_maxage)
     }
 
-    if (options['stale_while_revalidate']) {
-      this.setStaleWhileRevalidate(options['stale_while_revalidate'])
+    if (options.stale_while_revalidate) {
+      this.setStaleWhileRevalidate(options.stale_while_revalidate)
     }
 
-    if (options['stale_if_error']) {
-      this.setStaleIfError(options['stale_if_error'])
+    if (options.stale_if_error) {
+      this.setStaleIfError(options.stale_if_error)
     }
 
     Object
@@ -675,12 +669,12 @@ export class Response {
           }
         }
       })
-    
-    if (options['public']) {
+
+    if (options.public) {
       this.setPublic()
     }
-    
-    if (options['private']) {
+
+    if (options.private) {
       this.setPrivate()
     }
 
