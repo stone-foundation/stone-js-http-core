@@ -1,64 +1,81 @@
 {
-  "name": "@noowow-community/http",
+  "name": "@stone-js/http",
   "version": "0.0.1",
   "description": "Vanilla Javascript Http foundation",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "repository": "git@github.com:noowow-community/http.git",
   "author": "Mr Stone <pierre.evens16@gmail.com>",
   "license": "MIT",
-  "files": [
-    "/dist"
-  ],
+  "repository": "git@github.com:stonemjs/http.git",
+  "homepage": "https://github.com/stonemjs/http#readme",
+  "bugs": {
+    "url": "https://github.com/stonemjs/http/issues"
+  },
   "keywords": [
     "Http",
     "Noowow"
   ],
-  "homepage": "https://github.com/noowow-community/http#readme",
-  "bugs": {
-    "url": "https://github.com/noowow-community/http/issues"
-  },
+  "main": "./src/index.mjs",
+  "module": "./src/index.mjs",
+  "types": "./dist/index.d.mts",
+  "typings": "./dist/index.d.mts",
+  "files": [
+    "/src",
+    "/dist"
+  ],
   "exports": {
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./src/index.mjs"
       },
       "require": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./src/index.mjs"
       }
     }
   },
   "scripts": {
-    "lint": "eslint src --ext mjs",
-    "lint:test": "eslint tests --ext mjs",
-    "lint:fix": "eslint --fix --ext mjs src/ tests/",
-    "release": "yarn build && npm publish",
-    "build": "yarn lint && webpack --env prod",
-    "build:dev": "yarn lint && webpack --env dev",
-    "test": "yarn lint:test && mocha --experimental-modules --no-warnings test/**/*.spec.mjs"
+    "types": "tsc",
+    "lint": "standard src",
+    "lint:test": "standard --env mocha tests",
+    "lint:fix": "standard --fix src tests",
+    "predoc": "rimraf docs",
+    "doc": "jsdoc src/index.js -d docs",
+    "build": "cross-env NODE_ENV=prod yarn lint && rollup -c",
+    "build:dev": "cross-env NODE_ENV=dev yarn lint && rollup -c",
+    "release": "npm run test:summary && npm run build && npm publish --access public",
+    "test": "npm run lint:test && mocha --experimental-modules --no-warnings -r tests/setup.mjs tests/*.spec.mjs tests/**/*.spec.mjs",
+    "test:html": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text npm run test",
+    "test:lcov": "cross-env NODE_ENV=test nyc --reporter=lcovonly --reporter=text npm run test",
+    "test:summary": "cross-env NODE_ENV=test nyc --reporter=text-summary npm run test",
+    "test:text": "cross-env NODE_ENV=test nyc --reporter=text npm run test"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/plugin-transform-private-methods": "^7.22.5",
-    "@babel/preset-env": "^7.15.8",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.2",
-    "chai": "^4.3.4",
-    "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "eslint": "^7.12.1",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "mocha": "^9.1.3",
-    "webpack": "^5.58.2",
-    "webpack-cli": "^4.9.0",
-    "deepmerge": "^4.3.1"
+    "@babel/core": "^7.22.20",
+    "@babel/eslint-parser": "^7.22.15",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/register": "^7.22.15",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "babel-plugin-istanbul": "^6.1.1",
+    "chai": "^4.3.8",
+    "cross-env": "^7.0.3",
+    "jsdoc": "^4.0.2",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.1.5",
+    "rollup-plugin-delete": "^2.0.0",
+    "sinon": "^16.0.0",
+    "standard": "^17.1.0",
+    "typescript": "^5.2.2"
+  },
+  "standard": {
+    "parser": "@babel/eslint-parser",
+    "globals": [
+      "describe",
+      "it"
+    ]
   }
 }

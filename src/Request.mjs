@@ -37,6 +37,7 @@ export class Request {
 
   #body
   #query
+  #headers
   #metadata
   #userResolver
   #routeResolver
