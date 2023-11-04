@@ -1,5 +1,7 @@
+const { Request } = require('../src/Request')
+
 describe('Request', () => {
-  test('params', () => {
-    expect(1).toEqual(1)
+  test('has static METHOD_HEAD', () => {
+    expect(Request.METHOD_HEAD).toEqual('HEAD')
   })
 })
