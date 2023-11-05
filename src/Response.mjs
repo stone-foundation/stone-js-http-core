@@ -4,15 +4,16 @@ import cookie from 'cookie'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { sign } from 'cookie-signature'
+import { Macroable } from '@stone-js/macroable'
 import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
 import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
 import { LogicException } from './index.mjs'
 
 /**
- * InspiredBy: Symfony and Laravel
+ * InspiredBy: Symfony, Laravel and ExpressJS
  * @see: https://github.com/symfony/symfony/blob/6.4/src/Symfony/Component/HttpFoundation/Response.php
  */
-export class Response {
+export class Response extends Macroable {
   static HTTP_CONTINUE = 100
   static HTTP_SWITCHING_PROTOCOLS = 101
   static HTTP_PROCESSING = 102 // RFC2518

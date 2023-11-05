@@ -1,9 +1,10 @@
+import { Macroable } from '@stone-js/macroable'
 import { LogicException } from './exceptions/LogicException.mjs'
 import { RuntimeException } from './exceptions/RuntimeException.mjs'
 import { NodeJSRequestMapper } from './mappers/NodeJSRequestMapper.mjs'
 import { URIMapper } from './mappers/URIMapper.mjs'
 
-export class Request {
+export class Request extends Macroable {
   static FORMATS = {}
 
   static METHOD_HEAD = 'HEAD'

@@ -50,6 +50,7 @@
     "test:lcov": "npm run test:cvg -- --coverageReporters=lcov text"
   },
   "dependencies": {
+    "@stone-js/macroable": "^1.0.0",
     "content-disposition": "^0.5.4",
     "content-type": "^1.0.5",
     "cookie": "^0.5.0",
