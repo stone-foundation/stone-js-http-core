@@ -17,18 +17,18 @@ export class JsonResponse extends Response {
   }
 
   static fromJsonString (data, status = 200, headers = {}) {
-    return new this(data, status, headers).setJson(data)
+    return new this(data, status, headers, true)
   }
 
   setJson (jsonString) {
     this._data = jsonString
-    this.setContent(jsonString)
-    this._headers.set('Content-Type', 'application/json')
     return this
+      .setContent(jsonString)
+      .setContentType('json')
   }
 
   setData (data) {
-    return this.json(this._morphToJson(data))
+    return this.setJson(this._morphToJson(data))
   }
 
   get data () {

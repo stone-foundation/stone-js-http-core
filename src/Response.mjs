@@ -1,5 +1,14 @@
+import vary from 'vary'
+import { mime } from 'send'
+import cookie from 'cookie'
+import statuses from 'statuses'
+import encodeUrl from 'encodeUrl'
+import escapeHtml from 'escapeHtml'
+import { Buffer } from 'safe-buffer'
+import { sign } from 'cookie-signature'
 import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
 import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
+import { LogicException } from './index.mjs'
 
 /**
  * InspiredBy: Symfony and Laravel
@@ -90,70 +99,7 @@ export class Response {
     etag: true
   }
 
-  static STATUS_TEXTS = {
-    100: 'Continue',
-    101: 'Switching Protocols',
-    102: 'Processing', // RFC2518
-    103: 'Early Hints',
-    200: 'OK',
-    201: 'Created',
-    202: 'Accepted',
-    203: 'Non-Authoritative Information',
-    204: 'No Content',
-    205: 'Reset Content',
-    206: 'Partial Content',
-    207: 'Multi-Status', // RFC4918
-    208: 'Already Reported', // RFC5842
-    226: 'IM Used', // RFC3229
-    300: 'Multiple Choices',
-    301: 'Moved Permanently',
-    302: 'Found',
-    303: 'See Other',
-    304: 'Not Modified',
-    305: 'Use Proxy',
-    307: 'Temporary Redirect',
-    308: 'Permanent Redirect', // RFC7238
-    400: 'Bad Request',
-    401: 'Unauthorized',
-    402: 'Payment Required',
-    403: 'Forbidden',
-    404: 'Not Found',
-    405: 'Method Not Allowed',
-    406: 'Not Acceptable',
-    407: 'Proxy Authentication Required',
-    408: 'Request Timeout',
-    409: 'Conflict',
-    410: 'Gone',
-    411: 'Length Required',
-    412: 'Precondition Failed',
-    413: 'Content Too Large', // RFC-ietf-httpbis-semantics
-    414: 'URI Too Long',
-    415: 'Unsupported Media Type',
-    416: 'Range Not Satisfiable',
-    417: 'Expectation Failed',
-    418: 'I\'m a teapot', // RFC2324
-    421: 'Misdirected Request', // RFC7540
-    422: 'Unprocessable Content', // RFC-ietf-httpbis-semantics
-    423: 'Locked', // RFC4918
-    424: 'Failed Dependency', // RFC4918
-    425: 'Too Early', // RFC-ietf-httpbis-replay-04
-    426: 'Upgrade Required', // RFC2817
-    428: 'Precondition Required', // RFC6585
-    429: 'Too Many Requests', // RFC6585
-    431: 'Request Header Fields Too Large', // RFC6585
-    451: 'Unavailable For Legal Reasons', // RFC7725
-    500: 'Internal Server Error',
-    501: 'Not Implemented',
-    502: 'Bad Gateway',
-    503: 'Service Unavailable',
-    504: 'Gateway Timeout',
-    505: 'HTTP Version Not Supported',
-    506: 'Variant Also Negotiates', // RFC2295
-    507: 'Insufficient Storage', // RFC4918
-    508: 'Loop Detected', // RFC5842
-    510: 'Not Extended', // RFC2774
-    511: 'Network Authentication Required' // RFC6585
-  }
+  static STATUS_TEXTS = statuses.message
 
   _headers
   _content
@@ -162,28 +108,21 @@ export class Response {
   _exception
   _statusCode
   _statusText
+  #appResolver
+  #requestResolver
   #originalContent
   #headerCacheControl
 
   constructor (content = '', status = 200, headers = {}) {
     this
+      .setStatus(status)
       .setHeaders(headers)
       .setContent(content)
-      .setStatusCode(status)
       .setProtocolVersion('1.0')
   }
 
   get status () {
     return this.statusCode
-  }
-
-  get headers () {
-    return this._headers
-  }
-
-  setHeaders (headers) {
-    this._headers = new Map(Object.entries(headers ?? {}))
-    return this
   }
 
   get statusText () {
@@ -194,7 +133,104 @@ export class Response {
     return this._statusCode
   }
 
-  setStatusCode (code, text = null) {
+  get headers () {
+    return Object.fromEntries(this._headers.entries())
+  }
+
+  get content () {
+    return this._content
+  }
+
+  get originalContent () {
+    return this.#originalContent
+  }
+
+  get charset () {
+    return this._charset
+  }
+
+  get protocolVersion () {
+    return this._version
+  }
+
+  get app () {
+    if (!this.#appResolver) {
+      throw new LogicException('Must set an Application resolver')
+    }
+
+    return this.#appResolver()
+  }
+
+  get request () {
+    if (!this.#requestResolver) {
+      throw new LogicException('Must set a Request resolver')
+    }
+
+    return this.#requestResolver()
+  }
+
+  get vary () {
+    return this.getHeader('Vary', []).reduce((prev, curr) => prev.concat(curr.split(/[\s,]+/)), [])
+  }
+
+  get #charsetRegExp () {
+    return /;\s*charset\s*=/
+  }
+
+  setHeaders (headers) {
+    this._headers = new Map()
+    return Object.entries(headers).reduce((_, [key, value]) => this.setHeader(key, value))
+  }
+
+  withHeaders (headers) {
+    return this.setHeaders(headers)
+  }
+
+  header (key, value) {
+    return this.setHeader(key, value)
+  }
+
+  setHeader (key, value) {
+    value = Array.isArray(value) ? value.map(String) : String(value)
+
+    if (key.toLowerCase() === 'content-type') {
+      if (Array.isArray(value)) {
+        throw new InvalidArgumentException('Content-Type cannot be set to an Array')
+      } else if (!this.#charsetRegExp.test(value)) { // Add charset(Character Sets) to content-type
+        let charset = mime.charsets.lookup(value.split(';').shift())
+        value += charset ? `; charset=${charset.toLowerCase()}` : ''
+      }
+    }
+
+    this._headers.set(key, value)
+
+    return this
+  }
+
+  appendHeader (key, value) {
+    const oldValue = this.getHeader(key)
+    return this.setHeader(key, oldValue ? [].concat(oldValue, value) : value)
+  }
+
+  getHeader (key, fallback = null) {
+    return this._headers.get(key) ?? fallback
+  }
+
+  hasHeader (key) {
+    return this._headers.has(key)
+  }
+
+  removeHeader (key) {
+    key = Array.isArray(key) ? key : [key]
+    
+    for (const item of key) {
+      this._headers.delete(item)
+    }
+
+    return this
+  }
+
+  setStatus (code, text = null) {
     this._statusCode = code
 
     if (this.isInvalid()) {
@@ -210,14 +246,6 @@ export class Response {
     return this
   }
 
-  get content () {
-    return this._content
-  }
-
-  get originalContent () {
-    return this.#originalContent
-  }
-
   setContent (value) {
     if (this._shouldBeJson(value)) {
       this._content = this._morphToJson(value)
@@ -231,19 +259,67 @@ export class Response {
   }
 
   _shouldBeJson (content) {
-    return Array.isArray(content) || typeof content === 'object'
+    return !Buffer.isBuffer(content) && ['object', 'number', 'boolean'].includes(typeof content)
   }
 
   _morphToJson (content) {
     try {
-      return JSON.stringify(content)
+      return this.stringify(content, this.app.get('http.json.replacer'), this.app.get('http.json.spaces'), this.app.get('http.json.escape'))
     } catch (error) {
       throw new InvalidArgumentException(error)
     }
   }
 
-  get protocolVersion () {
-    return this._version
+  setCookie (name, value, options = {}) {
+    options ??= {}
+    options = { ...this.app.get('http.cookie', {}), ...options }
+
+    const secret = this.app.get('http.cookie.secret', this.app.get('http.secret', this.app.get('app.secret')))
+
+    if (options.signed && !secret) {
+      throw new LogicException('A secret is required for signed cookies. Please set a secret in configurations.')
+    }
+
+    value = typeof value === 'object' ? `j:${this.stringify(value)}` : String(value)
+    
+    if (options.signed) {
+      value = `s:${sign(value, secret)}`
+    }
+
+    if (options.maxAge) {
+      const maxAge = options.maxAge - 0
+      
+      if (!NaN(maxAge)) {
+        options.expires = new Date(Date.now() + maxAge)
+        options.maxAge = Math.floor(maxAge / 1000)
+      }
+    }
+
+    if (!options.path) {
+      options.path = '/'
+    }
+
+    this.appendHeader('Set-Cookie', cookie.serialize(name, String(value), options))
+
+    return this
+  }
+
+  clearCookie (name, options) {
+    return this.setCookie(name, '', { expires: new Date(1), path: '/', ...options })
+  }
+
+  secureCookies (value = false) {
+    const cookies = this
+      .getHeader('Set-Cookie', [])
+      .map(v => {
+        if (value) {
+          return v.includes('Secure') ? v : `${v}; Secure`
+        } else {
+          return v.replace(/;?\s*[Ss]ecure\s*;?/, '')
+        }
+      })
+
+    return this.setHeader('Set-Cookie', cookies)
   }
 
   setProtocolVersion (value) {
@@ -251,12 +327,81 @@ export class Response {
     return this
   }
 
-  get charset () {
-    return this._charset
-  }
-
   setCharset (value) {
     this._charset = value
+    return this
+  }
+
+  setContentType (value) {
+    return this.setHeader('Content-Type', value.includes('/') ? value : mime.lookup(value))
+  }
+
+  setType (value) {
+    return this.setContentType(value)
+  }
+
+  setLinks (links) {
+    return this.setHeader(
+      'Link',
+      Object
+        .entries(links)
+        .reduce((prev, [key, val]) => `${prev ? ', ' : ''}<${val}>; rel="${key}"`, this.getHeader('Link'))
+    )
+  }
+
+  format (formats) {
+    const keys = Object.keys(formats).filter(v => v !== 'default')
+    const key = keys.length > 0 ? this.request.accepts(keys) : null
+
+    if (key) {
+      this.setType(key)
+      this._content = formats[key]()
+    } else if (formats.default) {
+      this.setContent(formats.default())
+    } else {
+      this._statusCode = Response.HTTP_NOT_ACCEPTABLE
+      this._statusText = `Invalid types (${keys.join(',')})`
+    }
+
+    return this.addVary('Accept')
+  }
+
+  location (url) {
+    if (url === 'back') {
+      url = this.request.getHeader('Referrer') ?? '/'
+    }
+
+    return this.setHeader('Location', encodeUrl(url))
+  }
+
+  redirect (...values) {
+    const url = values.length === 2 ? values[1] : values[0]
+    const status = values.length === 2 ? values[0] : Response.HTTP_FOUND
+
+    url = escapeHtml(this.location(url).getHeader('Location'))
+
+    return this
+      .format({
+        default: () => '',
+        text: () => `${Response.STATUS_TEXTS[status]}. Redirecting to ${url}`,
+        html: () => `<p>${Response.STATUS_TEXTS[status]}. Redirecting to <a href="${url}">${url}</a></p>`,
+      })
+      .setStatus(status)
+      .setHeader('Content-Length', Buffer.byteLength(this._content))
+  }
+
+  addVary (field) {
+    vary(this, field)
+    return this
+  }
+
+  setApp (resolver) {
+    this.#appResolver = resolver
+    return this
+  }
+
+  setRequest (resolver) {
+    this.#requestResolver = resolver
     return this
   }
 
@@ -301,88 +446,111 @@ export class Response {
   }
 
   isRedirect (location = null) {
-    return [201, 301, 302, 303, 307, 308].includes(this._statusCode) && location === null ? true : this._headers.get('Location')
+    return [201, 301, 302, 303, 307, 308].includes(this._statusCode) && location === null ? true : this.getHeader('Location')
   }
 
   isEmpty () {
     return [204, 304].includes(this._statusCode)
   }
 
+  isResetContent () {
+    return [205].includes(this._statusCode)
+  }
+
   prepare (request) {
+    this.setRequest(() => request)
+
+    switch (typeof this._content) {
+      case 'string':
+        !this.getHeader('Content-Type') && this.setContentType('html')
+        break
+      case 'object':
+      case 'number':
+      case 'boolean':
+        if (Buffer.isBuffer(this._content)) {
+          !this.getHeader('Content-Type') && this.setContentType('bin')
+        } else {
+          !this.getHeader('Content-Type') && this.setContentType('json')
+        }
+        break
+    }
+
+    if (this.request.fresh) {
+      this._statusCode = Response.HTTP_NOT_MODIFIED
+    }
+
     if (this.isInformational() || this.isEmpty()) {
-      this.setContent(null)
-      this._headers.delete('Content-Type')
-      this._headers.delete('Content-Length')
+      this
+        .setContent(null)
+        .removeHeader(['Content-Type', 'Content-Length', 'Transfer-Encoding'])
+    } else if (this.isResetContent()) {
+      this
+        .setContent(null)
+        .setHeader('Content-Length', '0')
+        .removeHeader('Transfer-Encoding')
     } else {
-      if (!this._headers.has('Content-Type')) {
-        const mimeType = request.getMimeType(request.getRequestFormat(null))
-        mimeType && this._headers.set('Content-Type', mimeType)
+      let length, etag
+      const etagFn = this.app.get('http.etag.function')
+      const generateETag = !this.hasHeader('ETag') && typeof etagFn === 'function'
+      this._charset ??= 'UTF-8'
+
+      if (typeof this.getHeader('Content-Type') === 'string') {
+        this.setContentType(`${this.getHeader('Content-Type')}; charset=${this._charset}`)
       }
 
-      const charset = this._charset ?? 'UTF-8'
-      if (!this._headers.has('Content-Type')) {
-        this._headers.set('Content-Type', `text/html; charset=${charset}`)
-      } else if (!(this._headers.get('Content-Type') ?? '').includes('text/') && !(this._headers.get('Content-Type') ?? '').includes('charset')) {
-        this._headers.set('Content-Type', `${this._headers.get('Content-Type')}; charset=${charset}`)
+      if (this._content !== undefined) {
+        if (Buffer.isBuffer(this._content)) {
+          length = this._content.length
+        } else if (!generateETag && this._content.length < 1000) {
+          length = Buffer.byteLength(this._content, this._charset)
+        } else {
+          this._content = Buffer.from(chunk, this._charset)
+          this._charset = undefined
+          length = this._content.length
+        }
+
+        this.setHeader('Content-Length', length)
       }
 
-      if (this._headers.has('Transfer-Encoding')) {
-        this._headers.remove('Content-Length')
+      if (generateETag && length !== undefined) {
+        if ((etag = etagFn(this._content, this._charset))) {
+          this.setHeader('ETag', etag)
+        }
       }
 
-      if (this._headers.isMethod('HEAD')) {
+      if (this.hasHeader('Transfer-Encoding')) {
+        this.removeHeader('Content-Length')
+      }
+
+      if (this.request.isMethod('HEAD')) {
         // cf. RFC2616 14.13
-        const length = this._headers.get('Content-Length')
+        const length = this.getHeader('Content-Length')
         this.setContent(null)
         if (length) {
-          this._headers.set('Content-Length', length)
+          this.setHeader('Content-Length', length)
         }
       }
     }
 
-    if (request.server.get('SERVER_PROTOCOL') !== 'HTTP/1.0') {
+    if (this.request.server.get('SERVER_PROTOCOL') !== 'HTTP/1.0') {
       this.setProtocolVersion('1.1')
     }
 
-    if (this.getProtocolVersion() === '1.0' && (this._headers.get('pragma') ?? '').includes('no-cache')) {
-      this._headers.set('pragma', 'no-cache')
-      this._headers.set('expires', -1)
+    if (this.request.isSecure()) {
+      this.secureCookies(true)
     }
 
-    if (request.isSecure()) {
-      this.setHeaderCookieSecureDefault(true)
-    }
-
-    return this
-  }
-
-  setHeaderCookieSecureDefault (value = false) {
-    this._headers.set('cookies', this._headers.get('cookies').map(cookie => cookie.setSecure(value)))
     return this
   }
 
   setContentSafe (safe = true) {
     if (safe) {
-      this._headers.set('Preference-Applied', 'safe')
-    } else if (this._headers.get('Preference-Applied') === 'safe') {
-      this._headers.remove('Preference-Applied')
+      this.setHeader('Preference-Applied', 'safe')
+    } else if (this.getHeader('Preference-Applied') === 'safe') {
+      this.removeHeader('Preference-Applied')
     }
 
-    this.setVary('Prefer', false)
-
-    return this
-  }
-
-  header (key, value) {
-    this._headers.set(key, value)
-    return this
-  }
-
-  withHeaders (headers) {
-    return Object.entries(headers).reduce((prev, [key, value]) => {
-      this._headers.set(key, value)
-      return prev
-    }, this)
+    return this.addVary('Prefer')
   }
 
   throwResponse () {
@@ -421,15 +589,6 @@ export class Response {
       this._headers.set('Age', this.getMaxAge())
       this._headers.remove('Expires')
     }
-    return this
-  }
-
-  get vary () {
-    return (this._headers.get('Vary') ?? []).reduce((prev, curr) => prev.concat(curr.split(/[\s,]+/)), [])
-  }
-
-  setVary (values) {
-    this._headers.set('Vary', values)
     return this
   }
 
@@ -612,7 +771,7 @@ export class Response {
   }
 
   setNotModified () {
-    this.setStatusCode(304)
+    this.setStatus(304)
     this.setContent(null)
 
     const headers = ['Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified']
@@ -663,7 +822,7 @@ export class Response {
       .forEach(([key, value]) => {
         if (!value && options[key]) {
           if (options[key]) {
-            this.addHaderCacheControlDirective(value.replace('_', '-'))
+            this.addHeaderCacheControlDirective(value.replace('_', '-'))
           } else {
             this.removeHeaderCacheControlDirective(value.replace('_', '-'))
           }
@@ -679,5 +838,31 @@ export class Response {
     }
 
     return this
+  }
+
+  // From: https://github.com/expressjs/express/blob/master/lib/response.js
+  stringify (value, replacer, spaces, escape) {
+    // v8 checks arguments.length for optimizing simple call
+    // https://bugs.chromium.org/p/v8/issues/detail?id=4730
+    var json = replacer || spaces
+      ? JSON.stringify(value, replacer, spaces)
+      : JSON.stringify(value)
+  
+    if (escape && typeof json === 'string') {
+      json = json.replace(/[<>&]/g, function (c) {
+        switch (c.charCodeAt(0)) {
+          case 0x3c:
+            return '\\u003c'
+          case 0x3e:
+            return '\\u003e'
+          case 0x26:
+            return '\\u0026'
+          default:
+            return c
+        }
+      })
+    }
+  
+    return json
   }
 }
