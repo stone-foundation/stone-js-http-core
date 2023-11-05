@@ -2,8 +2,6 @@ import vary from 'vary'
 import { mime } from 'send'
 import cookie from 'cookie'
 import statuses from 'statuses'
-import encodeUrl from 'encodeUrl'
-import escapeHtml from 'escapeHtml'
 import { Buffer } from 'safe-buffer'
 import { sign } from 'cookie-signature'
 import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
@@ -354,8 +352,9 @@ export class Response {
     const key = keys.length > 0 ? this.request.accepts(keys) : null
 
     if (key) {
-      this.setType(key)
-      this._content = formats[key]()
+      this
+        .setContentType(key)
+        .setContent(formats[key]())
     } else if (formats.default) {
       this.setContent(formats.default())
     } else {
@@ -364,30 +363,6 @@ export class Response {
     }
 
     return this.addVary('Accept')
-  }
-
-  location (url) {
-    if (url === 'back') {
-      url = this.request.getHeader('Referrer') ?? '/'
-    }
-
-    return this.setHeader('Location', encodeUrl(url))
-  }
-
-  redirect (...values) {
-    const url = values.length === 2 ? values[1] : values[0]
-    const status = values.length === 2 ? values[0] : Response.HTTP_FOUND
-
-    url = escapeHtml(this.location(url).getHeader('Location'))
-
-    return this
-      .format({
-        default: () => '',
-        text: () => `${Response.STATUS_TEXTS[status]}. Redirecting to ${url}`,
-        html: () => `<p>${Response.STATUS_TEXTS[status]}. Redirecting to <a href="${url}">${url}</a></p>`,
-      })
-      .setStatus(status)
-      .setHeader('Content-Length', Buffer.byteLength(this._content))
   }
 
   addVary (field) {
@@ -665,15 +640,15 @@ export class Response {
   }
 
   addHeaderCacheControlDirective (key, value = true) {
-    this.#headerCacheControl = this.#headerCacheControl ?? new Map()
+    this.#headerCacheControl ??= new Map()
     this.#headerCacheControl.set(key, value)
-    this._headers.set('Cache-Control', this.getHeaderCacheControlHeader())
+    this.setHeader('Cache-Control', this.getHeaderCacheControlHeader())
     return this
   }
 
   removeCacheControlDirective (key) {
     this.#headerCacheControl.has(key) && this.#headerCacheControl.delete(key)
-    this._headers.set('Cache-Control', this.getHeaderCacheControlHeader())
+    this.setHeader('Cache-Control', this.getHeaderCacheControlHeader())
     return this
   }
 
