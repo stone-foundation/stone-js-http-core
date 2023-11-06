@@ -1,10 +1,26 @@
 import { JsonResponse } from './JsonResponse.mjs'
+import { InvalidArgumentException } from './index.mjs'
 
 export class JsonpResponse extends JsonResponse {
+  #callback
+
+  setCallback (callback) {
+    this.#callback = callback
+    return this
+  }
+
+  getCallback () {
+    return this.#callback ?? this.request.query[this.app.get('http.jsonp.callback.name')]
+  }
+
   setJson (jsonString) {
     this._data = jsonString
     
-    let callback = this.request.query[this.app.get('http.jsonp.callback.name')]
+    let callback = this.getCallback()
+
+    if (!callback) {
+      throw new InvalidArgumentException('No callback provided.')
+    }
 
     if (Array.isArray(callback)) {
       callback = callback.shift()
