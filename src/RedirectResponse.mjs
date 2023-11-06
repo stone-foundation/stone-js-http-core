@@ -1,5 +1,6 @@
 import encodeUrl from 'encodeUrl'
 import escapeHtml from 'escapeHtml'
+import { Buffer } from 'safe-buffer'
 import { Response } from './Response.mjs'
 import { InvalidArgumentException } from './index.mjs'
 

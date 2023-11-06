@@ -1,8 +1,8 @@
-import { mime } from 'send'
+import mime from 'mime'
 import { filesize } from 'filesize'
 import { basename, dirname, extname, isAbsolute, join } from 'node:path'
 import { InvalidArgumentException, RuntimeException } from '../index.mjs'
-import { statSync, existsSync, accessSync, constants, writeFileSync, readFileSync, mkdirSync, renameSync, chmodSync } from 'node:fs'
+import { statSync, existsSync, accessSync, constants, writeFileSync, readFileSync, mkdirSync, renameSync, chmodSync, rmSync } from 'node:fs'
 
 export class File {
   #path
@@ -39,8 +39,8 @@ export class File {
 
     try {
       renameSync(this.getPath(), target.getPath())
-    } catch (e) {
-      throw new RuntimeException(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${e}).`)
+    } catch (error) {
+      throw new RuntimeException(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`)
     }
     
     chmodSync(target.getPath(), 0o666)
@@ -48,12 +48,21 @@ export class File {
     return target
   }
 
+  remove (force = false) {
+    try {
+      rmSync(this.#path, { force })
+    } catch (error) {
+      throw new RuntimeException(`Could not remove this file (${this.#path}) (${error}).`)
+    }
+    return this
+  }
+
   getSize (string = false) {
     return string ? filesize(this.#getStats().size) :  this.#getStats().size
   }
 
   getMimeType () {
-    return mime.lookup(this.#path)
+    return mime.getType(this.#path)
   }
   
   getDirname () {
