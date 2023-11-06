@@ -4,6 +4,7 @@ import cookie from 'cookie'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { sign } from 'cookie-signature'
+import { createHash } from 'node:crypto'
 import { Macroable } from '@stone-js/macroable'
 import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
 import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
@@ -466,7 +467,7 @@ export class Response extends Macroable {
         .removeHeader('Transfer-Encoding')
     } else {
       let length, etag
-      const etagFn = this.app.get('http.etag.function')
+      const etagFn = this.app.get('http.etag.function', this.#defaultEtagFn)
       const generateETag = !this.hasHeader('ETag') && typeof etagFn === 'function'
       this._charset ??= 'UTF-8'
 
@@ -574,12 +575,12 @@ export class Response extends Macroable {
 
   setEtag (etag = null, weak = false) {
     if (!etag) {
-      this._headers.delete('ETag')
+      this.removeHeader('ETag')
     } else {
       if (!etag.startsWith('"')) {
         etag = `"${etag}"`
       }
-      this._headers.set('ETag', `${weak ? 'W/' : ''}${etag}`)
+      this.setHeader('ETag', `${weak ? 'W/' : ''}${etag}`)
     }
 
     return this
@@ -729,9 +730,9 @@ export class Response extends Macroable {
 
   setLastModified (date = null) {
     if (!date) {
-      this._headers.delete('Last-Modified')
+      this.removeHeader('Last-Modified')
     } else {
-      this._headers.set('Last-Modified', new Date().getUTCDate())
+      this.setHeader('Last-Modified', date.toUTCString())
     }
 
     return this
@@ -814,6 +815,14 @@ export class Response extends Macroable {
     }
 
     return this
+  }
+
+  #defaultEtagFn (content, encoding) {
+    return Buffer.from(this.#getHashedContent()).toString('base64')
+  }
+
+  #getHashedContent (content, encoding) {
+    return createHash('sha256').update(content, encoding).digest('hex')
   }
 
   // From: https://github.com/expressjs/express/blob/master/lib/response.js

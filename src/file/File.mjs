@@ -1,7 +1,8 @@
 import mime from 'mime'
 import { filesize } from 'filesize'
-import { basename, dirname, extname, isAbsolute, join } from 'node:path'
+import { createHash } from 'node:crypto'
 import { InvalidArgumentException, RuntimeException } from '../index.mjs'
+import { basename, dirname, extname, isAbsolute, join, resolve } from 'node:path'
 import { statSync, existsSync, accessSync, constants, writeFileSync, readFileSync, mkdirSync, renameSync, chmodSync, rmSync } from 'node:fs'
 
 export class File {
@@ -57,12 +58,18 @@ export class File {
     return this
   }
 
+  getHashedContent (algo = 'sha256') {
+    return createHash(algo)
+      .update(this.getContent(), 'utf-8')
+      .digest('hex')
+  }
+
   getSize (string = false) {
     return string ? filesize(this.#getStats().size) :  this.#getStats().size
   }
 
-  getMimeType () {
-    return mime.getType(this.#path)
+  getMimeType (fallback) {
+    return mime.getType(this.#path) ?? fallback
   }
   
   getDirname () {
@@ -71,6 +78,18 @@ export class File {
 
   getPath () {
     return this.#path
+  }
+
+  getPathEncoded () {
+    return encodeURI(this.getPath())
+  }
+
+  getAbsolutePath (root = '') {
+    return resolve(root, this.#path)
+  }
+
+  getAbsolutePathEncoded (root = '') {
+    return encodeURI(this.getAbsolutePath(root))
   }
 
   getBasename (exclude = '') {
