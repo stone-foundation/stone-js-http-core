@@ -6,9 +6,9 @@ import { Buffer } from 'safe-buffer'
 import { sign } from 'cookie-signature'
 import { createHash } from 'node:crypto'
 import { Macroable } from '@stone-js/macroable'
+import { LogicException } from './exceptions/LogicException.mjs'
 import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
 import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
-import { LogicException } from './index.mjs'
 
 /**
  * InspiredBy: Symfony, Laravel and ExpressJS
