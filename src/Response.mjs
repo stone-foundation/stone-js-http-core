@@ -107,8 +107,8 @@ export class Response extends Macroable {
   _charset
   _exception
   _statusCode
-  _statusText
   #appResolver
+  _statusMessage
   #requestResolver
   #originalContent
   #headerCacheControl
@@ -125,8 +125,8 @@ export class Response extends Macroable {
     return this.statusCode
   }
 
-  get statusText () {
-    return this._statusText
+  get statusMessage () {
+    return this._statusMessage
   }
 
   get statusCode () {
@@ -212,6 +212,10 @@ export class Response extends Macroable {
     return this.setHeader(key, oldValue ? [].concat(oldValue, value) : value)
   }
 
+  getHeaders (hasMap = false) {
+    return hasMap ? this._headers : this.headers
+  }
+
   getHeader (key, fallback = null) {
     return this._headers.get(key) ?? fallback
   }
@@ -238,9 +242,9 @@ export class Response extends Macroable {
     }
 
     if (text === null) {
-      this._statusText = Response.STATUS_TEXTS[code] ?? 'unknown status'
+      this._statusMessage = Response.STATUS_TEXTS[code] ?? 'unknown status'
     } else {
-      this._statusText = text
+      this._statusMessage = text
     }
 
     return this
@@ -360,8 +364,9 @@ export class Response extends Macroable {
     } else if (formats.default) {
       this.setContent(formats.default())
     } else {
-      this._statusCode = Response.HTTP_NOT_ACCEPTABLE
-      this._statusText = `Invalid types (${keys.join(',')})`
+      this
+        .setStatus(Response.HTTP_NOT_ACCEPTABLE)
+        .setContent(`Invalid types (${keys.join(',')})`)
     }
 
     return this.addVary('Accept')
@@ -372,12 +377,12 @@ export class Response extends Macroable {
     return this
   }
 
-  setApp (resolver) {
+  setAppResolver (resolver) {
     this.#appResolver = resolver
     return this
   }
 
-  setRequest (resolver) {
+  setRequestResolver (resolver) {
     this.#requestResolver = resolver
     return this
   }
@@ -435,7 +440,7 @@ export class Response extends Macroable {
   }
 
   prepare (request) {
-    this.setRequest(() => request)
+    this.setRequestResolver(() => request)
 
     switch (typeof this._content) {
       case 'string':
@@ -481,7 +486,7 @@ export class Response extends Macroable {
         } else if (!generateETag && this._content.length < 1000) {
           length = Buffer.byteLength(this._content, this._charset)
         } else {
-          this._content = Buffer.from(chunk, this._charset)
+          this._content = Buffer.from(this._content, this._charset)
           this._charset = undefined
           length = this._content.length
         }
@@ -500,12 +505,7 @@ export class Response extends Macroable {
       }
 
       if (this.request.isMethod('HEAD')) {
-        // cf. RFC2616 14.13
-        const length = this.getHeader('Content-Length')
         this.setContent(null)
-        if (length) {
-          this.setHeader('Content-Length', length)
-        }
       }
     }
 
@@ -753,7 +753,7 @@ export class Response extends Macroable {
 
     const headers = ['Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified']
 
-    headers.forEach(v => this._headers.delete(v))
+    headers.forEach(this.removeHeader)
 
     return this
   }

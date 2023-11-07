@@ -49,6 +49,10 @@ export class BinaryFileResponse extends Response {
     return this.#file
   }
 
+  getEncodedFilePath () {
+    return this.#file.getEncodedPath()
+  }
+
   setAutoEtag () {
     return this.setEtag(Buffer.from(this.#file.getHashedContent()).toString('base64'))
   }

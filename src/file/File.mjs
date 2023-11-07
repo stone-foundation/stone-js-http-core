@@ -80,7 +80,7 @@ export class File {
     return this.#path
   }
 
-  getPathEncoded () {
+  getEncodedPath () {
     return encodeURI(this.getPath())
   }
 
@@ -88,7 +88,7 @@ export class File {
     return resolve(root, this.#path)
   }
 
-  getAbsolutePathEncoded (root = '') {
+  getEncodedAbsolutePath (root = '') {
     return encodeURI(this.getAbsolutePath(root))
   }
 
