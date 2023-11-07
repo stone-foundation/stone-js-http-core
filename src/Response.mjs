@@ -114,6 +114,8 @@ export class Response extends Macroable {
   #headerCacheControl
 
   constructor (content = '', status = 200, headers = {}) {
+    super()
+
     this
       .setStatus(status)
       .setHeaders(headers)
@@ -197,7 +199,7 @@ export class Response extends Macroable {
       if (Array.isArray(value)) {
         throw new InvalidArgumentException('Content-Type cannot be set to an Array')
       } else if (!this.#charsetRegExp.test(value)) { // Add charset(Character Sets) to content-type
-        let charset = mime.charsets.lookup(value.split(';').shift())
+        const charset = mime.charsets.lookup(value.split(';').shift())
         value += charset ? `; charset=${charset.toLowerCase()}` : ''
       }
     }
@@ -226,7 +228,7 @@ export class Response extends Macroable {
 
   removeHeader (key) {
     key = Array.isArray(key) ? key : [key]
-    
+
     for (const item of key) {
       this._headers.delete(item)
     }
@@ -285,14 +287,14 @@ export class Response extends Macroable {
     }
 
     value = typeof value === 'object' ? `j:${this.stringify(value)}` : String(value)
-    
+
     if (options.signed) {
       value = `s:${sign(value, secret)}`
     }
 
     if (options.maxAge) {
       const maxAge = options.maxAge - 0
-      
+
       if (!NaN(maxAge)) {
         options.expires = new Date(Date.now() + maxAge)
         options.maxAge = Math.floor(maxAge / 1000)
@@ -829,10 +831,10 @@ export class Response extends Macroable {
   stringify (value, replacer, spaces, escape) {
     // v8 checks arguments.length for optimizing simple call
     // https://bugs.chromium.org/p/v8/issues/detail?id=4730
-    var json = replacer || spaces
+    let json = replacer || spaces
       ? JSON.stringify(value, replacer, spaces)
       : JSON.stringify(value)
-  
+
     if (escape && typeof json === 'string') {
       json = json.replace(/[<>&]/g, function (c) {
         switch (c.charCodeAt(0)) {
@@ -847,7 +849,7 @@ export class Response extends Macroable {
         }
       })
     }
-  
+
     return json
   }
 }

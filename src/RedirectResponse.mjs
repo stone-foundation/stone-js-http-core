@@ -27,7 +27,7 @@ export class RedirectResponse extends Response {
     }
 
     this.#targetUrl = url
-    
+
     return this.#redirect()
   }
 
@@ -42,7 +42,7 @@ export class RedirectResponse extends Response {
       .format({
         default: () => '',
         text: () => `${this.statusMessage}. Redirecting to ${this.#targetUrl}`,
-        html: () => `<p>${this.statusMessage}. Redirecting to <a href="${url}">${url}</a></p>`,
+        html: () => `<p>${this.statusMessage}. Redirecting to <a href="${url}">${url}</a></p>`
       })
       .setHeader('Content-Length', Buffer.byteLength(this._content))
   }

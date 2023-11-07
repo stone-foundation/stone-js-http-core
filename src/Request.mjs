@@ -67,6 +67,8 @@ export class Request extends Macroable {
     queryString,
     defaultLocale
   }) {
+    super()
+
     this.#body = body
     this.#metadata = metadata
     this.#query = new Map(Object.entries(query ?? {}))

@@ -15,7 +15,7 @@ export class JsonpResponse extends JsonResponse {
 
   setJson (jsonString) {
     this._data = jsonString
-    
+
     let callback = this.getCallback()
 
     if (!callback) {
@@ -34,9 +34,9 @@ export class JsonpResponse extends JsonResponse {
 
     if (typeof callback === 'string' && callback.length !== 0) {
       this.setContentType('javascript')
-      
-      callback = callback.replace(/[^\[\]\w$.]/g, '')
-  
+
+      callback = callback.replace(/[^[]\w$.]/g, '')
+
       if (jsonString === undefined) {
         jsonString = ''
       } else if (typeof jsonString === 'string') {
@@ -44,7 +44,7 @@ export class JsonpResponse extends JsonResponse {
           .replace(/\u2028/g, '\\u2028')
           .replace(/\u2029/g, '\\u2029')
       }
-  
+
       // the /**/ is a specific security mitigation for "Rosetta Flash JSONP abuse"
       // the typeof check is just to reduce client error noise
       jsonString = `/**/ typeof ${callback} === 'function' && ${callback}(${jsonString});`

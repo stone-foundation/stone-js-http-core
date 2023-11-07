@@ -12,7 +12,7 @@ export class BinaryFileResponse extends Response {
     file,
     status = 200,
     headers = {},
-    public = true,
+    isPublic = true,
     contentDispositionType = null,
     autoEtag = false,
     autoLastModified = true
@@ -21,7 +21,7 @@ export class BinaryFileResponse extends Response {
 
     this.setFile(file, contentDispositionType, autoEtag, autoLastModified)
 
-    public && this.setPublic()
+    isPublic && this.setPublic()
   }
 
   setFile (file, contentDispositionType, autoEtag, autoLastModified) {
@@ -29,10 +29,10 @@ export class BinaryFileResponse extends Response {
       throw new RuntimeException('file argument is required.')
     }
 
-    if (!file instanceof File) {
+    if (!(file instanceof File)) {
       file = new File(String(file))
     }
-    
+
     if (!file.isReadable()) {
       throw new RuntimeException('File must be readable.')
     }
@@ -71,7 +71,7 @@ export class BinaryFileResponse extends Response {
     if (content) {
       throw new LogicException('The content cannot be set on a BinaryFileResponse instance.')
     }
-    
+
     return this
   }
 
@@ -92,7 +92,7 @@ export class BinaryFileResponse extends Response {
     if (!this.hasHeader('Content-Type')) {
       this.setHeader('Content-Type', this.#file.getMimeType('application/octet-stream'))
     }
-    
+
     super.prepare(request)
 
     const fileSize = this.#file.getSize()

@@ -1,5 +1,6 @@
 import send from 'send'
 import http from 'node:http'
+import onFinished from 'on-finished'
 import { Request } from '../Request.mjs'
 import { LogicException } from '../exceptions/LogicException.mjs'
 
@@ -30,7 +31,7 @@ export class NodeHttpAdapter {
     return new Promise((resolve, reject) => {
       http
         .createServer(async (req, res) => {
-          const app = Application.default(configurations)
+          const app = Application.default(config)
           const request = await Request.createFromNodeRequest(req, this.#server)
           app.registerInstance(Request, request, ['originalRequest'])
           const response = await app.run()
@@ -61,15 +62,52 @@ export class NodeHttpAdapter {
   }
 
   #sendFile (req, res, response, options) {
-    let streaming, done = false
+    let streaming
+    let done = false
+
     const file = send(req, response.getEncodedFilePath(), options)
+
+    const onaborted = () => {
+      if (!done) {
+        done = true
+        const error = new Error('Request aborted')
+        error.code = 'ECONNABORTED'
+        this.#handleError(res, error)
+      }
+    }
+
+    onFinished(res, (error) => {
+      if (error && error.code === 'ECONNRESET') return onaborted()
+      if (error) return this.#handleError(res, error)
+      if (done) return
+
+      setImmediate(() => {
+        if (!done) {
+          if (streaming !== false) {
+            return onaborted()
+          }
+          done = true
+        }
+      })
+    })
 
     file
       .on('error', (error) => {
-        this.#handleError(res, error)
+        if (!done) {
+          done = true
+          this.#handleError(res, error)
+        }
       })
       .on('headers', (res) => {
         this.#setResHeaders(res, response)
+      })
+      .on('directory', () => {
+        if (!done) {
+          done = true
+          const error = new Error('EISDIR, read')
+          error.code = 'EISDIR'
+          this.#handleError(res, error)
+        }
       })
       .on('file', () => {
         streaming = false
@@ -78,7 +116,9 @@ export class NodeHttpAdapter {
         streaming = true
       })
       .on('end', () => {
-        done = true
+        if (!done) {
+          done = true
+        }
       })
       .pipe(res)
   }

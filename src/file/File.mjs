@@ -27,7 +27,7 @@ export class File {
     }
 
     writeFileSync(this.#path, content, 'utf-8')
-    
+
     return this
   }
 
@@ -43,9 +43,9 @@ export class File {
     } catch (error) {
       throw new RuntimeException(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`)
     }
-    
+
     chmodSync(target.getPath(), 0o666)
-    
+
     return target
   }
 
@@ -65,13 +65,13 @@ export class File {
   }
 
   getSize (string = false) {
-    return string ? filesize(this.#getStats().size) :  this.#getStats().size
+    return string ? filesize(this.#getStats().size) : this.#getStats().size
   }
 
   getMimeType (fallback) {
     return mime.getType(this.#path) ?? fallback
   }
-  
+
   getDirname () {
     return dirname(this.#path)
   }
@@ -95,11 +95,11 @@ export class File {
   getBasename (exclude = '') {
     return basename(this.#path, exclude)
   }
-  
+
   getFilename () {
     return this.getBasename()
   }
-  
+
   getName () {
     return this.getBasename(this.getExtension())
   }
@@ -127,7 +127,7 @@ export class File {
   isDir () {
     return this.#getStats().isDirectory()
   }
-  
+
   isFile () {
     return this.#getStats().isFile()
   }
@@ -142,7 +142,7 @@ export class File {
 
   isWritable () {
     try {
-      accessSync(this.#path, constants.W_OK) === undefined
+      return accessSync(this.#path, constants.W_OK) === undefined
     } catch (_) {
       return false
     }
@@ -150,7 +150,7 @@ export class File {
 
   isReadable () {
     try {
-      accessSync(this.#path, constants.R_OK) === undefined
+      return accessSync(this.#path, constants.R_OK) === undefined
     } catch (_) {
       return false
     }
@@ -158,7 +158,7 @@ export class File {
 
   isExecutable () {
     try {
-      accessSync(this.#path, constants.X_OK) === undefined
+      return accessSync(this.#path, constants.X_OK) === undefined
     } catch (_) {
       return false
     }
@@ -174,7 +174,7 @@ export class File {
 
   #validateFile () {
     if (!this.exists()) {
-      throw new InvalidArgumentException(`File not found. (${path})`)
+      throw new InvalidArgumentException(`File not found. (${this.#path})`)
     }
   }
 
