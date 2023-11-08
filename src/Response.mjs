@@ -1,14 +1,13 @@
 import vary from 'vary'
 import { mime } from 'send'
-import cookie from 'cookie'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
-import { sign } from 'cookie-signature'
 import { createHash } from 'node:crypto'
 import { Macroable } from '@stone-js/macroable'
 import { LogicException } from './exceptions/LogicException.mjs'
 import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
 import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
+import { CookieCollection } from './cookies/CookieCollection.mjs'
 
 /**
  * InspiredBy: Symfony, Laravel and ExpressJS
@@ -111,6 +110,7 @@ export class Response extends Macroable {
   _statusMessage
   #requestResolver
   #originalContent
+  #cookieCollection
   #headerCacheControl
 
   constructor (content = '', status = 200, headers = {}) {
@@ -121,6 +121,8 @@ export class Response extends Macroable {
       .setHeaders(headers)
       .setContent(content)
       .setProtocolVersion('1.0')
+    
+    this.#cookieCollection = CookieCollection.instance()
   }
 
   get status () {
@@ -136,7 +138,7 @@ export class Response extends Macroable {
   }
 
   get headers () {
-    return Object.fromEntries(this._headers.entries())
+    return this._headers
   }
 
   get content () {
@@ -157,7 +159,7 @@ export class Response extends Macroable {
 
   get app () {
     if (!this.#appResolver) {
-      throw new LogicException('Must set an Application resolver')
+      throw new LogicException('Must set an Application resolver.')
     }
 
     return this.#appResolver()
@@ -165,7 +167,7 @@ export class Response extends Macroable {
 
   get request () {
     if (!this.#requestResolver) {
-      throw new LogicException('Must set a Request resolver')
+      throw new LogicException('Must set a Request resolver.')
     }
 
     return this.#requestResolver()
@@ -180,8 +182,8 @@ export class Response extends Macroable {
   }
 
   setHeaders (headers) {
-    this._headers = new Map()
-    return Object.entries(headers).reduce((_, [key, value]) => this.setHeader(key, value))
+    this._headers = new Headers(headers)
+    return this
   }
 
   withHeaders (headers) {
@@ -199,8 +201,8 @@ export class Response extends Macroable {
       if (Array.isArray(value)) {
         throw new InvalidArgumentException('Content-Type cannot be set to an Array')
       } else if (!this.#charsetRegExp.test(value)) { // Add charset(Character Sets) to content-type
-        const charset = mime.charsets.lookup(value.split(';').shift())
-        value += charset ? `; charset=${charset.toLowerCase()}` : ''
+        this._charset = mime.charsets.lookup(value.split(';').shift().trim())
+        value += this._charset ? `; charset=${this._charset.toLowerCase()}` : ''
       }
     }
 
@@ -210,16 +212,20 @@ export class Response extends Macroable {
   }
 
   appendHeader (key, value) {
-    const oldValue = this.getHeader(key)
-    return this.setHeader(key, oldValue ? [].concat(oldValue, value) : value)
+    this._headers.append(key, value)
+    return this
   }
 
   getHeaders (hasMap = false) {
-    return hasMap ? this._headers : this.headers
+    return hasMap ? new Map(this.headers.entries()) : this.headers
   }
 
   getHeader (key, fallback = null) {
     return this._headers.get(key) ?? fallback
+  }
+
+  getHeaderNames () {
+    return this._headers.keys()
   }
 
   hasHeader (key) {
@@ -277,55 +283,27 @@ export class Response extends Macroable {
   }
 
   setCookie (name, value, options = {}) {
-    options ??= {}
-    options = { ...this.app.get('http.cookie', {}), ...options }
+    this.#cookieCollection.add(name, value, options)
+    return this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
+  }
 
-    const secret = this.app.get('http.cookie.secret', this.app.get('http.secret', this.app.get('app.secret')))
-
-    if (options.signed && !secret) {
-      throw new LogicException('A secret is required for signed cookies. Please set a secret in configurations.')
-    }
-
-    value = typeof value === 'object' ? `j:${this.stringify(value)}` : String(value)
-
-    if (options.signed) {
-      value = `s:${sign(value, secret)}`
-    }
-
-    if (options.maxAge) {
-      const maxAge = options.maxAge - 0
-
-      if (!NaN(maxAge)) {
-        options.expires = new Date(Date.now() + maxAge)
-        options.maxAge = Math.floor(maxAge / 1000)
-      }
-    }
-
-    if (!options.path) {
-      options.path = '/'
-    }
-
-    this.appendHeader('Set-Cookie', cookie.serialize(name, String(value), options))
-
+  clearCookie (name, force = false) {
+    this.#cookieCollection.remove(name)
+    this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
+    force && this.#cookieCollection.remove(name, force)
     return this
   }
 
-  clearCookie (name, options) {
-    return this.setCookie(name, '', { expires: new Date(1), path: '/', ...options })
+  clearCookies (force = false) {
+    this.#cookieCollection.clear()
+    this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
+    force && this.#cookieCollection.clear(force)
+    return this
   }
 
   secureCookies (value = false) {
-    const cookies = this
-      .getHeader('Set-Cookie', [])
-      .map(v => {
-        if (value) {
-          return v.includes('Secure') ? v : `${v}; Secure`
-        } else {
-          return v.replace(/;?\s*[Ss]ecure\s*;?/, '')
-        }
-      })
-
-    return this.setHeader('Set-Cookie', cookies)
+    this.#cookieCollection.secure(value)
+    return this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
   }
 
   setProtocolVersion (value) {
@@ -430,7 +408,7 @@ export class Response extends Macroable {
   }
 
   isRedirect (location = null) {
-    return [201, 301, 302, 303, 307, 308].includes(this._statusCode) && location === null ? true : this.getHeader('Location')
+    return [201, 301, 302, 303, 307, 308].includes(this._statusCode) && location === null ? true : !!this.getHeader('Location')
   }
 
   isEmpty () {
@@ -474,12 +452,13 @@ export class Response extends Macroable {
         .removeHeader('Transfer-Encoding')
     } else {
       let length, etag
+      const type = this.getHeader('Content-Type')
       const etagFn = this.app.get('http.etag.function', this.#defaultEtagFn)
       const generateETag = !this.hasHeader('ETag') && typeof etagFn === 'function'
       this._charset ??= 'UTF-8'
 
-      if (typeof this.getHeader('Content-Type') === 'string') {
-        this.setContentType(`${this.getHeader('Content-Type')}; charset=${this._charset}`)
+      if (typeof type === 'string' && !this.#charsetRegExp.test(type)) {
+        this.setContentType(`${type}; charset=${this._charset}`)
       }
 
       if (this._content !== undefined) {
@@ -820,7 +799,7 @@ export class Response extends Macroable {
   }
 
   #defaultEtagFn (content, encoding) {
-    return Buffer.from(this.#getHashedContent()).toString('base64')
+    return Buffer.from(this.#getHashedContent(content, encoding)).toString('base64')
   }
 
   #getHashedContent (content, encoding) {

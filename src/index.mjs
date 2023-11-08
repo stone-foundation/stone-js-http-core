@@ -1,4 +1,4 @@
-export { Cookie } from './Cookie.mjs'
+export { Cookie } from './cookies/Cookie.mjs'
 export { JsonResponse } from './JsonResponse.mjs'
 export { MetaResponse } from './MetaResponse.mjs'
 export { Request } from './Request.mjs'
