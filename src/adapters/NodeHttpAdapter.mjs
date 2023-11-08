@@ -2,63 +2,49 @@ import send from 'send'
 import http from 'node:http'
 import onFinished from 'on-finished'
 import { Request } from '../Request.mjs'
-import { LogicException } from '../exceptions/LogicException.mjs'
+import { BinaryFileResponse } from '../BinaryFileResponse.mjs'
 
 export class NodeHttpAdapter {
-  #config
-
-  get #server () {
-    try {
-      const url = new URL(this.#config.get('http.url', 'http://localhost:8080'))
-      return {
-        baseUrl: url,
-        port: url.port ?? 8080,
-        scheme: url.protocol ?? 'http',
-        hostname: url.hostname ?? 'localhost',
-        debug: this.#config.get('app.debug', false),
-        locale: this.#config.get('app.locale', 'en'),
-        env: this.#config.get('app.env', 'production'),
-        fallback_locale: this.#config.get('app.fallback_locale', 'en')
-      }
-    } catch (error) {
-      throw new LogicException('Invalid configuration', error)
-    }
-  }
-
   async run (Application, config) {
-    this.#config = config
-
     return new Promise((resolve, reject) => {
+      const isDebug = config.get('app.debug', false)
+      const port = config.get('http.server.port', 8080)
+      const hostname = config.get('http.server.hostname', 'localhost')
+      const requestTimeout = config.get('http.server.requestTimeout', 300000)
+
       http
-        .createServer(async (req, res) => {
+        .createServer({ requestTimeout }, async (req, res) => {
           const app = Application.default(config)
-          const request = await Request.createFromNodeRequest(req, this.#server)
+          const request = await Request.createFromNodeRequest(req)
           app.registerInstance(Request, request, ['originalRequest'])
           const response = await app.run()
-          res.writeHead(response.statusCode, response.headers)
-          response.isEmpty() ? res.end() : res.end(response.getContent())
+          this.#send(req, res, request, response)
         })
-        .listen(
-          this.#server.port,
-          this.#server.hostname,
-          () => {
-            resolve()
-            this.#config.get('app.debug', false) && console.log('Server started at:', this.#server.baseUrl)
-          }
-        )
+        .listen(port, hostname, () => {
+          isDebug && console.log('Server started at:', `${hostname}:${port}`)
+          resolve()
+        })
         .once('error', e => {
+          isDebug && console.log('An error occured', e)
           reject(e)
-          this.#config.get('app.debug', false) && console.log('An error occured', e)
         })
     })
   }
 
   #send (req, res, request, response) {
-    this.#setResHeaders(res, response)
+    this
+      .#setStatus(res, response)
+      .#setResHeaders(res, response)
 
     if (request.isMethod('HEAD')) {
       res.end()
+    } else if (response instanceof BinaryFileResponse) {
+      this.#sendFile(req, res, response, {})
+    } else {
+      res.end(response.content, response.charset)
     }
+
+    return this
   }
 
   #sendFile (req, res, response, options) {
@@ -121,21 +107,29 @@ export class NodeHttpAdapter {
         }
       })
       .pipe(res)
+
+    return this
   }
 
   #setStatus (res, response) {
     res.statusCode = response.statusCode
     res.statusMessage = response.statusMessage
+
+    return this
   }
 
   #setResHeaders (res, response) {
     for (const [key, value] of Object.entries(response.headers)) {
       res.setHeader(key, value)
     }
+
+    return this
   }
 
   #handleError (res, error) {
     res.statusCode = error.status || 500
     res.end(error.message)
+
+    return this
   }
 }
