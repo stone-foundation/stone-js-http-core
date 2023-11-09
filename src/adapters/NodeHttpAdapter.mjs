@@ -1,37 +1,82 @@
 import send from 'send'
 import http from 'node:http'
+import statuses from 'statuses'
 import onFinished from 'on-finished'
 import { Request } from '../Request.mjs'
 import { BinaryFileResponse } from '../BinaryFileResponse.mjs'
+import { FileException } from '../exceptions/FileException.mjs'
 
 export class NodeHttpAdapter {
-  async run (Application, config) {
-    return new Promise((resolve, reject) => {
-      const isDebug = config.get('app.debug', false)
-      const port = config.get('http.server.port', 8080)
-      const hostname = config.get('http.server.hostname', 'localhost')
-      const requestTimeout = config.get('http.server.requestTimeout', 300000)
+  #options = {}
 
+  async run (Application, config) {
+    this.#options = this.#makeOptions(config)
+
+    return new Promise((resolve, reject) => {
       http
-        .createServer({ requestTimeout }, async (req, res) => {
-          const app = Application.default(config)
-          const request = await Request.createFromNodeRequest(req)
-          app.registerInstance(Request, request, ['originalRequest'])
-          const response = await app.run()
-          this.#send(req, res, request, response)
+        .createServer(this.#options.serverOptions, async (req, res) => {
+          const app       = Application.default(config)
+          const request   = await this.#createRequest(app, req)
+          const response  = await app.run()
+
+          this.#send({ app, req, res, request, response })
         })
-        .listen(port, hostname, () => {
-          isDebug && console.log('Server started at:', `${hostname}:${port}`)
+        .listen(this.#options.port, this.#options.hostname, () => {
+          this.#options.isDebug && console.log('Server started at:', this.#options.host)
           resolve()
         })
         .once('error', e => {
-          isDebug && console.log('An error occured', e)
+          this.#options.isDebug && console.log('An error occured', e)
           reject(e)
         })
     })
   }
 
-  #send (req, res, request, response) {
+  #makeOptions (config) {
+    return {
+      isDebug: config.get('app.debug', false),
+      port: config.get('http.server.port', 8080),
+      files: config.get('http.files.response', {}),
+      get host () { return `${this.hostname}:${this.port}` },
+      hostname: config.get('http.server.hostname', 'localhost'),
+      serverOptions: {
+        requestTimeout: config.get('http.server.requestTimeout', 300000),
+      }
+    }
+  }
+
+  async #createRequest (app, req) {
+    const request = await Request.createFromNodeRequest(req)
+    app.registerInstance(Request, request, ['request'])
+    app.registerInstance('originalRequest', request.clone())
+
+    return request
+  }
+
+  #setStatus (res, response) {
+    res.statusCode = response.statusCode ?? 500
+    res.statusMessage = response.statusMessage ?? statuses.message[500]
+
+    return this
+  }
+
+  #setResHeaders (res, response) {
+    res.setHeaders(response.headers)
+
+    return this
+  }
+
+  #handleException ({ app, res, exception }) {
+    const response = app.kernel.reportException(exception).renderException(exception)
+
+    this.#setStatus(res, response)
+
+    res.end(response.message)
+
+    return this
+  }
+
+  #send ({ app, req, res, request, response }) {
     this
       .#setStatus(res, response)
       .#setResHeaders(res, response)
@@ -39,7 +84,7 @@ export class NodeHttpAdapter {
     if (request.isMethod('HEAD')) {
       res.end()
     } else if (response instanceof BinaryFileResponse) {
-      this.#sendFile(req, res, response, {})
+      this.#sendFile({ app, req, res, response, options: this.#options.files })
     } else {
       res.end(response.content, response.charset)
     }
@@ -47,7 +92,7 @@ export class NodeHttpAdapter {
     return this
   }
 
-  #sendFile (req, res, response, options) {
+  #sendFile ({ app, req, res, response, options }) {
     let streaming
     let done = false
 
@@ -56,15 +101,14 @@ export class NodeHttpAdapter {
     const onaborted = () => {
       if (!done) {
         done = true
-        const error = new Error('Request aborted')
-        error.code = 'ECONNABORTED'
-        this.#handleError(res, error)
+        const error = new FileException('Request aborted', 'HTTP_FILE-ECONNABORTED')
+        this.#handleException({ app, res, error })
       }
     }
 
     onFinished(res, (error) => {
       if (error && error.code === 'ECONNRESET') return onaborted()
-      if (error) return this.#handleError(res, error)
+      if (error) return this.#handleException({ app, res, error: new FileException(error.message, `HTTP_FILE-${error.code}`, error) })
       if (done) return
 
       setImmediate(() => {
@@ -81,7 +125,7 @@ export class NodeHttpAdapter {
       .on('error', (error) => {
         if (!done) {
           done = true
-          this.#handleError(res, error)
+          this.#handleException({ app, res, error: new FileException(error.message, `HTTP_FILE-${error.code}`, error) })
         }
       })
       .on('headers', (res) => {
@@ -90,9 +134,8 @@ export class NodeHttpAdapter {
       .on('directory', () => {
         if (!done) {
           done = true
-          const error = new Error('EISDIR, read')
-          error.code = 'EISDIR'
-          this.#handleError(res, error)
+          const error = new FileException('EISDIR, read', 'HTTP_FILE-EISDIR')
+          this.#handleException({ app, res, error })
         }
       })
       .on('file', () => {
@@ -107,28 +150,6 @@ export class NodeHttpAdapter {
         }
       })
       .pipe(res)
-
-    return this
-  }
-
-  #setStatus (res, response) {
-    res.statusCode = response.statusCode
-    res.statusMessage = response.statusMessage
-
-    return this
-  }
-
-  #setResHeaders (res, response) {
-    for (const [key, value] of Object.entries(response.headers)) {
-      res.setHeader(key, value)
-    }
-
-    return this
-  }
-
-  #handleError (res, error) {
-    res.statusCode = error.status || 500
-    res.end(error.message)
 
     return this
   }

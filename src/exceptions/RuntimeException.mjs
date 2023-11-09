@@ -1,7 +1,11 @@
 export class RuntimeException extends Error {
-  constructor (message) {
+  static CODE = 'HTTP_RUNTIME-500'
+
+  constructor (message, code = RuntimeException.CODE, previous = null) {
     super()
+    this.code = code
     this.message = message
-    this.name = 'StoneJS.http'
+    this.previous = previous
+    this.name = 'stonejs.http'
   }
 }

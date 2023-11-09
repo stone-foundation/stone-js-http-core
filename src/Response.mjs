@@ -5,7 +5,7 @@ import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
 import { Macroable } from '@stone-js/macroable'
 import { LogicException } from './exceptions/LogicException.mjs'
-import { HttpResponseException } from './exceptions/HttpResponseException.mjs'
+import { ResponseHttpException } from './exceptions/ResponseHttpException.mjs'
 import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
 
@@ -512,7 +512,7 @@ export class Response extends Macroable {
   }
 
   throwResponse () {
-    throw new HttpResponseException(this)
+    throw new ResponseHttpException(this)
   }
 
   withException (exception) {
