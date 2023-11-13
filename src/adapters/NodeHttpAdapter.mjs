@@ -1,5 +1,6 @@
 import send from 'send'
 import http from 'node:http'
+import https from 'node:https'
 import statuses from 'statuses'
 import onFinished from 'on-finished'
 import { Request } from '../Request.mjs'
@@ -13,7 +14,7 @@ export class NodeHttpAdapter {
     this.#options = this.#makeOptions(config)
 
     return new Promise((resolve, reject) => {
-      http
+      (this.#options.isSecure ? https : http)
         .createServer(this.#options.serverOptions, async (req, res) => {
           const app       = Application.default(config)
           const request   = await this.#createRequest(app, req)
@@ -37,9 +38,13 @@ export class NodeHttpAdapter {
       isDebug: config.get('app.debug', false),
       port: config.get('http.server.port', 8080),
       files: config.get('http.files.response', {}),
+      protocol: config.get('http.server.protocol', 'http'),
       get host () { return `${this.hostname}:${this.port}` },
       hostname: config.get('http.server.hostname', 'localhost'),
+      isSecure: config.get('http.server.protocol', 'http') === 'https',
       serverOptions: {
+        key: config.get('http.server.key', undefined),
+        cert: config.get('http.server.cert', undefined),
         requestTimeout: config.get('http.server.requestTimeout', 300000),
       }
     }

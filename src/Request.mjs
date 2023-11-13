@@ -1,12 +1,14 @@
+import typeIs from 'type-is'
+import accepts from 'accepts'
+import rangeParser from 'range-parser'
 import { Macroable } from '@stone-js/macroable'
+import { URIMapper } from './mappers/URIMapper.mjs'
 import { LogicException } from './exceptions/LogicException.mjs'
 import { RuntimeException } from './exceptions/RuntimeException.mjs'
 import { NodeJSRequestMapper } from './mappers/NodeJSRequestMapper.mjs'
-import { URIMapper } from './mappers/URIMapper.mjs'
+import { InvalidArgumentException } from './index.mjs'
 
 export class Request extends Macroable {
-  static FORMATS = {}
-
   static METHOD_HEAD = 'HEAD'
   static METHOD_GET = 'GET'
   static METHOD_POST = 'POST'
@@ -36,45 +38,28 @@ export class Request extends Macroable {
 
   static #mappers = new Map()
 
+  #ip
+  #ips
+  #url
   #body
+  #files
   #query
+  #params
+  #locale
+  #method
+  #accepts
   #headers
+  #cookies
   #metadata
+  #protocol
+  #queryString
+  #appResolver
   #userResolver
   #routeResolver
   #convertedFiles
   #currentMapperName
 
   #defaultLocale = 'en'
-
-  constructor ({
-    ip,
-    ips,
-    url,
-    body,
-    query,
-    files,
-    params,
-    locale,
-    method,
-    format,
-    cookies,
-    headers,
-    charsets,
-    metadata,
-    languages,
-    encodings,
-    queryString,
-    defaultLocale
-  }) {
-    super()
-
-    this.#body = body
-    this.#metadata = metadata
-    this.#query = new Map(Object.entries(query ?? {}))
-    this.#headers = new Map(Object.entries(headers ?? {}))
-    this.defaultLocale = defaultLocale ?? Request.defaultLocale
-  }
 
   static createFromUri (uri, mapper = URIMapper) {
     return this
@@ -116,21 +101,147 @@ export class Request extends Macroable {
     return Object.entries(mappers).reduce((_prev, [name, mapper]) => this.setMapper(name, mapper))
   }
 
-  static setMapper (name, mapper) {
-    if (mapper.map) {
-      this.#mappers.set(name, mapper)
+  static setMapper (name, Mapper) {
+    if (Mapper.prototype.map) {
+      this.#mappers.set(name, new Mapper())
       return this
     }
 
     throw new LogicException('Mapper must have a `map` method')
   }
 
-  #setCurrentMapperName (name) {
-    this.#currentMapperName = name
-    return this
+  constructor ({
+    ip,
+    ips,
+    url,
+    body,
+    files,
+    params,
+    locale,
+    method,
+    headers,
+    cookies,
+    metadata,
+    protocol,
+    queryString,
+    defaultLocale
+  }) {
+    super()
+
+    this.#ip = ip
+    this.#url = url
+    this.#ips = ips
+    this.#body = body
+    this.#files = files
+    this.#params = params
+    this.#locale = locale
+    this.#method = method
+    this.#cookies = cookies
+    this.#metadata = metadata
+    this.#protocol = protocol
+    this.#cookies = this.cookies
+    this.#accepts = accepts(this)
+    this.#queryString = queryString
+    this.#query = new URLSearchParams(queryString)
+    this.#defaultLocale = defaultLocale ?? this.#defaultLocale
+    this.#headers = headers instanceof Headers ? headers : new Headers(headers)
   }
 
-  getCurrentMapperName () {
+  get ip () {
+    return this.#ip
+  }
+
+  get ips () {
+    return this.#ips
+  }
+
+  get scheme () {
+    return this.#protocol
+  }
+
+  get isXhr () {
+    return this.header('X-Requested-With', '').toLowerCase() === 'xmlhttprequest'
+  }
+
+  get contentTypeFormat () {}
+
+  get userAgent () {
+    return this.header('user-agent')
+  }
+
+  get isSecure () {
+    this.protocol === 'https'
+  }
+
+  get isPrefetch () {}
+
+  get segments () {}
+
+  get decodedPath () {}
+
+  get path () {}
+  
+  get baseUrl () {}
+  
+  get hostname () {
+    return this.#url.hostname
+  }
+
+  get uri () {}
+  
+  get basePath () {}
+  
+  get pathInfo () {}
+  
+  get protocol () {
+    return this.#protocol
+  }
+  
+  get query () {
+    return this.#query
+  }
+  
+  get files () {
+    return this.#files
+  }
+  
+  get types () {
+    return this.#accepts.types()
+  }
+  
+  get locale () {
+    return this.#locale
+  }
+  
+  get method () {
+    return this.#method
+  }
+  
+  get format () {}
+  
+  get cookies () {}
+  
+  get headers () {
+    return this.#headers
+  }
+  
+  get charsets () {
+    return this.#accepts.charsets()
+  }
+  
+  get languages () {
+    return this.#accepts.languages()
+  }
+  
+  get encodings () {
+    return this.#accepts.encodings()
+  }
+
+  get queryString () {
+    return this.#queryString
+  }
+
+  get currentMapperName () {
     return this.#currentMapperName
   }
 
@@ -140,17 +251,68 @@ export class Request extends Macroable {
       return this.route().parameter(key)
     }
 
-    // Get from payload
-    if (this.payload.has(key)) {
-      return this.payload.get(key)
+    // Get from body
+    if (this.#body.has(key)) {
+      return this.#body.get(key)
     }
 
     // Get from query string
-    if (this.query.has(key)) {
-      return this.query.get(key)
+    if (this.#query.has(key)) {
+      return this.#query.get(key)
     }
 
     return fallback
+  }
+
+  param (name, fallback = null) {
+    return this.get(name, fallback)
+  }
+
+  header (name, fallback = null) {
+    if (!name) {
+      throw new InvalidArgumentException('name argument is required.')
+    }
+
+    if (typeof name != 'string') {
+      throw new InvalidArgumentException('name must be a string.')
+    }
+
+    name = name.toLowerCase()
+
+    if (['referer', 'referrer'].includes(name)) {
+      return this.#headers.get('referer') ?? this.#headers.get('referrer') ?? fallback
+    }
+
+    return this.#headers.get(name) ?? fallback
+  }
+
+  hasHeader (name) {
+    return this.#headers.has(name)
+  }
+
+  accepts (...values) {
+    return this.#accepts.type(this.#flattenValues(values))
+  }
+
+  acceptsEncodings (...values) {
+    return this.#accepts.encoding(this.#flattenValues(values))
+  }
+
+  acceptsCharsets (...values) {
+    return this.#accepts.charset(this.#flattenValues(values))
+  }
+
+  acceptsLanguages (...values) {
+    return this.#accepts.language(this.#flattenValues(values))
+  }
+
+  range (size, options) {
+    if (!this.hasHeader('Range')) return
+    return rangeParser(size, this.header('Range'), options)
+  }
+
+  is (types) {
+    return typeIs(this, this.#flattenValues(types))
   }
 
   json (key, fallback = null) {}
@@ -172,6 +334,15 @@ export class Request extends Macroable {
     }
 
     return btoa([].concat(route.methods, [route.getDomain(), route.uri, this.ip]).join('|'))
+  }
+
+  getAppResolver () {
+    return this.#appResolver ?? (() => null)
+  }
+
+  setAppResolver (resolver) {
+    this.#appResolver = resolver
+    return this
   }
 
   getUserResolver () {
@@ -212,39 +383,6 @@ export class Request extends Macroable {
 
   filterFiles (files) {}
 
-  get scheme () {}
-
-  get contentTypeFormat () {}
-
-  get userAgent () {}
-
-  get isSecure () {}
-
-  get isPrefetch () {}
-
-  get segments () {}
-
-  get decodedPath () {}
-
-  get path () {}
-  get query () {}
-  get files () {}
-  get locale () {}
-  get method () {}
-  get format () {}
-  get baseUrl () {}
-  get cookies () {}
-  get headers () {}
-  get hostname () {}
-  get protocol () {}
-  get basePath () {}
-  get charsets () {}
-  get pathInfo () {}
-  get languages () {}
-  get encodings () {}
-  get uri () {}
-  get queryString () {}
-
   isMethod (method) {
     return this.method.toUpperCase() === method.toUpperCase()
   }
@@ -257,19 +395,12 @@ export class Request extends Macroable {
     return ['GET', 'HEAD'].includes(this.method)
   }
 
-  static initializeFormats () {
-    this.FORMATS = {
-      html: ['text/html', 'application/xhtml+xml'],
-      txt: ['text/plain'],
-      js: ['application/javascript', 'application/x-javascript', 'text/javascript'],
-      css: ['text/css'],
-      json: ['application/json', 'application/x-json'],
-      jsonld: ['application/ld+json'],
-      xml: ['text/xml', 'application/xml', 'application/x-xml'],
-      rdf: ['application/rdf+xml'],
-      atom: ['application/atom+xml'],
-      rss: ['application/rss+xml'],
-      form: ['application/x-www-form-urlencoded', 'multipart/form-data']
-    }
+  #setCurrentMapperName (name) {
+    this.#currentMapperName = name
+    return this
+  }
+
+  #flattenValues (values) {
+    return values.reduce((prev, curr) => prev.concat(curr), [])
   }
 }
