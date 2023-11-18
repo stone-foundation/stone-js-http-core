@@ -1,12 +1,19 @@
+import mime from 'mime'
+import fresh from 'fresh'
 import typeIs from 'type-is'
 import accepts from 'accepts'
+import { isIP } from 'node:net'
+import { get, has } from 'lodash'
+import { isClass } from './Utils.mjs'
 import rangeParser from 'range-parser'
+import contentTypeLib from 'content-type'
 import { Macroable } from '@stone-js/macroable'
 import { URIMapper } from './mappers/URIMapper.mjs'
 import { LogicException } from './exceptions/LogicException.mjs'
 import { RuntimeException } from './exceptions/RuntimeException.mjs'
 import { NodeJSRequestMapper } from './mappers/NodeJSRequestMapper.mjs'
 import { InvalidArgumentException } from './index.mjs'
+import { CookieCollection } from './cookies/CookieCollection.mjs'
 
 export class Request extends Macroable {
   static METHOD_HEAD = 'HEAD'
@@ -44,7 +51,6 @@ export class Request extends Macroable {
   #body
   #files
   #query
-  #params
   #locale
   #method
   #accepts
@@ -56,7 +62,6 @@ export class Request extends Macroable {
   #appResolver
   #userResolver
   #routeResolver
-  #convertedFiles
   #currentMapperName
 
   #defaultLocale = 'en'
@@ -75,10 +80,12 @@ export class Request extends Macroable {
 
   static async createFromMapper (name, request) {
     if (this.hasMapper(name)) {
-      return new this(await this.getMapper(name).map(request)).#setCurrentMapperName(name)
+      const Mapper = this.getMapper(name)
+      const mapper = isClass(Mapper) ? new Mapper() : { map: Mapper }
+      return new this(await mapper.map(request)).#setCurrentMapperName(name)
     }
 
-    throw new LogicException(`No mapper with this name ${name} exists`)
+    throw new LogicException(`No mapper with this name ${name} exists.`)
   }
 
   static getMapper (name) {
@@ -101,13 +108,13 @@ export class Request extends Macroable {
     return Object.entries(mappers).reduce((_prev, [name, mapper]) => this.setMapper(name, mapper))
   }
 
-  static setMapper (name, Mapper) {
-    if (Mapper.prototype.map) {
-      this.#mappers.set(name, new Mapper())
+  static setMapper (name, mapper) {
+    if (mapper.prototype.map) {
+      this.#mappers.set(name,  mapper)
       return this
     }
 
-    throw new LogicException('Mapper must have a `map` method')
+    throw new LogicException('Mapper must have a `map` method.')
   }
 
   constructor ({
@@ -116,7 +123,6 @@ export class Request extends Macroable {
     url,
     body,
     files,
-    params,
     locale,
     method,
     headers,
@@ -130,21 +136,19 @@ export class Request extends Macroable {
 
     this.#ip = ip
     this.#url = url
-    this.#ips = ips
-    this.#body = body
-    this.#files = files
-    this.#params = params
+    this.#ips = ips ?? []
     this.#locale = locale
-    this.#method = method
-    this.#cookies = cookies
-    this.#metadata = metadata
-    this.#protocol = protocol
-    this.#cookies = this.cookies
+    this.#body = body ?? {}
+    this.#files = files ?? {}
     this.#accepts = accepts(this)
-    this.#queryString = queryString
-    this.#query = new URLSearchParams(queryString)
+    this.#method = method ?? 'GET'
+    this.#metadata = metadata ?? {}
+    this.#queryString = queryString ?? ''
+    this.#protocol = protocol ?? 'HTTP/1.1'
+    this.#query = new URLSearchParams(this.#queryString)
+    this.#cookies = cookies ?? CookieCollection.instance()
     this.#defaultLocale = defaultLocale ?? this.#defaultLocale
-    this.#headers = headers instanceof Headers ? headers : new Headers(headers)
+    this.#headers = headers instanceof Headers ? headers : new Headers(headers ?? {})
   }
 
   get ip () {
@@ -155,15 +159,13 @@ export class Request extends Macroable {
     return this.#ips
   }
 
-  get scheme () {
-    return this.#protocol
-  }
-
   get isXhr () {
     return this.header('X-Requested-With', '').toLowerCase() === 'xmlhttprequest'
   }
 
-  get contentTypeFormat () {}
+  get isAjax () {
+    return this.isXhr
+  }
 
   get userAgent () {
     return this.header('user-agent')
@@ -173,56 +175,91 @@ export class Request extends Macroable {
     this.protocol === 'https'
   }
 
-  get isPrefetch () {}
-
-  get segments () {}
-
-  get decodedPath () {}
-
-  get path () {}
-  
-  get baseUrl () {}
-  
-  get hostname () {
-    return this.#url.hostname
+  get isPrefetch () {
+    return [this.#headers.get('Purpose'), this.#headers.get('Sec-Purpose')].includes('prefetch')
   }
 
-  get uri () {}
-  
-  get basePath () {}
-  
-  get pathInfo () {}
+  get uri () {
+    this.#url.href
+  }
+
+  get scheme () {
+    return this.#protocol
+  }
   
   get protocol () {
     return this.#protocol
   }
   
+  get host () {
+    return this.#url.host
+  }
+  
+  get hostname () {
+    return this.#url.hostname
+  }
+
+  get decodedPath () {
+    try {
+      return decodeURIComponent(this.path)
+    } catch (_) {
+      return null
+    }
+  }
+
+  get path () {
+    return `${this.#url.pathname}${this.#url.search}`
+  }
+  
+  get pathname () {
+    return this.#url.pathname
+  }
+
+  get segments () {
+    return this.#url.pathname.split('/')
+  }
+  
+  get subdomains () {
+    if (!this.hostname) { return [] }
+    return isIP(this.hostname)
+      ? [this.hostname]
+      : this.hostname.split('.').reverse().slice(this.app.get('http.subdomain.offset'))
+  }
+  
   get query () {
     return this.#query
+  }
+
+  get queryString () {
+    return this.#queryString
   }
   
   get files () {
     return this.#files
   }
   
-  get types () {
-    return this.#accepts.types()
+  get locale () {
+    return this.get('locale', this.#locale) ?? this.#defaultLocale
   }
   
-  get locale () {
-    return this.#locale
+  get etag () {
+    return this.#headers.get('ETag')
   }
   
   get method () {
     return this.#method
   }
   
-  get format () {}
-  
-  get cookies () {}
+  get cookies () {
+    return this.#cookies
+  }
   
   get headers () {
     return this.#headers
+  }
+  
+  get types () {
+    return this.#accepts.types()
   }
   
   get charsets () {
@@ -236,13 +273,25 @@ export class Request extends Macroable {
   get encodings () {
     return this.#accepts.encodings()
   }
+  
+  get charset () {
+    return contentTypeLib.parse(this).parameters.charset
+  }
 
-  get queryString () {
-    return this.#queryString
+  get contentType () {
+    return contentTypeLib.parse(this).type
   }
 
   get currentMapperName () {
     return this.#currentMapperName
+  }
+
+  get app () {
+    return this.#appResolver()
+  }
+
+  get user () {
+    return this.#userResolver()
   }
 
   get (key, fallback = null) {
@@ -252,13 +301,14 @@ export class Request extends Macroable {
     }
 
     // Get from body
-    if (this.#body.has(key)) {
-      return this.#body.get(key)
+    if (has(this.#body, key)) {
+      return get(this.#body, key)
     }
 
     // Get from query string
-    if (this.#query.has(key)) {
-      return this.#query.get(key)
+    const query = Object.fromEntries(this.#query.entries())
+    if (has(query, key)) {
+      return get(query, key)
     }
 
     return fallback
@@ -286,6 +336,10 @@ export class Request extends Macroable {
     return this.#headers.get(name) ?? fallback
   }
 
+  getHeader (name, fallback = null) {
+    return this.header(name, fallback)
+  }
+
   hasHeader (name) {
     return this.#headers.has(name)
   }
@@ -306,6 +360,14 @@ export class Request extends Macroable {
     return this.#accepts.language(this.#flattenValues(values))
   }
 
+  getFormat (mimeType) {
+    return mime.getExtension(mimeType)
+  }
+
+  getMimeType (format) {
+    return mime.getType(format)
+  }
+
   range (size, options) {
     if (!this.hasHeader('Range')) return
     return rangeParser(size, this.header('Range'), options)
@@ -315,15 +377,41 @@ export class Request extends Macroable {
     return typeIs(this, this.#flattenValues(types))
   }
 
-  json (key, fallback = null) {}
+  json (key, fallback = null) {
+    if (this.is(['json'])) {
+      return get(this.#body, key, fallback)
+    }
+
+    return fallback
+  }
+
+  isFresh (res) {
+    if (!['GET', 'HEAD'].includes(this.#method)) {
+      return false
+    }
+
+    if ((res.status >= 200 && res.status < 300) || res.status === 304) {
+      return fresh(this.#headers, {
+        etag: res.etag,
+        'last-modified': res.lastModified
+      })
+    }
+
+    return false
+  }
+
+  isTale (res) {
+    return !this.isFresh(res)
+  }
 
   route (param, fallback = null) {
     const route = this.getRouteResolver()
-    return (!route || !param) ? route : route.parameters(param, fallback)
+    return !param ? route : route.parameters(param, fallback)
   }
 
-  user () {
-    return this.getUserResolver()
+  uriForPath (path) {
+    path = path.startsWith('/') ? path : `/${path}`
+    return `${this.scheme}://${this.host}${path}`
   }
 
   fingerprint () {
@@ -363,25 +451,23 @@ export class Request extends Macroable {
     return this
   }
 
-  metadata (pattern, fallback = null) {
-    return this.#deepGet(this.#metadata, pattern, fallback)
-  }
-
-  #deepGet (data, pattern, fallback = null) {
-    if (!pattern) {
-      return data ?? fallback
-    }
-
-    return pattern
-      .split('.')
-      .reduce((prev, key) => prev?.[key] ?? prev, data ?? fallback)
+  metadata (key, fallback = null) {
+    return get(this.#metadata, key, fallback)
   }
 
   setMetadata (value) {
     this.#metadata = value
+    return this
   }
 
-  filterFiles (files) {}
+  setLocale (locale) {
+    this.#locale = locale
+    return this
+  }
+
+  filterFiles (files) {
+    return Object.fromEntries(this.#files.entries().filter(([key]) => files.includes(key)))
+  }
 
   isMethod (method) {
     return this.method.toUpperCase() === method.toUpperCase()

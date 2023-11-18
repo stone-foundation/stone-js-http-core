@@ -719,8 +719,8 @@ export class Response extends Macroable {
     return this
   }
 
-  getLastModified () {
-    return this._headers.get('Date')
+  get lastModified () {
+    return this._headers.get('Last-Modified')
   }
 
   isNotModified (request) {
@@ -756,7 +756,7 @@ export class Response extends Macroable {
     }
 
     if (options.last_modified) {
-      this.setLastModfied(options.last_modified)
+      this.setLastModified(options.last_modified)
     }
 
     if (options.max_age) {

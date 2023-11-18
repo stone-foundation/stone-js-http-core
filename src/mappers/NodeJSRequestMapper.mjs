@@ -21,13 +21,15 @@ export class NodeJSRequestMapper {
     this.#options = options
     this.#url = new URL(request.url, `http://${request.headers.host}`)
 
+    let body = null
     let files = []
-    let body = !this.#isMultipart() && await this.#getBody()
 
     if (this.#isMultipart()) {
       const res = await this.#getFiles()
       files = res.files
       body = res.fields
+    } else {
+      body = await this.#getBody()
     }
     
     return {
@@ -81,7 +83,7 @@ export class NodeJSRequestMapper {
         case 'urlencoded':
           return await bodyParser.form(this.#req, { limit, encoding })
         default:
-          return ''
+          return null
       }
     } catch (error) {
       throw new RuntimeException(error.message, error.code, error)
@@ -135,7 +137,7 @@ export class NodeJSRequestMapper {
 
   #getType (req) {
     try {
-      return (contentType.parse(req).type || '').toLowerCase()
+      return contentType.parse(req).type
     } catch (_) {
       return undefined
     }
@@ -143,7 +145,7 @@ export class NodeJSRequestMapper {
 
   #getCharset (req) {
     try {
-      return (contentType.parse(req).parameters.charset || '').toLowerCase()
+      return contentType.parse(req).parameters.charset
     } catch (_) {
       return undefined
     }
