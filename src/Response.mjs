@@ -437,7 +437,7 @@ export class Response extends Macroable {
         break
     }
 
-    if (this.request.fresh) {
+    if (this.request.isFresh(this)) {
       this._statusCode = Response.HTTP_NOT_MODIFIED
     }
 

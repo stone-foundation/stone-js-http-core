@@ -24,6 +24,10 @@ export class BinaryFileResponse extends Response {
     isPublic && this.setPublic()
   }
 
+  get deleteFileAfterSend () {
+    return this.#deleteFileAfterSend
+  }
+
   setFile (file, contentDispositionType, autoEtag, autoLastModified) {
     if (!file) {
       throw new RuntimeException('file argument is required.')

@@ -21,6 +21,8 @@ export class NodeHttpAdapter {
           const response  = await app.run()
 
           this.#send({ app, req, res, request, response })
+
+          onFinished(res, async () => await app.stop())
         })
         .listen(this.#options.port, this.#options.hostname, () => {
           this.#options.isDebug && console.log('Server started at:', this.#options.host)
