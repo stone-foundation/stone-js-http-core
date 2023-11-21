@@ -15,6 +15,7 @@ export const config = {
     type: 'text/plain',
     defaultCharset: 'utf-8',
   },
+  cache: {},
   cookie: {
     secret: '',
     options: {},
