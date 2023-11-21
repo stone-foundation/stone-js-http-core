@@ -1,3 +1,5 @@
+import { isString } from "../Utils.mjs"
+
 /**
  * Class representing a HandleCorsMiddleware.
  *
@@ -54,7 +56,7 @@ export class HandleCorsMiddleware {
       return allowedOrigin.reduce((prev, curr) => this.#isOriginAllowed(origin, curr) || prev, false)
     } else if (allowedOrigin instanceof RegExp) {
       return allowedOrigin.test(origin)
-    } else if (typeof allowedOrigin === 'string' || allowedOrigin instanceof String) {
+    } else if (isString(allowedOrigin)) {
       return origin === allowedOrigin
     } else {
       return !!allowedOrigin
@@ -64,7 +66,7 @@ export class HandleCorsMiddleware {
   #configureOrigin ({ origin }, request) {
     if (!origin || origin === '*') {
       this.#setHeader('Access-Control-Allow-Origin', '*')
-    } else if (typeof origin === 'string' || origin instanceof String) {
+    } else if (isString(origin)) {
       this
         .#addVary('Origin')
         .#setHeader('Access-Control-Allow-Origin', origin)

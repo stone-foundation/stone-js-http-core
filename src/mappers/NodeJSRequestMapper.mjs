@@ -7,9 +7,10 @@ import proxyAddr from 'proxy-addr'
 import formidable from 'formidable'
 import contentType from 'content-type'
 import ipRangeCheck from 'ip-range-check'
-import { RuntimeException } from '../index.mjs'
 import { FileException } from '../exceptions/FileException.mjs'
 import { UploadedFile } from '../file/UploadedFile.mjs'
+import { RuntimeException } from '../exceptions/RuntimeException.mjs'
+import { SuspiciousOperationException } from '../exceptions/SuspiciousOperationException.mjs'
 
 export class NodeJSRequestMapper {
   #url
@@ -19,7 +20,7 @@ export class NodeJSRequestMapper {
   async map (request, options = {}) {
     this.#req = request
     this.#options = options
-    this.#url = new URL(request.url, `http://${request.headers.host}`)
+    this.#url = new URL(request.url, `http://${this.#getHost()}`)
 
     let body = null
     let files = []
@@ -47,13 +48,77 @@ export class NodeJSRequestMapper {
   }
 
   #getIp () {
-    return proxyAddr(this.#req, this.#isIpTrusted)
+    return proxyAddr(this.#req, this.#isFromTrustedProxy)
   }
 
   #getIps () {
-    const addrs = proxyAddr.all(this.#req, this.#isIpTrusted)
+    const addrs = proxyAddr.all(this.#req, this.#isFromTrustedProxy)
     addrs.reverse().pop()
     return addrs
+  }
+
+  #getProtocol () {
+    const proto = this.#req.socket.encrypted ? 'https' : 'http'
+    if (!this.#isFromTrustedProxy(this.#req.socket.remoteAddress)) return proto
+    return (this.#req.headers['X-Forwarded-Proto'] || proto).split(',').shift().trim()
+  }
+
+  #getHost () {
+    let host = null
+    const url = new URL(this.#options.url)
+    const allSubdomainRegex = new RegExp(`^(.+\.)?${url.hostname}$`)
+
+    if (this.#isFromTrustedProxy(this.#req.socket.remoteAddress)) {
+      host = (this.#req.headers['X-Forwarded-Host'] || proto).split(',').shift().trim()
+    } else if (this.#req.headers.has('host')) {
+      host = this.#req.headers['host']
+    } else {
+      host = url.hostname
+    }
+
+    host = host.trim().replace(/:\d+$/, '').toLowerCase()
+
+    // Validate host name as it comes from user
+    if (host.replace(/(?:^\[)?[a-zA-Z0-9-:\]_]+\.?/, '').length) {
+      throw new SuspiciousOperationException(`Invalid Host ${host}`)
+    }
+
+    if (this.#options.hosts.onlySubdomain) {
+      if (allSubdomainRegex.test(host)) {
+        return host
+      }
+
+      throw new SuspiciousOperationException(`Untrusted Host ${host}`)
+    }
+
+    if (this.#options.hosts?.trusted?.length || this.#options.hosts?.trustedPattern?.length) {
+      if (this.#options.hosts?.trusted?.includes(host)) {
+        return host
+      }
+
+      if (this.#options.hosts?.trustedPattern?.reduce((prev, pattern) => pattern.test(host) || prev, false)) {
+        return host
+      }
+
+      throw new SuspiciousOperationException(`Untrusted Host ${host}`)
+    }
+
+    return host
+  }
+
+  #isFromTrustedProxy (ip) {
+    const trusted = this.#options.proxies.trusted ?? []
+    const untrusted = this.#options.proxies.untrusted ?? []
+
+    if (untrusted.includes('*') || ipRangeCheck(ip, untrusted)) {
+      return false
+    }
+
+    if (trusted.includes('*') || ipRangeCheck(ip, trusted)) {
+      return true
+    }
+
+    return true
   }
 
   async #getBody () {
@@ -64,9 +129,9 @@ export class NodeJSRequestMapper {
     }
     
     const length = this.#req.headers['content-length']
-    const type = this.#getType(this.#req) ?? this.#options.type ?? 'text/plain'
-    const encoding = this.#getCharset(this.#req) ?? this.#options.defaultCharset ?? 'utf-8'
-    const limit = typeof this.#options.limit !== 'number' ? bytes.parse(this.#options.limit || '100kb') : this.#options.limit
+    const type = this.#getType(this.#req) ?? this.#options.body.type ?? 'text/plain'
+    const encoding = this.#getCharset(this.#req) ?? this.#options.body.defaultCharset ?? 'utf-8'
+    const limit = typeof this.#options.body.limit !== 'number' ? bytes.parse(this.#options.body.limit || '100kb') : this.#options.body.limit
 
     if (!typeIs(this.#req, type)) {
       return {}
@@ -112,27 +177,6 @@ export class NodeJSRequestMapper {
     } catch (error) {
       throw new FileException(error.message, error.code, error)
     }
-  }
-
-  #getProtocol () {
-    const proto = this.#req.socket.encrypted ? 'https' : 'http'
-    if (!this.#isIpTrusted(this.#req.socket.remoteAddress)) return proto
-    return (this.#req.headers['X-Forwarded-Proto'] || proto).split(',').shift().trim()
-  }
-
-  #isIpTrusted (ip) {
-    const trusted = this.#options.ip.trusted ?? []
-    const untrusted = this.#options.ip.untrusted ?? []
-
-    if (untrusted.includes('*') || ipRangeCheck(ip, untrusted)) {
-      return false
-    }
-
-    if (trusted.includes('*') || ipRangeCheck(ip, trusted)) {
-      return true
-    }
-
-    return true
   }
 
   #getType (req) {

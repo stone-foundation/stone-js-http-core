@@ -1,7 +1,3 @@
-export const isFunction = (value) => {
-  return typeof value === 'function'
-}
-
-export const isClass = (value) => {
-  return isFunction(value) && /^\s*class/.test(value.toString())
-}
+export const isFunction = (value) => typeof value === 'function'
+export const isString = (value) => typeof value === 'string' || value instanceof String
+export const isClass = (value) => isFunction(value) && /^\s*class/.test(value.toString())

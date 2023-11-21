@@ -27,22 +27,6 @@ export class Request extends Macroable {
   static METHOD_TRACE = 'TRACE'
   static METHOD_CONNECT = 'CONNECT'
 
-  static FORWARDED_PARAMS = {
-    X_FORWARDED_FOR: 'for',
-    X_FORWARDED_HOST: 'host',
-    X_FORWARDED_PORT: 'host',
-    X_FORWARDED_PROTO: 'proto'
-  }
-
-  static TRUSTED_HEADERS = [
-    'FORWARDED',
-    'X_FORWARDED_FOR',
-    'X_FORWARDED_HOST',
-    'X_FORWARDED_PORT',
-    'X_FORWARDED_PROTO',
-    'X_FORWARDED_PREFIX'
-  ]
-
   static #mappers = new Map()
 
   #ip
