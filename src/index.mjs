@@ -1,3 +1,4 @@
+export { config } from './config.mjs'
 export { HandleCorsMiddleware } from './middleware/HandleCorsMiddleware.mjs'
 export { BinaryFileResponse } from './BinaryFileResponse.mjs'
 export { JsonResponse } from './JsonResponse.mjs'
