@@ -57,6 +57,8 @@ export class NodeHttpAdapter {
     app.registerInstance(Request, request, ['request'])
     app.registerInstance('originalRequest', request.clone())
 
+    Request.macro('getNodeRequest', () => req)
+
     return request
   }
 
