@@ -194,6 +194,11 @@ export class Response extends Macroable {
     return this.setHeader(key, value)
   }
 
+  setHeaders (values) {
+    const headers = values instanceof Headers || values instanceof Map ? values.entries() : Object.entries(values)
+    return headers.reduce((_, [key, value]) => this.setHeader(key, value))
+  }
+
   setHeader (key, value) {
     value = Array.isArray(value) ? value.map(String) : String(value)
 

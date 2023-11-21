@@ -44,6 +44,10 @@ export class HttpKernel {
     return this.skipMiddleware() ? [] : this.#app.get('http.middleware', [])
   }
 
+  get requestMiddleware () {
+    return this.middleware.filter(v => isClass(v) && !!v.prototype.handle)
+  }
+
   get responseMiddleware () {
     return this.middleware.filter(v => isClass(v) && !!v.prototype.response)
   }
@@ -107,7 +111,7 @@ export class HttpKernel {
 
     return new Pipeline(this.#app.container)
       .send(this.#app.get('request'))
-      .through(this.middleware)
+      .through(this.requestMiddleware)
       .then(request => this.router.dispatch(request))
   }
 
