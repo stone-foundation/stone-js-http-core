@@ -1,7 +1,7 @@
 import mime from 'mime'
 import { File } from './File.mjs'
 import { basename, extname } from 'node:path'
-import { RuntimeException } from '../index.mjs'
+import { RuntimeException } from '@stone-js/common'
 
 export class UploadedFile extends File {
   #mimeType

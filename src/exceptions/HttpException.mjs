@@ -1,4 +1,4 @@
-import { RuntimeException } from "./RuntimeException.mjs"
+import { RuntimeException } from './RuntimeException.mjs'
 
 /**
  * Class representing an Exception.

@@ -1,17 +1,23 @@
 import { Response } from './Response.mjs'
-import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
+import { LogicException } from '@stone-js/common'
 
 export class JsonResponse extends Response {
   _data
+
+  static create (content = '', status = 200, headers = {}, json = false) {
+    return new this(content, status, headers, json)
+  }
 
   constructor (data = null, status = 200, headers = {}, json = false) {
     super('', status, headers)
 
     if (json && !['string', 'number', 'boolean'].includes(typeof data)) {
-      throw new InvalidArgumentException('When json is set to true, data must be one of these values [string, number, boolean]')
+      throw new LogicException('When json is set to true, data must be one of these values [string, number, boolean]')
     }
 
     data ??= {}
+
+    this.setType('json')
 
     json ? this.setJson(data) : this.setData(data)
   }

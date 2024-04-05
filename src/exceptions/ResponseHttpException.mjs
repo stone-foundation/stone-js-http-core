@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class ResponseHttpException extends HttpException {
   static CODE = 'HTTP_RESPONSE'

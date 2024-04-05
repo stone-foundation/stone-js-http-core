@@ -8,17 +8,17 @@ export const config = {
   },
   proxies: {
     trusted: [],
-    untrusted: [],
+    untrusted: []
   },
   body: {
     limit: '100kb',
     type: 'text/plain',
-    defaultCharset: 'utf-8',
+    defaultCharset: 'utf-8'
   },
   cache: {},
   cookie: {
     secret: '',
-    options: {},
+    options: {}
   },
   json: {
     spaces: '',
@@ -39,14 +39,6 @@ export const config = {
   etag: {
     function: null
   },
-  server: {
-    key: null,
-    cert: null,
-    port: 8080,
-    protocol: 'http',
-    hostname: 'localhost',
-    requestTimeout: 300000
-  },
   middleware: [],
   bootstrappers: [],
   skip_middleware: false,
@@ -58,6 +50,6 @@ export const config = {
     exposedHeaders: [],
     allowedHeaders: [],
     successStatus: 204,
-    preflightStop: false,
+    preflightStop: false
   }
 }

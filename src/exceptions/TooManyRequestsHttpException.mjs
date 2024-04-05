@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class TooManyRequestsHttpException extends HttpException {
   static CODE = 'HTTP_TOO_MANY_REQUESTS-404'

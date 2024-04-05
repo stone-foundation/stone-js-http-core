@@ -1,21 +1,17 @@
 import mime from 'mime'
 import fresh from 'fresh'
+import get from 'lodash/get'
+import set from 'lodash/set'
+import has from 'lodash/has'
 import typeIs from 'type-is'
 import accepts from 'accepts'
 import { isIP } from 'node:net'
-import { get, has } from 'lodash'
-import { isClass } from './Utils.mjs'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
-import { Macroable } from '@stone-js/macroable'
-import { URIMapper } from './mappers/URIMapper.mjs'
-import { LogicException } from './exceptions/LogicException.mjs'
-import { RuntimeException } from './exceptions/RuntimeException.mjs'
-import { NodeJSRequestMapper } from './mappers/NodeJSRequestMapper.mjs'
-import { InvalidArgumentException } from './index.mjs'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
+import { IncomingEvent, LogicException, RuntimeException, flattenValues } from '@stone-js/common'
 
-export class Request extends Macroable {
+export class Request extends IncomingEvent {
   static METHOD_HEAD = 'HEAD'
   static METHOD_GET = 'GET'
   static METHOD_POST = 'POST'
@@ -26,8 +22,6 @@ export class Request extends Macroable {
   static METHOD_OPTIONS = 'OPTIONS'
   static METHOD_TRACE = 'TRACE'
   static METHOD_CONNECT = 'CONNECT'
-
-  static #mappers = new Map()
 
   #ip
   #ips
@@ -43,63 +37,11 @@ export class Request extends Macroable {
   #metadata
   #protocol
   #queryString
-  #appResolver
   #userResolver
   #routeResolver
-  #currentMapperName
+  #contextResolver
 
   #defaultLocale = 'en'
-
-  static createFromUri (uri, mapper = URIMapper) {
-    return this
-      .setURIMapper(mapper)
-      .createFromMapper('uri', uri)
-  }
-
-  static createFromNodeRequest (request, mapper = NodeJSRequestMapper) {
-    return this
-      .setNodeJsMapper(mapper)
-      .createFromMapper('node', request)
-  }
-
-  static async createFromMapper (name, request) {
-    if (this.hasMapper(name)) {
-      const Mapper = this.getMapper(name)
-      const mapper = isClass(Mapper) ? new Mapper() : { map: Mapper }
-      return new this(await mapper.map(request)).#setCurrentMapperName(name)
-    }
-
-    throw new LogicException(`No mapper with this name ${name} exists.`)
-  }
-
-  static getMapper (name) {
-    return this.#mappers.get(name)
-  }
-
-  static hasMapper (name) {
-    return this.#mappers.has(name)
-  }
-
-  static setURIMapper (mapper) {
-    return this.setMapper('uri', mapper)
-  }
-
-  static setNodeJsMapper (mapper) {
-    return this.setMapper('node', mapper)
-  }
-
-  static setMappers (mappers) {
-    return Object.entries(mappers).reduce((_prev, [name, mapper]) => this.setMapper(name, mapper))
-  }
-
-  static setMapper (name, mapper) {
-    if (mapper.prototype.map) {
-      this.#mappers.set(name,  mapper)
-      return this
-    }
-
-    throw new LogicException('Mapper must have a `map` method.')
-  }
 
   constructor ({
     ip,
@@ -116,7 +58,7 @@ export class Request extends Macroable {
     queryString,
     defaultLocale
   }) {
-    super()
+    super({ url, metadata, locale, defaultLocale })
 
     this.#ip = ip
     this.#url = url
@@ -156,7 +98,7 @@ export class Request extends Macroable {
   }
 
   get isSecure () {
-    this.protocol === 'https'
+    return this.protocol === 'https'
   }
 
   get isPrefetch () {
@@ -164,21 +106,21 @@ export class Request extends Macroable {
   }
 
   get uri () {
-    this.#url.href
+    return this.#url.href
   }
 
   get scheme () {
     return this.#protocol
   }
-  
+
   get protocol () {
     return this.#protocol
   }
-  
+
   get host () {
     return this.#url.host
   }
-  
+
   get hostname () {
     return this.#url.hostname
   }
@@ -194,22 +136,26 @@ export class Request extends Macroable {
   get path () {
     return `${this.#url.pathname}${this.#url.search}`
   }
-  
+
   get pathname () {
     return this.#url.pathname
+  }
+
+  get hash () {
+    return this.#url.hash
   }
 
   get segments () {
     return this.#url.pathname.split('/')
   }
-  
+
   get subdomains () {
     if (!this.hostname) { return [] }
     return isIP(this.hostname)
       ? [this.hostname]
       : this.hostname.split('.').reverse().slice(this.app.get('http.subdomain.offset'))
   }
-  
+
   get query () {
     return this.#query
   }
@@ -217,47 +163,47 @@ export class Request extends Macroable {
   get queryString () {
     return this.#queryString
   }
-  
+
   get files () {
     return this.#files
   }
-  
+
   get locale () {
     return this.get('locale', this.#locale) ?? this.#defaultLocale
   }
-  
+
   get etag () {
     return this.#headers.get('ETag')
   }
-  
+
   get method () {
     return this.#method
   }
-  
+
   get cookies () {
     return this.#cookies
   }
-  
+
   get headers () {
     return this.#headers
   }
-  
+
   get types () {
     return this.#accepts.types()
   }
-  
+
   get charsets () {
     return this.#accepts.charsets()
   }
-  
+
   get languages () {
     return this.#accepts.languages()
   }
-  
+
   get encodings () {
     return this.#accepts.encodings()
   }
-  
+
   get charset () {
     return contentTypeLib.parse(this).parameters.charset
   }
@@ -266,16 +212,16 @@ export class Request extends Macroable {
     return contentTypeLib.parse(this).type
   }
 
-  get currentMapperName () {
-    return this.#currentMapperName
-  }
-
-  get app () {
-    return this.#appResolver()
+  get context () {
+    return this.#contextResolver()
   }
 
   get user () {
     return this.#userResolver()
+  }
+
+  get params () {
+    return this.route().parameters()
   }
 
   get (key, fallback = null) {
@@ -295,7 +241,22 @@ export class Request extends Macroable {
       return get(query, key)
     }
 
+    // Get from metadata
+    if (has(this.#metadata, key)) {
+      return get(this.#metadata, key)
+    }
+
     return fallback
+  }
+
+  set (key, value = null) {
+    key = typeof key === 'object' ? key : { [key]: value }
+
+    for (const [name, val] of Object.entries(key)) {
+      set(this.#metadata, name, val)
+    }
+
+    return this
   }
 
   param (name, fallback = null) {
@@ -304,11 +265,11 @@ export class Request extends Macroable {
 
   header (name, fallback = null) {
     if (!name) {
-      throw new InvalidArgumentException('name argument is required.')
+      throw new LogicException('name argument is required.')
     }
 
-    if (typeof name != 'string') {
-      throw new InvalidArgumentException('name must be a string.')
+    if (typeof name !== 'string') {
+      throw new LogicException('name must be a string.')
     }
 
     name = name.toLowerCase()
@@ -329,19 +290,19 @@ export class Request extends Macroable {
   }
 
   accepts (...values) {
-    return this.#accepts.type(this.#flattenValues(values))
+    return this.#accepts.type(flattenValues(values))
   }
 
   acceptsEncodings (...values) {
-    return this.#accepts.encoding(this.#flattenValues(values))
+    return this.#accepts.encoding(flattenValues(values))
   }
 
   acceptsCharsets (...values) {
-    return this.#accepts.charset(this.#flattenValues(values))
+    return this.#accepts.charset(flattenValues(values))
   }
 
   acceptsLanguages (...values) {
-    return this.#accepts.language(this.#flattenValues(values))
+    return this.#accepts.language(flattenValues(values))
   }
 
   getFormat (mimeType) {
@@ -358,7 +319,7 @@ export class Request extends Macroable {
   }
 
   is (types) {
-    return typeIs(this, this.#flattenValues(types))
+    return typeIs(this, flattenValues(types))
   }
 
   json (key, fallback = null) {
@@ -390,7 +351,7 @@ export class Request extends Macroable {
 
   route (param, fallback = null) {
     const route = this.getRouteResolver()
-    return !param ? route : route.parameters(param, fallback)
+    return !param ? route : route?.parameters(param, fallback)
   }
 
   uriForPath (path) {
@@ -405,15 +366,15 @@ export class Request extends Macroable {
       throw new RuntimeException('Unable to generate fingerprint. Route unavailable.')
     }
 
-    return btoa([].concat(route.methods, [route.getDomain(), route.uri, this.ip]).join('|'))
+    return btoa([].concat(route.methods, route.getDomain(), route.uri, this.ip).join('|'))
   }
 
-  getAppResolver () {
-    return this.#appResolver ?? (() => null)
+  getContextResolver () {
+    return this.#contextResolver ?? (() => null)
   }
 
-  setAppResolver (resolver) {
-    this.#appResolver = resolver
+  setContextResolver (resolver) {
+    this.#contextResolver = resolver
     return this
   }
 
@@ -439,11 +400,6 @@ export class Request extends Macroable {
     return get(this.#metadata, key, fallback)
   }
 
-  setMetadata (value) {
-    this.#metadata = value
-    return this
-  }
-
   setLocale (locale) {
     this.#locale = locale
     return this
@@ -465,12 +421,21 @@ export class Request extends Macroable {
     return ['GET', 'HEAD'].includes(this.method)
   }
 
-  #setCurrentMapperName (name) {
-    this.#currentMapperName = name
-    return this
-  }
-
-  #flattenValues (values) {
-    return values.reduce((prev, curr) => prev.concat(curr), [])
+  clone () {
+    return new Request({
+      ip: this.#ip,
+      ips: this.#ips,
+      method: this.#method,
+      locale: this.#locale,
+      cookies: this.#cookies,
+      protocol: this.#protocol,
+      queryString: this.#queryString,
+      url: structuredClone(this.#url),
+      body: structuredClone(this.#body),
+      defaultLocale: this.#defaultLocale,
+      files: structuredClone(this.#files),
+      headers: structuredClone(this.#headers),
+      metadata: structuredClone(this.#metadata)
+    })
   }
 }

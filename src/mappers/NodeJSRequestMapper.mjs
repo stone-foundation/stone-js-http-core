@@ -7,9 +7,10 @@ import proxyAddr from 'proxy-addr'
 import formidable from 'formidable'
 import contentType from 'content-type'
 import ipRangeCheck from 'ip-range-check'
-import { FileException } from '../exceptions/FileException.mjs'
+import { RuntimeException } from '@stone-js/common'
 import { UploadedFile } from '../file/UploadedFile.mjs'
-import { RuntimeException } from '../exceptions/RuntimeException.mjs'
+import { FileException } from '../exceptions/FileException.mjs'
+import { CookieCollection } from '../cookies/CookieCollection.mjs'
 import { SuspiciousOperationException } from '../exceptions/SuspiciousOperationException.mjs'
 
 export class NodeJSRequestMapper {
@@ -32,7 +33,7 @@ export class NodeJSRequestMapper {
     } else {
       body = await this.#getBody()
     }
-    
+
     return {
       body,
       files,
@@ -43,7 +44,7 @@ export class NodeJSRequestMapper {
       headers: request.headers,
       cookies: this.#getCookies(),
       protocol: this.#getProtocol(),
-      queryString: this.#url.search,
+      queryString: this.#url.search
     }
   }
 
@@ -66,12 +67,13 @@ export class NodeJSRequestMapper {
   #getHost () {
     let host = null
     const url = new URL(this.#options.url)
-    const allSubdomainRegex = new RegExp(`^(.+\.)?${url.hostname}$`)
+    const proto = this.#req.socket.encrypted ? 'https' : 'http'
+    const allSubdomainRegex = new RegExp(`^(.+\\.)?${url.hostname}$`)
 
     if (this.#isFromTrustedProxy(this.#req.socket.remoteAddress)) {
       host = (this.#req.headers['X-Forwarded-Host'] || proto).split(',').shift().trim()
     } else if (this.#req.headers.has('host')) {
-      host = this.#req.headers['host']
+      host = this.#req.headers.host
     } else {
       host = url.hostname
     }
@@ -123,11 +125,11 @@ export class NodeJSRequestMapper {
 
   async #getBody () {
     this.#req.body ??= {}
-    
+
     if (!typeIs.hasBody(this.#req)) {
       return {}
     }
-    
+
     const length = this.#req.headers['content-length']
     const type = this.#getType(this.#req) ?? this.#options.body.type ?? 'text/plain'
     const encoding = this.#getCharset(this.#req) ?? this.#options.body.defaultCharset ?? 'utf-8'
@@ -138,7 +140,7 @@ export class NodeJSRequestMapper {
     }
 
     try {
-      switch (typeIs(req, ['urlencoded', 'json', 'text', 'bin'])) {
+      switch (typeIs(this.#req, ['urlencoded', 'json', 'text', 'bin'])) {
         case 'bin':
           return await rawBody(this.#req, { length, limit })
         case 'json':
@@ -165,11 +167,9 @@ export class NodeJSRequestMapper {
     if (!typeIs.hasBody(this.#req) || !this.#isMultipart()) return {}
 
     const form = formidable(this.#options.files ?? {})
-    
+
     try {
-      let files
-      let fields
-      [fields, files] = await form.parse(this.#req)
+      const [fields, files] = await form.parse(this.#req)
       return {
         fields,
         files: files.map(v => new UploadedFile(v.filepath, v.originalFilename, v.mimetype))

@@ -1,8 +1,7 @@
-import encodeUrl from 'encodeUrl'
-import escapeHtml from 'escapeHtml'
+import escape from 'lodash/escape'
 import { Buffer } from 'safe-buffer'
 import { Response } from './Response.mjs'
-import { InvalidArgumentException } from './index.mjs'
+import { LogicException } from '@stone-js/common'
 
 export class RedirectResponse extends Response {
   #targetUrl
@@ -11,7 +10,7 @@ export class RedirectResponse extends Response {
     super('', status, headers)
 
     if (!this.isRedirect()) {
-      throw new InvalidArgumentException(`This HTTP status(${status}) code is not a redirect.`)
+      throw new LogicException(`This HTTP status(${status}) code is not a redirect.`)
     }
 
     if (this.isMovedPermanently() && !this.#hasCacheControl(headers)) {
@@ -23,7 +22,7 @@ export class RedirectResponse extends Response {
 
   setTargetUrl (url) {
     if (!url) {
-      throw InvalidArgumentException('Cannot redirect to an empty URL.')
+      throw LogicException('Cannot redirect to an empty URL.')
     }
 
     this.#targetUrl = url
@@ -36,7 +35,7 @@ export class RedirectResponse extends Response {
   }
 
   #redirect () {
-    const url = escapeHtml(this.#location().getHeader('Location'))
+    const url = escape(this.#location().getHeader('Location'))
 
     return this
       .format({
@@ -52,7 +51,7 @@ export class RedirectResponse extends Response {
       this.#targetUrl = this.request.getHeader('Referrer') ?? '/'
     }
 
-    return this.setHeader('Location', encodeUrl(this.#targetUrl))
+    return this.setHeader('Location', encodeURIComponent(this.#targetUrl))
   }
 
   #hasCacheControl (headers) {

@@ -1,7 +1,7 @@
 import mime from 'mime'
 import { filesize } from 'filesize'
 import { createHash } from 'node:crypto'
-import { InvalidArgumentException, RuntimeException } from '../index.mjs'
+import { RuntimeException, LogicException } from '@stone-js/common'
 import { basename, dirname, extname, isAbsolute, join, resolve } from 'node:path'
 import { statSync, existsSync, accessSync, constants, writeFileSync, readFileSync, mkdirSync, renameSync, chmodSync, rmSync } from 'node:fs'
 
@@ -174,7 +174,7 @@ export class File {
 
   #validateFile () {
     if (!this.exists()) {
-      throw new InvalidArgumentException(`File not found. (${this.#path})`)
+      throw new LogicException(`File not found. (${this.#path})`)
     }
   }
 

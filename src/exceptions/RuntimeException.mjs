@@ -6,6 +6,6 @@ export class RuntimeException extends Error {
     this.code = code
     this.message = message
     this.previous = previous
-    this.name = 'stonejs.http'
+    this.name = 'stone.js.http'
   }
 }

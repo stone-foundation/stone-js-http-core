@@ -1,4 +1,4 @@
-import { BinaryFileResponse } from "../BinaryFileResponse.mjs"
+import { BinaryFileResponse } from '../BinaryFileResponse.mjs'
 
 /**
  * Class representing a SetCacheHeadersMiddleware.
@@ -8,14 +8,14 @@ import { BinaryFileResponse } from "../BinaryFileResponse.mjs"
 export class SetCacheHeadersMiddleware {
   #config
 
-  constructor({ config }) {
+  constructor ({ config }) {
     this.#config = config
   }
-  
+
   response (request, response, next) {
     if (
-      !request.isMethodCacheable() || 
-      !response.content || 
+      !request.isMethodCacheable() ||
+      !response.content ||
       !(response instanceof BinaryFileResponse)
     ) {
       return next(request, response)

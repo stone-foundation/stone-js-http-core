@@ -16,9 +16,9 @@ export class NodeHttpAdapter {
     return new Promise((resolve, reject) => {
       (this.#options.isSecure ? https : http)
         .createServer(this.#options.serverOptions, async (req, res) => {
-          const app       = Application.default(config)
-          const request   = await this.#createRequest(app, req)
-          const response  = await app.run()
+          const app = Application.default(config)
+          const request = await this.#createRequest(app, req)
+          const response = await app.run()
 
           this.#send({ app, req, res, request, response })
 
@@ -47,7 +47,7 @@ export class NodeHttpAdapter {
       serverOptions: {
         key: config.get('http.server.key', undefined),
         cert: config.get('http.server.cert', undefined),
-        requestTimeout: config.get('http.server.requestTimeout', 300000),
+        requestTimeout: config.get('http.server.requestTimeout', 300000)
       }
     }
   }

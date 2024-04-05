@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class ServiceUnavailableHttpException extends HttpException {
   static CODE = 'HTTP_SERVICE_UNAVAILABLE-503'

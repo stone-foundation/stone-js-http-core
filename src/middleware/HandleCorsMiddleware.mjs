@@ -1,4 +1,4 @@
-import { isString } from "../Utils.mjs"
+import { isString } from '@stone-js/common'
 
 /**
  * Class representing a HandleCorsMiddleware.
@@ -11,7 +11,7 @@ export class HandleCorsMiddleware {
   #headers
   #headerVary
 
-  constructor({ config }) {
+  constructor ({ config }) {
     this.#config = config
     this.#headerVary = []
     this.#headers = new Headers()
@@ -19,7 +19,7 @@ export class HandleCorsMiddleware {
 
   response (request, response, next) {
     const options = this.#getOptions()
-    
+
     this
       .#configureCredentials(options)
       .#configureExposedHeaders(options)
@@ -30,7 +30,7 @@ export class HandleCorsMiddleware {
         .#configureMaxAge(options)
         .#configureMethods(options)
         .#configureAllowedHeaders(options, request)
-      
+
       if (options.preflightStop) {
         return response
           .addVary(this.#headerVary)
@@ -39,7 +39,7 @@ export class HandleCorsMiddleware {
           .setStatus(options.successStatus ?? 204)
       }
     }
-      
+
     response
       .addVary(this.#headerVary)
       .setHeaders(this.#headers)
@@ -84,7 +84,7 @@ export class HandleCorsMiddleware {
     return this.#setHeader('Access-Control-Allow-Methods', Array.isArray(methods) ? methods.join(',') : methods)
   }
 
-  #configureCredentials({ credentials }) {
+  #configureCredentials ({ credentials }) {
     return credentials === true ? this.#setHeader('Access-Control-Allow-Credentials', true) : this
   }
 
@@ -138,10 +138,10 @@ export class HandleCorsMiddleware {
   }
 
   #getDefaults () {
-    return  {
+    return {
       origin: '*',
       preflightContinue: true,
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
     }
   }
 }

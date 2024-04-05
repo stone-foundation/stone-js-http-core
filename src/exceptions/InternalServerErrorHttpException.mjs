@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class InternalServerErrorHttpException extends HttpException {
   static CODE = 'HTTP_INTERNAL_SERVER_ERROR-500'

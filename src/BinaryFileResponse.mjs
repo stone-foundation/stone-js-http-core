@@ -2,7 +2,7 @@ import { Buffer } from 'safe-buffer'
 import { File } from './file/File.mjs'
 import { Response } from './Response.mjs'
 import contentDisposition from 'content-disposition'
-import { LogicException, RuntimeException } from './index.mjs'
+import { LogicException, RuntimeException } from '@stone-js/common'
 
 export class BinaryFileResponse extends Response {
   #file
@@ -83,7 +83,7 @@ export class BinaryFileResponse extends Response {
     return false
   }
 
-  deleteFileAfterSend (shouldDelete = true) {
+  setDeleteFileAfterSend (shouldDelete = true) {
     this.#deleteFileAfterSend = shouldDelete
     return this
   }

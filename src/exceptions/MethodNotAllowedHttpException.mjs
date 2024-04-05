@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class MethodNotAllowedHttpException extends HttpException {
   static CODE = 'HTTP_METHOD_NOT_ALLOWED-405'

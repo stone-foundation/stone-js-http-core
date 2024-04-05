@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class NotFoundHttpException extends HttpException {
   static CODE = 'HTTP_NOT_FOUND-404'

@@ -3,17 +3,15 @@ import { mime } from 'send'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
-import { Macroable } from '@stone-js/macroable'
-import { LogicException } from './exceptions/LogicException.mjs'
-import { ResponseHttpException } from './exceptions/ResponseHttpException.mjs'
-import { InvalidArgumentException } from './exceptions/InvalidArgumentException.mjs'
+import { LogicException } from '@stone-js/common'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
+import { ResponseHttpException } from './exceptions/ResponseHttpException.mjs'
 
 /**
  * InspiredBy: Symfony, Laravel and ExpressJS
  * @see: https://github.com/symfony/symfony/blob/6.4/src/Symfony/Component/HttpFoundation/Response.php
  */
-export class Response extends Macroable {
+export class Response {
   static HTTP_CONTINUE = 100
   static HTTP_SWITCHING_PROTOCOLS = 101
   static HTTP_PROCESSING = 102 // RFC2518
@@ -100,6 +98,58 @@ export class Response extends Macroable {
 
   static STATUS_TEXTS = statuses.message
 
+  static create (content = '', status = 200, headers = {}) {
+    return new this(content, status, headers)
+  }
+
+  static ok (body, headers = {}) {
+    return this.create(body, 200, headers)
+  }
+
+  static noContent (headers = {}) {
+    return this.create(undefined, 204, headers)
+  }
+
+  static badRequest (body, headers = {}) {
+    return this.create(body, 400, headers)
+  }
+
+  static unauthorized (body, headers = {}) {
+    return this.create(body, 401, headers)
+  }
+
+  static forbidden (body, headers = {}) {
+    return this.create(body, 403, headers)
+  }
+
+  static notFound (body, headers = {}) {
+    return this.create(body, 404, headers)
+  }
+
+  static methodNotAllowed (body, headers = {}) {
+    return this.create(body, 405, headers)
+  }
+
+  static serverError (body, headers = {}) {
+    return this.create(body, 500, headers)
+  }
+
+  static unavailable (body, headers = {}) {
+    return this.create(body, 503, headers)
+  }
+
+  static fromString (content, statusCode = 200, headers = { 'Content-Type': 'text/html' }) {
+    return this.create(content, statusCode, headers)
+  }
+
+  static json (content, statusCode = 200, headers = { 'Content-Type': 'application/json' }) {
+    return this.create(content, statusCode, headers)
+  }
+
+  static empty (statusCode = 201, headers = { 'Content-Type': 'application/json' }) {
+    return this.create(statusCode, headers)
+  }
+
   _headers
   _content
   _version
@@ -114,14 +164,12 @@ export class Response extends Macroable {
   #headerCacheControl
 
   constructor (content = '', status = 200, headers = {}) {
-    super()
-
     this
       .setStatus(status)
       .setHeaders(headers)
       .setContent(content)
       .setProtocolVersion('1.0')
-    
+
     this.#cookieCollection = CookieCollection.instance()
   }
 
@@ -181,10 +229,10 @@ export class Response extends Macroable {
     return /;\s*charset\s*=/
   }
 
-  setHeaders (headers) {
-    this._headers = new Headers(headers)
-    return this
-  }
+  // setHeaders (headers) {
+  //   this._headers = new Headers(headers)
+  //   return this
+  // }
 
   withHeaders (headers) {
     return this.setHeaders(headers)
@@ -204,7 +252,7 @@ export class Response extends Macroable {
 
     if (key.toLowerCase() === 'content-type') {
       if (Array.isArray(value)) {
-        throw new InvalidArgumentException('Content-Type cannot be set to an Array')
+        throw new LogicException('Content-Type cannot be set to an Array')
       } else if (!this.#charsetRegExp.test(value)) { // Add charset(Character Sets) to content-type
         this._charset = mime.charsets.lookup(value.split(';').shift().trim())
         value += this._charset ? `; charset=${this._charset.toLowerCase()}` : ''
@@ -251,7 +299,7 @@ export class Response extends Macroable {
     this._statusCode = code
 
     if (this.isInvalid()) {
-      throw new InvalidArgumentException(`The HTTP status code "${code}" is not valid.`)
+      throw new LogicException(`The HTTP status code "${code}" is not valid.`)
     }
 
     if (text === null) {
@@ -283,7 +331,7 @@ export class Response extends Macroable {
     try {
       return this.stringify(content, this.app.get('http.json.replacer'), this.app.get('http.json.spaces'), this.app.get('http.json.escape'))
     } catch (error) {
-      throw new InvalidArgumentException(error)
+      throw new LogicException(error)
     }
   }
 
@@ -753,7 +801,7 @@ export class Response extends Macroable {
     }, [])
 
     if (diff.length > 0) {
-      throw new InvalidArgumentException(`Response does not support the following options: "${diff.join(', ')}".`)
+      throw new LogicException(`Response does not support the following options: "${diff.join(', ')}".`)
     }
 
     if (options.etag) {

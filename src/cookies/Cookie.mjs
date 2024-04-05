@@ -1,6 +1,6 @@
 import { serialize } from 'cookie'
 import { sign } from 'cookie-signature'
-import { LogicException } from '../exceptions/LogicException.mjs'
+import { LogicException } from '@stone-js/common'
 
 export class Cookie {
   static SAMESITE_LAX = 'lax'
@@ -21,7 +21,7 @@ export class Cookie {
     secure,
     expires,
     httpOnly,
-    sameSite,
+    sameSite
   }) {
     this.raw = raw
     this.name = name
@@ -42,12 +42,12 @@ export class Cookie {
       secure: this.secure,
       expires: this.expires,
       httpOnly: this.httpOnly,
-      sameSite: this.sameSite,
+      sameSite: this.sameSite
     }
   }
 
   setOptions (options) {
-    this.path = options.path,
+    this.path = options.path
     this.domain = options.domain
     this.secure = options.secure
     this.expires = options.expires
@@ -80,7 +80,7 @@ export class Cookie {
     if (this.signed && !secret) {
       throw new LogicException('A secret is required for signed cookies. Please set a secret in configurations.')
     }
-    
+
     this.value = typeof this.value === 'object' ? `j:${JSON.stringify(this.value)}` : String(this.value)
 
     if (this.signed) {

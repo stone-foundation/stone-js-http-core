@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException.mjs"
+import { HttpException } from './HttpException.mjs'
 
 export class AccessDeniedHttpException extends HttpException {
   static CODE = 'HTTP_ACCES_DENIED-403'

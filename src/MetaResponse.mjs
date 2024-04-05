@@ -1,23 +1,59 @@
 import { Response } from './Response.mjs'
 
-export class MetaResponse extends Response {
+export class MetaResponse {
+  #response
   #metadata
 
-  constructor (content = null, status = 200, headers = {}, metadata = {}) {
-    super(content, status, headers)
-
+  constructor (response, metadata) {
+    this.#response = response
     this.#metadata = metadata
   }
 
-  get metadata () {
-    return this.#metadata
+  getResponse () {
+    return this.#response
   }
 
-  get decorators () {
-    return this.metadata.decorators ?? {}
+  getMetadata () {
+    return this.#metadata ?? {}
   }
 
-  get RouteDecorator () {
-    return this.decorators.route
+  getDecorators () {
+    return this.getMetadata().decorators ?? {}
+  }
+
+  getRouteDecorator () {
+    return this.getDecorators().route
+  }
+
+  getResponseDecorator () {
+    return this.getDecorators().response
+  }
+
+  getStatus () {
+    if (this.#response instanceof Response) {
+      return this.#response.status
+    } else {
+      return this.getResponseDecorator()?.status
+    }
+  }
+
+  getHeaders () {
+    if (this.#response instanceof Response) {
+      return this.#response.headers
+    } else {
+      return this.getResponseDecorator()?.headers
+    }
+  }
+
+  getContent () {
+    if (this.#response instanceof Response) {
+      return this.#response.content
+    } else {
+      return this.#response
+    }
+  }
+
+  toResponse () {
+    return Response.create(this.getContent(), this.getStatus(), this.getHeaders())
   }
 }
