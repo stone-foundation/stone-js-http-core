@@ -1,7 +1,7 @@
 import mime from 'mime'
 import { filesize } from 'filesize'
 import { createHash } from 'node:crypto'
-import { RuntimeException, LogicException } from '@stone-js/common'
+import { RuntimeError, LogicError } from '@stone-js/common'
 import { basename, dirname, extname, isAbsolute, join, resolve } from 'node:path'
 import { statSync, existsSync, accessSync, constants, writeFileSync, readFileSync, mkdirSync, renameSync, chmodSync, rmSync } from 'node:fs'
 
@@ -16,14 +16,14 @@ export class File {
 
   getContent () {
     if (!this.isReadable()) {
-      throw new RuntimeException(`Could not get the content of the file (${this.#path}).`)
+      throw new RuntimeError(`Could not get the content of the file (${this.#path}).`)
     }
     return readFileSync(this.#path, 'utf-8')
   }
 
   write (content) {
     if (!this.isWritable()) {
-      throw new RuntimeException(`Could not write content to this file(${this.#path}).`)
+      throw new RuntimeError(`Could not write content to this file(${this.#path}).`)
     }
 
     writeFileSync(this.#path, content, 'utf-8')
@@ -41,7 +41,7 @@ export class File {
     try {
       renameSync(this.getPath(), target.getPath())
     } catch (error) {
-      throw new RuntimeException(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`)
+      throw new RuntimeError(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`)
     }
 
     chmodSync(target.getPath(), 0o666)
@@ -53,7 +53,7 @@ export class File {
     try {
       rmSync(this.#path, { force })
     } catch (error) {
-      throw new RuntimeException(`Could not remove this file (${this.#path}) (${error}).`)
+      throw new RuntimeError(`Could not remove this file (${this.#path}) (${error}).`)
     }
     return this
   }
@@ -174,7 +174,7 @@ export class File {
 
   #validateFile () {
     if (!this.exists()) {
-      throw new LogicException(`File not found. (${this.#path})`)
+      throw new LogicError(`File not found. (${this.#path})`)
     }
   }
 
@@ -183,13 +183,13 @@ export class File {
       try {
         mkdirSync(directory, { recursive: true })
       } catch (_) {
-        throw new RuntimeException(`Unable to create the "${directory}" directory.`)
+        throw new RuntimeError(`Unable to create the "${directory}" directory.`)
       }
     } else {
       try {
         accessSync(directory, constants.W_OK)
       } catch (_) {
-        throw new RuntimeException(`Unable to write in the "${directory}" directory.`)
+        throw new RuntimeError(`Unable to write in the "${directory}" directory.`)
       }
     }
 

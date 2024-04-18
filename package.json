@@ -1,7 +1,7 @@
 {
   "name": "@stone-js/http",
   "version": "0.0.1",
-  "description": "Vanilla Javascript Http foundation",
+  "description": "Stone.js Http foundation",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
   "repository": "git@github.com:stonemjs/http.git",
@@ -13,23 +13,21 @@
     "Http",
     "Stone.js"
   ],
-  "main": "./src/index.mjs",
-  "module": "./src/index.mjs",
-  "types": "./dist/index.d.mts",
-  "typings": "./dist/index.d.mts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.mts",
   "files": [
-    "/src",
     "/dist"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./src/index.mjs"
+        "types": "./dist/types/index.d.mts",
+        "default": "./dist/index.mjs"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/types/index.d.mts",
+        "default": "./dist/index.cjs"
       }
     }
   },
@@ -38,13 +36,13 @@
     "lint": "standard src",
     "lint:fix": "standard --fix src tests",
     "lint:test": "standard --env jest tests",
-    "predoc": "rimraf docs",
-    "doc": "jsdoc src/index.mjs -d docs",
+    "predoc": "npm run build && rimraf docs",
+    "doc": "jsdoc src -r -a all -c jsdoc.json -R README.md -d docs/jsdoc",
+    "doc:serve": "npm run doc && npx http-server docs/jsdoc -p 8081",
     "build": "npm run lint && rollup -c && npm run types",
-    "build:dev": "cross-env NODE_ENV=dev npm run build",
     "release": "npm run test:text && npm run build && npm publish --access public",
-    "test": "npm run lint:test && jest",
-    "test:cvg": "npm run lint:test && jest --coverage",
+    "test": "npm run lint:test && jest -i",
+    "test:cvg": "npm run lint:test && jest -i --coverage",
     "test:text": "npm run test:cvg -- --coverageReporters=text",
     "test:html": "npm run test:cvg -- --coverageReporters=html text",
     "test:lcov": "npm run test:cvg -- --coverageReporters=lcov text"
@@ -106,9 +104,12 @@
     "parser": "@babel/eslint-parser",
     "globals": [
       "it",
+      "jest",
       "test",
       "expect",
-      "describe"
+      "describe",
+      "afterEach",
+      "beforeEach"
     ]
   }
 }

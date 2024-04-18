@@ -1,7 +1,7 @@
 import mime from 'mime'
 import { File } from './File.mjs'
 import { basename, extname } from 'node:path'
-import { RuntimeException } from '@stone-js/common'
+import { RuntimeError } from '@stone-js/common'
 
 export class UploadedFile extends File {
   #mimeType
@@ -38,6 +38,6 @@ export class UploadedFile extends File {
       return super.move(directory, name)
     }
 
-    throw new RuntimeException('No file was uploaded.')
+    throw new RuntimeError('No file was uploaded.')
   }
 }

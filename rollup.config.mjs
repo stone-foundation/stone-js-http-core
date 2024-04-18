@@ -14,7 +14,9 @@ export default {
   plugins: [
     json(),
     nodeExternals({ deps: false }), // Must always be before `nodeResolve()`.
-    nodeResolve(),
+    nodeResolve({
+      exportConditions: ['node', 'import', 'require', 'default']
+    }),
     babel({ babelHelpers: 'bundled' }),
     commonjs(),
     del({ targets: 'dist/*', runOnce: true }),

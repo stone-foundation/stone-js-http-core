@@ -1,7 +1,7 @@
-import { Response } from './Response.mjs'
-import { LogicException } from '@stone-js/common'
+import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
+import { LogicError } from '@stone-js/common'
 
-export class JsonResponse extends Response {
+export class JsonResponse extends OutgoingHttpResponse {
   _data
 
   static create (content = '', status = 200, headers = {}, json = false) {
@@ -12,7 +12,7 @@ export class JsonResponse extends Response {
     super('', status, headers)
 
     if (json && !['string', 'number', 'boolean'].includes(typeof data)) {
-      throw new LogicException('When json is set to true, data must be one of these values [string, number, boolean]')
+      throw new LogicError('When json is set to true, data must be one of these values [string, number, boolean]')
     }
 
     data ??= {}

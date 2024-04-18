@@ -1,16 +1,16 @@
 import escape from 'lodash/escape'
 import { Buffer } from 'safe-buffer'
-import { Response } from './Response.mjs'
-import { LogicException } from '@stone-js/common'
+import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
+import { LogicError } from '@stone-js/common'
 
-export class RedirectResponse extends Response {
+export class RedirectResponse extends OutgoingHttpResponse {
   #targetUrl
 
   constructor (url, status = 302, headers = {}) {
     super('', status, headers)
 
     if (!this.isRedirect()) {
-      throw new LogicException(`This HTTP status(${status}) code is not a redirect.`)
+      throw new LogicError(`This HTTP status(${status}) code is not a redirect.`)
     }
 
     if (this.isMovedPermanently() && !this.#hasCacheControl(headers)) {
@@ -22,7 +22,7 @@ export class RedirectResponse extends Response {
 
   setTargetUrl (url) {
     if (!url) {
-      throw LogicException('Cannot redirect to an empty URL.')
+      throw LogicError('Cannot redirect to an empty URL.')
     }
 
     this.#targetUrl = url
@@ -31,7 +31,7 @@ export class RedirectResponse extends Response {
   }
 
   isMovedPermanently () {
-    return [Response.HTTP_MOVED_PERMANENTLY].includes(this._statusCode)
+    return [OutgoingHttpResponse.HTTP_MOVED_PERMANENTLY].includes(this._statusCode)
   }
 
   #redirect () {

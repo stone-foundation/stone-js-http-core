@@ -3,15 +3,14 @@ import { mime } from 'send'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
-import { LogicException } from '@stone-js/common'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { ResponseHttpException } from './exceptions/ResponseHttpException.mjs'
+import { OutgoingResponse, LogicError, HttpError } from '@stone-js/common'
 
 /**
  * InspiredBy: Symfony, Laravel and ExpressJS
  * @see: https://github.com/symfony/symfony/blob/6.4/src/Symfony/Component/HttpFoundation/Response.php
  */
-export class Response {
+export class OutgoingHttpResponse extends OutgoingResponse {
   static HTTP_CONTINUE = 100
   static HTTP_SWITCHING_PROTOCOLS = 101
   static HTTP_PROCESSING = 102 // RFC2518
@@ -150,11 +149,11 @@ export class Response {
     return this.create(statusCode, headers)
   }
 
+  _error
   _headers
   _content
   _version
   _charset
-  _exception
   _statusCode
   #appResolver
   _statusMessage
@@ -164,6 +163,7 @@ export class Response {
   #headerCacheControl
 
   constructor (content = '', status = 200, headers = {}) {
+    super(content, status)
     this
       .setStatus(status)
       .setHeaders(headers)
@@ -207,7 +207,7 @@ export class Response {
 
   get app () {
     if (!this.#appResolver) {
-      throw new LogicException('Must set an Application resolver.')
+      throw new LogicError('Must set an Application resolver.')
     }
 
     return this.#appResolver()
@@ -215,7 +215,7 @@ export class Response {
 
   get request () {
     if (!this.#requestResolver) {
-      throw new LogicException('Must set a Request resolver.')
+      throw new LogicError('Must set a IncomingHttpEvent resolver.')
     }
 
     return this.#requestResolver()
@@ -252,7 +252,7 @@ export class Response {
 
     if (key.toLowerCase() === 'content-type') {
       if (Array.isArray(value)) {
-        throw new LogicException('Content-Type cannot be set to an Array')
+        throw new LogicError('Content-Type cannot be set to an Array')
       } else if (!this.#charsetRegExp.test(value)) { // Add charset(Character Sets) to content-type
         this._charset = mime.charsets.lookup(value.split(';').shift().trim())
         value += this._charset ? `; charset=${this._charset.toLowerCase()}` : ''
@@ -299,11 +299,11 @@ export class Response {
     this._statusCode = code
 
     if (this.isInvalid()) {
-      throw new LogicException(`The HTTP status code "${code}" is not valid.`)
+      throw new LogicError(`The HTTP status code "${code}" is not valid.`)
     }
 
     if (text === null) {
-      this._statusMessage = Response.STATUS_TEXTS[code] ?? 'unknown status'
+      this._statusMessage = OutgoingHttpResponse.STATUS_TEXTS[code] ?? 'unknown status'
     } else {
       this._statusMessage = text
     }
@@ -331,7 +331,7 @@ export class Response {
     try {
       return this.stringify(content, this.app.get('http.json.replacer'), this.app.get('http.json.spaces'), this.app.get('http.json.escape'))
     } catch (error) {
-      throw new LogicException(error)
+      throw new LogicError(error)
     }
   }
 
@@ -398,7 +398,7 @@ export class Response {
       this.setContent(formats.default())
     } else {
       this
-        .setStatus(Response.HTTP_NOT_ACCEPTABLE)
+        .setStatus(OutgoingHttpResponse.HTTP_NOT_ACCEPTABLE)
         .setContent(`Invalid types (${keys.join(',')})`)
     }
 
@@ -491,7 +491,7 @@ export class Response {
     }
 
     if (this.request.isFresh(this)) {
-      this._statusCode = Response.HTTP_NOT_MODIFIED
+      this._statusCode = OutgoingHttpResponse.HTTP_NOT_MODIFIED
     }
 
     if (this.isInformational() || this.isEmpty()) {
@@ -565,11 +565,11 @@ export class Response {
   }
 
   throwResponse () {
-    throw new ResponseHttpException(this)
+    throw new HttpError(this)
   }
 
-  withException (exception) {
-    this._exception = exception
+  withError (error) {
+    this._error = error
     return this
   }
 
@@ -793,7 +793,7 @@ export class Response {
   }
 
   setCache (options) {
-    const diff = Object.keys(Response.#HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES).reduce((prev, curr) => {
+    const diff = Object.keys(OutgoingHttpResponse.#HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES).reduce((prev, curr) => {
       if (!Object.keys(options).includes(curr)) {
         prev.push(curr)
       }
@@ -801,7 +801,7 @@ export class Response {
     }, [])
 
     if (diff.length > 0) {
-      throw new LogicException(`Response does not support the following options: "${diff.join(', ')}".`)
+      throw new LogicError(`Response does not support the following options: "${diff.join(', ')}".`)
     }
 
     if (options.etag) {
@@ -829,7 +829,7 @@ export class Response {
     }
 
     Object
-      .entries(Response.#HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES)
+      .entries(OutgoingHttpResponse.#HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES)
       .forEach(([key, value]) => {
         if (!value && options[key]) {
           if (options[key]) {

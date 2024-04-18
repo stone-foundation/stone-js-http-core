@@ -9,9 +9,9 @@ import { isIP } from 'node:net'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { IncomingEvent, LogicException, RuntimeException, flattenValues } from '@stone-js/common'
+import { IncomingEvent, LogicError, RuntimeError, flattenValues } from '@stone-js/common'
 
-export class Request extends IncomingEvent {
+export class IncomingHttpEvent extends IncomingEvent {
   static METHOD_HEAD = 'HEAD'
   static METHOD_GET = 'GET'
   static METHOD_POST = 'POST'
@@ -72,7 +72,7 @@ export class Request extends IncomingEvent {
     this.#queryString = queryString ?? ''
     this.#protocol = protocol ?? 'HTTP/1.1'
     this.#query = new URLSearchParams(this.#queryString)
-    this.#cookies = cookies ?? CookieCollection.instance()
+    this.#cookies = cookies ?? CookieCollection.create()
     this.#defaultLocale = defaultLocale ?? this.#defaultLocale
     this.#headers = headers instanceof Headers ? headers : new Headers(headers ?? {})
   }
@@ -226,7 +226,7 @@ export class Request extends IncomingEvent {
 
   get (key, fallback = null) {
     // Get from params
-    if (this.route().hasParameter(key)) {
+    if (this.route().hasParameter?.(key)) {
       return this.route().parameter(key)
     }
 
@@ -265,11 +265,11 @@ export class Request extends IncomingEvent {
 
   header (name, fallback = null) {
     if (!name) {
-      throw new LogicException('name argument is required.')
+      throw new LogicError('name argument is required.')
     }
 
     if (typeof name !== 'string') {
-      throw new LogicException('name must be a string.')
+      throw new LogicError('name must be a string.')
     }
 
     name = name.toLowerCase()
@@ -363,7 +363,7 @@ export class Request extends IncomingEvent {
     const route = this.route()
 
     if (!route) {
-      throw new RuntimeException('Unable to generate fingerprint. Route unavailable.')
+      throw new RuntimeError('Unable to generate fingerprint. Route unavailable.')
     }
 
     return btoa([].concat(route.methods, route.getDomain(), route.uri, this.ip).join('|'))
@@ -422,7 +422,7 @@ export class Request extends IncomingEvent {
   }
 
   clone () {
-    return new Request({
+    return new IncomingHttpEvent({
       ip: this.#ip,
       ips: this.#ips,
       method: this.#method,

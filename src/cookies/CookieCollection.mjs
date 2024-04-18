@@ -1,73 +1,94 @@
 import { parse } from 'cookie'
 import { Cookie } from './Cookie.mjs'
-import { unsign } from 'cookie-signature'
 
+/**
+ * Class representing a CookieCollection.
+ *
+ * @author Mr. Stone <evensstone@gmail.com>
+ */
 export class CookieCollection {
   #secret
   #options
   #cookies
 
-  static instance (options = {}, secret = null) {
-    return new this(options, secret)
+  /**
+   * Create a CookieCollection.
+   *
+   * @param {string} cookie - String cookie from header.
+   * @param {cookieOptions} [options={}] - Cookies options
+   * @param {string} [secret=null] - Secret value to sign and unsign cookies.
+   * @returns {CookieCollection}
+   */
+  static create (cookie, options = {}, secret = null) {
+    return new this(cookie, options, secret)
   }
 
-  constructor (options = {}, secret = null) {
+  /**
+   * Create a CookieCollection.
+   *
+   * @param {string} cookie - String cookie from header.
+   * @param {cookieOptions} [options={}] - Cookies options
+   * @param {string} [secret=null] - Secret value to sign and unsign cookies.
+   */
+  constructor (cookie, options = {}, secret = null) {
     this.#secret = secret
     this.#options = options
-    this.#cookies = new Map()
+    this.#cookies = this.#parse(cookie)
   }
 
-  parse (cookieStr) {
-    this.#cookies = new Map(
-      Object
-        .entries(parse(cookieStr))
-        .map(([name, value]) => [name, Cookie.instance({ name, value: this.#decode(value) })])
-    )
-    return this
-  }
-
+  /**
+   * Add cookie.
+   *
+   * @param   {string} name
+   * @param   {*} value
+   * @param   {cookieOptions} [options={}]
+   * @returns {this}
+   */
   add (name, value, options = {}) {
-    options = { ...this.#options, ...options }
-
-    if (options.maxAge) {
-      const maxAge = options.maxAge - 0
-
-      if (!NaN(maxAge)) {
-        options.expires = new Date(Date.now() + maxAge)
-        options.maxAge = Math.floor(maxAge / 1000)
-      }
-    }
-
-    if (!options.path) {
-      options.path = '/'
-    }
-
-    this.#cookies.set(name, Cookie.instance({ name, value, ...options }))
-
+    this.#cookies.set(name, Cookie.create(name, value, { ...this.#options, ...options }))
     return this
   }
 
+  /**
+   * Update cookie.
+   *
+   * @param   {string} name
+   * @param   {*} value
+   * @param   {cookieOptions} [options={}]
+   * @returns {this}
+   */
   update (name, value, options = {}) {
     this.has(name) && this.get(name).setValue(value).updateOptions(options)
     return this
   }
 
+  /**
+   * Get cookie.
+   *
+   * @param   {string} name
+   * @returns {(Cookie|null)}
+   */
   get (name) {
-    return this.#cookies.get(name)
+    return this.#cookies.get(name) ?? null
   }
 
-  all (serialize = false) {
-    return serialize ? this.allSerialized() : this.#cookies
-  }
-
-  allSerialized () {
-    return Array.from(this.#cookies.values()).map(v => v.serialize(this.#secret))
-  }
-
+  /**
+   * Has cookie.
+   *
+   * @param   {string} name
+   * @returns {boolean}
+   */
   has (name) {
     return this.#cookies.has(name)
   }
 
+  /**
+   * Remove cookie.
+   *
+   * @param   {string} name - Cookie name to remove
+   * @param   {boolean} [force=false] - Remove only from collection.
+   * @returns {this}
+   */
   remove (name, force = false) {
     if (force) {
       this.#cookies.delete(name)
@@ -78,6 +99,25 @@ export class CookieCollection {
     return this
   }
 
+  /**
+   * All cookies.
+   *
+   * @param   {boolean} [serialize=false] - Must serialize cookies?.
+   * @returns {(Array|Object)}
+   */
+  all (serialize = false) {
+    const values = Array.from(this.#cookies.values())
+    return serialize
+      ? values.map(v => v.serialize(this.#secret))
+      : Object.fromEntries(values.map(v => [v.name, v.value]))
+  }
+
+  /**
+   * Clear cookies.
+   *
+   * @param   {boolean} [force=false] - Remove only from collection.
+   * @returns {this}
+   */
   clear (force = false) {
     if (force) {
       this.#cookies.clear()
@@ -88,30 +128,57 @@ export class CookieCollection {
     return this
   }
 
+  /**
+   * Secure cookies.
+   *
+   * @param   {boolean} [value=false]
+   * @returns {this}
+   */
   secure (value = false) {
     this.#cookies.forEach(v => v.setSecure(value))
     return this
   }
 
+  /**
+   * Set Secret.
+   *
+   * @param   {string} value
+   * @returns {this}
+   */
   setSecret (value) {
     this.#secret = value
     return this
   }
 
+  /**
+   * Set options.
+   *
+   * @param   {cookieOptions} value
+   * @returns {this}
+   */
   setOptions (value) {
     this.#options = value
+    this.#cookies.forEach(v => v.setOptions(value))
     return this
   }
 
-  #decode (value) {
-    if (value.startsWith('s:')) {
-      value = unsign(value.replace('s:', ''), this.#secret)
-    }
+  /**
+   * Deserialize cookies.
+   *
+   * @param   {string} [secret=null]
+   * @returns {this}
+   */
+  deserialize (secret = null) {
+    this.#secret = secret ?? this.#secret
+    this.#cookies.forEach(v => v.deserialize(this.#secret))
+    return this
+  }
 
-    if (value.startsWith('j:')) {
-      value = JSON.parse(value.replace('j:', ''))
-    }
-
-    return value
+  #parse (cookie) {
+    return new Map(
+      Object
+        .entries(parse(cookie))
+        .map(([name, value]) => [name, Cookie.create(name, value, this.#options).deserialize(this.#secret)])
+    )
   }
 }

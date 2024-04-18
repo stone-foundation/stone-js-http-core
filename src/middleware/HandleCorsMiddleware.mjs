@@ -3,7 +3,7 @@ import { isString } from '@stone-js/common'
 /**
  * Class representing a HandleCorsMiddleware.
  *
- * @author Mr. Stone <pierre.evens16@gmail.com>
+ * @author Mr. Stone <evensstone@gmail.com>
  * @comment Inspired by expressjs Cors https://www.npmjs.com/package/cors
  */
 export class HandleCorsMiddleware {
@@ -92,7 +92,7 @@ export class HandleCorsMiddleware {
     if (Array.isArray(allowedHeaders)) {
       allowedHeaders = allowedHeaders.join(',')
     } else if (!allowedHeaders) {
-      this.#addVary('Access-Control-Request-Headers')
+      this.#addVary('Access-Control-IncomingHttpEvent-Headers')
       allowedHeaders = request.header('access-control-request-headers')
     }
 

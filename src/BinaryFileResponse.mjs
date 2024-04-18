@@ -1,10 +1,10 @@
 import { Buffer } from 'safe-buffer'
 import { File } from './file/File.mjs'
-import { Response } from './Response.mjs'
+import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
 import contentDisposition from 'content-disposition'
-import { LogicException, RuntimeException } from '@stone-js/common'
+import { LogicError, RuntimeError } from '@stone-js/common'
 
-export class BinaryFileResponse extends Response {
+export class BinaryFileResponse extends OutgoingHttpResponse {
   #file
   #deleteFileAfterSend
 
@@ -30,7 +30,7 @@ export class BinaryFileResponse extends Response {
 
   setFile (file, contentDispositionType, autoEtag, autoLastModified) {
     if (!file) {
-      throw new RuntimeException('file argument is required.')
+      throw new RuntimeError('file argument is required.')
     }
 
     if (!(file instanceof File)) {
@@ -38,7 +38,7 @@ export class BinaryFileResponse extends Response {
     }
 
     if (!file.isReadable()) {
-      throw new RuntimeException('File must be readable.')
+      throw new RuntimeError('File must be readable.')
     }
 
     this.#file = file
@@ -73,7 +73,7 @@ export class BinaryFileResponse extends Response {
 
   setContent (content) {
     if (content) {
-      throw new LogicException('The content cannot be set on a BinaryFileResponse instance.')
+      throw new LogicError('The content cannot be set on a BinaryFileResponse instance.')
     }
 
     return this

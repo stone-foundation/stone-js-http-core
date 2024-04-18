@@ -1,5 +1,5 @@
 import { JsonResponse } from './JsonResponse.mjs'
-import { LogicException } from '@stone-js/common'
+import { LogicError } from '@stone-js/common'
 
 export class JsonpResponse extends JsonResponse {
   #callback
@@ -19,7 +19,7 @@ export class JsonpResponse extends JsonResponse {
     let callback = this.getCallback()
 
     if (!callback) {
-      throw new LogicException('No callback provided.')
+      throw new LogicError('No callback provided.')
     }
 
     if (Array.isArray(callback)) {
