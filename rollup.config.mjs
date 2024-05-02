@@ -1,24 +1,27 @@
 import json from '@rollup/plugin-json'
-import del from 'rollup-plugin-delete'
 import babel from '@rollup/plugin-babel'
+import multi from '@rollup/plugin-multi-entry'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import nodeExternals from 'rollup-plugin-node-externals'
 
-export default {
-	input: 'src/index.mjs',
+const inputs = {
+  index: 'src/**/*.mjs'
+}
+
+export default Object.entries(inputs).map(([name, input]) => ({
+	input,
 	output: [
-    { format: 'es', file: 'dist/index.mjs' },
-    { format: 'cjs', file: 'dist/index.cjs' }
+    { format: 'es', file: `dist/${name}.js` }
   ],
   plugins: [
     json(),
+    multi(),
     nodeExternals({ deps: false }), // Must always be before `nodeResolve()`.
     nodeResolve({
       exportConditions: ['node', 'import', 'require', 'default']
     }),
     babel({ babelHelpers: 'bundled' }),
-    commonjs(),
-    del({ targets: 'dist/*', runOnce: true }),
+    commonjs()
   ]
-};
+}))

@@ -5,7 +5,7 @@
 ![npm](https://img.shields.io/npm/dm/@stone-js/http)
 ![Maintenance](https://img.shields.io/maintenance/yes/2024)
 
-Stone.js Http foundation with typings.
+Stone.js Pure ESM Http utils with typings.
 
 ---
 
