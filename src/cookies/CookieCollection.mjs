@@ -113,6 +113,15 @@ export class CookieCollection {
   }
 
   /**
+   * Is empty.
+   *
+   * @returns {boolean}
+   */
+  isEmpty () {
+    return this.#cookies.size === 0
+  }
+
+  /**
    * Clear cookies.
    *
    * @param   {boolean} [force=false] - Remove only from collection.

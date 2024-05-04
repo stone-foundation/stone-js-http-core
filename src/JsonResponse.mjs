@@ -1,43 +1,38 @@
+import { isString } from '@stone-js/common'
 import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
-import { LogicError } from '@stone-js/common'
 
+/**
+ * Class representing a JsonResponse.
+ *
+ * @author Mr. Stone <evensstone@gmail.com>
+ */
 export class JsonResponse extends OutgoingHttpResponse {
-  _data
-
-  static create (content = '', status = 200, headers = {}, json = false) {
-    return new this(content, status, headers, json)
+  /**
+   * Prepare response.
+   *
+   * @param   {IncomingHttpEvent} request
+   * @param   {Config} [config=null]
+   * @returns {this}
+   */
+  prepare (request, config = null) {
+    return this
+      .setConfigResolver(() => config)
+      .setRequestResolver(() => request)
+      .setContentType('json')
+      ._prepareCookies()
+      ._makeJson()
   }
 
-  constructor (data = null, status = 200, headers = {}, json = false) {
-    super('', status, headers)
-
-    if (json && !['string', 'number', 'boolean'].includes(typeof data)) {
-      throw new LogicError('When json is set to true, data must be one of these values [string, number, boolean]')
+  /**
+   * Make Json response.
+   *
+   * @returns {this}
+   */
+  _makeJson () {
+    if (!isString(this.content)) {
+      this._content = this._morphToJson(this.content, this.config.get('app.http.json', {}))
     }
 
-    data ??= {}
-
-    this.setType('json')
-
-    json ? this.setJson(data) : this.setData(data)
-  }
-
-  static fromJsonString (data, status = 200, headers = {}) {
-    return new this(data, status, headers, true)
-  }
-
-  setJson (jsonString) {
-    this._data = jsonString
     return this
-      .setContent(jsonString)
-      .setContentType('json')
-  }
-
-  setData (data) {
-    return this.setJson(this._morphToJson(data))
-  }
-
-  get data () {
-    return JSON.parse(this._data)
   }
 }

@@ -1,16 +1,19 @@
 import mime from 'mime'
 import fresh from 'fresh'
 import get from 'lodash/get'
-import set from 'lodash/set'
 import has from 'lodash/has'
 import typeIs from 'type-is'
 import accepts from 'accepts'
-import { isIP } from 'node:net'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { IncomingEvent, LogicError, RuntimeError, flattenValues } from '@stone-js/common'
+import { IncomingEvent, flattenValues, isString } from '@stone-js/common'
 
+/**
+ * Class representing an IncomingHttpEvent.
+ *
+ * @author Mr. Stone <evensstone@gmail.com>
+ */
 export class IncomingHttpEvent extends IncomingEvent {
   static METHOD_HEAD = 'HEAD'
   static METHOD_GET = 'GET'
@@ -25,205 +28,176 @@ export class IncomingHttpEvent extends IncomingEvent {
 
   #ip
   #ips
-  #url
   #body
   #files
   #query
-  #locale
-  #method
   #accepts
   #headers
   #cookies
-  #metadata
   #protocol
   #queryString
-  #userResolver
-  #routeResolver
-  #contextResolver
 
-  #defaultLocale = 'en'
-
+  /**
+   * Create an IncomingHttpEvent.
+   *
+   * @param  {Object} options - Event options.
+   * @param  {string} options.ip
+   * @param  {string[]} [options.ips=[]]
+   * @param  {URL} options.url
+   * @param  {Object} [options.body={}]
+   * @param  {Object} [options.files={}]
+   * @param  {string} [options.locale='en']
+   * @param  {string} [options.method='GET']
+   * @param  {(Object|Headers)} [options.headers={}]
+   * @param  {CookieCollection} [options.cookies=null]
+   * @param  {Object} [options.metadata={}]
+   * @param  {string} [options.protocol='http']
+   * @param  {string} [options.queryString=null]
+   * @param  {string} [options.defaultLocale='en']
+   * @throws {TypeError}
+   */
   constructor ({
     ip,
-    ips,
+    ips = [],
     url,
-    body,
-    files,
-    locale,
-    method,
-    headers,
-    cookies,
-    metadata,
-    protocol,
-    queryString,
-    defaultLocale
+    body = {},
+    files = {},
+    locale = 'en',
+    method = 'GET',
+    headers = {},
+    cookies = null,
+    metadata = {},
+    protocol = 'http',
+    queryString = null,
+    defaultLocale = 'en'
   }) {
     super({ url, metadata, locale, defaultLocale })
 
     this.#ip = ip
-    this.#url = url
-    this.#ips = ips ?? []
-    this.#locale = locale
-    this.#body = body ?? {}
-    this.#files = files ?? {}
+    this.#ips = ips
+    this.#body = body
+    this.#files = files
+    this._method = method
+    this.#protocol = protocol
     this.#accepts = accepts(this)
-    this.#method = method ?? 'GET'
-    this.#metadata = metadata ?? {}
-    this.#queryString = queryString ?? ''
-    this.#protocol = protocol ?? 'HTTP/1.1'
+    this.#queryString = queryString
     this.#query = new URLSearchParams(this.#queryString)
     this.#cookies = cookies ?? CookieCollection.create()
-    this.#defaultLocale = defaultLocale ?? this.#defaultLocale
-    this.#headers = headers instanceof Headers ? headers : new Headers(headers ?? {})
+    this.#headers = headers instanceof Headers ? headers : new Headers(headers)
   }
 
+  /** @return {string} */
   get ip () {
     return this.#ip
   }
 
+  /** @return {string[]} */
   get ips () {
     return this.#ips
   }
 
+  /** @return {boolean} */
   get isXhr () {
-    return this.header('X-Requested-With', '').toLowerCase() === 'xmlhttprequest'
+    return this.getHeader('X-Requested-With', '').toLowerCase() === 'xmlhttprequest'
   }
 
+  /** @return {boolean} */
   get isAjax () {
     return this.isXhr
   }
 
+  /** @return {string} */
   get userAgent () {
-    return this.header('user-agent')
+    return this.getHeader('user-agent')
   }
 
-  get isSecure () {
-    return this.protocol === 'https'
-  }
-
+  /** @return {boolean} */
   get isPrefetch () {
-    return [this.#headers.get('Purpose'), this.#headers.get('Sec-Purpose')].includes('prefetch')
+    return [this.getHeader('Purpose'), this.getHeader('Sec-Purpose')].includes('prefetch')
   }
 
-  get uri () {
-    return this.#url.href
-  }
-
-  get scheme () {
-    return this.#protocol
-  }
-
+  /** @return {string} */
   get protocol () {
     return this.#protocol
   }
 
-  get host () {
-    return this.#url.host
-  }
-
-  get hostname () {
-    return this.#url.hostname
-  }
-
-  get decodedPath () {
-    try {
-      return decodeURIComponent(this.path)
-    } catch (_) {
-      return null
-    }
-  }
-
-  get path () {
-    return `${this.#url.pathname}${this.#url.search}`
-  }
-
-  get pathname () {
-    return this.#url.pathname
-  }
-
-  get hash () {
-    return this.#url.hash
-  }
-
-  get segments () {
-    return this.#url.pathname.split('/')
-  }
-
-  get subdomains () {
-    if (!this.hostname) { return [] }
-    return isIP(this.hostname)
-      ? [this.hostname]
-      : this.hostname.split('.').reverse().slice(this.app.get('http.subdomain.offset'))
-  }
-
+  /** @return {URLSearchParams} */
   get query () {
     return this.#query
   }
 
+  /** @return {string} */
   get queryString () {
     return this.#queryString
   }
 
+  /** @return {Object} */
   get files () {
     return this.#files
   }
 
-  get locale () {
-    return this.get('locale', this.#locale) ?? this.#defaultLocale
-  }
-
+  /** @return {string} */
   get etag () {
-    return this.#headers.get('ETag')
+    return this.getHeader('ETag')
   }
 
-  get method () {
-    return this.#method
-  }
-
+  /** @return {CookieCollection} */
   get cookies () {
     return this.#cookies
   }
 
+  /** @return {(Object|Headers)} */
   get headers () {
     return this.#headers
   }
 
+  /** @return {string[]} */
   get types () {
     return this.#accepts.types()
   }
 
+  /** @return {string[]} */
   get charsets () {
     return this.#accepts.charsets()
   }
 
+  /** @return {string[]} */
   get languages () {
     return this.#accepts.languages()
   }
 
+  /** @return {string[]} */
   get encodings () {
     return this.#accepts.encodings()
   }
 
+  /** @return {string} */
   get charset () {
     return contentTypeLib.parse(this).parameters.charset
   }
 
+  /** @return {string} */
   get contentType () {
     return contentTypeLib.parse(this).type
   }
 
-  get context () {
-    return this.#contextResolver()
-  }
-
-  get user () {
-    return this.#userResolver()
-  }
-
+  /** @return {Object} */
   get params () {
-    return this.route().parameters()
+    return this.route().parameters?.()
   }
 
+  /**
+   * Get data from request.
+   * 1st - Get from route params if exist.
+   * 2nd - Get from body if exist.
+   * 3rd - Get from query params if exists.
+   * 4th - Get from metadata if exists.
+   * last - return fallback value.
+   *
+   * @param   {string} key
+   * @param   {*} [fallback=null]
+   * @returns {(string|*)}
+   */
   get (key, fallback = null) {
     // Get from params
     if (this.route().hasParameter?.(key)) {
@@ -241,87 +215,150 @@ export class IncomingHttpEvent extends IncomingEvent {
       return get(query, key)
     }
 
+    // Get from header
+    if (this.hasHeader(key)) {
+      return this.getHeader(key, fallback)
+    }
+
     // Get from metadata
-    if (has(this.#metadata, key)) {
-      return get(this.#metadata, key)
-    }
-
-    return fallback
+    return this.metadata(key, fallback)
   }
 
-  set (key, value = null) {
-    key = typeof key === 'object' ? key : { [key]: value }
-
-    for (const [name, val] of Object.entries(key)) {
-      set(this.#metadata, name, val)
-    }
-
-    return this
-  }
-
-  param (name, fallback = null) {
-    return this.get(name, fallback)
-  }
-
-  header (name, fallback = null) {
+  /**
+   * Get header.
+   *
+   * @param   {string} name
+   * @param   {*} [fallback=null]
+   * @returns {(string|*)}
+   */
+  getHeader (name, fallback = null) {
     if (!name) {
-      throw new LogicError('name argument is required.')
+      throw new TypeError('name argument is required.')
     }
 
-    if (typeof name !== 'string') {
-      throw new LogicError('name must be a string.')
+    if (!isString(name)) {
+      throw new TypeError('name must be a string.')
     }
 
-    name = name.toLowerCase()
+    const lcName = name.toLowerCase()
 
-    if (['referer', 'referrer'].includes(name)) {
+    if (['referer', 'referrer'].includes(lcName)) {
       return this.#headers.get('referer') ?? this.#headers.get('referrer') ?? fallback
     }
 
-    return this.#headers.get(name) ?? fallback
+    return this.#headers.get(name) ?? this.#headers.get(lcName) ?? fallback
   }
 
-  getHeader (name, fallback = null) {
-    return this.header(name, fallback)
-  }
-
+  /**
+   * Has header.
+   *
+   * @param   {string} name
+   * @returns {boolean}
+   */
   hasHeader (name) {
     return this.#headers.has(name)
   }
 
-  accepts (...values) {
+  /**
+   * Content negotiation utils.
+   */
+
+  /**
+   * Return the first accepted type.
+   * If nothing in types is accepted, then false is returned.
+   *
+   * @param   {...string} values
+   * @returns {(boolean|string|string[])}
+   */
+  acceptsTypes (...values) {
     return this.#accepts.type(flattenValues(values))
   }
 
+  /**
+   * Return the first accepted encoding.
+   * If nothing in encodings is accepted, then false is returned.
+   *
+   * @param   {...string} values
+   * @returns {(boolean|string|string[])}
+   */
   acceptsEncodings (...values) {
     return this.#accepts.encoding(flattenValues(values))
   }
 
+  /**
+   * Return the first accepted charset.
+   * If nothing in charsets is accepted, then false is returned.
+   *
+   * @param   {...string} values
+   * @returns {(boolean|string|string[])}
+   */
   acceptsCharsets (...values) {
     return this.#accepts.charset(flattenValues(values))
   }
 
+  /**
+   * Return the first accepted language.
+   * If nothing in languages is accepted, then false is returned.
+   *
+   * @param   {...string} values
+   * @returns {(boolean|string|string[])}
+   */
   acceptsLanguages (...values) {
     return this.#accepts.language(flattenValues(values))
   }
 
-  getFormat (mimeType) {
-    return mime.getExtension(mimeType)
-  }
-
+  /**
+   * Get mime type for the given file path or extension.
+   *
+   * @param   {string} mimeType
+   * @returns {(string|null)}
+   */
   getMimeType (format) {
     return mime.getType(format)
   }
 
-  range (size, options) {
-    if (!this.hasHeader('Range')) return
-    return rangeParser(size, this.header('Range'), options)
+  /**
+   * Get file extension for the given mime type.
+   *
+   * @param   {string} mimeType
+   * @returns {(string|null)}
+   */
+  getFormat (mimeType) {
+    return mime.getExtension(mimeType)
   }
 
+  /**
+   * Infer the content-type of a request.
+   *
+   * @param   {string[]} types
+   * @returns {(boolean|string|null)}
+   */
   is (types) {
     return typeIs(this, flattenValues(types))
   }
 
+  /**
+   * Get request range.
+   * When ranges are returned, the array has a "type" property
+   * which is the type of range that is required (most commonly, "bytes").
+   * Each array element is an object with a "start" and "end" property for the portion of the range.
+   *
+   * @param   {number} size - The maximum size of the resource.
+   * @param   {boolean} [combine=false] - Specifies if overlapping & adjacent ranges should be combined.
+   * @returns {Object}
+   */
+  range (size, combine = false) {
+    if (!this.hasHeader('Range')) return
+    return rangeParser(size, this.getHeader('Range'), { combine })
+  }
+
+  /**
+   * Get value by key from json body.
+   *
+   * @param   {string} key
+   * @param   {*} [fallback=null]
+   * @returns {*}
+   */
   json (key, fallback = null) {
     if (this.is(['json'])) {
       return get(this.#body, key, fallback)
@@ -330,112 +367,82 @@ export class IncomingHttpEvent extends IncomingEvent {
     return fallback
   }
 
-  isFresh (res) {
-    if (!['GET', 'HEAD'].includes(this.#method)) {
+  /**
+   * Cache section determining
+   * if cache is fresh or stale.
+   */
+
+  /**
+   * Is cache is fresh.
+   *
+   * @param   {OutgoingHttpResponse} response
+   * @returns {boolean}
+   */
+  isFresh (response) {
+    if (!['GET', 'HEAD'].includes(this.method)) {
       return false
     }
 
-    if ((res.status >= 200 && res.status < 300) || res.status === 304) {
+    if ((response.status >= 200 && response.status < 300) || response.status === 304) {
       return fresh(this.#headers, {
-        etag: res.etag,
-        'last-modified': res.lastModified
+        etag: response.etag,
+        'last-modified': response.lastModified
       })
     }
 
     return false
   }
 
-  isTale (res) {
-    return !this.isFresh(res)
+  /**
+   * Is cache is stale.
+   *
+   * @param   {OutgoingHttpResponse} response
+   * @returns {boolean}
+   */
+  isStale (response) {
+    return !this.isFresh(response)
   }
 
-  route (param, fallback = null) {
-    const route = this.getRouteResolver()
-    return !param ? route : route?.parameters(param, fallback)
-  }
-
+  /**
+   * Generate an url for the given path.
+   *
+   * @param   {string} path
+   * @returns {string}
+   */
   uriForPath (path) {
-    path = path.startsWith('/') ? path : `/${path}`
-    return `${this.scheme}://${this.host}${path}`
+    return new URL(path, `${this.scheme}://${this.host}`).href
   }
 
-  fingerprint () {
-    const route = this.route()
-
-    if (!route) {
-      throw new RuntimeError('Unable to generate fingerprint. Route unavailable.')
-    }
-
-    return btoa([].concat(route.methods, route.getDomain(), route.uri, this.ip).join('|'))
-  }
-
-  getContextResolver () {
-    return this.#contextResolver ?? (() => null)
-  }
-
-  setContextResolver (resolver) {
-    this.#contextResolver = resolver
-    return this
-  }
-
-  getUserResolver () {
-    return this.#userResolver ?? (() => null)
-  }
-
-  setUserResolver (resolver) {
-    this.#userResolver = resolver
-    return this
-  }
-
-  getRouteResolver () {
-    return this.#routeResolver ?? (() => null)
-  }
-
-  setRouteResolver (resolver) {
-    this.#routeResolver = resolver
-    return this
-  }
-
-  metadata (key, fallback = null) {
-    return get(this.#metadata, key, fallback)
-  }
-
-  setLocale (locale) {
-    this.#locale = locale
-    return this
-  }
-
+  /**
+   * Return filtered files.
+   *
+   * @param   {string[]} files - Files names.
+   * @returns {Object}
+   */
   filterFiles (files) {
     return Object.fromEntries(this.#files.entries().filter(([key]) => files.includes(key)))
   }
 
-  isMethod (method) {
-    return this.method.toUpperCase() === method.toUpperCase()
-  }
-
-  isMethodSafe () {
-    return ['GET', 'HEAD', 'OPTIONS', 'TRACE'].includes(this.method)
-  }
-
-  isMethodCacheable () {
-    return ['GET', 'HEAD'].includes(this.method)
-  }
-
+  /**
+   * Return a cloned event.
+   *
+   * @returns {IncomingHttpEvent}
+   */
   clone () {
     return new IncomingHttpEvent({
       ip: this.#ip,
       ips: this.#ips,
-      method: this.#method,
-      locale: this.#locale,
+      method: this.method,
+      locale: this.locale,
       cookies: this.#cookies,
       protocol: this.#protocol,
       queryString: this.#queryString,
-      url: structuredClone(this.#url),
+      url: structuredClone(this.url),
       body: structuredClone(this.#body),
-      defaultLocale: this.#defaultLocale,
+      defaultLocale: this._defaultLocale,
       files: structuredClone(this.#files),
       headers: structuredClone(this.#headers),
-      metadata: structuredClone(this.#metadata)
+      metadata: structuredClone(this.metadata)
     })
   }
 }

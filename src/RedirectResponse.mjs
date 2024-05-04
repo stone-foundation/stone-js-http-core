@@ -1,16 +1,27 @@
 import escape from 'lodash/escape'
 import { Buffer } from 'safe-buffer'
 import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
-import { LogicError } from '@stone-js/common'
 
+/**
+ * Class representing a RedirectResponse.
+ *
+ * @author Mr. Stone <evensstone@gmail.com>
+ */
 export class RedirectResponse extends OutgoingHttpResponse {
   #targetUrl
 
-  constructor (url, status = 302, headers = {}) {
-    super('', status, headers)
+  /**
+   * Create a RedirectResponse.
+   *
+   * @param  {(string|URL)} url
+   * @param  {number} [statusCode=302]
+   * @param {(Object|Map|Headers)} [headers={}]
+   */
+  constructor (url, statusCode = 302, headers = {}) {
+    super('', statusCode, headers)
 
     if (!this.isRedirect()) {
-      throw new LogicError(`This HTTP status(${status}) code is not a redirect.`)
+      throw new TypeError(`This HTTP status(${statusCode}) code is not a redirect.`)
     }
 
     if (this.isMovedPermanently() && !this.#hasCacheControl(headers)) {
@@ -20,18 +31,20 @@ export class RedirectResponse extends OutgoingHttpResponse {
     this.setTargetUrl(url)
   }
 
+  /**
+   * Set target url.
+   *
+   * @param   {(string|URL)} url
+   * @returns {this}
+   */
   setTargetUrl (url) {
     if (!url) {
-      throw LogicError('Cannot redirect to an empty URL.')
+      throw TypeError('Cannot redirect to an empty URL.')
     }
 
     this.#targetUrl = url
 
     return this.#redirect()
-  }
-
-  isMovedPermanently () {
-    return [OutgoingHttpResponse.HTTP_MOVED_PERMANENTLY].includes(this._statusCode)
   }
 
   #redirect () {
@@ -40,7 +53,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
     return this
       .format({
         default: () => '',
-        text: () => `${this.statusMessage}. Redirecting to ${this.#targetUrl}`,
+        text: () => `${this.statusMessage}. Redirecting to ${url}`,
         html: () => `<p>${this.statusMessage}. Redirecting to <a href="${url}">${url}</a></p>`
       })
       .setHeader('Content-Length', Buffer.byteLength(this._content))
@@ -48,10 +61,13 @@ export class RedirectResponse extends OutgoingHttpResponse {
 
   #location () {
     if (this.#targetUrl === 'back') {
-      this.#targetUrl = this.request.getHeader('Referrer') ?? '/'
+      this.#targetUrl = this.request.getHeader('Referrer', '/')
     }
 
-    return this.setHeader('Location', encodeURIComponent(this.#targetUrl))
+    const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\/?]+/.exec(this.#targetUrl)
+    const position = matches ? matches[0].length + 1 : 0
+
+    return this.setHeader('Location', `${this.#targetUrl.slice(0, position)}${encodeURIComponent(this.#targetUrl.slice(position))}`)
   }
 
   #hasCacheControl (headers) {

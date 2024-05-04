@@ -1,7 +1,7 @@
 import { isString } from '@stone-js/common'
 
 /**
- * Class representing a HandleCorsMiddleware.
+ * Class representing an HandleCorsMiddleware.
  *
  * @author Mr. Stone <evensstone@gmail.com>
  * @comment Inspired by expressjs Cors https://www.npmjs.com/package/cors
@@ -11,13 +11,26 @@ export class HandleCorsMiddleware {
   #headers
   #headerVary
 
+  /**
+   * Create a BinaryFileResponse.
+   *
+   * @param {Container} container
+   */
   constructor ({ config }) {
     this.#config = config
     this.#headerVary = []
     this.#headers = new Headers()
   }
 
-  response (request, response, next) {
+  /**
+   * Handle passable.
+   *
+   * @param {IncomingHttpEvent} request
+   * @param {OutgoingHttpResponse} response
+   * @param {Function} next
+   * @returns {*}
+   */
+  handle (request, response, next) {
     const options = this.#getOptions()
 
     this

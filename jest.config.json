@@ -4,8 +4,7 @@
     "\\.m?[jt]sx?$": "babel-jest"
   },
   "collectCoverageFrom": [
-    "src/**/*.{js,mjs}",
-    "!src/index.mjs"
+    "src/**/*.{js,mjs}"
   ],
   "coverageThreshold": {
     "global": {

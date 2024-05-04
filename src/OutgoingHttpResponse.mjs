@@ -4,379 +4,319 @@ import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { OutgoingResponse, LogicError, HttpError } from '@stone-js/common'
+import { OutgoingResponse, HttpError, isString, isFunction } from '@stone-js/common'
+import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants/http_statuses.mjs'
 
 /**
+ * Class representing an OutgoingHttpResponse.
+ *
+ * @author Mr. Stone <evensstone@gmail.com>
+ *
  * InspiredBy: Symfony, Laravel and ExpressJS
  * @see: https://github.com/symfony/symfony/blob/6.4/src/Symfony/Component/HttpFoundation/Response.php
  */
 export class OutgoingHttpResponse extends OutgoingResponse {
-  static HTTP_CONTINUE = 100
-  static HTTP_SWITCHING_PROTOCOLS = 101
-  static HTTP_PROCESSING = 102 // RFC2518
-  static HTTP_EARLY_HINTS = 103 // RFC8297
-  static HTTP_OK = 200
-  static HTTP_CREATED = 201
-  static HTTP_ACCEPTED = 202
-  static HTTP_NON_AUTHORITATIVE_INFORMATION = 203
-  static HTTP_NO_CONTENT = 204
-  static HTTP_RESET_CONTENT = 205
-  static HTTP_PARTIAL_CONTENT = 206
-  static HTTP_MULTI_STATUS = 207 // RFC4918
-  static HTTP_ALREADY_REPORTED = 208 // RFC5842
-  static HTTP_IM_USED = 226 // RFC3229
-  static HTTP_MULTIPLE_CHOICES = 300
-  static HTTP_MOVED_PERMANENTLY = 301
-  static HTTP_FOUND = 302
-  static HTTP_SEE_OTHER = 303
-  static HTTP_NOT_MODIFIED = 304
-  static HTTP_USE_PROXY = 305
-  static HTTP_RESERVED = 306
-  static HTTP_TEMPORARY_REDIRECT = 307
-  static HTTP_PERMANENTLY_REDIRECT = 308 // RFC7238
-  static HTTP_BAD_REQUEST = 400
-  static HTTP_UNAUTHORIZED = 401
-  static HTTP_PAYMENT_REQUIRED = 402
-  static HTTP_FORBIDDEN = 403
-  static HTTP_NOT_FOUND = 404
-  static HTTP_METHOD_NOT_ALLOWED = 405
-  static HTTP_NOT_ACCEPTABLE = 406
-  static HTTP_PROXY_AUTHENTICATION_REQUIRED = 407
-  static HTTP_REQUEST_TIMEOUT = 408
-  static HTTP_CONFLICT = 409
-  static HTTP_GONE = 410
-  static HTTP_LENGTH_REQUIRED = 411
-  static HTTP_PRECONDITION_FAILED = 412
-  static HTTP_REQUEST_ENTITY_TOO_LARGE = 413
-  static HTTP_REQUEST_URI_TOO_LONG = 414
-  static HTTP_UNSUPPORTED_MEDIA_TYPE = 415
-  static HTTP_REQUESTED_RANGE_NOT_SATISFIABLE = 416
-  static HTTP_EXPECTATION_FAILED = 417
-  static HTTP_I_AM_A_TEAPOT = 418 // RFC2324
-  static HTTP_MISDIRECTED_REQUEST = 421 // RFC7540
-  static HTTP_UNPROCESSABLE_ENTITY = 422 // RFC4918
-  static HTTP_LOCKED = 423 // RFC4918
-  static HTTP_FAILED_DEPENDENCY = 424 // RFC4918
-  static HTTP_TOO_EARLY = 425 // RFC-ietf-httpbis-replay-04
-  static HTTP_UPGRADE_REQUIRED = 426 // RFC2817
-  static HTTP_PRECONDITION_REQUIRED = 428 // RFC6585
-  static HTTP_TOO_MANY_REQUESTS = 429 // RFC6585
-  static HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431 // RFC6585
-  static HTTP_UNAVAILABLE_FOR_LEGAL_REASONS = 451 // RFC7725
-  static HTTP_INTERNAL_SERVER_ERROR = 500
-  static HTTP_NOT_IMPLEMENTED = 501
-  static HTTP_BAD_GATEWAY = 502
-  static HTTP_SERVICE_UNAVAILABLE = 503
-  static HTTP_GATEWAY_TIMEOUT = 504
-  static HTTP_VERSION_NOT_SUPPORTED = 505
-  static HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506 // RFC2295
-  static HTTP_INSUFFICIENT_STORAGE = 507 // RFC4918
-  static HTTP_LOOP_DETECTED = 508 // RFC5842
-  static HTTP_NOT_EXTENDED = 510 // RFC2774
-  static HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511 // RFC6585
+  #headers
+  #charset
+  #configResolver
+  #requestResolver
+  #cookieCollection
 
   /**
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+   * Create an OutgoingHttpResponse.
+   *
+   * @param  {*} content
+   * @param  {number} [statusCode=null]
+   * @param  {string} [headers={}]
+   * @return {OutgoingHttpResponse}
    */
-  static #HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES = {
-    must_revalidate: false,
-    no_cache: false,
-    no_store: false,
-    no_transform: false,
-    public: false,
-    private: false,
-    proxy_revalidate: false,
-    max_age: true,
-    s_maxage: true,
-    stale_if_error: true, // RFC5861
-    stale_while_revalidate: true, // RFC5861
-    immutable: false,
-    last_modified: true,
-    etag: true
+  static create (content, statusCode = 200, headers = {}) {
+    return new this(content, statusCode, headers)
   }
 
-  static STATUS_TEXTS = statuses.message
+  /**
+   * Create an OutgoingHttpResponse.
+   *
+   * @param  {*} [content='']
+   * @param  {number} [statusCode=200]
+   * @param  {Object} [headers={}]
+   */
+  constructor (content = '', statusCode = 200, headers = {}) {
+    super(content, statusCode)
 
-  static create (content = '', status = 200, headers = {}) {
-    return new this(content, status, headers)
-  }
-
-  static ok (body, headers = {}) {
-    return this.create(body, 200, headers)
-  }
-
-  static noContent (headers = {}) {
-    return this.create(undefined, 204, headers)
-  }
-
-  static badRequest (body, headers = {}) {
-    return this.create(body, 400, headers)
-  }
-
-  static unauthorized (body, headers = {}) {
-    return this.create(body, 401, headers)
-  }
-
-  static forbidden (body, headers = {}) {
-    return this.create(body, 403, headers)
-  }
-
-  static notFound (body, headers = {}) {
-    return this.create(body, 404, headers)
-  }
-
-  static methodNotAllowed (body, headers = {}) {
-    return this.create(body, 405, headers)
-  }
-
-  static serverError (body, headers = {}) {
-    return this.create(body, 500, headers)
-  }
-
-  static unavailable (body, headers = {}) {
-    return this.create(body, 503, headers)
-  }
-
-  static fromString (content, statusCode = 200, headers = { 'Content-Type': 'text/html' }) {
-    return this.create(content, statusCode, headers)
-  }
-
-  static json (content, statusCode = 200, headers = { 'Content-Type': 'application/json' }) {
-    return this.create(content, statusCode, headers)
-  }
-
-  static empty (statusCode = 201, headers = { 'Content-Type': 'application/json' }) {
-    return this.create(statusCode, headers)
-  }
-
-  _error
-  _headers
-  _content
-  _version
-  _charset
-  _statusCode
-  #appResolver
-  _statusMessage
-  #requestResolver
-  #originalContent
-  #cookieCollection
-  #headerCacheControl
-
-  constructor (content = '', status = 200, headers = {}) {
-    super(content, status)
     this
-      .setStatus(status)
       .setHeaders(headers)
-      .setContent(content)
-      .setProtocolVersion('1.0')
+      .setStatus(statusCode)
 
     this.#cookieCollection = CookieCollection.instance()
   }
 
+  /** @return {number} */
   get status () {
     return this.statusCode
   }
 
-  get statusMessage () {
-    return this._statusMessage
-  }
-
-  get statusCode () {
-    return this._statusCode
-  }
-
+  /** @return {(Object|Headers)} */
   get headers () {
-    return this._headers
+    return this.#headers
   }
 
-  get content () {
-    return this._content
-  }
-
-  get originalContent () {
-    return this.#originalContent
-  }
-
+  /** @return {string} */
   get charset () {
-    return this._charset
+    return this.#charset
   }
 
-  get protocolVersion () {
-    return this._version
+  /** @return {string} */
+  get etag () {
+    return this.#headers.get('ETag')
   }
 
-  get app () {
-    if (!this.#appResolver) {
-      throw new LogicError('Must set an Application resolver.')
-    }
-
-    return this.#appResolver()
+  /** @return {string} */
+  get vary () {
+    return this.getHeader('Vary', []).reduce((prev, curr) => prev.concat(curr.split(/[\s,]+/)), [])
   }
 
+  /** @return {string} */
+  get lastModified () {
+    return this.#headers.get('Last-Modified')
+  }
+
+  /** @return {IncomingHttpEvent} */
   get request () {
     if (!this.#requestResolver) {
-      throw new LogicError('Must set a IncomingHttpEvent resolver.')
+      throw new TypeError('Must set an IncomingHttpEvent resolver.')
     }
 
     return this.#requestResolver()
   }
 
-  get vary () {
-    return this.getHeader('Vary', []).reduce((prev, curr) => prev.concat(curr.split(/[\s,]+/)), [])
+  /** @return {Object} */
+  get config () {
+    return this.#configResolver()
   }
 
+  /** @return {RegExp} */
   get #charsetRegExp () {
     return /;\s*charset\s*=/
   }
 
-  // setHeaders (headers) {
-  //   this._headers = new Headers(headers)
-  //   return this
-  // }
-
-  withHeaders (headers) {
-    return this.setHeaders(headers)
-  }
-
-  header (key, value) {
-    return this.setHeader(key, value)
-  }
-
+  /**
+   * Set headers.
+   *
+   * @param   {(Object|Map|Headers)} values
+   * @returns {this}
+   */
   setHeaders (values) {
     const headers = values instanceof Headers || values instanceof Map ? values.entries() : Object.entries(values)
     return headers.reduce((_, [key, value]) => this.setHeader(key, value))
   }
 
+  /**
+   * Set header.
+   *
+   * @param   {string} key
+   * @param   {(string|string[])} value
+   * @returns {this}
+   */
   setHeader (key, value) {
     value = Array.isArray(value) ? value.map(String) : String(value)
 
     if (key.toLowerCase() === 'content-type') {
       if (Array.isArray(value)) {
-        throw new LogicError('Content-Type cannot be set to an Array')
+        throw new TypeError('Content-Type cannot be set to an Array')
       } else if (!this.#charsetRegExp.test(value)) { // Add charset(Character Sets) to content-type
-        this._charset = mime.charsets.lookup(value.split(';').shift().trim())
-        value += this._charset ? `; charset=${this._charset.toLowerCase()}` : ''
+        this.#charset = mime.charsets.lookup(value.split(';').shift().trim())
+        value += this.#charset ? `; charset=${this.#charset.toLowerCase()}` : ''
       }
     }
 
-    this._headers.set(key, value)
+    this.#headers ??= new Headers()
+    this.#headers.set(key, value)
 
     return this
   }
 
+  /**
+   * Append header.
+   *
+   * @param   {string} key
+   * @param   {(string|string[])} value
+   * @returns {this}
+   */
   appendHeader (key, value) {
-    this._headers.append(key, value)
+    this.#headers.append(key, value)
     return this
   }
 
+  /**
+   * Get headers.
+   *
+   * @param   {boolean} [hasMap=false]
+   * @returns {(Map|Headers)}
+   */
   getHeaders (hasMap = false) {
     return hasMap ? new Map(this.headers.entries()) : this.headers
   }
 
+  /**
+   * Get header.
+   *
+   * @param   {string} key
+   * @param   {*} [fallback=null]
+   * @returns {string}
+   */
   getHeader (key, fallback = null) {
-    return this._headers.get(key) ?? fallback
+    return this.#headers.get(key) ?? fallback
   }
 
+  /**
+   * Get header names.
+   *
+   * @returns {string[]}
+   */
   getHeaderNames () {
-    return this._headers.keys()
+    return this.#headers.keys()
   }
 
+  /**
+   * Has header.
+   *
+   * @param   {string} key
+   * @returns {boolean}
+   */
   hasHeader (key) {
-    return this._headers.has(key)
+    return this.#headers.has(key)
   }
 
+  /**
+   * Remove header.
+   *
+   * @param   {(string|string[])} key
+   * @returns {this}
+   */
   removeHeader (key) {
-    key = Array.isArray(key) ? key : [key]
-
-    for (const item of key) {
-      this._headers.delete(item)
-    }
-
+    [].concat(key).forEach(v => this.#headers.delete(v))
     return this
   }
 
+  /**
+   * Set status.
+   *
+   * @param   {string} code
+   * @param   {string} [text=null]
+   * @returns {this}
+   */
   setStatus (code, text = null) {
     this._statusCode = code
 
     if (this.isInvalid()) {
-      throw new LogicError(`The HTTP status code "${code}" is not valid.`)
+      throw new TypeError(`The HTTP status code "${code}" is not valid.`)
     }
 
-    if (text === null) {
-      this._statusMessage = OutgoingHttpResponse.STATUS_TEXTS[code] ?? 'unknown status'
-    } else {
-      this._statusMessage = text
-    }
+    this._statusMessage = text ?? statuses.message[code] ?? 'unknown status'
 
     return this
   }
 
-  setContent (value) {
-    if (this._shouldBeJson(value)) {
-      this._content = this._morphToJson(value)
-    } else {
-      this._content = value ?? ''
-    }
-
-    this.#originalContent = value
-
+  /**
+   * Set content.
+   *
+   * @param   {string} value
+   * @param   {Object} options
+   * @returns {this}
+   */
+  setContent (value, options = {}) {
+    this._content = this._shouldBeJson(value) ? this._morphToJson(value, options) : value ?? ''
     return this
   }
 
-  _shouldBeJson (content) {
-    return !Buffer.isBuffer(content) && ['object', 'number', 'boolean'].includes(typeof content)
-  }
-
-  _morphToJson (content) {
-    try {
-      return this.stringify(content, this.app.get('http.json.replacer'), this.app.get('http.json.spaces'), this.app.get('http.json.escape'))
-    } catch (error) {
-      throw new LogicError(error)
-    }
-  }
-
+  /**
+   * Set cookie.
+   *
+   * @param   {string} name
+   * @param   {string} value
+   * @param   {Object} options
+   * @returns {this}
+   */
   setCookie (name, value, options = {}) {
     this.#cookieCollection.add(name, value, options)
-    return this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
+    return this
   }
 
+  /**
+   * Clear cookie.
+   *
+   * @param   {string} name
+   * @param   {string} [force=false]
+   * @returns {this}
+   */
   clearCookie (name, force = false) {
     this.#cookieCollection.remove(name)
-    this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
     force && this.#cookieCollection.remove(name, force)
     return this
   }
 
+  /**
+   * Clear cookies.
+   *
+   * @param   {string} [force=false]
+   * @returns {this}
+   */
   clearCookies (force = false) {
     this.#cookieCollection.clear()
-    this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
     force && this.#cookieCollection.clear(force)
     return this
   }
 
+  /**
+   * Secure cookies.
+   *
+   * @param   {string} value
+   * @returns {this}
+   */
   secureCookies (value = false) {
     this.#cookieCollection.secure(value)
-    return this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
-  }
-
-  setProtocolVersion (value) {
-    this._version = value
     return this
   }
 
+  /**
+   * Set content type charset.
+   *
+   * @param   {string} value
+   * @returns {this}
+   */
   setCharset (value) {
-    this._charset = value
+    this.#charset = value
     return this
   }
 
+  /**
+   * Set content type.
+   *
+   * @param   {string} value
+   * @returns {this}
+   */
   setContentType (value) {
     return this.setHeader('Content-Type', value.includes('/') ? value : mime.lookup(value))
   }
 
+  /**
+   * Set content type.
+   *
+   * @alias setContentType
+   * @param   {string} value
+   * @returns {this}
+   */
   setType (value) {
     return this.setContentType(value)
   }
 
+  /**
+   * Set link.
+   *
+   * @param   {Object} links
+   * @returns {this}
+   */
   setLinks (links) {
     return this.setHeader(
       'Link',
@@ -386,9 +326,16 @@ export class OutgoingHttpResponse extends OutgoingResponse {
     )
   }
 
+  /**
+   * Format response according
+   * to the content negotiation.
+   *
+   * @param   {Object} formats
+   * @returns {this}
+   */
   format (formats) {
     const keys = Object.keys(formats).filter(v => v !== 'default')
-    const key = keys.length > 0 ? this.request.accepts(keys) : null
+    const key = keys.length > 0 ? this.request.acceptsTypes(keys) : null
 
     if (key) {
       this
@@ -398,215 +345,31 @@ export class OutgoingHttpResponse extends OutgoingResponse {
       this.setContent(formats.default())
     } else {
       this
-        .setStatus(OutgoingHttpResponse.HTTP_NOT_ACCEPTABLE)
+        .setStatus(HTTP_NOT_ACCEPTABLE)
         .setContent(`Invalid types (${keys.join(',')})`)
     }
 
     return this.addVary('Accept')
   }
 
+  /**
+   * Add vary.
+   *
+   * @param   {string} field
+   * @returns {this}
+   */
   addVary (field) {
     vary(this, field)
     return this
   }
 
-  setAppResolver (resolver) {
-    this.#appResolver = resolver
-    return this
-  }
-
-  setRequestResolver (resolver) {
-    this.#requestResolver = resolver
-    return this
-  }
-
-  isInvalid () {
-    return this._statusCode < 100 || this._statusCode >= 600
-  }
-
-  isInformational () {
-    return this._statusCode >= 100 && this._statusCode < 200
-  }
-
-  isSuccessful () {
-    return this._statusCode >= 200 && this._statusCode < 300
-  }
-
-  isRedirection () {
-    return this._statusCode >= 300 && this._statusCode < 400
-  }
-
-  isClientError () {
-    return this._statusCode >= 400 && this._statusCode < 500
-  }
-
-  isServerError () {
-    return this._statusCode >= 500 && this._statusCode < 600
-  }
-
-  isOk () {
-    return [200].includes(this._statusCode)
-  }
-
-  isUnauthorized () {
-    return [401].includes(this._statusCode)
-  }
-
-  isForbidden () {
-    return [403].includes(this._statusCode)
-  }
-
-  isNotFound () {
-    return [404].includes(this._statusCode)
-  }
-
-  isRedirect (location = null) {
-    return [201, 301, 302, 303, 307, 308].includes(this._statusCode) && location === null ? true : !!this.getHeader('Location')
-  }
-
-  isEmpty () {
-    return [204, 304].includes(this._statusCode)
-  }
-
-  isResetContent () {
-    return [205].includes(this._statusCode)
-  }
-
-  prepare (request) {
-    this.setRequestResolver(() => request)
-
-    switch (typeof this._content) {
-      case 'string':
-        !this.getHeader('Content-Type') && this.setContentType('html')
-        break
-      case 'object':
-      case 'number':
-      case 'boolean':
-        if (Buffer.isBuffer(this._content)) {
-          !this.getHeader('Content-Type') && this.setContentType('bin')
-        } else {
-          !this.getHeader('Content-Type') && this.setContentType('json')
-        }
-        break
-    }
-
-    if (this.request.isFresh(this)) {
-      this._statusCode = OutgoingHttpResponse.HTTP_NOT_MODIFIED
-    }
-
-    if (this.isInformational() || this.isEmpty()) {
-      this
-        .setContent(null)
-        .removeHeader(['Content-Type', 'Content-Length', 'Transfer-Encoding'])
-    } else if (this.isResetContent()) {
-      this
-        .setContent(null)
-        .setHeader('Content-Length', '0')
-        .removeHeader('Transfer-Encoding')
-    } else {
-      let length, etag
-      const type = this.getHeader('Content-Type')
-      const etagFn = this.app.get('http.etag.function', this.#defaultEtagFn)
-      const generateETag = !this.hasHeader('ETag') && typeof etagFn === 'function'
-      this._charset ??= 'UTF-8'
-
-      if (typeof type === 'string' && !this.#charsetRegExp.test(type)) {
-        this.setContentType(`${type}; charset=${this._charset}`)
-      }
-
-      if (this._content !== undefined) {
-        if (Buffer.isBuffer(this._content)) {
-          length = this._content.length
-        } else if (!generateETag && this._content.length < 1000) {
-          length = Buffer.byteLength(this._content, this._charset)
-        } else {
-          this._content = Buffer.from(this._content, this._charset)
-          this._charset = undefined
-          length = this._content.length
-        }
-
-        this.setHeader('Content-Length', length)
-      }
-
-      if (generateETag && length !== undefined) {
-        if ((etag = etagFn(this._content, this._charset))) {
-          this.setHeader('ETag', etag)
-        }
-      }
-
-      if (this.hasHeader('Transfer-Encoding')) {
-        this.removeHeader('Content-Length')
-      }
-
-      if (this.request.isMethod('HEAD')) {
-        this.setContent(null)
-      }
-    }
-
-    if (this.request.server.get('SERVER_PROTOCOL') !== 'HTTP/1.0') {
-      this.setProtocolVersion('1.1')
-    }
-
-    if (this.request.isSecure()) {
-      this.secureCookies(true)
-    }
-
-    return this
-  }
-
-  setContentSafe (safe = true) {
-    if (safe) {
-      this.setHeader('Preference-Applied', 'safe')
-    } else if (this.getHeader('Preference-Applied') === 'safe') {
-      this.removeHeader('Preference-Applied')
-    }
-
-    return this.addVary('Prefer')
-  }
-
-  throwResponse () {
-    throw new HttpError(this)
-  }
-
-  withError (error) {
-    this._error = error
-    return this
-  }
-
   /**
-   * Cache section
-   * All items below are cache features
-   * WIP: Must validate each method
+   * Set ETag.
+   *
+   * @param   {string} [etag=null]
+   * @param   {boolean} [weak=false]
+   * @returns {this}
    */
-  getDate () {
-    return this._headers.get('Date')
-  }
-
-  setDate (date) {
-    this._headers.set('Date', date)
-    return this
-  }
-
-  getAge () {
-    if (!this._headers.has('Age')) {
-      return parseInt(this._headers.get('Age'))
-    }
-
-    return Math.max(new Date().getTime() - parseInt(this.getDate().getTime()), 0)
-  }
-
-  expire () {
-    if (this.isFresh()) {
-      this._headers.set('Age', this.getMaxAge())
-      this._headers.remove('Expires')
-    }
-    return this
-  }
-
-  get etag () {
-    return this._headers.get('ETag')
-  }
-
   setEtag (etag = null, weak = false) {
     if (!etag) {
       this.removeHeader('ETag')
@@ -620,148 +383,12 @@ export class OutgoingHttpResponse extends OutgoingResponse {
     return this
   }
 
-  isCacheable () {
-    if ([200, 203, 300, 301, 302, 404, 410].includes(this._statusCode)) {
-      return false
-    }
-
-    if (this.hasHeaderCacheControlDirective('no-store') || this.getHeaderCacheControlDirective('private')) {
-      return false
-    }
-
-    return this.isValidateable() || this.isFresh()
-  }
-
-  isFresh () {
-    return this.getTtl() > 0
-  }
-
-  isValidateable () {
-    return this._headers.has('Last-Modified') || this._headers.has('ETag')
-  }
-
-  setPrivate () {
-    this.removeHeaderCacheControlDirective('public')
-    this.addHeaderCacheControlDirective('private')
-    return this
-  }
-
-  setPublic () {
-    this.removeHeaderCacheControlDirective('private')
-    this.addHeaderCacheControlDirective('public')
-    return this
-  }
-
-  setImmutable (immutable = true) {
-    immutable
-      ? this.addHeaderCacheControlDirective('immutable')
-      : this.removeHeaderCacheControlDirective('immutable')
-    return this
-  }
-
-  isImmutable () {
-    return this.hasHeaderCacheControlDirective('immutable')
-  }
-
-  mustRevalidate () {
-    return this.hasHeaderCacheControlDirective('must-revalidate') || this.hasHeaderCacheControlDirective('proxy-revalidate')
-  }
-
-  hasHeaderCacheControlDirective (key) {
-    return this.#headerCacheControl.has(key)
-  }
-
-  getHeaderCacheControlDirective (key) {
-    return this.#headerCacheControl.get(key)
-  }
-
-  addHeaderCacheControlDirective (key, value = true) {
-    this.#headerCacheControl ??= new Map()
-    this.#headerCacheControl.set(key, value)
-    this.setHeader('Cache-Control', this.getHeaderCacheControlHeader())
-    return this
-  }
-
-  removeCacheControlDirective (key) {
-    this.#headerCacheControl.has(key) && this.#headerCacheControl.delete(key)
-    this.setHeader('Cache-Control', this.getHeaderCacheControlHeader())
-    return this
-  }
-
-  getHeaderCacheControlHeader () {
-    return Array
-      .from(this.#headerCacheControl.entries())
-      .reduce((prev, [key, value]) => {
-        if (value === true) {
-          prev = `${prev}, `
-        } else {
-          prev = `${prev}, ${key}=${value}`
-        }
-        return prev
-      }, '')
-  }
-
-  getExpires () {
-    return this._headers.get('Expires')
-  }
-
-  setExpires (date) {
-    if (!date) {
-      this._headers.delete('Expires')
-    } else {
-      this._headers.set('Expires', new Date().toUTCString())
-    }
-
-    return this
-  }
-
-  getMaxAge () {
-    if (this.hasHeaderCacheControlDirective('s-maxage')) {
-      return parseInt(this.getHeaderCacheControlDirective('s-maxage'))
-    }
-
-    if (this.hasHeaderCacheControlDirective('max-age')) {
-      return parseInt(this.getHeaderCacheControlDirective('max-age'))
-    }
-
-    if (this.getExpires()) {
-      return Math.max(this.getExpires().getTime() - this.getDate().getTime(), 0)
-    }
-
-    return null
-  }
-
-  setMaxAge (value) {
-    this.addHeaderCacheControlDirective('max-age', value)
-    return this
-  }
-
-  setStaleIfError (value) {
-    this.addHeaderCacheControlDirective('stale-if-error', value)
-    return this
-  }
-
-  setStaleWhileRevalidate (value) {
-    this.addHeaderCacheControlDirective('stale-while-revalidate', value)
-    return this
-  }
-
-  setSharedMaxAge (value) {
-    this.setPublic()
-    this.addHeaderCacheControlDirective('s-maxage', value)
-    return this
-  }
-
-  getTtl () {
-    const maxAge = this.getMaxAge()
-    return maxAge !== null ? Math.max(maxAge - this.getAge(), 0) : null
-  }
-
-  setTtl (seconds) {
-    this.setSharedMaxAge(this.getAge() + seconds)
-    return this
-  }
-
+  /**
+   * Set last modified.
+   *
+   * @param   {Date} [date=null]
+   * @returns {this}
+   */
   setLastModified (date = null) {
     if (!date) {
       this.removeHeader('Last-Modified')
@@ -772,113 +399,339 @@ export class OutgoingHttpResponse extends OutgoingResponse {
     return this
   }
 
-  get lastModified () {
-    return this._headers.get('Last-Modified')
-  }
-
-  isNotModified (request) {
-    // :TODO
-    return true
-  }
-
-  setNotModified () {
-    this.setStatus(304)
-    this.setContent(null)
-
-    const headers = ['Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified']
-
-    headers.forEach(this.removeHeader)
-
+  /**
+   * Set request resolver.
+   *
+   * @param   {Function} resolver
+   * @returns {this}
+   */
+  setRequestResolver (resolver) {
+    this.#requestResolver = resolver
     return this
   }
 
-  setCache (options) {
-    const diff = Object.keys(OutgoingHttpResponse.#HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES).reduce((prev, curr) => {
-      if (!Object.keys(options).includes(curr)) {
-        prev.push(curr)
-      }
-      return prev
-    }, [])
+  /**
+   * Set config resolver.
+   *
+   * @param   {Function} resolver
+   * @returns {this}
+   */
+  setConfigResolver (resolver) {
+    this.#configResolver = resolver
+    return this
+  }
 
-    if (diff.length > 0) {
-      throw new LogicError(`Response does not support the following options: "${diff.join(', ')}".`)
-    }
+  /**
+   * Is Invalid response.
+   *
+   * @returns {boolean}
+   */
+  isInvalid () {
+    return this.statusCode < 100 || this.statusCode >= 600
+  }
 
-    if (options.etag) {
-      this.setEtag(options.etag)
-    }
+  /**
+   * Is Informational response.
+   *
+   * @returns {boolean}
+   */
+  isInformational () {
+    return this.statusCode >= 100 && this.statusCode < 200
+  }
 
-    if (options.last_modified) {
-      this.setLastModified(options.last_modified)
-    }
+  /**
+   * Is Successful response.
+   *
+   * @returns {boolean}
+   */
+  isSuccessful () {
+    return this.statusCode >= 200 && this.statusCode < 300
+  }
 
-    if (options.max_age) {
-      this.setMaxAge(options.max_age)
-    }
+  /**
+   * Is Ok response.
+   *
+   * @returns {boolean}
+   */
+  isOk () {
+    return this.statusCode === 200
+  }
 
-    if (options.s_maxage) {
-      this.setSharedMaxAge(options.s_maxage)
-    }
+  /**
+   * Is Reset Content response.
+   *
+   * @returns {boolean}
+   */
+  isResetContent () {
+    return this.statusCode === 205
+  }
 
-    if (options.stale_while_revalidate) {
-      this.setStaleWhileRevalidate(options.stale_while_revalidate)
-    }
+  /**
+   * Is Empty response.
+   *
+   * @returns {boolean}
+   */
+  isEmpty () {
+    return [204, 304].includes(this.statusCode)
+  }
 
-    if (options.stale_if_error) {
-      this.setStaleIfError(options.stale_if_error)
-    }
+  /**
+   * Is Redirection response.
+   *
+   * @returns {boolean}
+   */
+  isRedirection () {
+    return this.statusCode >= 300 && this.statusCode < 400
+  }
 
-    Object
-      .entries(OutgoingHttpResponse.#HTTP_RESPONSE_CACHE_CONTROL_DIRECTIVES)
-      .forEach(([key, value]) => {
-        if (!value && options[key]) {
-          if (options[key]) {
-            this.addHeaderCacheControlDirective(value.replace('_', '-'))
-          } else {
-            this.removeHeaderCacheControlDirective(value.replace('_', '-'))
-          }
+  /**
+   * Is Redirect response.
+   *
+   * @returns {boolean}
+   */
+  isRedirect (location = null) {
+    return [201, 301, 302, 303, 307, 308].includes(this.statusCode) && location === null ? true : !!this.getHeader('Location')
+  }
+
+  /**
+   * Is moved permanently.
+   *
+   * @returns {boolean}
+   */
+  isMovedPermanently () {
+    return this.statusCode === 301
+  }
+
+  /**
+   * Is ClientError response.
+   *
+   * @returns {boolean}
+   */
+  isClientError () {
+    return this.statusCode >= 400 && this.statusCode < 500
+  }
+
+  /**
+   * Is Unauthorized response.
+   *
+   * @returns {boolean}
+   */
+  isUnauthorized () {
+    return this.statusCode === 401
+  }
+
+  /**
+   * Is Forbidden response.
+   *
+   * @returns {boolean}
+   */
+  isForbidden () {
+    return this.statusCode === 403
+  }
+
+  /**
+   * Is NotFound response.
+   *
+   * @returns {boolean}
+   */
+  isNotFound () {
+    return this.statusCode === 404
+  }
+
+  /**
+   * Is ServerError response.
+   *
+   * @returns {boolean}
+   */
+  isServerError () {
+    return this.statusCode >= 500 && this.statusCode < 600
+  }
+
+  /**
+   * Is Validateable.
+   *
+   * @returns {boolean}
+   */
+  isValidateable () {
+    return this.#headers.has('Last-Modified') || this.#headers.has('ETag')
+  }
+
+  /**
+   * Prepare response.
+   *
+   * @param   {IncomingHttpEvent} request
+   * @param   {Config} [config=null]
+   * @returns {this}
+   */
+  prepare (request, config = null) {
+    this
+      .setConfigResolver(() => config)
+      .setRequestResolver(() => request)
+      ._prepareCookies()
+
+    switch (typeof this.content) { // Set content type
+      case 'string':
+        !this.hasHeader('Content-Type') && this.setContentType('html')
+        break
+      case 'object':
+      case 'number':
+      case 'boolean':
+        if (Buffer.isBuffer(this.content)) {
+          !this.hasHeader('Content-Type') && this.setContentType('bin')
+        } else {
+          !this.hasHeader('Content-Type') && this.setContentType('json')
+          return this.setContent(this.content, this.config.get('app.http.json', {}))
         }
-      })
-
-    if (options.public) {
-      this.setPublic()
+        break
     }
 
-    if (options.private) {
-      this.setPrivate()
+    if (this.request.isFresh(this)) {
+      this.statusCode = HTTP_NOT_MODIFIED
+    }
+
+    if (this.isInformational() || this.isEmpty()) {
+      this
+        .setContent(null)
+        .removeHeader(['Content-Type', 'Content-Length', 'Transfer-Encoding'])
+    } else if (this.isResetContent()) {
+      this
+        .setContent(null)
+        .setHeader('Content-Length', '0')
+        .removeHeader('Transfer-Encoding')
+    } else {
+      let length
+      const type = this.getHeader('Content-Type')
+      const etagFn = this.config.get('app.http.etag.function', this._defaultEtagFn)
+      const generateETag = !this.hasHeader('ETag') && isFunction(etagFn)
+      this.#charset ??= 'UTF-8'
+
+      if (isString(this.content) && isString(type) && !this.#charsetRegExp.test(type)) { // Set charset
+        this.setContentType(`${type}; charset=${this.#charset}`)
+      }
+
+      if (this.content !== undefined) { // Set Content-Length
+        if (Buffer.isBuffer(this.content)) {
+          length = this.content.length
+        } else if (!generateETag && this.content.length < 1000) {
+          length = Buffer.byteLength(this.content, this.#charset)
+        } else {
+          this._content = Buffer.from(this.content, this.#charset)
+          this.#charset = undefined
+          length = this.content.length
+        }
+
+        this.setHeader('Content-Length', length)
+      }
+
+      if (generateETag && length !== undefined) { // Set ETag
+        this.setEtag(etagFn(this.content, this.#charset))
+      }
+
+      if (this.hasHeader('Transfer-Encoding')) {
+        this.removeHeader('Content-Length')
+      }
+
+      if (this.request.isMethod('HEAD')) {
+        this.setContent(null)
+      }
     }
 
     return this
   }
 
-  #defaultEtagFn (content, encoding) {
-    return Buffer.from(this.#getHashedContent(content, encoding)).toString('base64')
+  /**
+   * Throw this reponse as an HttpError.
+   *
+   * @returns
+   */
+  throwResponse () {
+    throw new HttpError(this)
   }
 
-  #getHashedContent (content, encoding) {
+  /**
+   * Should be Json.
+   *
+   * @param   {*} content
+   * @returns {boolean}
+   */
+  _shouldBeJson (content) {
+    return !Buffer.isBuffer(content) && ['object', 'number', 'boolean'].includes(typeof content)
+  }
+
+  /**
+   * Morph to Json.
+   *
+   * @param   {*} content
+   * @param   {Object} [options={}]
+   * @returns {string}
+   */
+  _morphToJson (content, options = {}) {
+    try {
+      return this._stringify(content, options.replacer, options.spaces, options.escape)
+    } catch (error) {
+      throw new TypeError(error)
+    }
+  }
+
+  /**
+   * Prepare Cookies.
+   *
+   * @returns {this}
+   */
+  _prepareCookies () {
+    if (!this.#cookieCollection.isEmpty()) { // Set cookies
+      this
+        .#cookieCollection
+        .setSecret(this.config.get('app.secret'))
+        .setOptions(this.config.get('app.http.cookie'))
+
+      if (this.request.isSecure) {
+        this.secureCookies(true)
+      }
+
+      this.setHeader('Set-Cookie', this.#cookieCollection.all(true))
+    }
+
+    return this
+  }
+
+  /**
+   * Default ETag function.
+   *
+   * @param   {string} content
+   * @param   {string} encoding
+   * @returns {this}
+   */
+  _defaultEtagFn (content, encoding) {
+    return Buffer.from(this._getHashedContent(content, encoding)).toString('base64')
+  }
+
+  /**
+   * Prepare Cookies.
+   *
+   * @param   {string} content
+   * @param   {string} encoding
+   * @returns {this}
+   */
+  _getHashedContent (content, encoding) {
     return createHash('sha256').update(content, encoding).digest('hex')
   }
 
-  // From: https://github.com/expressjs/express/blob/master/lib/response.js
-  stringify (value, replacer, spaces, escape) {
-    // v8 checks arguments.length for optimizing simple call
-    // https://bugs.chromium.org/p/v8/issues/detail?id=4730
-    let json = replacer || spaces
-      ? JSON.stringify(value, replacer, spaces)
-      : JSON.stringify(value)
+  /**
+   * Stringify value to json.
+   *
+   * @param   {(number|Object|boolean)} value
+   * @param   {string} replacer
+   * @param   {string} spaces
+   * @param   {boolean} escape
+   * @returns {this}
+   */
+  _stringify (value, replacer, spaces, escape) {
+    const json = JSON.stringify(value, replacer, spaces)
 
-    if (escape && typeof json === 'string') {
-      json = json.replace(/[<>&]/g, function (c) {
-        switch (c.charCodeAt(0)) {
-          case 0x3c:
-            return '\\u003c'
-          case 0x3e:
-            return '\\u003e'
-          case 0x26:
-            return '\\u0026'
-          default:
-            return c
-        }
+    if (escape) {
+      return json?.replace(/[<>&]/g, (c) => {
+        return { 0x3c: '\\u003c', 0x3e: '\\u003e', 0x26: '\\u0026' }[c.charCodeAt(0)] ?? c
       })
     }
 

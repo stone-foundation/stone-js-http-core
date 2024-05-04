@@ -9,7 +9,6 @@ dist/
 public/
 dist-ssr
 *.local
-stone-js-http-*
 
 # Istanbul Code coverage
 coverage
