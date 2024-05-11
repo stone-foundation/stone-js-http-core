@@ -1,9 +1,8 @@
 import mime from 'mime'
 import fresh from 'fresh'
-import get from 'lodash/get'
-import has from 'lodash/has'
 import typeIs from 'type-is'
 import accepts from 'accepts'
+import { get, has } from 'lodash-es'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
@@ -436,13 +435,13 @@ export class IncomingHttpEvent extends IncomingEvent {
       locale: this.locale,
       cookies: this.#cookies,
       protocol: this.#protocol,
+      metadata: this._metadata,
       queryString: this.#queryString,
       url: structuredClone(this.url),
       body: structuredClone(this.#body),
       defaultLocale: this._defaultLocale,
       files: structuredClone(this.#files),
-      headers: structuredClone(this.#headers),
-      metadata: structuredClone(this.metadata)
+      headers: structuredClone(this.#headers)
     })
   }
 }

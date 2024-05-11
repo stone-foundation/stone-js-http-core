@@ -1,4 +1,4 @@
-import escape from 'lodash/escape'
+import { escape } from 'lodash-es'
 import { Buffer } from 'safe-buffer'
 import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
 

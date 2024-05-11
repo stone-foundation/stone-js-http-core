@@ -1,5 +1,6 @@
 import { parse } from 'cookie'
 import { Cookie } from './Cookie.mjs'
+import { isString } from '@stone-js/common'
 
 /**
  * Class representing a CookieCollection.
@@ -184,6 +185,10 @@ export class CookieCollection {
   }
 
   #parse (cookie) {
+    if (!isString(cookie)) {
+      return new Map()
+    }
+
     return new Map(
       Object
         .entries(parse(cookie))

@@ -13,11 +13,16 @@
     "Http",
     "Stone.js"
   ],
-  "type": "module",
-  "exports": "./dist/index.js",
   "files": [
     "/dist"
   ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "engines": {
     "node": ">=18.0.0"
   },
@@ -26,41 +31,37 @@
     "lint": "standard src",
     "lint:fix": "standard --fix src tests",
     "lint:test": "standard --env jest tests",
-    "predoc": "npm run build && rimraf docs",
+    "predoc": "rimraf docs",
     "doc": "jsdoc src -r -a all -c jsdoc.json -R README.md -d docs/jsdoc",
     "doc:serve": "npm run doc && npx http-server docs/jsdoc -p 8081",
     "prebuild": "rimraf dist",
     "build": "npm run lint && rollup -c && npm run types",
     "release": "npm run test:text && npm run build && npm publish --access public",
-    "test": "npm run lint:test && jest -i",
-    "test:cvg": "npm run lint:test && jest -i --coverage",
+    "local_publish": "npm run build && npm publish --registry http://localhost:4873/",
+    "local_unpublish": "npm unpublish @stone-js/http -f --registry http://localhost:4873",
+    "test": "npm run lint:test && jest",
+    "test:cvg": "npm run lint:test && jest --coverage",
     "test:text": "npm run test:cvg -- --coverageReporters=text",
     "test:html": "npm run test:cvg -- --coverageReporters=html text",
     "test:lcov": "npm run test:cvg -- --coverageReporters=lcov text"
   },
+  "peerDependencies": {
+    "@stone-js/common": "^0.0.1",
+    "@stone-js/pipeline": "^0.0.1"
+  },
   "dependencies": {
-    "@stone-js/common": "^1.0.0",
-    "@stone-js/pipeline": "^1.0.0",
     "accepts": "^1.3.8",
     "bytes": "^3.1.2",
-    "co-body": "^6.1.0",
     "content-disposition": "^0.5.4",
     "content-type": "^1.0.5",
     "cookie": "^0.5.0",
     "cookie-signature": "^1.2.1",
-    "encodeurl": "^1.0.2",
-    "escape-html": "^1.0.3",
     "etag": "^1.8.1",
     "filesize": "^10.1.0",
-    "formidable": "^3.5.1",
     "fresh": "^0.5.2",
-    "ip-range-check": "^0.2.0",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "mime": "^3.0.0",
-    "on-finished": "^2.4.1",
-    "proxy-addr": "^2.0.7",
     "range-parser": "^1.2.1",
-    "raw-body": "^2.5.2",
     "safe-buffer": "^5.2.1",
     "send": "^0.18.0",
     "statuses": "^2.0.1",
@@ -73,7 +74,6 @@
     "@babel/preset-env": "^7.24.5",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-multi-entry": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "babel-jest": "^29.7.0",
@@ -86,7 +86,6 @@
     "standard": "^17.1.0",
     "typescript": "^5.2.2"
   },
-  "types": "./dist/types/index.d.ts",
   "standard": {
     "parser": "@babel/eslint-parser",
     "globals": [

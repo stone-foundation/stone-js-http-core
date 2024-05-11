@@ -48,7 +48,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
       .setHeaders(headers)
       .setStatus(statusCode)
 
-    this.#cookieCollection = CookieCollection.instance()
+    this.#cookieCollection = CookieCollection.create()
   }
 
   /** @return {number} */
@@ -108,7 +108,8 @@ export class OutgoingHttpResponse extends OutgoingResponse {
    */
   setHeaders (values) {
     const headers = values instanceof Headers || values instanceof Map ? values.entries() : Object.entries(values)
-    return headers.reduce((_, [key, value]) => this.setHeader(key, value))
+    headers.forEach(([key, value]) => this.setHeader(key, value))
+    return this
   }
 
   /**
