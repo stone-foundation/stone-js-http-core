@@ -135,6 +135,11 @@ export class IncomingHttpEvent extends IncomingEvent {
     return this.#files
   }
 
+  /** @return {Object} */
+  get body () {
+    return this.#body
+  }
+
   /** @return {string} */
   get etag () {
     return this.getHeader('ETag')

@@ -107,6 +107,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
    * @returns {this}
    */
   setHeaders (values) {
+    this.#headers ??= new Headers()
     const headers = values instanceof Headers || values instanceof Map ? values.entries() : Object.entries(values)
     headers.forEach(([key, value]) => this.setHeader(key, value))
     return this
@@ -131,7 +132,6 @@ export class OutgoingHttpResponse extends OutgoingResponse {
       }
     }
 
-    this.#headers ??= new Headers()
     this.#headers.set(key, value)
 
     return this
