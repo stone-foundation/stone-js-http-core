@@ -6,6 +6,7 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import nodeExternals from 'rollup-plugin-node-externals'
 
 const inputs = {
+  utils: 'src/utils.mjs',
   config: 'src/config/*.mjs',
   index: [
     'src/**/*.mjs',
