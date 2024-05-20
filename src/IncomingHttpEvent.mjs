@@ -5,8 +5,9 @@ import accepts from 'accepts'
 import { get, has } from 'lodash-es'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
+import { IncomingEvent } from './IncomingEvent.mjs'
+import { flattenValues, isString } from '@stone-js/common'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { IncomingEvent, flattenValues, isString } from '@stone-js/common'
 
 /**
  * Class representing an IncomingHttpEvent.

@@ -6,7 +6,11 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import nodeExternals from 'rollup-plugin-node-externals'
 
 const inputs = {
-  index: 'src/**/*.mjs'
+  config: 'src/config/*.mjs',
+  index: [
+    'src/**/*.mjs',
+    '!src/config/*.mjs'
+  ]
 }
 
 export default Object.entries(inputs).map(([name, input]) => ({

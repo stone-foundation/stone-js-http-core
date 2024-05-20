@@ -1,11 +1,11 @@
 /**
- * Http options.
+ * Event foundation options.
  * Options are merge to adapter namespace
  * so user can change options per adapter.
  *
  * @returns {Object}
 */
-export const httpOptions = {
+export const eventFoundationOptions = {
   // App namespace.
   app: {
     // Here you can defined common adapter's options.

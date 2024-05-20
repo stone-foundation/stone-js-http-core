@@ -18,7 +18,7 @@
     "scripts": [],
     "menu": {
       "Github repo": {
-        "href": "https://github.com/stonemjs/http",
+        "href": "https://github.com/stonemjs/event-foundation",
         "target": "_blank",
         "class": "menu-item",
         "id": "repository"

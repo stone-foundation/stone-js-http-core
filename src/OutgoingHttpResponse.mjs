@@ -3,17 +3,17 @@ import { mime } from 'send'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
+import { OutgoingResponse } from './OutgoingResponse.mjs'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { OutgoingResponse, HttpError, isString, isFunction } from '@stone-js/common'
-import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants/http_statuses.mjs'
+import { HttpError, isString, isFunction } from '@stone-js/common'
+import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants/httpStatuses.mjs'
 
 /**
  * Class representing an OutgoingHttpResponse.
  *
  * @author Mr. Stone <evensstone@gmail.com>
  *
- * InspiredBy: Symfony, Laravel and ExpressJS
- * @see: https://github.com/symfony/symfony/blob/6.4/src/Symfony/Component/HttpFoundation/Response.php
+ * InspiredBy: Symfony, Laravel and ExpressJS.
  */
 export class OutgoingHttpResponse extends OutgoingResponse {
   #headers

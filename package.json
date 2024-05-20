@@ -1,17 +1,19 @@
 {
-  "name": "@stone-js/http",
+  "name": "@stone-js/event-foundation",
   "version": "0.0.1",
-  "description": "Stone.js Http foundation",
+  "description": "Stone.js Event foundation",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
-  "repository": "git@github.com:stonemjs/http.git",
-  "homepage": "https://github.com/stonemjs/http#readme",
+  "repository": "git@github.com:stonemjs/event-foundation.git",
+  "homepage": "https://github.com/stonemjs/event-foundation#readme",
   "bugs": {
-    "url": "https://github.com/stonemjs/http/issues"
+    "url": "https://github.com/stonemjs/event-foundation/issues"
   },
   "keywords": [
     "Http",
-    "Stone.js"
+    "Event",
+    "Stone.js",
+    "Foundation"
   ],
   "files": [
     "/dist"
@@ -21,6 +23,10 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./config": {
+      "types": "./dist/types/config.d.ts",
+      "default": "./dist/config.js"
     }
   },
   "engines": {
@@ -38,7 +44,7 @@
     "build": "npm run lint && rollup -c && npm run types",
     "release": "npm run test:text && npm run build && npm publish --access public",
     "local_publish": "npm run build && npm publish --registry http://localhost:4873/",
-    "local_unpublish": "npm unpublish @stone-js/http -f --registry http://localhost:4873",
+    "local_unpublish": "npm unpublish @stone-js/event-foundation -f --registry http://localhost:4873",
     "test": "npm run lint:test && jest",
     "test:cvg": "npm run lint:test && jest --coverage",
     "test:text": "npm run test:cvg -- --coverageReporters=text",
@@ -88,7 +94,7 @@
   "stone": {
     "config": {
       "make": {
-        "http": "dist/options.mjs"
+        "event-foundation": "dist/options.mjs"
       }
     }
   },
