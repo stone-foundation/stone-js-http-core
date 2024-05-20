@@ -4,7 +4,10 @@
   "description": "Stone.js HTTP Core",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
-  "repository": "git@github.com:stonemjs/http-core.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/stonemjs/http-core.git"
+  },
   "homepage": "https://github.com/stonemjs/http-core#readme",
   "bugs": {
     "url": "https://github.com/stonemjs/http-core/issues"
