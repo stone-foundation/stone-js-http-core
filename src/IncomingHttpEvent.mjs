@@ -2,6 +2,7 @@ import mime from 'mime'
 import fresh from 'fresh'
 import typeIs from 'type-is'
 import accepts from 'accepts'
+import { URL } from 'node:url'
 import { get, has } from 'lodash-es'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
@@ -656,13 +657,13 @@ export class IncomingHttpEvent extends IncomingEvent {
     return new IncomingHttpEvent({
       ip: this.#ip,
       ips: this.#ips,
+      url: this.#url,
       locale: this.locale,
       method: this.#method,
       cookies: this.#cookies,
       protocol: this.#protocol,
       metadata: this.getMetadata(),
       queryString: this.#queryString,
-      url: structuredClone(this.#url),
       body: structuredClone(this.#body),
       defaultLocale: this.defaultLocale,
       files: structuredClone(this.#files),
