@@ -1,17 +1,17 @@
 {
-  "name": "@stone-js/event-foundation",
+  "name": "@stone-js/http-core",
   "version": "0.0.1",
-  "description": "Stone.js Event foundation",
+  "description": "Stone.js HTTP Core",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
-  "repository": "git@github.com:stonemjs/event-foundation.git",
-  "homepage": "https://github.com/stonemjs/event-foundation#readme",
+  "repository": "git@github.com:stonemjs/http-core.git",
+  "homepage": "https://github.com/stonemjs/http-core#readme",
   "bugs": {
-    "url": "https://github.com/stonemjs/event-foundation/issues"
+    "url": "https://github.com/stonemjs/http-core/issues"
   },
   "keywords": [
     "Http",
-    "Event",
+    "Core",
     "Stone.js",
     "Foundation"
   ],
@@ -48,12 +48,15 @@
     "build": "npm run lint && rollup -c && npm run types",
     "release": "npm run test:text && npm run build && npm publish --access public",
     "local_publish": "npm run build && npm publish --registry http://localhost:4873/",
-    "local_unpublish": "npm unpublish @stone-js/event-foundation -f --registry http://localhost:4873",
+    "local_unpublish": "npm unpublish @stone-js/http-core -f --registry http://localhost:4873",
     "test": "npm run lint:test && jest",
     "test:cvg": "npm run lint:test && jest --coverage",
     "test:text": "npm run test:cvg -- --coverageReporters=text",
     "test:html": "npm run test:cvg -- --coverageReporters=html text",
     "test:lcov": "npm run test:cvg -- --coverageReporters=lcov text"
+  },
+  "peerDependencies": {
+    "@stone-js/core": "^0.0.1"
   },
   "dependencies": {
     "@stone-js/common": "^0.0.1",
@@ -101,7 +104,7 @@
   "stone": {
     "config": {
       "make": {
-        "event-foundation": "dist/options.mjs"
+        "http.options": "dist/options.mjs"
       }
     }
   },

@@ -5,9 +5,29 @@ import accepts from 'accepts'
 import { get, has } from 'lodash-es'
 import rangeParser from 'range-parser'
 import contentTypeLib from 'content-type'
-import { IncomingEvent } from './IncomingEvent.mjs'
+import { IncomingEvent } from '@stone-js/core'
 import { flattenValues, isString } from '@stone-js/common'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
+
+/**
+ * IncomingHttpEventOptions.
+ *
+ * @typedef   {Object} IncomingHttpEventOptions
+ * @property  {URL} url
+ * @property  {string} ip
+ * @property  {Object} [body={}]
+ * @property  {Object} [files={}]
+ * @property  {string[]} [ips=[]]
+ * @property  {Object} [source=null]
+ * @property  {string} [locale='en']
+ * @property  {Object} [metadata={}]
+ * @property  {string} [method='GET']
+ * @property  {string} [protocol='http']
+ * @property  {string} [queryString=null]
+ * @property  {string} [defaultLocale='en']
+ * @property  {(Object|Headers)} [headers={}]
+ * @property  {CookieCollection} [cookies=null]
+ */
 
 /**
  * Class representing an IncomingHttpEvent.
@@ -15,69 +35,100 @@ import { CookieCollection } from './cookies/CookieCollection.mjs'
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class IncomingHttpEvent extends IncomingEvent {
-  static METHOD_HEAD = 'HEAD'
-  static METHOD_GET = 'GET'
-  static METHOD_POST = 'POST'
-  static METHOD_PUT = 'PUT'
-  static METHOD_PATCH = 'PATCH'
-  static METHOD_DELETE = 'DELETE'
-  static METHOD_PURGE = 'PURGE'
-  static METHOD_OPTIONS = 'OPTIONS'
-  static METHOD_TRACE = 'TRACE'
-  static METHOD_CONNECT = 'CONNECT'
+  /**
+   * INCOMING_HTTP_EVENT Event name, fires on platform http message.
+   *
+   * @type {Symbol}
+   * @event IncomingHttpEvent#INCOMING_HTTP_EVENT
+   */
+  static INCOMING_HTTP_EVENT = Symbol('stonejs@incoming_http_event')
 
+  /** @type {string} */
   #ip
+
+  /** @type {string[]} */
   #ips
+
+  /** @type {URL} */
+  #url
+
+  /** @type {Object} */
   #body
+
+  /** @type {Object} */
   #files
+
+  /** @type {URLSearchParams} */
   #query
+
+  /** @type {string} */
+  #method
+
+  /** @type {Object} */
   #accepts
+
+  /** @type {(Map|Headers|Object)} */
   #headers
+
+  /** @type {CookieCollection} */
   #cookies
+
+  /** @type {string} */
   #protocol
+
+  /** @type {string} */
   #queryString
+
+  /** @type {Function} */
+  #userResolver
+
+  /** @type {Function} */
+  #routeResolver
 
   /**
    * Create an IncomingHttpEvent.
    *
-   * @param  {Object} options - Event options.
-   * @param  {string} options.ip
-   * @param  {string[]} [options.ips=[]]
-   * @param  {URL} options.url
-   * @param  {Object} [options.body={}]
-   * @param  {Object} [options.files={}]
-   * @param  {string} [options.locale='en']
-   * @param  {string} [options.method='GET']
-   * @param  {(Object|Headers)} [options.headers={}]
-   * @param  {CookieCollection} [options.cookies=null]
-   * @param  {Object} [options.metadata={}]
-   * @param  {string} [options.protocol='http']
-   * @param  {string} [options.queryString=null]
-   * @param  {string} [options.defaultLocale='en']
+   * @param   {IncomingHttpEventOptions} options
+   * @returns {IncomingHttpEvent}
+   */
+  static create (options) {
+    return new this(options)
+  }
+
+  /**
+   * Create an IncomingHttpEvent.
+   *
+   * @param  {IncomingHttpEventOptions} options
    * @throws {TypeError}
    */
   constructor ({
     ip,
-    ips = [],
     url,
+    ips = [],
     body = {},
     files = {},
     locale = 'en',
     method = 'GET',
     headers = {},
+    source = null,
     cookies = null,
     metadata = {},
     protocol = 'http',
     queryString = null,
     defaultLocale = 'en'
   }) {
-    super({ url, metadata, locale, defaultLocale })
+    super({ type: IncomingHttpEvent.INCOMING_HTTP_EVENT, source, metadata, locale, defaultLocale })
+
+    if (url && !(url instanceof URL)) {
+      throw new TypeError('The `url` option must be an instance of `URL`.')
+    }
 
     this.#ip = ip
     this.#ips = ips
+    this.#url = url
     this.#body = body
     this.#files = files
-    this._method = method
+    this.#method = method
     this.#protocol = protocol
     this.#accepts = accepts(this)
     this.#queryString = queryString
@@ -86,109 +137,173 @@ export class IncomingHttpEvent extends IncomingEvent {
     this.#headers = headers instanceof Headers ? headers : new Headers(headers)
   }
 
-  /** @return {string} */
+  /** @returns {string} */
   get ip () {
     return this.#ip
   }
 
-  /** @return {string[]} */
+  /** @returns {string[]} */
   get ips () {
     return this.#ips
   }
 
-  /** @return {boolean} */
-  get isXhr () {
-    return this.getHeader('X-Requested-With', '').toLowerCase() === 'xmlhttprequest'
+  /** @returns {string} */
+  get decodedPathname () {
+    try {
+      return decodeURIComponent(this.pathname)
+    } catch (_) {
+      return null
+    }
   }
 
-  /** @return {boolean} */
-  get isAjax () {
-    return this.isXhr
+  /** @returns {string} */
+  get hash () {
+    return this.#url.hash
   }
 
-  /** @return {string} */
-  get userAgent () {
-    return this.getHeader('user-agent')
+  /** @returns {string} */
+  get host () {
+    return this.#url.host
   }
 
-  /** @return {boolean} */
-  get isPrefetch () {
-    return [this.getHeader('Purpose'), this.getHeader('Sec-Purpose')].includes('prefetch')
+  /** @returns {string} */
+  get hostname () {
+    return this.#url.hostname
   }
 
-  /** @return {string} */
+  /** @returns {string} */
+  get method () {
+    return this.#method
+  }
+
+  /** @returns {Object} */
+  get params () {
+    return this.route().parameters?.()
+  }
+
+  /** @returns {string} */
+  get path () {
+    return this.#url ? `${this.#url.pathname}${this.#url.search}` : null
+  }
+
+  /** @returns {string} */
+  get pathname () {
+    return this.#url.pathname
+  }
+
+  /** @returns {string} */
   get protocol () {
     return this.#protocol
   }
 
-  /** @return {URLSearchParams} */
+  /** @returns {URLSearchParams} */
   get query () {
     return this.#query
   }
 
-  /** @return {string} */
+  /** @returns {string} */
   get queryString () {
     return this.#queryString
   }
 
-  /** @return {Object} */
+  /** @returns {string} */
+  get uri () {
+    return this.#url.href
+  }
+
+  /** @returns {string} */
+  get scheme () {
+    return this.protocol
+  }
+
+  /** @returns {string[]} */
+  get segments () {
+    return this.#url.pathname.split('/')
+  }
+
+  /** @returns {boolean} */
+  get isSecure () {
+    return this.protocol === 'https'
+  }
+
+  /** @returns {boolean} */
+  get isXhr () {
+    return this.getHeader('X-Requested-With', '').toLowerCase() === 'xmlhttprequest'
+  }
+
+  /** @returns {boolean} */
+  get isAjax () {
+    return this.isXhr
+  }
+
+  /** @returns {string} */
+  get userAgent () {
+    return this.getHeader('user-agent')
+  }
+
+  /** @returns {boolean} */
+  get isPrefetch () {
+    return [this.getHeader('Purpose'), this.getHeader('Sec-Purpose')].includes('prefetch')
+  }
+
+  /** @returns {Object} */
   get files () {
     return this.#files
   }
 
-  /** @return {Object} */
+  /** @returns {Object} */
   get body () {
     return this.#body
   }
 
-  /** @return {string} */
+  /** @returns {string} */
   get etag () {
     return this.getHeader('ETag')
   }
 
-  /** @return {CookieCollection} */
+  /** @returns {CookieCollection} */
   get cookies () {
     return this.#cookies
   }
 
-  /** @return {(Object|Headers)} */
+  /** @returns {(Object|Headers)} */
   get headers () {
     return this.#headers
   }
 
-  /** @return {string[]} */
+  /** @returns {string[]} */
   get types () {
     return this.#accepts.types()
   }
 
-  /** @return {string[]} */
+  /** @returns {string[]} */
   get charsets () {
     return this.#accepts.charsets()
   }
 
-  /** @return {string[]} */
+  /** @returns {string[]} */
   get languages () {
     return this.#accepts.languages()
   }
 
-  /** @return {string[]} */
+  /** @returns {string[]} */
   get encodings () {
     return this.#accepts.encodings()
   }
 
-  /** @return {string} */
+  /** @returns {string} */
   get charset () {
     return contentTypeLib.parse(this).parameters.charset
   }
 
-  /** @return {string} */
+  /** @returns {string} */
   get contentType () {
     return contentTypeLib.parse(this).type
   }
 
-  /** @return {Object} */
-  get params () {
-    return this.route().parameters?.()
+  /** @returns {Object} */
+  get user () {
+    return this.userResolver()
   }
 
   /**
@@ -429,7 +544,111 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
-   * Return a cloned event.
+   * Check current event method.
+   *
+   * @param   {string} method
+   * @returns {boolean}
+   */
+  isMethod (method) {
+    return this.#method.toUpperCase() === method.toUpperCase()
+  }
+
+  /**
+   * Is current event method is safe.
+   *
+   * @returns {boolean}
+   */
+  isMethodSafe () {
+    return ['GET', 'HEAD', 'OPTIONS', 'TRACE'].includes(this.#method)
+  }
+
+  /**
+   * Is current event method is cacheable.
+   *
+   * @returns {boolean}
+   */
+  isMethodCacheable () {
+    return ['GET', 'HEAD'].includes(this.#method)
+  }
+
+  /**
+   * Get uri with or without domain.
+   *
+   * @param   {boolean} [withDomain=false]
+   * @returns {string}
+   */
+  getUri (withDomain = false) {
+    return withDomain ? new URL(this.decodedPathname, this.hostname).href : this.decodedPathname
+  }
+
+  /**
+   * Return current route or route parameter.
+   *
+   * @param   {string} [param]
+   * @param   {string} [fallback=null]
+   * @returns {(string|Object)}
+   */
+  route (param, fallback = null) {
+    const route = this.getRouteResolver()
+    return !param ? route : route?.parameters(param, fallback)
+  }
+
+  /**
+   * Generate an unique identifier for each event.
+   *
+   * @param   {string} path
+   * @returns {string}
+   */
+  fingerprint () {
+    const route = this.route()
+
+    if (!route) {
+      throw new TypeError('Unable to generate fingerprint. Route unavailable.')
+    }
+
+    return btoa([].concat(route.methods, route.getDomain(), route.uri, this.ip).join('|'))
+  }
+
+  /**
+   * Get user resolver.
+   *
+   * @returns {Function}
+   */
+  getUserResolver () {
+    return this.#userResolver ?? (() => null)
+  }
+
+  /**
+   * Set user resolver.
+   *
+   * @returns {Function}
+   */
+  setUserResolver (resolver) {
+    this.#userResolver = resolver
+    return this
+  }
+
+  /**
+   * Get route resolver.
+   *
+   * @returns {Function}
+   */
+  getRouteResolver () {
+    return this.#routeResolver ?? (() => null)
+  }
+
+  /**
+   * Set route resolver.
+   *
+   * @returns {Function}
+   */
+  setRouteResolver (resolver) {
+    this.#routeResolver = resolver
+    return this
+  }
+
+  /**
+   * Return a cloned instance.
    *
    * @returns {IncomingHttpEvent}
    */
@@ -437,15 +656,15 @@ export class IncomingHttpEvent extends IncomingEvent {
     return new IncomingHttpEvent({
       ip: this.#ip,
       ips: this.#ips,
-      method: this.method,
       locale: this.locale,
+      method: this.#method,
       cookies: this.#cookies,
       protocol: this.#protocol,
-      metadata: this._metadata,
+      metadata: this.getMetadata(),
       queryString: this.#queryString,
-      url: structuredClone(this.url),
+      url: structuredClone(this.#url),
       body: structuredClone(this.#body),
-      defaultLocale: this._defaultLocale,
+      defaultLocale: this.defaultLocale,
       files: structuredClone(this.#files),
       headers: structuredClone(this.#headers)
     })

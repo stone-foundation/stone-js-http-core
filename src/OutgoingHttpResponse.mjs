@@ -3,11 +3,12 @@ import { mime } from 'send'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
+import { OutgoingResponse } from '@stone-js/core'
 import { HttpError } from './errors/HttpError.mjs'
 import { isString, isFunction } from '@stone-js/common'
-import { OutgoingResponse } from './OutgoingResponse.mjs'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
 import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants/httpStatuses.mjs'
+
 /**
  * Class representing an OutgoingHttpResponse.
  *
@@ -16,10 +17,27 @@ import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants/httpStatuses
  * InspiredBy: Symfony, Laravel and ExpressJS.
  */
 export class OutgoingHttpResponse extends OutgoingResponse {
-  #headers
+  /**
+   * OUTGOING_HTTP_RESPONSE Event name, fires on reponse to the incoming http event.
+   *
+   * @type {Symbol}
+   * @event OutgoingHttpResponse#OUTGOING_HTTP_RESPONSE
+   */
+  static OUTGOING_HTTP_RESPONSE = Symbol('stonejs@outgoing_http_response')
+
+  /** @type {string} */
   #charset
+
+  /** @type {(Map|Headers|Object)} */
+  #headers
+
+  /** @type {Function} */
   #configResolver
+
+  /** @type {Function} */
   #requestResolver
+
+  /** @type {CookieCollection} */
   #cookieCollection
 
   /**
@@ -28,10 +46,11 @@ export class OutgoingHttpResponse extends OutgoingResponse {
    * @param  {*} content
    * @param  {number} [statusCode=null]
    * @param  {string} [headers={}]
+   * @param  {Object} [source=null]
    * @return {OutgoingHttpResponse}
    */
-  static create (content, statusCode = 200, headers = {}) {
-    return new this(content, statusCode, headers)
+  static create (content, statusCode = 200, headers = {}, source = null, type = OutgoingHttpResponse.OUTGOING_HTTP_RESPONSE) {
+    return new this(content, statusCode, headers, source, type)
   }
 
   /**
@@ -40,9 +59,10 @@ export class OutgoingHttpResponse extends OutgoingResponse {
    * @param  {*} [content='']
    * @param  {number} [statusCode=200]
    * @param  {Object} [headers={}]
+   * @param  {Object} [source=null]
    */
-  constructor (content = '', statusCode = 200, headers = {}) {
-    super(content, statusCode)
+  constructor (content = '', statusCode = 200, headers = {}, source = null, type = OutgoingHttpResponse.OUTGOING_HTTP_RESPONSE) {
+    super(content, statusCode, null, source, type)
 
     this
       .setHeaders(headers)
