@@ -2,7 +2,7 @@ import { Buffer } from 'safe-buffer'
 import { File } from './file/File.mjs'
 import { isFunction } from '@stone-js/common'
 import contentDisposition from 'content-disposition'
-import { HTTP_NOT_MODIFIED } from './constants/http_statuses.mjs'
+import { HTTP_NOT_MODIFIED } from './constants/httpStatuses.mjs'
 import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
 
 /**

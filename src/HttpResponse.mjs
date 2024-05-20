@@ -13,7 +13,7 @@ import {
   HTTP_METHOD_NOT_ALLOWED,
   HTTP_SERVICE_UNAVAILABLE,
   HTTP_INTERNAL_SERVER_ERROR
-} from './constants/http_statuses.mjs'
+} from './constants/httpStatuses.mjs'
 
 /**
  * Class representing an HttpResponse.
