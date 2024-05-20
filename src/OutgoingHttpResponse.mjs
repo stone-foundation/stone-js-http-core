@@ -3,11 +3,11 @@ import { mime } from 'send'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import { createHash } from 'node:crypto'
+import { HttpError } from './errors/HttpError.mjs'
+import { isString, isFunction } from '@stone-js/common'
 import { OutgoingResponse } from './OutgoingResponse.mjs'
 import { CookieCollection } from './cookies/CookieCollection.mjs'
-import { HttpError, isString, isFunction } from '@stone-js/common'
 import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants/httpStatuses.mjs'
-
 /**
  * Class representing an OutgoingHttpResponse.
  *
