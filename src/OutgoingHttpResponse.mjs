@@ -35,7 +35,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
   #configResolver
 
   /** @type {Function} */
-  #requestResolver
+  #incomingEventResolver
 
   /** @type {CookieCollection} */
   #cookieCollection
@@ -102,12 +102,12 @@ export class OutgoingHttpResponse extends OutgoingResponse {
   }
 
   /** @return {IncomingHttpEvent} */
-  get request () {
-    if (!this.#requestResolver) {
+  get incomingEvent () {
+    if (!this.#incomingEventResolver) {
       throw new TypeError('Must set an IncomingHttpEvent resolver.')
     }
 
-    return this.#requestResolver()
+    return this.#incomingEventResolver()
   }
 
   /** @return {Object} */
@@ -356,7 +356,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
    */
   format (formats) {
     const keys = Object.keys(formats).filter(v => v !== 'default')
-    const key = keys.length > 0 ? this.request.acceptsTypes(keys) : null
+    const key = keys.length > 0 ? this.incomingEvent.acceptsTypes(keys) : null
 
     if (key) {
       this
@@ -421,13 +421,13 @@ export class OutgoingHttpResponse extends OutgoingResponse {
   }
 
   /**
-   * Set request resolver.
+   * Set incoming event resolver.
    *
    * @param   {Function} resolver
    * @returns {this}
    */
-  setRequestResolver (resolver) {
-    this.#requestResolver = resolver
+  setIncomingEventResolver (resolver) {
+    this.#incomingEventResolver = resolver
     return this
   }
 
@@ -580,14 +580,14 @@ export class OutgoingHttpResponse extends OutgoingResponse {
   /**
    * Prepare response.
    *
-   * @param   {IncomingHttpEvent} request
+   * @param   {IncomingHttpEvent} event
    * @param   {Config} [config=null]
    * @returns {this}
    */
-  prepare (request, config = null) {
+  prepare (event, config = null) {
     this
       .setConfigResolver(() => config)
-      .setRequestResolver(() => request)
+      .setIncomingEventResolver(() => event)
       ._prepareCookies()
 
     switch (typeof this.content) { // Set content type
@@ -606,7 +606,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
         break
     }
 
-    if (this.request.isFresh(this)) {
+    if (this.incomingEvent.isFresh(this)) {
       this.statusCode = HTTP_NOT_MODIFIED
     }
 
@@ -652,7 +652,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
         this.removeHeader('Content-Length')
       }
 
-      if (this.request.isMethod('HEAD')) {
+      if (this.incomingEvent.isMethod('HEAD')) {
         this.setContent(null)
       }
     }
@@ -706,7 +706,7 @@ export class OutgoingHttpResponse extends OutgoingResponse {
         .setSecret(this.config.get('app.secret'))
         .setOptions(this.config.get('app.http.cookie'))
 
-      if (this.request.isSecure) {
+      if (this.incomingEvent.isSecure) {
         this.secureCookies(true)
       }
 

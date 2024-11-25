@@ -27,7 +27,7 @@ export class JsonpResponse extends JsonResponse {
    * @returns {(string|string[])}
    */
   getCallback () {
-    return this.#callback ?? this.request.query[this.config.get('app.http.jsonp.callback.name')]
+    return this.#callback ?? this.incomingEvent.query[this.config.get('app.http.jsonp.callback.name')]
   }
 
   /**

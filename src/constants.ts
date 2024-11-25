@@ -1,3 +1,17 @@
+// HTTP Methods
+export const GET = 'GET'
+export const PUT = 'PUT'
+export const HEAD = 'HEAD'
+export const POST = 'POST'
+export const TRACE = 'TRACE'
+export const PATCH = 'PATCH'
+export const PURGE = 'PURGE'
+export const DELETE = 'DELETE'
+export const CONNECT = 'CONNECT'
+export const OPTIONS = 'OPTIONS'
+export const HTTP_METHODS = [GET, PUT, HEAD, POST, PATCH, DELETE, OPTIONS]
+
+// HTTP Status Codes
 export const HTTP_CONTINUE = 100
 export const HTTP_SWITCHING_PROTOCOLS = 101
 export const HTTP_PROCESSING = 102 // RFC2518

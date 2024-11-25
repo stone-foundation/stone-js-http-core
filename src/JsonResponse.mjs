@@ -17,7 +17,7 @@ export class JsonResponse extends OutgoingHttpResponse {
   prepare (request, config = null) {
     return this
       .setConfigResolver(() => config)
-      .setRequestResolver(() => request)
+      .setIncomingEventResolver(() => request)
       .setContentType('json')
       ._prepareCookies()
       ._makeJson()

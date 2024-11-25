@@ -61,7 +61,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
 
   #location () {
     if (this.#targetUrl === 'back') {
-      this.#targetUrl = this.request.getHeader('Referrer', '/')
+      this.#targetUrl = this.incomingEvent.getHeader('Referrer', '/')
     }
 
     const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\/?]+/.exec(this.#targetUrl)

@@ -1,5 +1,5 @@
 import { Buffer } from 'safe-buffer'
-import { File } from './file/File.mjs'
+import { File } from './file/File.js'
 import { isFunction } from '@stone-js/common'
 import contentDisposition from 'content-disposition'
 import { HTTP_NOT_MODIFIED } from './constants/httpStatuses.mjs'
@@ -13,6 +13,28 @@ import { OutgoingHttpResponse } from './OutgoingHttpResponse.mjs'
 export class BinaryFileResponse extends OutgoingHttpResponse {
   #file
   #deleteFileAfterSent
+
+  /**
+   * Create a BinaryFileResponse with inline content disposition.
+   *
+   * @param   {(string|File)} file
+   * @param   {(Object|Map|Headers)} [headers={}]
+   * @returns {BinaryFileResponse}
+   */
+  static file (file, headers = {}) {
+    return new this(file, 200, headers, 'inline')
+  }
+
+  /**
+   * Create a BinaryFileResponse with attachment content disposition.
+   *
+   * @param   {(string|File)} file
+   * @param   {(Object|Map|Headers)} [headers={}]
+   * @returns {BinaryFileResponse}
+   */
+  static download (file, headers = {}) {
+    return new this(file, 200, headers, 'attachment')
+  }
 
   /**
    * Create a BinaryFileResponse.
@@ -155,17 +177,17 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
   /**
    * Prepare response.
    *
-   * @param   {IncomingHttpEvent} request
+   * @param   {IncomingHttpEvent} event
    * @param   {Config} [config=null]
    * @returns {this}
    */
-  prepare (request, config = null) {
+  prepare (event, config = null) {
     this
       .setConfigResolver(() => config)
-      .setRequestResolver(() => request)
+      .setIncomingEventResolver(() => event)
       ._prepareCookies()
 
-    if (this.request.isFresh(this)) {
+    if (this.incomingEvent.isFresh(this)) {
       this.statusCode = HTTP_NOT_MODIFIED
     }
 

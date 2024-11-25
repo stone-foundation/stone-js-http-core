@@ -212,6 +212,11 @@ export class IncomingHttpEvent extends IncomingEvent {
     return this.#url.href
   }
 
+  /** @returns {URL} */
+  get url () {
+    return this.#url
+  }
+
   /** @returns {string} */
   get scheme () {
     return this.protocol
@@ -312,7 +317,9 @@ export class IncomingHttpEvent extends IncomingEvent {
    * 1st - Get from route params if exist.
    * 2nd - Get from body if exist.
    * 3rd - Get from query params if exists.
-   * 4th - Get from metadata if exists.
+   * 4rd - Get from headers if exists.
+   * 5rd - Get from cookies if exists.
+   * 6th - Get from metadata if exists.
    * last - return fallback value.
    *
    * @param   {string} key
@@ -338,7 +345,12 @@ export class IncomingHttpEvent extends IncomingEvent {
 
     // Get from header
     if (this.hasHeader(key)) {
-      return this.getHeader(key, fallback)
+      return this.getHeader(key)
+    }
+
+    // Get from cookies
+    if (this.#cookies.has(key)) {
+      return this.#cookies.get(key)
     }
 
     // Get from metadata
@@ -378,6 +390,27 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   hasHeader (name) {
     return this.#headers.has(name)
+  }
+
+  /**
+   * Get cookie.
+   *
+   * @param   {string} name
+   * @param   {*} [fallback=null]
+   * @returns {(string|*)}
+   */
+  getCookie (name, fallback = null) {
+    return this.#cookies.get(name, fallback) ?? this.#cookies.get(name.toLowerCase(), fallback)
+  }
+
+  /**
+   * Has cookie.
+   *
+   * @param   {string} name
+   * @returns {boolean}
+   */
+  hasCookie (name) {
+    return this.#cookies.has(name)
   }
 
   /**
@@ -489,6 +522,20 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
+   * Check if key exists in json body.
+   *
+   * @param   {string} key
+   * @returns {boolean}
+   */
+  hasJson (key) {
+    if (this.is(['json'])) {
+      return has(this.#body, key)
+    }
+
+    return false
+  }
+
+  /**
    * Cache section determining
    * if cache is fresh or stale.
    */
@@ -542,6 +589,26 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   filterFiles (files) {
     return Object.fromEntries(this.#files.entries().filter(([key]) => files.includes(key)))
+  }
+
+  /**
+   * Get file.
+   *
+   * @param   {string} name
+   * @returns {UploadedFile[]}
+   */
+  getFile (name) {
+    return this.#files[name]
+  }
+
+  /**
+   * Has file.
+   *
+   * @param   {string} name
+   * @returns {boolean}
+   */
+  hasFile (name) {
+    return this.#files.keys().includes(name)
   }
 
   /**
