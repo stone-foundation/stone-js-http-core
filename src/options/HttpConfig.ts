@@ -1,5 +1,6 @@
+import { Encoding } from "node:crypto";
+import { CookieSameSite } from "../declarations";
 import { KernelMiddlewareConfig } from "@stone-js/core";
-
 
 export interface HttpCorsConfig {
   /**
@@ -35,6 +36,34 @@ export interface HttpCorsConfig {
    */
   preflightStop: boolean;
 };
+
+export interface HttpJsonConfig {
+  /**
+   * The number of spaces to use for formatting JSON output.
+   */
+  spaces: string;
+  /**
+   * Whether to escape HTML characters in JSON output.
+   */
+  escape: boolean;
+  /**
+   * A custom replacer function for JSON serialization.
+   */
+  replacer: (this: unknown, key: string, value: unknown) => unknown;
+}
+
+/**
+ * Options for configuring a cookie.
+ */
+export interface CookieOptions {
+  path?: string;
+  expires?: Date;
+  domain?: string;
+  maxAge?: number;
+  secure?: boolean;
+  httpOnly?: boolean;
+  sameSite?: CookieSameSite;
+}
 
 /**
  * Represents the core HTTP config options for the application.
@@ -115,20 +144,7 @@ export interface HttpConfig {
       /**
        * JSON-related configuration options.
        */
-      json: {
-        /**
-         * The number of spaces to use for formatting JSON output.
-         */
-        spaces: string;
-        /**
-         * Whether to escape HTML characters in JSON output.
-         */
-        escape: string;
-        /**
-         * A custom replacer function for JSON serialization.
-         */
-        replacer: Function ;
-      };
+      json: HttpJsonConfig;
       /**
        * File upload and response configuration options.
        */
@@ -172,7 +188,7 @@ export interface HttpConfig {
         /**
          * A custom function for generating ETags.
          */
-        function: (() => string) | null;
+        function?: (content: string, encoding: Encoding) => string;
       };
       /**
        * Cross-Origin Resource Sharing (CORS) configuration options.
@@ -219,7 +235,7 @@ export const http: HttpConfig = {
       },
       json: {
         spaces: '',
-        escape: '',
+        escape: true,
         replacer: () => {},
       },
       files: {
@@ -235,7 +251,7 @@ export const http: HttpConfig = {
         offset: 1,
       },
       etag: {
-        function: null,
+        function: undefined,
       },
       cors: {
         origin: [],

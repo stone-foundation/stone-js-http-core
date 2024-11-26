@@ -1,6 +1,7 @@
 import { parse } from 'cookie';
-import { Cookie, CookieOptions } from './Cookie';
+import { Cookie } from './Cookie';
 import { deserializeCookieValue } from './utils';
+import { CookieOptions } from '../options/HttpConfig';
 
 /**
  * Class representing a collection of Cookies.
@@ -17,7 +18,7 @@ export class CookieCollection {
    * @param options - Cookies options.
    * @param secret - Secret value to sign and unsign cookies.
    */
-  static create(cookie: string, options: CookieOptions = {}, secret?: string): CookieCollection {
+  static create(cookie?: string, options: CookieOptions = {}, secret?: string): CookieCollection {
     return new this(cookie, options, secret);
   }
 
@@ -28,7 +29,7 @@ export class CookieCollection {
    * @param options - Cookies options.
    * @param secret - Secret value to sign and unsign cookies.
    */
-  protected constructor(cookie: string, options: CookieOptions = {}, secret?: string) {
+  protected constructor(cookie?: string, options: CookieOptions = {}, secret?: string) {
     this.secret = secret;
     this.options = options;
     this.cookies = this.parse(cookie);
@@ -164,7 +165,7 @@ export class CookieCollection {
    *
    * @param cookie - String cookie from header.
    */
-  private parse(cookie: string): Map<string, Cookie> {
+  private parse(cookie?: string): Map<string, Cookie> {
     if (typeof cookie !== 'string') { return new Map(); }
 
     return new Map(

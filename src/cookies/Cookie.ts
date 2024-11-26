@@ -1,27 +1,6 @@
 import { serialize } from 'cookie';
+import { CookieOptions } from '../options/HttpConfig';
 import { isCookieValueSerialized, isCookieValueSigned, signCookieValue } from './utils';
-
-/**
- * Options for configuring a cookie.
- */
-export interface CookieOptions {
-  path?: string;
-  expires?: Date;
-  domain?: string;
-  maxAge?: number;
-  secure?: boolean;
-  httpOnly?: boolean;
-  sameSite?: CookieSameSite;
-}
-
-/**
- * SameSite options for the cookie.
- */
-export enum CookieSameSite {
-  Lax = 'lax',
-  None = 'none',
-  Strict = 'strict',
-}
 
 /**
  * Class representing a Cookie.

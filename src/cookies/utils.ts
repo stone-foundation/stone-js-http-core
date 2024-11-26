@@ -1,6 +1,7 @@
+import { Cookie } from './Cookie';
 import { sign, unsign } from 'cookie-signature';
 import { CookieError } from "../errors/CookieError";
-import { Cookie, CookieOptions } from './Cookie';
+import { CookieOptions } from '../options/HttpConfig';
 
 /**
  * Check if the value is serialized.
