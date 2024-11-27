@@ -89,7 +89,7 @@
     "@types/fresh": "^0.5.2",
     "@types/lodash-es": "^4.17.12",
     "@types/mime": "^3.0.4",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.10.0",
     "@types/range-parser": "^1.2.7",
     "@types/send": "^0.17.4",
     "@types/statuses": "^2.0.5",
