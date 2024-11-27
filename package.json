@@ -50,7 +50,7 @@
     "@stone-js/core": "^0.0.31"
   },
   "dependencies": {
-    "@stone-js/pipeline": "^0.0.45",
+    "@stone-js/pipeline": "^0.0.46",
     "@types/busboy": "^1.5.4",
     "@types/bytes": "^3.1.4",
     "@types/content-disposition": "^0.5.8",
