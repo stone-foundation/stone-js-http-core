@@ -1,15 +1,15 @@
-import { parse } from 'cookie';
-import { Cookie } from './Cookie';
-import { deserializeCookieValue } from './utils';
-import { CookieOptions } from '../options/HttpConfig';
+import { parse } from 'cookie'
+import { Cookie } from './Cookie'
+import { deserializeCookieValue } from './utils'
+import { CookieOptions } from '../options/HttpConfig'
 
 /**
  * Class representing a collection of Cookies.
  */
 export class CookieCollection {
-  private secret?: string;
-  private options: CookieOptions;
-  private cookies: Map<string, Cookie>;
+  private secret?: string
+  private options: CookieOptions
+  private readonly cookies: Map<string, Cookie>
 
   /**
    * Create a CookieCollection.
@@ -18,8 +18,8 @@ export class CookieCollection {
    * @param options - Cookies options.
    * @param secret - Secret value to sign and unsign cookies.
    */
-  static create(cookie?: string, options: CookieOptions = {}, secret?: string): CookieCollection {
-    return new this(cookie, options, secret);
+  static create (cookie?: string, options: CookieOptions = {}, secret?: string): CookieCollection {
+    return new this(cookie, options, secret)
   }
 
   /**
@@ -29,10 +29,10 @@ export class CookieCollection {
    * @param options - Cookies options.
    * @param secret - Secret value to sign and unsign cookies.
    */
-  protected constructor(cookie?: string, options: CookieOptions = {}, secret?: string) {
-    this.secret = secret;
-    this.options = options;
-    this.cookies = this.parse(cookie);
+  protected constructor (cookie?: string, options: CookieOptions = {}, secret?: string) {
+    this.secret = secret
+    this.options = options
+    this.cookies = this.parse(cookie)
   }
 
   /**
@@ -42,9 +42,9 @@ export class CookieCollection {
    * @param value - Cookie value.
    * @param options - Cookie options.
    */
-  add(name: string, value: unknown, options: CookieOptions = {}): this {
-    this.cookies.set(name, Cookie.create(name, value, { ...this.options, ...options }));
-    return this;
+  add (name: string, value: unknown, options: CookieOptions = {}): this {
+    this.cookies.set(name, Cookie.create(name, value, { ...this.options, ...options }))
+    return this
   }
 
   /**
@@ -54,12 +54,12 @@ export class CookieCollection {
    * @param value - New cookie value.
    * @param options - Cookie options.
    */
-  update(name: string, value: unknown, options: CookieOptions = {}): this {
+  update (name: string, value: unknown, options: CookieOptions = {}): this {
     const cookie = this.cookies.get(name)
     if (cookie !== undefined) {
-      this.cookies.set(name, cookie.cloneWith(value, options));
+      this.cookies.set(name, cookie.cloneWith(value, options))
     }
-    return this;
+    return this
   }
 
   /**
@@ -68,8 +68,8 @@ export class CookieCollection {
    * @param name - Cookie name.
    * @param fallback - Fallback value if the cookie does not exist.
    */
-  get(name: string, fallback?: Cookie): Cookie | undefined {
-    return this.cookies.get(name) ?? fallback;
+  get (name: string, fallback?: Cookie): Cookie | undefined {
+    return this.cookies.get(name) ?? fallback
   }
 
   /**
@@ -77,8 +77,8 @@ export class CookieCollection {
    *
    * @param name - Cookie name.
    */
-  has(name: string): boolean {
-    return this.cookies.has(name);
+  has (name: string): boolean {
+    return this.cookies.has(name)
   }
 
   /**
@@ -87,13 +87,13 @@ export class CookieCollection {
    * @param name - Cookie name to remove.
    * @param force - If true, remove only from collection without setting expiry.
    */
-  remove(name: string, force: boolean = false): this {
+  remove (name: string, force: boolean = false): this {
     if (force) {
-      this.cookies.delete(name);
+      this.cookies.delete(name)
     } else {
-      this.update(name, '', { expires: new Date(1) });
+      this.update(name, '', { expires: new Date(1) })
     }
-    return this;
+    return this
   }
 
   /**
@@ -101,18 +101,18 @@ export class CookieCollection {
    *
    * @param serialize - If true, serialize the cookies.
    */
-  all<S extends boolean>(serialize: S = false as S): S extends true ? Array<string> : Record<string, unknown> {
-    const values = Array.from(this.cookies.values());
+  all<S extends boolean>(serialize: S = false as S): S extends true ? string[] : Record<string, unknown> {
+    const values = Array.from(this.cookies.values())
     return (serialize
       ? values.map((v) => v.serialize(this.secret))
-      : Object.fromEntries(values.map((v) => [v.name, v.value]))) as S extends true ? Array<string> : Record<string, unknown>;
+      : Object.fromEntries(values.map((v) => [v.name, v.value]))) as S extends true ? string[] : Record<string, unknown>
   }
 
   /**
    * Check if the collection is empty.
    */
-  isEmpty(): boolean {
-    return this.cookies.size === 0;
+  isEmpty (): boolean {
+    return this.cookies.size === 0
   }
 
   /**
@@ -120,13 +120,13 @@ export class CookieCollection {
    *
    * @param force - If true, remove only from collection without setting expiry.
    */
-  clear(force: boolean = false): this {
+  clear (force: boolean = false): this {
     if (force) {
-      this.cookies.clear();
+      this.cookies.clear()
     } else {
-      this.cookies.forEach((v) => this.update(v.name, '', { expires: new Date(1) }));
+      this.cookies.forEach((v) => this.update(v.name, '', { expires: new Date(1) }))
     }
-    return this;
+    return this
   }
 
   /**
@@ -134,9 +134,9 @@ export class CookieCollection {
    *
    * @param value - Whether the cookies are secure.
    */
-  secure(value: boolean = false): this {
-    this.cookies.forEach((v) => v.setSecure(value));
-    return this;
+  secure (value: boolean = false): this {
+    this.cookies.forEach((v) => v.setSecure(value))
+    return this
   }
 
   /**
@@ -144,9 +144,9 @@ export class CookieCollection {
    *
    * @param value - Secret value.
    */
-  setSecret(value: string): this {
-    this.secret = value;
-    return this;
+  setSecret (value: string): this {
+    this.secret = value
+    return this
   }
 
   /**
@@ -154,10 +154,10 @@ export class CookieCollection {
    *
    * @param options - Cookie options.
    */
-  setOptions(options: CookieOptions): this {
-    this.options = options;
-    this.cookies.forEach((cookie, name) => this.cookies.set(name, cookie.cloneWith(cookie.value, options)));
-    return this;
+  setOptions (options: CookieOptions): this {
+    this.options = options
+    this.cookies.forEach((cookie, name) => this.cookies.set(name, cookie.cloneWith(cookie.value, options)))
+    return this
   }
 
   /**
@@ -165,13 +165,13 @@ export class CookieCollection {
    *
    * @param cookie - String cookie from header.
    */
-  private parse(cookie?: string): Map<string, Cookie> {
-    if (typeof cookie !== 'string') { return new Map(); }
+  private parse (cookie?: string): Map<string, Cookie> {
+    if (typeof cookie !== 'string') { return new Map() }
 
     return new Map(
       Object
         .entries(parse(cookie))
         .map(([name, value]) => [name, deserializeCookieValue(name, value, this.options, this.secret)])
-    );
+    )
   }
 }

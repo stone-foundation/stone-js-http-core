@@ -1,8 +1,8 @@
-import mime from 'mime';
-import { filesize } from 'filesize';
-import { createHash } from 'node:crypto';
-import { FileError } from '../errors/FileError';
-import { basename, dirname, extname, isAbsolute, join, resolve } from 'node:path';
+import mime from 'mime'
+import { filesize } from 'filesize'
+import { createHash } from 'node:crypto'
+import { FileError } from '../errors/FileError'
+import { basename, dirname, extname, isAbsolute, join, resolve } from 'node:path'
 import {
   statSync,
   existsSync,
@@ -14,7 +14,7 @@ import {
   renameSync,
   chmodSync,
   rmSync
-} from 'node:fs';
+} from 'node:fs'
 
 /**
  * Class representing a File.
@@ -22,8 +22,8 @@ import {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class File {
-  private readonly path: string;
-  private stats?: ReturnType<typeof statSync>;
+  private readonly path: string
+  private stats?: ReturnType<typeof statSync>
 
   /**
    * Create a File.
@@ -42,10 +42,10 @@ export class File {
    * @param path - The file path.
    * @param checkPath - Whether to check if the file path is valid.
    */
-  protected constructor(path: string, checkPath: boolean = true) {
-    this.path = path;
+  protected constructor (path: string, checkPath: boolean = true) {
+    this.path = path
     if (checkPath) {
-      this.validateFile();
+      this.validateFile()
     }
   }
 
@@ -54,11 +54,11 @@ export class File {
    *
    * @returns The content of the file as a string.
    */
-  getContent(): string {
+  getContent (): string {
     if (!this.isReadable()) {
-      throw new FileError(`Could not get the content of the file (${this.path}).`);
+      throw new FileError(`Could not get the content of the file (${this.path}).`)
     }
-    return readFileSync(this.path, 'utf-8');
+    return readFileSync(this.path, 'utf-8')
   }
 
   /**
@@ -67,13 +67,13 @@ export class File {
    * @param content - The content to write to the file.
    * @returns The current File instance.
    */
-  write(content: string): this {
+  write (content: string): this {
     if (!this.isWritable()) {
-      throw new FileError(`Could not write content to this file (${this.path}).`);
+      throw new FileError(`Could not write content to this file (${this.path}).`)
     }
 
-    writeFileSync(this.path, content, 'utf-8');
-    return this;
+    writeFileSync(this.path, content, 'utf-8')
+    return this
   }
 
   /**
@@ -82,8 +82,8 @@ export class File {
    * @param callback - The callback function to modify the file content.
    * @returns The current File instance.
    */
-  edit(callback: (content: string) => string): this {
-    return this.write(callback(this.getContent()));
+  edit (callback: (content: string) => string): this {
+    return this.write(callback(this.getContent()))
   }
 
   /**
@@ -94,17 +94,17 @@ export class File {
    * @returns The new File instance representing the moved file.
    * @throws FileError if the file could not be moved.
    */
-  move(directory: string, name?: string): File {
-    const target = this.getTargetFile(directory, name);
+  move (directory: string, name?: string): File {
+    const target = this.getTargetFile(directory, name)
 
     try {
-      renameSync(this.getPath(), target.getPath());
+      renameSync(this.getPath(), target.getPath())
     } catch (error) {
-      throw new FileError(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`);
+      throw new FileError(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`)
     }
 
-    chmodSync(target.getPath(), 0o666);
-    return target;
+    chmodSync(target.getPath(), 0o666)
+    return target
   }
 
   /**
@@ -113,13 +113,13 @@ export class File {
    * @param force - Whether to forcefully remove the file.
    * @returns The current File instance.
    */
-  remove(force: boolean = false): this {
+  remove (force: boolean = false): this {
     try {
-      rmSync(this.path, { force });
+      rmSync(this.path, { force })
     } catch (error) {
-      throw new FileError(`Could not remove this file (${this.path}) (${error}).`);
+      throw new FileError(`Could not remove this file (${this.path}) (${error}).`)
     }
-    return this;
+    return this
   }
 
   /**
@@ -128,8 +128,8 @@ export class File {
    * @param algo - The hashing algorithm to use.
    * @returns The hashed content of the file as a hex string.
    */
-  getHashedContent(algo: string = 'sha256'): string {
-    return createHash(algo).update(this.getContent(), 'utf-8').digest('hex');
+  getHashedContent (algo: string = 'sha256'): string {
+    return createHash(algo).update(this.getContent(), 'utf-8').digest('hex')
   }
 
   /**
@@ -138,9 +138,9 @@ export class File {
    * @param formatted - Whether to return the file size as a formatted string.
    * @returns The file size as a string or number.
    */
-  getSize(formatted: boolean = false): string | number | bigint | undefined {
-    const size = this.getStats()?.size;
-    return size !== undefined && formatted ? filesize(Number(size)) : size;
+  getSize (formatted: boolean = false): string | number | bigint | undefined {
+    const size = this.getStats()?.size
+    return size !== undefined && formatted ? filesize(Number(size)) : size
   }
 
   /**
@@ -149,8 +149,8 @@ export class File {
    * @param fallback - A fallback MIME type if detection fails.
    * @returns The MIME type of the file.
    */
-  getMimeType(fallback?: string): string | undefined {
-    return mime.getType(this.path) ?? fallback;
+  getMimeType (fallback?: string): string | undefined {
+    return mime.getType(this.path) ?? fallback
   }
 
   /**
@@ -158,8 +158,8 @@ export class File {
    *
    * @returns The directory name.
    */
-  getDirname(): string {
-    return dirname(this.path);
+  getDirname (): string {
+    return dirname(this.path)
   }
 
   /**
@@ -167,8 +167,8 @@ export class File {
    *
    * @returns The file path.
    */
-  getPath(): string {
-    return this.path;
+  getPath (): string {
+    return this.path
   }
 
   /**
@@ -176,8 +176,8 @@ export class File {
    *
    * @returns The encoded file path.
    */
-  getEncodedPath(): string {
-    return encodeURI(this.getPath());
+  getEncodedPath (): string {
+    return encodeURI(this.getPath())
   }
 
   /**
@@ -186,8 +186,8 @@ export class File {
  * @param root - The root directory to resolve from.
  * @returns The absolute file path.
  */
-  getAbsolutePath(root: string = ''): string {
-    return resolve(root, this.path);
+  getAbsolutePath (root: string = ''): string {
+    return resolve(root, this.path)
   }
 
   /**
@@ -196,8 +196,8 @@ export class File {
    * @param root - The root directory to resolve from.
    * @returns The encoded absolute file path.
    */
-  getEncodedAbsolutePath(root: string = ''): string {
-    return encodeURI(this.getAbsolutePath(root));
+  getEncodedAbsolutePath (root: string = ''): string {
+    return encodeURI(this.getAbsolutePath(root))
   }
 
   /**
@@ -206,8 +206,8 @@ export class File {
    * @param exclude - The file extension to exclude from the basename.
    * @returns The basename of the file.
    */
-  getBasename(exclude: string = ''): string {
-    return basename(this.path, exclude);
+  getBasename (exclude: string = ''): string {
+    return basename(this.path, exclude)
   }
 
   /**
@@ -215,8 +215,8 @@ export class File {
    *
    * @returns The filename of the file.
    */
-  getFilename(): string {
-    return this.getBasename();
+  getFilename (): string {
+    return this.getBasename()
   }
 
   /**
@@ -224,8 +224,8 @@ export class File {
    *
    * @returns The name of the file.
    */
-  getName(): string {
-    return this.getBasename(this.getExtension());
+  getName (): string {
+    return this.getBasename(this.getExtension())
   }
 
   /**
@@ -233,8 +233,8 @@ export class File {
    *
    * @returns The file extension.
    */
-  getExtension(): string {
-    return extname(this.path);
+  getExtension (): string {
+    return extname(this.path)
   }
 
   /**
@@ -242,8 +242,8 @@ export class File {
    *
    * @returns The last access time in milliseconds.
    */
-  getATime(): number | bigint | undefined {
-    return this.getStats()?.atimeMs;
+  getATime (): number | bigint | undefined {
+    return this.getStats()?.atimeMs
   }
 
   /**
@@ -251,8 +251,8 @@ export class File {
    *
    * @returns The last modified time in milliseconds.
    */
-  getMTime(): number | bigint | undefined {
-    return this.getStats()?.mtimeMs;
+  getMTime (): number | bigint | undefined {
+    return this.getStats()?.mtimeMs
   }
 
   /**
@@ -260,8 +260,8 @@ export class File {
    *
    * @returns The created time in milliseconds.
    */
-  getCTime(): number | bigint | undefined {
-    return this.getStats()?.ctimeMs;
+  getCTime (): number | bigint | undefined {
+    return this.getStats()?.ctimeMs
   }
 
   /**
@@ -269,8 +269,8 @@ export class File {
    *
    * @returns True if the file exists, otherwise false.
    */
-  exists(): boolean {
-    return existsSync(this.path);
+  exists (): boolean {
+    return existsSync(this.path)
   }
 
   /**
@@ -278,8 +278,8 @@ export class File {
    *
    * @returns True if the file is a directory, otherwise false.
    */
-  isDir(): boolean {
-    return this.getStats()?.isDirectory() ?? false;
+  isDir (): boolean {
+    return this.getStats()?.isDirectory() ?? false
   }
 
   /**
@@ -287,8 +287,8 @@ export class File {
    *
    * @returns True if the file is a regular file, otherwise false.
    */
-  isFile(): boolean {
-    return this.getStats()?.isFile() ?? false;
+  isFile (): boolean {
+    return this.getStats()?.isFile() ?? false
   }
 
   /**
@@ -296,8 +296,8 @@ export class File {
    *
    * @returns True if the file is a symbolic link, otherwise false.
    */
-  isLink(): boolean {
-    return this.getStats()?.isSymbolicLink() ?? false;
+  isLink (): boolean {
+    return this.getStats()?.isSymbolicLink() ?? false
   }
 
   /**
@@ -305,8 +305,8 @@ export class File {
    *
    * @returns True if the file path is absolute, otherwise false.
    */
-  isAbsolute(): boolean {
-    return isAbsolute(this.path);
+  isAbsolute (): boolean {
+    return isAbsolute(this.path)
   }
 
   /**
@@ -314,12 +314,12 @@ export class File {
    *
    * @returns True if the file is writable, otherwise false.
    */
-  isWritable(): boolean {
+  isWritable (): boolean {
     try {
-      accessSync(this.path, constants.W_OK);
-      return true;
+      accessSync(this.path, constants.W_OK)
+      return true
     } catch (_) {
-      return false;
+      return false
     }
   }
 
@@ -328,12 +328,12 @@ export class File {
    *
    * @returns True if the file is readable, otherwise false.
    */
-  isReadable(): boolean {
+  isReadable (): boolean {
     try {
-      accessSync(this.path, constants.R_OK);
-      return true;
+      accessSync(this.path, constants.R_OK)
+      return true
     } catch (e) {
-      return false;
+      return false
     }
   }
 
@@ -342,12 +342,12 @@ export class File {
    *
    * @returns True if the file is executable, otherwise false.
    */
-  isExecutable(): boolean {
+  isExecutable (): boolean {
     try {
-      accessSync(this.path, constants.X_OK);
-      return true;
+      accessSync(this.path, constants.X_OK)
+      return true
     } catch (_) {
-      return false;
+      return false
     }
   }
 
@@ -356,11 +356,11 @@ export class File {
    *
    * @returns The file statistics object.
    */
-  private getStats(): ReturnType<typeof statSync> {
+  private getStats (): ReturnType<typeof statSync> {
     if (this.stats === undefined) {
-      this.stats = statSync(this.path);
+      this.stats = statSync(this.path)
     }
-    return this.stats;
+    return this.stats
   }
 
   /**
@@ -368,9 +368,9 @@ export class File {
    *
    * @throws FileError if the file does not exist.
    */
-  private validateFile(): void {
+  private validateFile (): void {
     if (!this.exists()) {
-      throw new FileError(`File not found. (${this.path})`);
+      throw new FileError(`File not found. (${this.path})`)
     }
   }
 
@@ -382,21 +382,21 @@ export class File {
    * @returns A new File instance representing the target file.
    * @throws FileError if the directory cannot be created or is not writable.
    */
-  private getTargetFile(directory: string, name: string | null = null): File {
+  private getTargetFile (directory: string, name: string | null = null): File {
     if (!existsSync(directory)) {
       try {
-        mkdirSync(directory, { recursive: true });
+        mkdirSync(directory, { recursive: true })
       } catch (_) {
-        throw new FileError(`Unable to create the "${directory}" directory.`);
+        throw new FileError(`Unable to create the "${directory}" directory.`)
       }
     } else {
       try {
-        accessSync(directory, constants.W_OK);
+        accessSync(directory, constants.W_OK)
       } catch (_) {
-        throw new FileError(`Unable to write in the "${directory}" directory.`);
+        throw new FileError(`Unable to write in the "${directory}" directory.`)
       }
     }
 
-    return new File(join(directory, name ?? this.getFilename()), false);
+    return new File(join(directory, name ?? this.getFilename()), false)
   }
 }

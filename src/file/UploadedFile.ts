@@ -1,7 +1,7 @@
-import mime from 'mime';
-import { File } from './File';
-import { basename, extname } from 'node:path';
-import { FileError } from '../errors/FileError';
+import mime from 'mime'
+import { File } from './File'
+import { basename, extname } from 'node:path'
+import { FileError } from '../errors/FileError'
 
 /**
  * Class representing an UploadedFile.
@@ -9,8 +9,8 @@ import { FileError } from '../errors/FileError';
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class UploadedFile extends File {
-  private readonly mimeType: string;
-  private readonly originalName: string;
+  private readonly mimeType: string
+  private readonly originalName: string
 
   /**
    * Create an UploadedFile.
@@ -20,8 +20,8 @@ export class UploadedFile extends File {
    * @param mimeType - The MIME type of the file.
    * @returns A new UploadedFile instance.
    */
-  static createUploadedFile(path: string, originalName: string, mimeType?: string): UploadedFile {
-    return new this(path, originalName, mimeType);
+  static createFile (path: string, originalName: string, mimeType?: string): UploadedFile {
+    return new this(path, originalName, mimeType)
   }
 
   /**
@@ -31,10 +31,10 @@ export class UploadedFile extends File {
    * @param originalName - The original name of the uploaded file.
    * @param mimeType - The MIME type of the file.
    */
-  constructor(path: string, originalName: string, mimeType?: string) {
-    super(path);
-    this.originalName = basename(originalName);
-    this.mimeType = mimeType ?? 'application/octet-stream';
+  constructor (path: string, originalName: string, mimeType?: string) {
+    super(path)
+    this.originalName = basename(originalName)
+    this.mimeType = mimeType ?? 'application/octet-stream'
   }
 
   /**
@@ -42,8 +42,8 @@ export class UploadedFile extends File {
    *
    * @returns The original name of the file.
    */
-  getClientOriginalName(): string {
-    return this.originalName;
+  getClientOriginalName (): string {
+    return this.originalName
   }
 
   /**
@@ -51,8 +51,8 @@ export class UploadedFile extends File {
    *
    * @returns The original file extension.
    */
-  getClientOriginalExtension(): string {
-    return extname(this.originalName);
+  getClientOriginalExtension (): string {
+    return extname(this.originalName)
   }
 
   /**
@@ -60,8 +60,8 @@ export class UploadedFile extends File {
    *
    * @returns The MIME type of the file.
    */
-  getClientMimeType(): string {
-    return this.mimeType;
+  getClientMimeType (): string {
+    return this.mimeType
   }
 
   /**
@@ -69,8 +69,8 @@ export class UploadedFile extends File {
    *
    * @returns The guessed file extension.
    */
-  guessClientExtension(): string | undefined {
-    return mime.getExtension(this.getClientMimeType()) ?? undefined;
+  guessClientExtension (): string | undefined {
+    return mime.getExtension(this.getClientMimeType()) ?? undefined
   }
 
   /**
@@ -78,8 +78,8 @@ export class UploadedFile extends File {
    *
    * @returns True if the file exists, otherwise false.
    */
-  isValid(): boolean {
-    return this.exists();
+  isValid (): boolean {
+    return this.exists()
   }
 
   /**
@@ -90,11 +90,11 @@ export class UploadedFile extends File {
    * @returns The current UploadedFile instance.
    * @throws FileError if the file is not valid.
    */
-  move(directory: string, name?: string): this {
+  move (directory: string, name?: string): this {
     if (this.isValid()) {
-      return super.move(directory, name) as this;
+      return super.move(directory, name) as this
     }
 
-    throw new FileError('No file was uploaded.');
+    throw new FileError('No file was uploaded.')
   }
 }

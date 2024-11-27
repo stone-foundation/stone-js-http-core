@@ -1,14 +1,14 @@
-import mime from 'mime';
-import { filesize } from 'filesize';
-import { createHash } from 'node:crypto';
-import { resolve, join } from 'node:path';
-import { File } from '../../src/file/File';
-import { mkdirSync, statSync, writeFileSync, renameSync, rmSync, accessSync, existsSync, readFileSync } from 'node:fs';
+import mime from 'mime'
+import { filesize } from 'filesize'
+import { createHash } from 'node:crypto'
+import { resolve, join } from 'node:path'
+import { File } from '../../src/file/File'
+import { mkdirSync, statSync, writeFileSync, renameSync, rmSync, accessSync, existsSync, readFileSync } from 'node:fs'
 
 const mockHash = {
   update: vi.fn().mockReturnThis(),
-  digest: vi.fn().mockReturnValue('hashed-content'),
-};
+  digest: vi.fn().mockReturnValue('hashed-content')
+}
 
 vi.mock('node:fs', () => ({
   statSync: vi.fn(() => ({
@@ -24,50 +24,50 @@ vi.mock('node:fs', () => ({
   constants: {
     W_OK: 2,
     R_OK: 4,
-    X_OK: 1,
+    X_OK: 1
   }
-}));
+}))
 vi.mock('node:crypto', () => ({
-  createHash: vi.fn(() => mockHash),
-}));
-vi.mock('node:path');
-vi.mock('mime');
-vi.mock('filesize', () => ({ filesize: vi.fn(() => '12.3 kB') }));
+  createHash: vi.fn(() => mockHash)
+}))
+vi.mock('node:path')
+vi.mock('mime')
+vi.mock('filesize', () => ({ filesize: vi.fn(() => '12.3 kB') }))
 
 /**
  * Unit tests for the File class (Part 2).
  */
 describe('File', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
-  });
+    vi.clearAllMocks()
+  })
 
   describe('getHashedContent', () => {
     it('should return the hashed content of the file', () => {
-      const file = File.create('/path/to/file.txt', false);
-      const hashedContent = file.getHashedContent('sha256');
+      const file = File.create('/path/to/file.txt', false)
+      const hashedContent = file.getHashedContent('sha256')
 
-      expect(createHash).toHaveBeenCalledWith('sha256');
-      expect(mockHash.update).toHaveBeenCalledWith('File content', 'utf-8');
-      expect(mockHash.digest).toHaveBeenCalledWith('hex');
-      expect(hashedContent).toBe('hashed-content');
-    });
-  });
+      expect(createHash).toHaveBeenCalledWith('sha256')
+      expect(mockHash.update).toHaveBeenCalledWith('File content', 'utf-8')
+      expect(mockHash.digest).toHaveBeenCalledWith('hex')
+      expect(hashedContent).toBe('hashed-content')
+    })
+  })
 
   describe('getSize', () => {
     it('should return the file size as a number', () => {
-      const file = File.create('/path/to/file.txt', false);
-      const size = file.getSize();
-      expect(size).toBe(12345);
-    });
+      const file = File.create('/path/to/file.txt', false)
+      const size = file.getSize()
+      expect(size).toBe(12345)
+    })
 
     it('should return the file size as a formatted string', () => {
-      const file = File.create('/path/to/file.txt', false);
-      const formattedSize = file.getSize(true);
-      expect(filesize).toHaveBeenCalledWith(12345);
-      expect(formattedSize).toBe('12.3 kB');
-    });
-  });
+      const file = File.create('/path/to/file.txt', false)
+      const formattedSize = file.getSize(true)
+      expect(filesize).toHaveBeenCalledWith(12345)
+      expect(formattedSize).toBe('12.3 kB')
+    })
+  })
 
   // describe('getMimeType', () => {
   //   it('should return the MIME type of the file', () => {
@@ -132,4 +132,4 @@ describe('File', () => {
   //     expect(file.isDir()).toBe(false);
   //   });
   // });
-});
+})

@@ -1,14 +1,14 @@
-import statuses from 'statuses';
-import { ErrorOptions, RuntimeError } from '@stone-js/core';
+import statuses from 'statuses'
+import { ErrorOptions, RuntimeError } from '@stone-js/core'
 
 /**
  * Represents options for configuring an error.
  */
 export interface HttpErrorOptions extends ErrorOptions {
-  headers?: Map<string, string> | Headers;
-  statusCode?: number;
-  statusMessage?: string;
-  body?: unknown;
+  headers?: Map<string, string> | Headers
+  statusCode?: number
+  statusMessage?: string
+  body?: unknown
 }
 
 /**
@@ -17,10 +17,10 @@ export interface HttpErrorOptions extends ErrorOptions {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class HttpError extends RuntimeError {
-  readonly body: unknown;
-  readonly headers: Headers;
-  readonly statusCode: number;
-  readonly statusMessage: string;
+  readonly body: unknown
+  readonly headers: Headers
+  readonly statusCode: number
+  readonly statusMessage: string
 
   /**
    * Create an HttpError.
@@ -30,14 +30,14 @@ export class HttpError extends RuntimeError {
    * @param message - The message to log.
    * @param options - The error options.
    */
-  constructor(message: string, options: HttpErrorOptions = {}) {
-    super(message, options);
+  constructor (message: string, options: HttpErrorOptions = {}) {
+    super(message, options)
 
-    this.name = 'HttpError';
-    this.body = options.body;
-    this.statusCode = options.statusCode ?? 500;
-    this.statusMessage = options.statusMessage ?? statuses.message[this.statusCode] ?? 'Unknown Status';
-    this.headers = options.headers instanceof Map ? HttpError.convertHeaders(options.headers) : options.headers ?? new Headers();
+    this.name = 'HttpError'
+    this.body = options.body
+    this.statusCode = options.statusCode ?? 500
+    this.statusMessage = options.statusMessage ?? statuses.message[this.statusCode] ?? 'Unknown Status'
+    this.headers = options.headers instanceof Map ? HttpError.convertHeaders(options.headers) : options.headers ?? new Headers()
   }
 
   /**
@@ -46,10 +46,10 @@ export class HttpError extends RuntimeError {
    * @param headersMap - The headers map to convert.
    * @returns A Headers object.
    */
-  private static convertHeaders(headersMap: Map<string, string>): Headers {
+  private static convertHeaders (headersMap: Map<string, string>): Headers {
     return headersMap.entries().reduce((headers, [value, key]) => {
       headers.append(key, value)
-      return headers;
-    }, new Headers());
+      return headers
+    }, new Headers())
   }
 }

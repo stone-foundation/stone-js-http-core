@@ -1,14 +1,14 @@
-import { serialize } from 'cookie';
-import { CookieOptions } from '../options/HttpConfig';
-import { isCookieValueSerialized, isCookieValueSigned, signCookieValue } from './utils';
+import { serialize } from 'cookie'
+import { CookieOptions } from '../options/HttpConfig'
+import { isCookieValueSerialized, isCookieValueSigned, signCookieValue } from './utils'
 
 /**
  * Class representing a Cookie.
  */
 export class Cookie {
-  readonly name: string;
-  readonly value: unknown;
-  readonly options: CookieOptions;
+  readonly name: string
+  readonly value: unknown
+  readonly options: CookieOptions
 
   /**
    * Create a Cookie.
@@ -16,8 +16,8 @@ export class Cookie {
    * @param value - Cookie value.
    * @param options - Cookie options.
    */
-  static create(name: string, value: unknown, options: CookieOptions = {}): Cookie {
-    return new this(name, value, options);
+  static create (name: string, value: unknown, options: CookieOptions = {}): Cookie {
+    return new this(name, value, options)
   }
 
   /**
@@ -25,46 +25,46 @@ export class Cookie {
    * @param value - Cookie value.
    * @param options - Cookie options.
    */
-  protected constructor(name: string, value: unknown, options: CookieOptions = {}) {
-    this.name = name;
-    this.value = value;
-    this.options = options;
+  protected constructor (name: string, value: unknown, options: CookieOptions = {}) {
+    this.name = name
+    this.value = value
+    this.options = options
   }
 
   /**
    * Set expiration date for the cookie.
    * @param value - Expiration date.
    */
-  setExpires(value: Date): this {
-    this.options.expires = value;
-    return this;
+  setExpires (value: Date): this {
+    this.options.expires = value
+    return this
   }
 
   /**
    * Set secure flag for the cookie.
    * @param value - Whether the cookie is secure.
    */
-  setSecure(value: boolean): this {
-    this.options.secure = value;
-    return this;
+  setSecure (value: boolean): this {
+    this.options.secure = value
+    return this
   }
 
   /**
    * Serialize the cookie value.
    * @param secret - Optional secret for signing.
    */
-  serialize(secret?: string): string {
-    let value = this.value;
+  serialize (secret?: string): string {
+    let value = this.value
 
     if (!isCookieValueSerialized(value)) {
-      value = typeof value === 'object' ? `$$j$$:${JSON.stringify(value)}` : String(value);
+      value = typeof value === 'object' ? `$$j$$:${JSON.stringify(value)}` : String(value)
     }
 
     if (!isCookieValueSigned(value) && secret !== undefined) {
-      value = signCookieValue(value, secret);
+      value = signCookieValue(value, secret)
     }
 
-    return serialize(this.name, String(value), this.options);
+    return serialize(this.name, String(value), this.options)
   }
 
   /**
@@ -73,7 +73,7 @@ export class Cookie {
    * @param options - New cookie options.
    * @returns A new cookie instance.
    */
-  cloneWith(value: unknown, options: CookieOptions = {}): Cookie {
-    return new Cookie(this.name, value, { ...this.options, ...options });
+  cloneWith (value: unknown, options: CookieOptions = {}): Cookie {
+    return new Cookie(this.name, value, { ...this.options, ...options })
   }
 }

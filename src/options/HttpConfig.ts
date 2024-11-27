@@ -1,68 +1,68 @@
-import { Encoding } from "node:crypto";
-import { CookieSameSite } from "../declarations";
-import { KernelMiddlewareConfig } from "@stone-js/core";
+import { Encoding } from 'node:crypto'
+import { CookieSameSite } from '../declarations'
+import { KernelMiddlewareConfig } from '@stone-js/core'
 
 export interface HttpCorsConfig {
   /**
    * The allowed origins for CORS requests.
    */
-  origin: string | string[];
+  origin: string | string[]
   /**
    * The allowed methods for CORS requests.
    */
-  methods: string | string[];
+  methods: string | string[]
   /**
    * The maximum age for preflight requests.
    */
-  maxAge: number | null;
+  maxAge: number | null
   /**
    * Whether credentials are allowed in CORS requests.
    */
-  credentials: boolean;
+  credentials: boolean
   /**
    * The headers that are exposed to the client in CORS responses.
    */
-  exposedHeaders: string | string[];
+  exposedHeaders: string | string[]
   /**
    * The headers that are allowed in CORS requests.
    */
-  allowedHeaders: string | string[];
+  allowedHeaders: string | string[]
   /**
    * The HTTP status code to use for successful preflight requests.
    */
-  successStatus: number;
+  successStatus: number
   /**
    * Whether to stop processing preflight requests.
    */
-  preflightStop: boolean;
+  preflightStop: boolean
 };
 
 export interface HttpJsonConfig {
   /**
    * The number of spaces to use for formatting JSON output.
    */
-  spaces: string;
+  spaces: string
   /**
    * Whether to escape HTML characters in JSON output.
    */
-  escape: boolean;
+  escape: boolean
   /**
    * A custom replacer function for JSON serialization.
    */
-  replacer: (this: unknown, key: string, value: unknown) => unknown;
+  replacer: (this: unknown, key: string, value: unknown) => unknown
 }
 
 /**
  * Options for configuring a cookie.
  */
 export interface CookieOptions {
-  path?: string;
-  expires?: Date;
-  domain?: string;
-  maxAge?: number;
-  secure?: boolean;
-  httpOnly?: boolean;
-  sameSite?: CookieSameSite;
+  path?: string
+  expires?: Date
+  domain?: string
+  maxAge?: number
+  secure?: boolean
+  httpOnly?: boolean
+  sameSite?: CookieSameSite
 }
 
 /**
@@ -84,16 +84,16 @@ export interface HttpConfig {
         /**
          * A list of trusted hostnames.
          */
-        trusted: string[];
+        trusted: string[]
         /**
          * A list of trusted host patterns.
          */
-        trustedPattern: string[];
+        trustedPattern: string[]
         /**
          * Whether only subdomains are allowed.
          */
-        onlySubdomain: boolean;
-      };
+        onlySubdomain: boolean
+      }
       /**
        * Proxy-related configuration options.
        */
@@ -101,12 +101,12 @@ export interface HttpConfig {
         /**
          * A list of trusted proxies.
          */
-        trusted: string[];
+        trusted: string[]
         /**
          * A list of untrusted proxies.
          */
-        untrusted: string[];
-      };
+        untrusted: string[]
+      }
       /**
        * Configuration for request body parsing.
        */
@@ -114,20 +114,20 @@ export interface HttpConfig {
         /**
          * The maximum size of the request body.
          */
-        limit: string;
+        limit: string
         /**
          * The content type of the request body.
          */
-        type: string;
+        type: string
         /**
          * The default character set for the request body.
          */
-        defaultCharset: string;
-      };
+        defaultCharset: string
+      }
       /**
        * Cache configuration options.
        */
-      cache: Record<string, any>;
+      cache: Record<string, any>
       /**
        * Cookie-related configuration options.
        */
@@ -135,16 +135,16 @@ export interface HttpConfig {
         /**
          * The secret used for signing cookies.
          */
-        secret: string;
+        secret: string
         /**
          * Additional cookie options.
          */
-        options: Record<string, any>;
-      };
+        options: Record<string, any>
+      }
       /**
        * JSON-related configuration options.
        */
-      json: HttpJsonConfig;
+      json: HttpJsonConfig
       /**
        * File upload and response configuration options.
        */
@@ -152,12 +152,12 @@ export interface HttpConfig {
         /**
          * Configuration for file uploads.
          */
-        upload: Record<string, any>;
+        upload: Record<string, any>
         /**
          * Configuration for file responses.
          */
-        response: Record<string, any>;
-      };
+        response: Record<string, any>
+      }
       /**
        * JSONP-related configuration options.
        */
@@ -169,9 +169,9 @@ export interface HttpConfig {
           /**
            * The name of the JSONP callback parameter.
            */
-          name: string;
-        };
-      };
+          name: string
+        }
+      }
       /**
        * Subdomain-related configuration options.
        */
@@ -179,8 +179,8 @@ export interface HttpConfig {
         /**
          * The offset to use when determining subdomains.
          */
-        offset: number;
-      };
+        offset: number
+      }
       /**
        * ETag-related configuration options.
        */
@@ -188,13 +188,13 @@ export interface HttpConfig {
         /**
          * A custom function for generating ETags.
          */
-        function?: (content: string, encoding: Encoding) => string;
-      };
+        function?: (content: string, encoding: Encoding) => string
+      }
       /**
        * Cross-Origin Resource Sharing (CORS) configuration options.
        */
-      cors: HttpCorsConfig;
-    };
+      cors: HttpCorsConfig
+    }
 
     /**
      * This interface defines the configuration for kernel-level options.
@@ -205,7 +205,7 @@ export interface HttpConfig {
        */
       middleware: Partial<KernelMiddlewareConfig>
     }
-  };
+  }
 }
 
 /**
@@ -217,41 +217,41 @@ export const http: HttpConfig = {
       hosts: {
         trusted: [],
         trustedPattern: [],
-        onlySubdomain: true,
+        onlySubdomain: true
       },
       proxies: {
         trusted: [],
-        untrusted: [],
+        untrusted: []
       },
       body: {
         limit: '100kb',
         type: 'text/plain',
-        defaultCharset: 'utf-8',
+        defaultCharset: 'utf-8'
       },
       cache: {},
       cookie: {
         secret: '',
-        options: {},
+        options: {}
       },
       json: {
         spaces: '',
         escape: true,
-        replacer: () => {},
+        replacer: () => {}
       },
       files: {
         upload: {},
-        response: {},
+        response: {}
       },
       jsonp: {
         callback: {
-          name: 'callback',
-        },
+          name: 'callback'
+        }
       },
       subdomain: {
-        offset: 1,
+        offset: 1
       },
       etag: {
-        function: undefined,
+        function: undefined
       },
       cors: {
         origin: [],
@@ -261,13 +261,13 @@ export const http: HttpConfig = {
         exposedHeaders: [],
         allowedHeaders: [],
         successStatus: 204,
-        preflightStop: false,
-      },
+        preflightStop: false
+      }
     },
     kernel: {
       middleware: {
-        event: [],
+        event: []
       }
     }
-  },
-};
+  }
+}
