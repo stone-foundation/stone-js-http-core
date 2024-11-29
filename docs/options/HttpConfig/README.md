@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / options/HttpConfig
+[HTTP Core Documentation](../../modules.md) / options/HttpConfig
 
 # options/HttpConfig
 

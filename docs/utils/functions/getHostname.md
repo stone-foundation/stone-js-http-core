@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [utils](../README.md) / getHostname
+[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getHostname
 
 # Function: getHostname()
 
@@ -12,23 +12,33 @@ Get hostname.
 
 ## Parameters
 
-• **ip**: `string`
+### ip
+
+`string`
 
 The IP address of the request.
 
-• **headers**: `Record`\<`string`, `string`\>
+### headers
+
+`Record`\<`string`, `string`\>
 
 The headers from the incoming request.
 
-• **options**
+### options
 
 Options for trusted IPs, fallback, etc.
 
-• **options.trusted**: (`string` \| `RegExp`)[]
+#### options.trusted
 
-• **options.trustedIp**: `string`[]
+(`string` \| `RegExp`)[]
 
-• **options.untrustedIp**: `string`[]
+#### options.trustedIp
+
+`string`[]
+
+#### options.untrustedIp
+
+`string`[]
 
 ## Returns
 
@@ -38,4 +48,4 @@ The hostname from the request.
 
 ## Defined in
 
-[utils.ts:104](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L104)
+[utils.ts:104](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/utils.ts#L104)

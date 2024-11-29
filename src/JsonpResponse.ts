@@ -48,7 +48,7 @@ export class JsonpResponse extends JsonResponse {
     }
 
     if (typeof this.content !== 'string') {
-      this.setContent(this.morphToJson(this.content, this.blueprint?.get('stone.http.json', {})))
+      this.setContent(this.content)
     }
 
     if (typeof callback === 'string' && callback.length > 0) {

@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [utils](../README.md) / streamFile
+[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / streamFile
 
 # Function: streamFile()
 
@@ -14,19 +14,27 @@ Only for node http server.
 
 ## Parameters
 
-• **message**: `IncomingMessage`
+### message
+
+`IncomingMessage`
 
 The incoming message.
 
-• **response**: `OutgoingMessage`\<`IncomingMessage`\>
+### response
+
+`OutgoingMessage`\<`IncomingMessage`\>
 
 The outgoing response.
 
-• **fileResponse**: [`File`](../../file/File/classes/File.md)
+### fileResponse
+
+[`File`](../../file/File/classes/File.md)
 
 The binary file response to be streamed.
 
-• **options**: `SendOptions` & `object`
+### options
+
+`SendOptions` & `object`
 
 The options for streaming.
 
@@ -38,4 +46,4 @@ A promise that resolves when the file streaming is complete.
 
 ## Defined in
 
-[utils.ts:204](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L204)
+[utils.ts:204](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/utils.ts#L204)

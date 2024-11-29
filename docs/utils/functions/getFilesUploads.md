@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [utils](../README.md) / getFilesUploads
+[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getFilesUploads
 
 # Function: getFilesUploads()
 
@@ -14,11 +14,25 @@ Get streamed or pre-read(not streamed) file upload.
 
 ## Parameters
 
-• **event**: `IncomingMessage` \| `object`
+### event
+
+`IncomingMessage`
+
+\{`body`: `unknown`;`headers`: `IncomingHttpHeaders`; \}
 
 The incoming event containing the file data.
 
-• **options**: `Record`\<`string`, `any`\>
+#### event.body
+
+`unknown`
+
+#### event.headers
+
+`IncomingHttpHeaders`
+
+### options
+
+`Record`\<`string`, `any`\>
 
 The options for file upload limits.
 
@@ -38,4 +52,4 @@ A promise that resolves with the uploaded files and fields.
 
 ## Defined in
 
-[utils.ts:145](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L145)
+[utils.ts:145](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/utils.ts#L145)

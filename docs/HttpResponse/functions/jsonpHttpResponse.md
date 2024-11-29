@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [HttpResponse](../README.md) / jsonpHttpResponse
+[HTTP Core Documentation](../../modules.md) / [HttpResponse](../README.md) / jsonpHttpResponse
 
 # Function: jsonpHttpResponse()
 
@@ -12,15 +12,21 @@ Create a 200(OK) JSONP OutgoingHttpResponse.
 
 ## Parameters
 
-• **content**: `unknown`
+### content
+
+`unknown`
 
 The content of the response.
 
-• **statusCode**: `number` = `HTTP_OK`
+### statusCode
+
+`number` = `HTTP_OK`
 
 The status code of the response.
 
-• **headers**: `Record`\<`string`, `string`\> = `{}`
+### headers
+
+`Record`\<`string`, `string`\> = `{}`
 
 The headers for the response.
 
@@ -32,4 +38,4 @@ A new instance of JsonpResponse.
 
 ## Defined in
 
-HttpResponse.ts:161
+[HttpResponse.ts:161](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/HttpResponse.ts#L161)

@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [RedirectResponse](../README.md) / RedirectResponseOptions
+[HTTP Core Documentation](../../modules.md) / [RedirectResponse](../README.md) / RedirectResponseOptions
 
 # Interface: RedirectResponseOptions
 
@@ -11,6 +11,10 @@ Options for creating a Redirect HTTP Response.
 ## Extends
 
 - [`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md)
+
+## Indexable
+
+ \[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -24,7 +28,7 @@ Options for creating a Redirect HTTP Response.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:19](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L19)
+[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/OutgoingHttpResponse.ts#L21)
 
 ***
 
@@ -34,4 +38,4 @@ Options for creating a Redirect HTTP Response.
 
 #### Defined in
 
-[RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/RedirectResponse.ts#L12)
+[RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/RedirectResponse.ts#L12)

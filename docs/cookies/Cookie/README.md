@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / cookies/Cookie
+[HTTP Core Documentation](../../modules.md) / cookies/Cookie
 
 # cookies/Cookie
 

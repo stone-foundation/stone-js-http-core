@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../../modules.md) / [cookies/utils](../README.md) / isCookieValueSerialized
+[HTTP Core Documentation](../../../modules.md) / [cookies/utils](../README.md) / isCookieValueSerialized
 
 # Function: isCookieValueSerialized()
 
@@ -12,7 +12,9 @@ Check if the value is serialized.
 
 ## Parameters
 
-• **value**: `unknown`
+### value
+
+`unknown`
 
 The value to check.
 
@@ -22,4 +24,4 @@ The value to check.
 
 ## Defined in
 
-[cookies/utils.ts:8](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/cookies/utils.ts#L8)
+[cookies/utils.ts:8](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/cookies/utils.ts#L8)

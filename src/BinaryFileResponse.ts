@@ -1,4 +1,4 @@
-import { mime } from 'send'
+import mime from 'mime/lite'
 import { File } from './file/File'
 import { Buffer } from 'safe-buffer'
 import { IBlueprint } from '@stone-js/core'
@@ -107,7 +107,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
   setContentDisposition (type?: string): this {
     return this
       .setHeader('Content-Disposition', contentDisposition(this.file.getPath(), { type }))
-      .setHeader('Content-Type', this.file.getMimeType('application/octet-stream') ?? mime.lookup('bin'))
+      .setHeader('Content-Type', this.file.getMimeType() ?? mime.getType('bin') ?? 'application/octet-stream')
   }
 
   /**
@@ -189,7 +189,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
     }
 
     if (!this.hasHeader('Content-Type')) {
-      this.setHeader('Content-Type', this.file.getMimeType('application/octet-stream') ?? mime.lookup('bin'))
+      this.setHeader('Content-Type', this.file.getMimeType() ?? mime.getType('bin') ?? 'application/octet-stream')
     }
 
     return this

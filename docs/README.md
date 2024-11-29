@@ -1,4 +1,4 @@
-**HTTP Core Documentation v0.0.0** • [**Docs**](modules.md)
+**HTTP Core Documentation v0.0.0**
 
 ***
 

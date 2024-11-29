@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [HttpResponse](../README.md) / createHttpResponse
+[HTTP Core Documentation](../../modules.md) / [HttpResponse](../README.md) / createHttpResponse
 
 # Function: createHttpResponse()
 
@@ -12,15 +12,21 @@ Create an OutgoingHttpResponse.
 
 ## Parameters
 
-• **content**: `unknown`
+### content
+
+`unknown`
 
 The content of the response.
 
-• **statusCode**: `number` = `HTTP_OK`
+### statusCode
+
+`number` = `HTTP_OK`
 
 The status code of the response.
 
-• **headers**: `Record`\<`string`, `string`\> = `{}`
+### headers
+
+`Record`\<`string`, `string`\> = `{}`
 
 The headers for the response.
 
@@ -32,4 +38,4 @@ A new instance of OutgoingHttpResponse.
 
 ## Defined in
 
-HttpResponse.ts:27
+[HttpResponse.ts:27](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/HttpResponse.ts#L27)

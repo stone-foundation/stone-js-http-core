@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [utils](../README.md) / getProtocol
+[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getProtocol
 
 # Function: getProtocol()
 
@@ -12,25 +12,35 @@ Get protocol.
 
 ## Parameters
 
-• **ip**: `string`
+### ip
+
+`string`
 
 The IP address of the request.
 
-• **headers**: `Record`\<`string`, `string`\>
+### headers
+
+`Record`\<`string`, `string`\>
 
 The headers from the incoming request.
 
-• **encrypted**: `boolean`
+### encrypted
+
+`boolean`
 
 Whether the connection is encrypted (HTTPS).
 
-• **options**
+### options
 
 Options for trusted and untrusted IPs.
 
-• **options.trustedIp**: `string`[]
+#### options.trustedIp
 
-• **options.untrustedIp**: `string`[]
+`string`[]
+
+#### options.untrustedIp
+
+`string`[]
 
 ## Returns
 
@@ -40,4 +50,4 @@ The protocol (http or https).
 
 ## Defined in
 
-[utils.ts:86](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L86)
+[utils.ts:86](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/utils.ts#L86)

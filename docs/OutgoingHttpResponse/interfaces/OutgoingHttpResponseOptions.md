@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [OutgoingHttpResponse](../README.md) / OutgoingHttpResponseOptions
+[HTTP Core Documentation](../../modules.md) / [OutgoingHttpResponse](../README.md) / OutgoingHttpResponseOptions
 
 # Interface: OutgoingHttpResponseOptions
 
@@ -17,6 +17,10 @@ Options for creating an Outgoing HTTP Response.
 - [`BinaryFileResponseOptions`](../../BinaryFileResponse/interfaces/BinaryFileResponseOptions.md)
 - [`RedirectResponseOptions`](../../RedirectResponse/interfaces/RedirectResponseOptions.md)
 
+## Indexable
+
+ \[`key`: `string`\]: `unknown`
+
 ## Properties
 
 ### headers?
@@ -25,4 +29,4 @@ Options for creating an Outgoing HTTP Response.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:19](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L19)
+[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/OutgoingHttpResponse.ts#L21)

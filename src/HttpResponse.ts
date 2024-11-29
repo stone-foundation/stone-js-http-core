@@ -197,12 +197,12 @@ export const redirectHttpResponse = (url: string | URL, statusCode: number = 302
 }
 
 /**
- * Create a 201(Created) empty JSON OutgoingHttpResponse.
+ * Create a 204(No content) empty JSON OutgoingHttpResponse.
  *
  * @param statusCode - The status code of the response.
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const emptyHttpResponse = (statusCode: number = 201, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const emptyHttpResponse = (statusCode: number = 204, headers: Record<string, string> = {}): OutgoingHttpResponse => {
   return createHttpResponse(undefined, statusCode, { 'Content-Type': 'application/json', ...headers })
 }

@@ -1,9 +1,11 @@
 
 import vary from 'vary'
-import { mime } from 'send'
+import mime from 'mime/lite'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
+import contentTypeLib from 'content-type'
 import { HttpError } from './errors/HttpError'
+import { isFunction, isString } from 'lodash-es'
 import { createHash, Encoding } from 'node:crypto'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { CookieCollection } from './cookies/CookieCollection'
@@ -55,7 +57,9 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     this._headers = new Headers()
     this._cookieCollection = CookieCollection.create()
 
-    this.setHeaders(options.headers ?? {})
+    this
+      .setHeaders(options.headers ?? {})
+      .setStatus(options.statusCode ?? 500)
   }
 
   /**
@@ -116,12 +120,12 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   /**
    * Get the associated IncomingHttpEvent.
    *
-   * @throws Error if the IncomingHttpEvent resolver is not set.
+   * @throws HttpError if the IncomingHttpEvent resolver is not set.
    * @returns The associated IncomingHttpEvent.
    */
   get incomingEvent (): IncomingHttpEvent {
     if (this._incomingEventResolver === undefined) {
-      throw new Error('Must set an IncomingHttpEvent resolver.')
+      throw new HttpError('Must set an IncomingHttpEvent resolver.')
     }
     return this._incomingEventResolver()
   }
@@ -152,7 +156,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   setHeaders (values: HeadersType): this {
-    const headers = values instanceof Headers || values instanceof Map ? values.entries() : Object.entries(values)
+    const headers = values instanceof Headers || values instanceof Map ? Array.from(values.entries()) : Object.entries(values)
     headers.forEach(([key, value]) => this.setHeader(key, value))
     return this
   }
@@ -191,16 +195,6 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
       this._headers.set(key, value)
     }
     return this
-  }
-
-  /**
-   * Get all headers of the response.
-   *
-   * @param asMap - Whether to return the headers as a Map.
-   * @returns The headers as a Headers instance or a Map.
-   */
-  getHeaders (asMap: boolean = false): Headers | Map<string, string> {
-    return asMap ? new Map(this._headers.entries()) : this._headers
   }
 
   /**
@@ -284,7 +278,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   setCookie (name: string, value: unknown, options: CookieOptions = {}): this {
-    if (typeof name !== 'string') { throw new HttpError('Cookie name must be a non-empty string.') }
+    if (!isString(name)) { throw new HttpError('Cookie name must be a non-empty string.') }
     this._cookieCollection.add(name, value, options)
     return this
   }
@@ -297,7 +291,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   clearCookie (name: string, force = false): this {
-    if (typeof name !== 'string') { throw new HttpError('Cookie name must be a non-empty string.') }
+    if (!isString(name)) { throw new HttpError('Cookie name must be a non-empty string.') }
     this._cookieCollection.remove(name, force)
     return this
   }
@@ -340,14 +334,14 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    *
    * @param value - The MIME type for the response.
    * @returns The current instance of OutgoingHttpResponse for chaining.
-   * @throws Error if the provided MIME type is invalid.
+   * @throws HttpError if the provided MIME type is invalid.
    */
   setContentType (value: string): this {
-    const mimeType = value.includes('/') ? value : mime.lookup(value)
+    const mimeType = isString(value) && value.includes('/') ? value : mime.getType(value) ?? undefined
     if (mimeType !== undefined) {
       return this.setHeader('Content-Type', mimeType)
     } else {
-      throw new Error(`Invalid MIME type: ${value}`)
+      throw new HttpError(`Invalid MIME type: ${value}`)
     }
   }
 
@@ -384,7 +378,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     const types = Object.keys(formats).filter(v => v !== 'default')
     const type = types.length > 0 ? this.incomingEvent.acceptsTypes(...types) : undefined
 
-    if (typeof type === 'string' && formats[type] !== undefined) {
+    if (isString(type) && formats[type] !== undefined) {
       this.setContentType(type).setContent(formats[type]())
     } else if (formats.default !== undefined) {
       this.setContent(formats.default())
@@ -683,9 +677,9 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     let length = 0
     const type = this.getHeader('Content-Type')
     const etagFn = this.blueprint?.get('stone.http.etag.function', this.defaultEtagFn.bind(this))
-    const generateETag = !this.hasHeader('ETag') && typeof etagFn === 'function'
+    const generateETag = !this.hasHeader('ETag') && isFunction(etagFn)
 
-    if (typeof this.content === 'string' && typeof type === 'string' && !this.charsetRegExp.test(type)) {
+    if (isString(this.content) && isString(type) && !this.charsetRegExp.test(type)) {
       this.setContentType(`${type}; charset=${String(this.charset)}`)
     }
 
@@ -694,8 +688,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
       this.setHeader('Content-Length', String(length))
     }
 
-    if (generateETag && length > 0 && typeof this.content === 'string') {
-      this.setEtag(etagFn(this.content, this.charset))
+    if (generateETag && length > 0) {
+      this.setEtag(etagFn(String(this.content), this.charset))
     }
 
     if (this.hasHeader('Transfer-Encoding')) {
@@ -717,12 +711,12 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   protected calculateContentLength (generateETag: boolean): number {
     if (Buffer.isBuffer(this.content)) {
       return this.content.length
-    } else if (!generateETag && typeof this.content === 'string' && this.content.length < 1000) {
+    } else if (!generateETag && isString(this.content) && this.content.length < 1000) {
       return Buffer.byteLength(this.content, this.charset)
     } else {
       this._content = Buffer.from(String(this.content), this.charset)
       this._charset = undefined
-      return String(this.content).length
+      return (this._content as { length: number }).length
     }
   }
 
@@ -734,10 +728,12 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    */
   protected ensureCharset (value: string): this {
     if (!this.charsetRegExp.test(value)) {
-      const type = value.split(';').shift() ?? 'text/html'
+      const type = value?.split(';')?.shift() ?? 'text/html'
       this
-        .setCharset(mime.charsets.lookup(type.trim(), 'UTF-8'))
-        .setContentType(this.charset !== undefined ? `${type}; charset=${this.charset.toLowerCase()}` : value)
+        .setCharset(contentTypeLib.parse(type.trim()).parameters.charset ?? 'UTF-8')
+        .setContentType(`${type}; charset=${this.charset.toLowerCase()}`)
+    } else {
+      this._headers.set('Content-Type', value)
     }
 
     return this
@@ -764,11 +760,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   protected morphToJson (content: unknown, options: Partial<HttpJsonConfig> = {}): string {
     try {
       return this.stringify(content, options.replacer, options.spaces, options.escape)
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new HttpError(error.message, { cause: error })
-      }
-      throw new HttpError('Unknown error occurred during JSON serialization.')
+    } catch (error: any) {
+      throw new HttpError(error.message, { cause: error })
     }
   }
 
@@ -833,9 +826,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     const json = JSON.stringify(value, replacer, spaces)
 
     if (escape === true) {
-      return json.replace(/[<>&]/g, (c) => {
-        return { '<': '\u003c', '>': '\u003e', '&': '\u0026' }[c] ?? c
-      })
+      return json.replace(/[<>&]/g, (c) => ({ '<': '\u003c', '>': '\u003e', '&': '\u0026' }[c]) as string)
     }
 
     return json

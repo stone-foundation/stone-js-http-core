@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [declarations](../README.md) / HttpMethods
+[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / HttpMethods
 
 # Enumeration: HttpMethods
 
@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[declarations.ts:19](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L19)
+[declarations.ts:19](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L19)
 
 ***
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[declarations.ts:14](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L14)
+[declarations.ts:14](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L14)
 
 ***
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[declarations.ts:16](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L16)
+[declarations.ts:16](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L16)
 
 ***
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[declarations.ts:20](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L20)
+[declarations.ts:20](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L20)
 
 ***
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[declarations.ts:18](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L18)
+[declarations.ts:18](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L18)
 
 ***
 
@@ -64,7 +64,7 @@
 
 #### Defined in
 
-[declarations.ts:17](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L17)
+[declarations.ts:17](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L17)
 
 ***
 
@@ -74,4 +74,4 @@
 
 #### Defined in
 
-[declarations.ts:15](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L15)
+[declarations.ts:15](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L15)

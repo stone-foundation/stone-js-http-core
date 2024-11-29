@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../../modules.md) / [middleware/HandleCorsMiddleware](../README.md) / HandleCorsMiddleware
+[HTTP Core Documentation](../../../modules.md) / [middleware/HandleCorsMiddleware](../README.md) / HandleCorsMiddleware
 
 # Class: HandleCorsMiddleware\<U, V\>
 
@@ -33,11 +33,13 @@ Construct an instance of HandleCorsMiddleware.
 
 #### Parameters
 
-• **blueprint**
+##### blueprint
 
 The configuration blueprint used for managing CORS settings.
 
-• **blueprint.blueprint**: `IBlueprint`
+###### blueprint.blueprint
+
+`IBlueprint`
 
 #### Returns
 
@@ -45,7 +47,7 @@ The configuration blueprint used for managing CORS settings.
 
 #### Defined in
 
-[middleware/HandleCorsMiddleware.ts:25](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/middleware/HandleCorsMiddleware.ts#L25)
+[middleware/HandleCorsMiddleware.ts:25](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/middleware/HandleCorsMiddleware.ts#L25)
 
 ## Methods
 
@@ -57,11 +59,15 @@ Handle CORS by modifying the response headers based on the configuration.
 
 #### Parameters
 
-• **param0**: `KernelContext`\<`U`, `V`\>
+##### param0
+
+`KernelContext`\<`U`, `V`\>
 
 The context containing incoming HTTP event and outgoing HTTP response.
 
-• **next**: `NextPipe`\<`KernelContext`\<`U`, `V`\>\>
+##### next
+
+`NextPipe`\<`KernelContext`\<`U`, `V`\>\>
 
 The next middleware function to continue processing the request.
 
@@ -73,4 +79,4 @@ The modified kernel context or the next middleware function result.
 
 #### Defined in
 
-[middleware/HandleCorsMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/middleware/HandleCorsMiddleware.ts#L38)
+[middleware/HandleCorsMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/middleware/HandleCorsMiddleware.ts#L38)

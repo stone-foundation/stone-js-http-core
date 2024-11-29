@@ -34,7 +34,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
     }
 
     if (this.isMovedPermanently() && !this.hasCacheControl()) {
-      this.removeHeader('cache-control')
+      this.setHeader('Cache-Control', 'public, max-age=31536000')
     }
 
     this.setTargetUrl(options.url)
@@ -93,7 +93,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
     }
 
     const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\/?]+/.exec(String(this.targetUrl))
-    const position = (matches != null) ? matches[0].length + 1 : 0
+    const position = (matches !== null) ? matches[0].length + 1 : 0
 
     return this.setHeader('Location', `${String(this.targetUrl).slice(0, position)}${encodeURIComponent(String(this.targetUrl).slice(position))}`)
   }

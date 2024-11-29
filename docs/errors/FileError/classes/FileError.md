@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../../modules.md) / [errors/FileError](../README.md) / FileError
+[HTTP Core Documentation](../../../modules.md) / [errors/FileError](../README.md) / FileError
 
 # Class: FileError
 
@@ -20,7 +20,9 @@ Custom error for error operations.
 
 #### Parameters
 
-• **message**: `string`
+##### message
+
+`string`
 
 #### Returns
 
@@ -32,7 +34,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/FileError.ts:7](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/FileError.ts#L7)
+[errors/FileError.ts:7](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/errors/FileError.ts#L7)
 
 ## Properties
 
@@ -46,7 +48,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L20)
+[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/errors/HttpError.ts#L20)
 
 ***
 
@@ -60,7 +62,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L21)
+[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/errors/HttpError.ts#L21)
 
 ***
 
@@ -74,7 +76,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L22)
+[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/errors/HttpError.ts#L22)
 
 ***
 
@@ -88,4 +90,4 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L23)
+[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/errors/HttpError.ts#L23)

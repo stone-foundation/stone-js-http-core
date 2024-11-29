@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [declarations](../README.md) / CookieSameSite
+[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / CookieSameSite
 
 # Enumeration: CookieSameSite
 
@@ -16,7 +16,7 @@ SameSite options for the cookie.
 
 #### Defined in
 
-[declarations.ts:8](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L8)
+[declarations.ts:8](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L8)
 
 ***
 
@@ -26,7 +26,7 @@ SameSite options for the cookie.
 
 #### Defined in
 
-[declarations.ts:9](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L9)
+[declarations.ts:9](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L9)
 
 ***
 
@@ -36,4 +36,4 @@ SameSite options for the cookie.
 
 #### Defined in
 
-[declarations.ts:10](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L10)
+[declarations.ts:10](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L10)

@@ -1,22 +1,26 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [HttpResponse](../README.md) / emptyHttpResponse
+[HTTP Core Documentation](../../modules.md) / [HttpResponse](../README.md) / emptyHttpResponse
 
 # Function: emptyHttpResponse()
 
 > **emptyHttpResponse**(`statusCode`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Create a 201(Created) empty JSON OutgoingHttpResponse.
+Create a 204(No content) empty JSON OutgoingHttpResponse.
 
 ## Parameters
 
-• **statusCode**: `number` = `201`
+### statusCode
+
+`number` = `204`
 
 The status code of the response.
 
-• **headers**: `Record`\<`string`, `string`\> = `{}`
+### headers
+
+`Record`\<`string`, `string`\> = `{}`
 
 The headers for the response.
 
@@ -28,4 +32,4 @@ A new instance of OutgoingHttpResponse.
 
 ## Defined in
 
-HttpResponse.ts:206
+[HttpResponse.ts:206](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/HttpResponse.ts#L206)

@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../../modules.md) / [file/UploadedFile](../README.md) / UploadedFile
+[HTTP Core Documentation](../../../modules.md) / [file/UploadedFile](../README.md) / UploadedFile
 
 # Class: UploadedFile
 
@@ -26,19 +26,27 @@ Create an UploadedFile.
 
 #### Parameters
 
-• **path**: `string`
+##### path
+
+`string`
 
 The file path.
 
-• **originalName**: `string`
+##### originalName
+
+`string`
 
 The original name of the uploaded file.
 
-• **mimeType?**: `string`
+##### mimeType?
+
+`string`
 
 The MIME type of the file.
 
-• **checkPath?**: `boolean` = `true`
+##### checkPath?
+
+`boolean` = `true`
 
 #### Returns
 
@@ -50,7 +58,7 @@ The MIME type of the file.
 
 #### Defined in
 
-[file/UploadedFile.ts:34](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L34)
+[file/UploadedFile.ts:34](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L34)
 
 ## Methods
 
@@ -62,7 +70,9 @@ Edit file content.
 
 #### Parameters
 
-• **callback**
+##### callback
+
+(`content`) => `string`
 
 The callback function to modify the file content.
 
@@ -78,7 +88,7 @@ The current File instance.
 
 #### Defined in
 
-[file/File.ts:85](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L85)
+[file/File.ts:85](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L85)
 
 ***
 
@@ -100,7 +110,7 @@ True if the file exists, otherwise false.
 
 #### Defined in
 
-[file/File.ts:272](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L272)
+[file/File.ts:272](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L272)
 
 ***
 
@@ -112,7 +122,9 @@ Get the absolute file path.
 
 #### Parameters
 
-• **root**: `string` = `''`
+##### root
+
+`string` = `''`
 
 The root directory to resolve from.
 
@@ -128,7 +140,7 @@ The absolute file path.
 
 #### Defined in
 
-[file/File.ts:189](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L189)
+[file/File.ts:189](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L189)
 
 ***
 
@@ -150,7 +162,7 @@ The last access time in milliseconds.
 
 #### Defined in
 
-[file/File.ts:245](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L245)
+[file/File.ts:245](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L245)
 
 ***
 
@@ -162,7 +174,9 @@ Get the basename of the file.
 
 #### Parameters
 
-• **exclude**: `string` = `''`
+##### exclude
+
+`string` = `''`
 
 The file extension to exclude from the basename.
 
@@ -178,7 +192,7 @@ The basename of the file.
 
 #### Defined in
 
-[file/File.ts:209](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L209)
+[file/File.ts:209](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L209)
 
 ***
 
@@ -196,7 +210,7 @@ The MIME type of the file.
 
 #### Defined in
 
-[file/UploadedFile.ts:63](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L63)
+[file/UploadedFile.ts:63](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L63)
 
 ***
 
@@ -214,7 +228,7 @@ The original file extension.
 
 #### Defined in
 
-[file/UploadedFile.ts:54](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L54)
+[file/UploadedFile.ts:54](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L54)
 
 ***
 
@@ -232,7 +246,7 @@ The original name of the file.
 
 #### Defined in
 
-[file/UploadedFile.ts:45](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L45)
+[file/UploadedFile.ts:45](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L45)
 
 ***
 
@@ -254,7 +268,7 @@ The content of the file as a string.
 
 #### Defined in
 
-[file/File.ts:57](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L57)
+[file/File.ts:57](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L57)
 
 ***
 
@@ -276,7 +290,7 @@ The created time in milliseconds.
 
 #### Defined in
 
-[file/File.ts:263](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L263)
+[file/File.ts:263](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L263)
 
 ***
 
@@ -298,7 +312,7 @@ The directory name.
 
 #### Defined in
 
-[file/File.ts:161](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L161)
+[file/File.ts:161](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L161)
 
 ***
 
@@ -310,7 +324,9 @@ Get the encoded absolute file path.
 
 #### Parameters
 
-• **root**: `string` = `''`
+##### root
+
+`string` = `''`
 
 The root directory to resolve from.
 
@@ -326,7 +342,7 @@ The encoded absolute file path.
 
 #### Defined in
 
-[file/File.ts:199](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L199)
+[file/File.ts:199](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L199)
 
 ***
 
@@ -348,7 +364,7 @@ The encoded file path.
 
 #### Defined in
 
-[file/File.ts:179](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L179)
+[file/File.ts:179](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L179)
 
 ***
 
@@ -370,7 +386,7 @@ The file extension.
 
 #### Defined in
 
-[file/File.ts:236](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L236)
+[file/File.ts:236](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L236)
 
 ***
 
@@ -392,7 +408,7 @@ The filename of the file.
 
 #### Defined in
 
-[file/File.ts:218](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L218)
+[file/File.ts:218](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L218)
 
 ***
 
@@ -404,7 +420,9 @@ Get the hashed content of the file.
 
 #### Parameters
 
-• **algo**: `string` = `'sha256'`
+##### algo
+
+`string` = `'sha256'`
 
 The hashing algorithm to use.
 
@@ -420,7 +438,7 @@ The hashed content of the file as a hex string.
 
 #### Defined in
 
-[file/File.ts:131](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L131)
+[file/File.ts:131](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L131)
 
 ***
 
@@ -432,7 +450,9 @@ Get the MIME type of the file.
 
 #### Parameters
 
-• **fallback?**: `string`
+##### fallback?
+
+`string`
 
 A fallback MIME type if detection fails.
 
@@ -448,7 +468,7 @@ The MIME type of the file.
 
 #### Defined in
 
-[file/File.ts:152](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L152)
+[file/File.ts:152](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L152)
 
 ***
 
@@ -470,7 +490,7 @@ The last modified time in milliseconds.
 
 #### Defined in
 
-[file/File.ts:254](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L254)
+[file/File.ts:254](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L254)
 
 ***
 
@@ -492,7 +512,7 @@ The name of the file.
 
 #### Defined in
 
-[file/File.ts:227](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L227)
+[file/File.ts:227](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L227)
 
 ***
 
@@ -514,7 +534,7 @@ The file path.
 
 #### Defined in
 
-[file/File.ts:170](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L170)
+[file/File.ts:170](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L170)
 
 ***
 
@@ -526,7 +546,9 @@ Get file size.
 
 #### Parameters
 
-• **formatted**: `boolean` = `false`
+##### formatted
+
+`boolean` = `false`
 
 Whether to return the file size as a formatted string.
 
@@ -542,7 +564,7 @@ The file size as a string or number.
 
 #### Defined in
 
-[file/File.ts:141](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L141)
+[file/File.ts:141](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L141)
 
 ***
 
@@ -560,7 +582,7 @@ The guessed file extension.
 
 #### Defined in
 
-[file/UploadedFile.ts:72](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L72)
+[file/UploadedFile.ts:72](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L72)
 
 ***
 
@@ -582,7 +604,7 @@ True if the file path is absolute, otherwise false.
 
 #### Defined in
 
-[file/File.ts:308](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L308)
+[file/File.ts:308](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L308)
 
 ***
 
@@ -604,7 +626,7 @@ True if the file is a directory, otherwise false.
 
 #### Defined in
 
-[file/File.ts:281](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L281)
+[file/File.ts:281](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L281)
 
 ***
 
@@ -626,7 +648,7 @@ True if the file is executable, otherwise false.
 
 #### Defined in
 
-[file/File.ts:345](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L345)
+[file/File.ts:345](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L345)
 
 ***
 
@@ -648,7 +670,7 @@ True if the file is a regular file, otherwise false.
 
 #### Defined in
 
-[file/File.ts:290](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L290)
+[file/File.ts:290](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L290)
 
 ***
 
@@ -670,7 +692,7 @@ True if the file is a symbolic link, otherwise false.
 
 #### Defined in
 
-[file/File.ts:299](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L299)
+[file/File.ts:299](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L299)
 
 ***
 
@@ -692,7 +714,7 @@ True if the file is readable, otherwise false.
 
 #### Defined in
 
-[file/File.ts:331](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L331)
+[file/File.ts:331](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L331)
 
 ***
 
@@ -710,7 +732,7 @@ True if the file exists, otherwise false.
 
 #### Defined in
 
-[file/UploadedFile.ts:81](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L81)
+[file/UploadedFile.ts:81](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L81)
 
 ***
 
@@ -732,7 +754,7 @@ True if the file is writable, otherwise false.
 
 #### Defined in
 
-[file/File.ts:317](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L317)
+[file/File.ts:317](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L317)
 
 ***
 
@@ -744,11 +766,15 @@ Move the uploaded file to a new directory.
 
 #### Parameters
 
-• **directory**: `string`
+##### directory
+
+`string`
 
 The target directory.
 
-• **name?**: `string`
+##### name?
+
+`string`
 
 The new name for the file.
 
@@ -768,7 +794,7 @@ FileError if the file is not valid.
 
 #### Defined in
 
-[file/UploadedFile.ts:93](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L93)
+[file/UploadedFile.ts:93](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L93)
 
 ***
 
@@ -780,7 +806,9 @@ Remove file.
 
 #### Parameters
 
-• **force**: `boolean` = `false`
+##### force
+
+`boolean` = `false`
 
 Whether to forcefully remove the file.
 
@@ -796,7 +824,7 @@ The current File instance.
 
 #### Defined in
 
-[file/File.ts:116](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L116)
+[file/File.ts:116](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L116)
 
 ***
 
@@ -808,7 +836,9 @@ Write content to file.
 
 #### Parameters
 
-• **content**: `string`
+##### content
+
+`string`
 
 The content to write to the file.
 
@@ -824,7 +854,7 @@ The current File instance.
 
 #### Defined in
 
-[file/File.ts:70](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L70)
+[file/File.ts:70](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L70)
 
 ***
 
@@ -836,11 +866,15 @@ Create a File.
 
 #### Parameters
 
-• **path**: `string`
+##### path
+
+`string`
 
 The file path.
 
-• **checkPath**: `boolean` = `true`
+##### checkPath
+
+`boolean` = `true`
 
 Whether to check if the file path is valid.
 
@@ -856,7 +890,7 @@ A new File instance.
 
 #### Defined in
 
-[file/File.ts:35](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/File.ts#L35)
+[file/File.ts:35](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/File.ts#L35)
 
 ***
 
@@ -868,19 +902,27 @@ Create an UploadedFile.
 
 #### Parameters
 
-• **path**: `string`
+##### path
+
+`string`
 
 The file path.
 
-• **originalName**: `string`
+##### originalName
+
+`string`
 
 The original name of the uploaded file.
 
-• **mimeType?**: `string`
+##### mimeType?
+
+`string`
 
 The MIME type of the file.
 
-• **checkPath?**: `boolean` = `true`
+##### checkPath?
+
+`boolean` = `true`
 
 #### Returns
 
@@ -890,4 +932,4 @@ A new UploadedFile instance.
 
 #### Defined in
 
-[file/UploadedFile.ts:23](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/file/UploadedFile.ts#L23)
+[file/UploadedFile.ts:23](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/file/UploadedFile.ts#L23)

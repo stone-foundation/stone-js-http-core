@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [BinaryFileResponse](../README.md) / BinaryFileResponseOptions
+[HTTP Core Documentation](../../modules.md) / [BinaryFileResponse](../README.md) / BinaryFileResponseOptions
 
 # Interface: BinaryFileResponseOptions
 
@@ -12,6 +12,10 @@ Options for creating a BinaryFile HTTP Response.
 
 - [`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md)
 
+## Indexable
+
+ \[`key`: `string`\]: `unknown`
+
 ## Properties
 
 ### autoEtag?
@@ -20,7 +24,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/BinaryFileResponse.ts#L15)
+[BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/BinaryFileResponse.ts#L15)
 
 ***
 
@@ -30,7 +34,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/BinaryFileResponse.ts#L17)
+[BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/BinaryFileResponse.ts#L17)
 
 ***
 
@@ -40,7 +44,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:18](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/BinaryFileResponse.ts#L18)
+[BinaryFileResponse.ts:18](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/BinaryFileResponse.ts#L18)
 
 ***
 
@@ -50,7 +54,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/BinaryFileResponse.ts#L16)
+[BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/BinaryFileResponse.ts#L16)
 
 ***
 
@@ -64,4 +68,4 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:19](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L19)
+[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/OutgoingHttpResponse.ts#L21)

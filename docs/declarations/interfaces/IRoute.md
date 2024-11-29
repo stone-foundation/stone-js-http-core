@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [declarations](../README.md) / IRoute
+[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / IRoute
 
 # Interface: IRoute
 
@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[declarations.ts:26](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L26)
+[declarations.ts:26](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L26)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[declarations.ts:25](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L25)
+[declarations.ts:25](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L25)
 
 ***
 
@@ -38,7 +38,9 @@
 
 #### Parameters
 
-• **key**: `string`
+##### key
+
+`string`
 
 #### Returns
 
@@ -46,7 +48,7 @@
 
 #### Defined in
 
-[declarations.ts:27](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L27)
+[declarations.ts:27](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L27)
 
 ***
 
@@ -56,9 +58,13 @@
 
 #### Parameters
 
-• **key?**: `string`
+##### key?
 
-• **fallback?**: `string`
+`string`
+
+##### fallback?
+
+`string`
 
 #### Returns
 
@@ -66,7 +72,7 @@
 
 #### Defined in
 
-[declarations.ts:28](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L28)
+[declarations.ts:28](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L28)
 
 ***
 
@@ -76,4 +82,4 @@
 
 #### Defined in
 
-[declarations.ts:24](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L24)
+[declarations.ts:24](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L24)

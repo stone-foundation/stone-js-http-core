@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [constants](../README.md) / HTTP\_SWITCHING\_PROTOCOLS
+[HTTP Core Documentation](../../modules.md) / [constants](../README.md) / HTTP\_SWITCHING\_PROTOCOLS
 
 # Variable: HTTP\_SWITCHING\_PROTOCOLS
 
@@ -10,4 +10,4 @@
 
 ## Defined in
 
-[constants.ts:16](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/constants.ts#L16)
+[constants.ts:16](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/constants.ts#L16)

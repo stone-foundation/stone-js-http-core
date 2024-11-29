@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [declarations](../README.md) / IOutgoingHttpResponse
+[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / IOutgoingHttpResponse
 
 # Interface: IOutgoingHttpResponse
 
@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[declarations.ts:32](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L32)
+[declarations.ts:32](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L32)
 
 ***
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[declarations.ts:34](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L34)
+[declarations.ts:34](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L34)
 
 ***
 
@@ -34,4 +34,4 @@
 
 #### Defined in
 
-[declarations.ts:33](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L33)
+[declarations.ts:33](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/declarations.ts#L33)

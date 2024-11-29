@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [utils](../README.md) / throwSuspiciousOperationError
+[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / throwSuspiciousOperationError
 
 # Function: throwSuspiciousOperationError()
 
@@ -12,15 +12,21 @@ Throw Suspicious Operation Error.
 
 ## Parameters
 
-• **message**: `string`
+### message
+
+`string`
 
 The error message.
 
-• **ip**: `string`
+### ip
+
+`string`
 
 The IP address involved.
 
-• **host**: `string`
+### host
+
+`string`
 
 The hostname involved.
 
@@ -34,4 +40,4 @@ HttpError with appropriate details.
 
 ## Defined in
 
-[utils.ts:243](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L243)
+[utils.ts:243](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/utils.ts#L243)

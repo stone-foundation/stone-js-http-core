@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../../modules.md) / [options/HttpConfig](../README.md) / CookieOptions
+[HTTP Core Documentation](../../../modules.md) / [options/HttpConfig](../README.md) / CookieOptions
 
 # Interface: CookieOptions
 
@@ -16,7 +16,7 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:61](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L61)
+[options/HttpConfig.ts:61](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L61)
 
 ***
 
@@ -26,7 +26,7 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:60](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L60)
+[options/HttpConfig.ts:60](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L60)
 
 ***
 
@@ -36,7 +36,7 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:64](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L64)
+[options/HttpConfig.ts:64](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L64)
 
 ***
 
@@ -46,7 +46,7 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:62](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L62)
+[options/HttpConfig.ts:62](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L62)
 
 ***
 
@@ -56,7 +56,7 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:59](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L59)
+[options/HttpConfig.ts:59](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L59)
 
 ***
 
@@ -66,7 +66,7 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:65](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L65)
+[options/HttpConfig.ts:65](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L65)
 
 ***
 
@@ -76,4 +76,4 @@ Options for configuring a cookie.
 
 #### Defined in
 
-[options/HttpConfig.ts:63](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L63)
+[options/HttpConfig.ts:63](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/options/HttpConfig.ts#L63)

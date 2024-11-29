@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md) • **Docs**
+[**HTTP Core Documentation v0.0.0**](../../README.md)
 
 ***
 
-[HTTP Core Documentation v0.0.0](../../modules.md) / [utils](../README.md) / getHttpError
+[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getHttpError
 
 # Function: getHttpError()
 
@@ -12,23 +12,33 @@ Return HttpError instance.
 
 ## Parameters
 
-• **statusCode**: `number`
+### statusCode
+
+`number`
 
 The HTTP status code.
 
-• **body**: `string`
+### body
+
+`string`
 
 The response body.
 
-• **message**: `string`
+### message
+
+`string`
 
 The error message.
 
-• **code?**: `string`
+### code?
+
+`string`
 
 A custom error code.
 
-• **cause?**: `Error`
+### cause?
+
+`Error`
 
 Optional cause of the error.
 
@@ -40,4 +50,4 @@ An instance of HttpError.
 
 ## Defined in
 
-[utils.ts:257](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L257)
+[utils.ts:257](https://github.com/stonemjs/http-core/blob/a162480c16327760396238c341daab61793d5440/src/utils.ts#L257)
