@@ -17,6 +17,7 @@
 - [errors/HttpError](errors/HttpError/README.md)
 - [file/File](file/File/README.md)
 - [file/UploadedFile](file/UploadedFile/README.md)
+- [HttpResponse](HttpResponse/README.md)
 - [IncomingHttpEvent](IncomingHttpEvent/README.md)
 - [JsonpResponse](JsonpResponse/README.md)
 - [JsonResponse](JsonResponse/README.md)

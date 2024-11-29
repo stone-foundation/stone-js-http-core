@@ -14,7 +14,7 @@ import { HttpMethods, IOutgoingHttpResponse, IRoute } from './declarations'
 /**
  * IncomingHttpEventOptions interface.
  */
-interface IncomingHttpEventOptions extends IncomingEventOptions {
+export interface IncomingHttpEventOptions extends IncomingEventOptions {
   url: URL
   ip: string
   ips?: string[]
@@ -52,7 +52,7 @@ export class IncomingHttpEvent extends IncomingEvent {
   /** The content negotiation handler for the request. */
   public readonly accepts: accepts.Accepts
   /** The headers of the request. */
-  public readonly headers: Headers
+  public readonly _headers: Headers
   /** The cookies included in the request. */
   public readonly cookies: CookieCollection
   /** The protocol used for the request (e.g., http or https). */
@@ -60,7 +60,7 @@ export class IncomingHttpEvent extends IncomingEvent {
   /** The query string of the request. */
   public readonly queryString?: string
 
-  protected userResolver?: () => unknown
+  protected userResolver?: <T>() => T
   protected routeResolver?: () => IRoute
 
   /**
@@ -108,10 +108,17 @@ export class IncomingHttpEvent extends IncomingEvent {
     this.method = method
     this.protocol = protocol
     this.queryString = queryString
-    this.accepts = accepts(this as any)
-    this.query = new URLSearchParams(this.queryString ?? '')
     this.cookies = cookies ?? CookieCollection.create()
-    this.headers = headers instanceof Headers ? headers : new Headers(headers)
+    this.query = new URLSearchParams(this.queryString ?? '')
+    this._headers = headers instanceof Headers ? headers : new Headers(headers)
+
+    // Must be called after the headers are set
+    this.accepts = accepts(this as any)
+  }
+
+  /** @returns The headers of the request. */
+  get headers (): Record<string, string> {
+    return Object.fromEntries(this._headers.entries())
   }
 
   /** @returns The decoded pathname of the URL. */
@@ -140,12 +147,12 @@ export class IncomingHttpEvent extends IncomingEvent {
 
   /** @returns The route parameters. */
   get params (): Record<string, unknown> | undefined {
-    return this.routeResolver?.()?.parameters?.()
+    return this.getRoute()?.parameters?.()
   }
 
   /** @returns The full path including pathname and search query. */
   get path (): string | undefined {
-    return this.url ? `${this.url.pathname}${this.url.search}` : undefined
+    return this.url !== undefined ? `${this.url.pathname}${this.url.search}` : undefined
   }
 
   /** @returns The pathname of the URL. */
@@ -228,11 +235,6 @@ export class IncomingHttpEvent extends IncomingEvent {
     return contentTypeLib.parse(this).type
   }
 
-  /** @returns The user object, resolved through a user resolver function if available. */
-  get user (): unknown {
-    return this.userResolver?.()
-  }
-
   /**
    * Get data from the request.
    *
@@ -251,7 +253,7 @@ export class IncomingHttpEvent extends IncomingEvent {
   */
   get<R = unknown>(key: string, fallback?: R): R {
     return (
-      this.getFromRouteParams(key) ??
+      this.getParam(key) ??
       this.getFromBody(key) ??
       this.getFromQueryParams(key) ??
       this.getFromHeaders(key) ??
@@ -271,8 +273,8 @@ export class IncomingHttpEvent extends IncomingEvent {
   getHeader<R = string>(name: string, fallback?: R): R {
     if (!this.isValidName(name)) { throw new TypeError('Header name must be a non-empty string.') }
     const lcName = name.toLowerCase()
-    if (['referer', 'referrer'].includes(lcName)) { return (this.headers.get('referer') ?? this.headers.get('referrer') ?? fallback) as R }
-    return (this.headers.get(lcName) ?? fallback) as R
+    if (['referer', 'referrer'].includes(lcName)) { return (this._headers.get('referer') ?? this._headers.get('referrer') ?? fallback) as R }
+    return (this._headers.get(lcName) ?? fallback) as R
   }
 
   /**
@@ -283,7 +285,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   hasHeader (name: string): boolean {
     if (!this.isValidName(name)) { throw new TypeError('Header name must be a non-empty string.') }
-    return this.headers.has(name.toLowerCase())
+    return this._headers.has(name.toLowerCase())
   }
 
   /**
@@ -353,20 +355,20 @@ export class IncomingHttpEvent extends IncomingEvent {
    * Get MIME type for a given file path or extension.
    *
    * @param format - The file path or extension.
-   * @returns The corresponding MIME type, or null if not found.
+   * @returns The corresponding MIME type, or undefined if not found.
    */
-  getMimeType (format: string): string | null {
-    return mime.getType(format)
+  getMimeType (format: string): string | undefined {
+    return mime.getType(format) ?? undefined
   }
 
   /**
    * Get file extension for a given MIME type.
    *
    * @param mimeType - The MIME type.
-   * @returns The corresponding file extension, or null if not found.
+   * @returns The corresponding file extension, or undefined if not found.
    */
-  getFormat (mimeType: string): string | null {
-    return mime.getExtension(mimeType)
+  getFormat (mimeType: string): string | undefined {
+    return mime.getExtension(mimeType) ?? undefined
   }
 
   /**
@@ -387,7 +389,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns The parsed range, or undefined if not applicable.
    */
   range (size: number, combine = false): rangeParser.Result | rangeParser.Ranges | undefined {
-    if (!this.hasHeader('Range')) return undefined
+    if (!this.hasHeader('Range')) return
     return rangeParser(size, this.getHeader('Range'), { combine })
   }
 
@@ -399,7 +401,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns The value of the key or the fallback.
    */
   json (key: string, fallback?: unknown): unknown {
-    if (this.is(['json'])) {
+    if (this.is(['json']) !== false && this.is(['json']) !== undefined) {
       return get(this.body, key, fallback)
     }
     return fallback
@@ -425,7 +427,7 @@ export class IncomingHttpEvent extends IncomingEvent {
     const status = response.status ?? 500
     return ['GET', 'HEAD'].includes(this.method) &&
       ((status >= 200 && status < 300) || status === 304) &&
-      fresh(Object.fromEntries(this.headers.entries()), {
+      fresh(this.headers, {
         etag: response.etag,
         'last-modified': response.lastModified
       })
@@ -439,16 +441,6 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   isStale (response: IOutgoingHttpResponse): boolean {
     return !this.isFresh(response)
-  }
-
-  /**
-   * Generate a full URL for the given path.
-   *
-   * @param path - The path to append to the base URL.
-   * @returns The full URL for the given path.
-   */
-  uriForPath (path: string): string {
-    return new URL(path, `${this.scheme}://${this.host}`).href
   }
 
   /**
@@ -478,7 +470,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns True if the file exists, otherwise false.
    */
   hasFile (name: string): boolean {
-    return name in this.files
+    return name in this.files && this.files[name].length > 0
   }
 
   /**
@@ -510,6 +502,16 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
+   * Generate a full URL for the given path.
+   *
+   * @param path - The path to append to the base URL.
+   * @returns The full URL for the given path.
+   */
+  uriForPath (path: string): string {
+    return new URL(path, `${this.scheme}://${this.host}`).href
+  }
+
+  /**
    * Get the URI with or without the domain.
    *
    * @param withDomain - Whether to include the domain in the URI.
@@ -520,30 +522,12 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
-   * Return the current route or a route parameter.
+   * Get the user instance.
    *
-   * @param param - The parameter to retrieve from the route.
-   * @param fallback - The fallback value if the parameter does not exist.
-   * @returns The route parameter or the route object.
+   * @returns The user object, resolved through a user resolver function if available.
    */
-  route (param?: string, fallback?: string): string | Record<string, unknown> | IRoute | undefined {
-    const route = this.routeResolver?.()
-    return param ? route?.parameters(param, fallback) : route
-  }
-
-  /**
-   * Generate a unique fingerprint for the event.
-   *
-   * @returns The generated fingerprint as a base64 string.
-   */
-  fingerprint (): string {
-    const route = this.route() as IRoute
-
-    if (typeof route !== 'object') {
-      throw new TypeError('Unable to generate fingerprint. Route unavailable.')
-    }
-
-    return Buffer.from([route.methods, route.getDomain(), route.uri, this.ip].join('|')).toString('base64')
+  getUser<T>(): T | undefined {
+    return this.userResolver<T>?.()
   }
 
   /**
@@ -551,8 +535,8 @@ export class IncomingHttpEvent extends IncomingEvent {
    *
    * @returns The user resolver function.
    */
-  getUserResolver (): () => unknown {
-    return this.userResolver ?? (() => undefined)
+  getUserResolver <T>(): () => T | undefined {
+    return this.userResolver<T> ?? (() => undefined)
   }
 
   /**
@@ -561,7 +545,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param resolver - The user resolver function.
    * @returns The current instance for method chaining.
    */
-  setUserResolver (resolver: () => unknown): this {
+  setUserResolver (resolver: <T>() => T): this {
     this.userResolver = resolver
     return this
   }
@@ -587,13 +571,38 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
+   * Return the current route or a route parameter.
+   *
+   * @returns The route parameter or the route object.
+   */
+  getRoute (): IRoute | undefined {
+    return this.routeResolver?.()
+  }
+
+  /**
+   * Generate a unique fingerprint for the event.
+   *
+   * @returns The generated fingerprint as a base64 string.
+   */
+  fingerprint (): string {
+    const route = this.getRoute()
+
+    if (typeof route !== 'object') {
+      throw new TypeError('Unable to generate fingerprint. Route unavailable.')
+    }
+
+    return Buffer.from([route.methods, route.getDomain(), route.uri, this.ip].join('|')).toString('base64')
+  }
+
+  /**
    * Retrieve a parameter from the route if it exists.
    *
    * @param key - The name of the parameter to retrieve.
+   * @param fallback - The fallback value if the parameter does not exist.
    * @returns The value of the parameter if it exists, otherwise undefined.
    */
-  private getFromRouteParams (key: string): string | undefined {
-    return this.routeResolver?.()?.parameter?.(key)
+  getParam (key: string, fallback?: string): string | undefined {
+    return this.getRoute()?.parameter?.(key) ?? fallback
   }
 
   /**
@@ -632,7 +641,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param key - The name of the cookie to retrieve.
    * @returns The value of the cookie if it exists, otherwise undefined.
    */
-  private getFromCookies (key: string): undefined {
+  private getFromCookies (key: string): string | undefined {
     return this.hasCookie(key) ? this.getCookie(key) : undefined
   }
 

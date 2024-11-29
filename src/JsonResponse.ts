@@ -31,7 +31,7 @@ export class JsonResponse extends OutgoingHttpResponse {
    */
   protected makeJson (): this {
     if (typeof this.content !== 'string') {
-      this.setContent(this.morphToJson(this.content, this.blueprint?.get('app.http.json', {})))
+      this.setContent(this.morphToJson(this.content, this.blueprint?.get('stone.http.json', {})))
     }
 
     return this

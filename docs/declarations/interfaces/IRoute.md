@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[declarations.ts:26](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/declarations.ts#L26)
+[declarations.ts:26](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L26)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[declarations.ts:25](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/declarations.ts#L25)
+[declarations.ts:25](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L25)
 
 ***
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[declarations.ts:27](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/declarations.ts#L27)
+[declarations.ts:27](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L27)
 
 ***
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[declarations.ts:28](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/declarations.ts#L28)
+[declarations.ts:28](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L28)
 
 ***
 
@@ -76,4 +76,4 @@
 
 #### Defined in
 
-[declarations.ts:24](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/declarations.ts#L24)
+[declarations.ts:24](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/declarations.ts#L24)

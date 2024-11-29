@@ -26,7 +26,7 @@ Create a RedirectResponse.
 
 #### Parameters
 
-• **options**: `RedirectResponseOptions`
+• **options**: [`RedirectResponseOptions`](../interfaces/RedirectResponseOptions.md)
 
 Options for creating the RedirectResponse.
 
@@ -44,7 +44,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[RedirectResponse.ts:29](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/RedirectResponse.ts#L29)
+[RedirectResponse.ts:29](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/RedirectResponse.ts#L29)
 
 ## Properties
 
@@ -62,7 +62,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:31](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L31)
+[OutgoingHttpResponse.ts:31](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L31)
 
 ***
 
@@ -76,7 +76,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:30](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L30)
+[OutgoingHttpResponse.ts:30](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L30)
 
 ***
 
@@ -90,7 +90,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:35](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L35)
+[OutgoingHttpResponse.ts:35](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L35)
 
 ***
 
@@ -104,7 +104,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:34](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L34)
+[OutgoingHttpResponse.ts:34](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L34)
 
 ***
 
@@ -122,7 +122,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:32](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L32)
+[OutgoingHttpResponse.ts:32](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L32)
 
 ***
 
@@ -136,7 +136,7 @@ HttpError if the status code is not a redirect code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:28](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L28)
+[OutgoingHttpResponse.ts:28](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L28)
 
 ## Accessors
 
@@ -160,7 +160,7 @@ The blueprint or undefined if not set.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:134](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L134)
+[OutgoingHttpResponse.ts:134](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L134)
 
 ***
 
@@ -185,7 +185,7 @@ The character set encoding.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:85](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L85)
+[OutgoingHttpResponse.ts:85](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L85)
 
 ***
 
@@ -209,7 +209,7 @@ The regular expression for matching charset in content type.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:144](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L144)
+[OutgoingHttpResponse.ts:144](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L144)
 
 ***
 
@@ -233,7 +233,7 @@ The value of the ETag header, if present.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:94](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L94)
+[OutgoingHttpResponse.ts:94](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L94)
 
 ***
 
@@ -257,7 +257,7 @@ The headers of the response as a Headers object.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:75](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L75)
+[OutgoingHttpResponse.ts:75](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L75)
 
 ***
 
@@ -285,7 +285,7 @@ The associated IncomingHttpEvent.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:122](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L122)
+[OutgoingHttpResponse.ts:122](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L122)
 
 ***
 
@@ -309,7 +309,7 @@ The value of the Last-Modified header, if present.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:112](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L112)
+[OutgoingHttpResponse.ts:112](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L112)
 
 ***
 
@@ -333,7 +333,7 @@ The HTTP status code.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:66](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L66)
+[OutgoingHttpResponse.ts:66](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L66)
 
 ***
 
@@ -357,7 +357,7 @@ The Vary header values split by comma, or undefined if not present.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:103](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L103)
+[OutgoingHttpResponse.ts:103](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L103)
 
 ## Methods
 
@@ -369,7 +369,7 @@ Add a field to the Vary header.
 
 #### Parameters
 
-• **field**: `string`
+• **field**: `string` \| `string`[]
 
 The field to add to the Vary header.
 
@@ -385,7 +385,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:404](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L404)
+[OutgoingHttpResponse.ts:404](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L404)
 
 ***
 
@@ -417,7 +417,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:186](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L186)
+[OutgoingHttpResponse.ts:186](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L186)
 
 ***
 
@@ -445,7 +445,7 @@ The content length.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:717](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L717)
+[OutgoingHttpResponse.ts:717](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L717)
 
 ***
 
@@ -477,7 +477,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:299](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L299)
+[OutgoingHttpResponse.ts:299](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L299)
 
 ***
 
@@ -505,7 +505,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:311](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L311)
+[OutgoingHttpResponse.ts:311](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L311)
 
 ***
 
@@ -537,7 +537,7 @@ The generated ETag as a base64 string.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:803](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L803)
+[OutgoingHttpResponse.ts:803](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L803)
 
 ***
 
@@ -565,7 +565,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:735](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L735)
+[OutgoingHttpResponse.ts:735](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L735)
 
 ***
 
@@ -593,7 +593,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:383](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L383)
+[OutgoingHttpResponse.ts:383](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L383)
 
 ***
 
@@ -625,7 +625,7 @@ The hashed content as a hexadecimal string.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:814](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L814)
+[OutgoingHttpResponse.ts:814](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L814)
 
 ***
 
@@ -657,7 +657,7 @@ The value of the header or the fallback value.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:213](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L213)
+[OutgoingHttpResponse.ts:213](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L213)
 
 ***
 
@@ -679,7 +679,7 @@ An array of all header names.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:222](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L222)
+[OutgoingHttpResponse.ts:222](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L222)
 
 ***
 
@@ -707,7 +707,7 @@ The headers as a Headers instance or a Map.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:202](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L202)
+[OutgoingHttpResponse.ts:202](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L202)
 
 ***
 
@@ -729,7 +729,7 @@ The current instance of the response for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:654](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L654)
+[OutgoingHttpResponse.ts:654](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L654)
 
 ***
 
@@ -757,7 +757,7 @@ True if the header exists, false otherwise.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:232](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L232)
+[OutgoingHttpResponse.ts:232](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L232)
 
 ***
 
@@ -779,7 +779,7 @@ True if the status code is a client error, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:555](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L555)
+[OutgoingHttpResponse.ts:555](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L555)
 
 ***
 
@@ -801,7 +801,7 @@ True if the status code indicates an empty response, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:516](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L516)
+[OutgoingHttpResponse.ts:516](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L516)
 
 ***
 
@@ -823,7 +823,7 @@ True if the status code is 403, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:574](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L574)
+[OutgoingHttpResponse.ts:574](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L574)
 
 ***
 
@@ -845,7 +845,7 @@ True if the status code is informational, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:478](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L478)
+[OutgoingHttpResponse.ts:478](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L478)
 
 ***
 
@@ -867,7 +867,7 @@ True if the status code is invalid, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:468](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L468)
+[OutgoingHttpResponse.ts:468](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L468)
 
 ***
 
@@ -889,7 +889,7 @@ True if the status code is 301, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:546](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L546)
+[OutgoingHttpResponse.ts:546](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L546)
 
 ***
 
@@ -911,7 +911,7 @@ True if the status code is 404, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:583](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L583)
+[OutgoingHttpResponse.ts:583](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L583)
 
 ***
 
@@ -933,19 +933,19 @@ True if the status code is 200, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:498](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L498)
+[OutgoingHttpResponse.ts:498](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L498)
 
 ***
 
 ### isRedirect()
 
-> **isRedirect**(`location`): `boolean`
+> **isRedirect**(`location`?): `boolean`
 
 Check if the response is a redirect.
 
 #### Parameters
 
-• **location**: `null` \| `string` = `null`
+• **location?**: `string`
 
 The optional location to check for redirection.
 
@@ -961,7 +961,7 @@ True if the status code indicates a redirect, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:536](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L536)
+[OutgoingHttpResponse.ts:536](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L536)
 
 ***
 
@@ -983,7 +983,7 @@ True if the status code is a redirection, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:525](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L525)
+[OutgoingHttpResponse.ts:525](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L525)
 
 ***
 
@@ -1005,7 +1005,7 @@ True if the status code is 205, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:507](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L507)
+[OutgoingHttpResponse.ts:507](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L507)
 
 ***
 
@@ -1027,7 +1027,7 @@ True if the status code is a server error, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:592](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L592)
+[OutgoingHttpResponse.ts:592](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L592)
 
 ***
 
@@ -1049,7 +1049,7 @@ True if the status code is successful, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:488](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L488)
+[OutgoingHttpResponse.ts:488](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L488)
 
 ***
 
@@ -1071,7 +1071,7 @@ True if the status code is 401, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:565](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L565)
+[OutgoingHttpResponse.ts:565](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L565)
 
 ***
 
@@ -1093,7 +1093,7 @@ True if the response has Last-Modified or ETag headers, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:602](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L602)
+[OutgoingHttpResponse.ts:602](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L602)
 
 ***
 
@@ -1129,7 +1129,7 @@ HttpError if the content cannot be converted to JSON.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:764](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L764)
+[OutgoingHttpResponse.ts:764](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L764)
 
 ***
 
@@ -1161,7 +1161,7 @@ The current instance of the response for chaining.
 
 #### Defined in
 
-[RedirectResponse.ts:63](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/RedirectResponse.ts#L63)
+[RedirectResponse.ts:63](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/RedirectResponse.ts#L63)
 
 ***
 
@@ -1183,7 +1183,7 @@ The current instance of the response for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:666](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L666)
+[OutgoingHttpResponse.ts:666](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L666)
 
 ***
 
@@ -1205,7 +1205,7 @@ The current instance of the response for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:780](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L780)
+[OutgoingHttpResponse.ts:780](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L780)
 
 ***
 
@@ -1233,7 +1233,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:242](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L242)
+[OutgoingHttpResponse.ts:242](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L242)
 
 ***
 
@@ -1261,7 +1261,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:322](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L322)
+[OutgoingHttpResponse.ts:322](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L322)
 
 ***
 
@@ -1289,7 +1289,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:458](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L458)
+[OutgoingHttpResponse.ts:458](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L458)
 
 ***
 
@@ -1317,7 +1317,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:333](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L333)
+[OutgoingHttpResponse.ts:333](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L333)
 
 ***
 
@@ -1350,7 +1350,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:273](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L273)
+[OutgoingHttpResponse.ts:273](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L273)
 
 ***
 
@@ -1372,7 +1372,7 @@ The current instance of the response for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:682](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L682)
+[OutgoingHttpResponse.ts:682](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L682)
 
 ***
 
@@ -1404,7 +1404,7 @@ Error if the provided MIME type is invalid.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:345](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L345)
+[OutgoingHttpResponse.ts:345](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L345)
 
 ***
 
@@ -1426,7 +1426,7 @@ The current instance of the response for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:628](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L628)
+[OutgoingHttpResponse.ts:628](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L628)
 
 ***
 
@@ -1462,7 +1462,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:286](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L286)
+[OutgoingHttpResponse.ts:286](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L286)
 
 ***
 
@@ -1494,7 +1494,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:416](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L416)
+[OutgoingHttpResponse.ts:416](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L416)
 
 ***
 
@@ -1527,7 +1527,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:168](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L168)
+[OutgoingHttpResponse.ts:168](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L168)
 
 ***
 
@@ -1555,7 +1555,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:154](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L154)
+[OutgoingHttpResponse.ts:154](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L154)
 
 ***
 
@@ -1583,7 +1583,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:447](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L447)
+[OutgoingHttpResponse.ts:447](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L447)
 
 ***
 
@@ -1611,7 +1611,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:432](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L432)
+[OutgoingHttpResponse.ts:432](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L432)
 
 ***
 
@@ -1639,7 +1639,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:370](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L370)
+[OutgoingHttpResponse.ts:370](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L370)
 
 ***
 
@@ -1676,7 +1676,7 @@ HttpError if the status code is invalid.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:256](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L256)
+[OutgoingHttpResponse.ts:256](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L256)
 
 ***
 
@@ -1704,7 +1704,7 @@ HttpError if the URL is empty.
 
 #### Defined in
 
-[RedirectResponse.ts:50](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/RedirectResponse.ts#L50)
+[RedirectResponse.ts:50](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/RedirectResponse.ts#L50)
 
 ***
 
@@ -1732,7 +1732,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:360](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L360)
+[OutgoingHttpResponse.ts:360](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L360)
 
 ***
 
@@ -1760,7 +1760,7 @@ True if the content should be serialized as JSON, otherwise false.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:752](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L752)
+[OutgoingHttpResponse.ts:752](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L752)
 
 ***
 
@@ -1800,15 +1800,19 @@ The JSON string representation of the value.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:827](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L827)
+[OutgoingHttpResponse.ts:827](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L827)
 
 ***
 
 ### create()
 
-> `static` **create**(`options`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
+> `static` **create**\<`T`\>(`options`): `T`
 
 Create an instance of OutgoingHttpResponse.
+
+#### Type Parameters
+
+• **T** *extends* [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md) = [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
 #### Parameters
 
@@ -1818,7 +1822,7 @@ Options for the outgoing HTTP response.
 
 #### Returns
 
-[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
+`T`
 
 A new instance of OutgoingHttpResponse.
 
@@ -1828,4 +1832,4 @@ A new instance of OutgoingHttpResponse.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:43](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/OutgoingHttpResponse.ts#L43)
+[OutgoingHttpResponse.ts:43](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/OutgoingHttpResponse.ts#L43)

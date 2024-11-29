@@ -8,7 +8,7 @@ import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHtt
 /**
  * Options for creating a Redirect HTTP Response.
  */
-interface RedirectResponseOptions extends OutgoingHttpResponseOptions {
+export interface RedirectResponseOptions extends OutgoingHttpResponseOptions {
   url: string | URL
 }
 
@@ -76,8 +76,8 @@ export class RedirectResponse extends OutgoingHttpResponse {
     return this
       .format({
         default: () => '',
-        text: () => `${this.statusMessage}. Redirecting to ${url}`,
-        html: () => `<p>${this.statusMessage}. Redirecting to <a href="${url}">${url}</a></p>`
+        text: () => `${String(this.statusMessage)}. Redirecting to ${url}`,
+        html: () => `<p>${String(this.statusMessage)}. Redirecting to <a href="${url}">${url}</a></p>`
       })
       .setHeader('Content-Length', Buffer.byteLength(String(this.content)).toString())
   }
@@ -92,7 +92,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
       this.targetUrl = this.incomingEvent.getHeader('Referrer', '/')
     }
 
-    const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\/?]+/.exec(String(this.targetUrl))
+    const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\/?]+/.exec(String(this.targetUrl))
     const position = (matches != null) ? matches[0].length + 1 : 0
 
     return this.setHeader('Location', `${String(this.targetUrl).slice(0, position)}${encodeURIComponent(String(this.targetUrl).slice(position))}`)

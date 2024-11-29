@@ -1,7 +1,8 @@
 import { parse } from 'cookie'
 import { Cookie } from './Cookie'
-import { deserializeCookieValue } from './utils'
+import { CookieError } from '../errors/CookieError'
 import { CookieOptions } from '../options/HttpConfig'
+import { isCookieValueSerialized, isCookieValueSigned, unsignCookieValue } from './utils'
 
 /**
  * Class representing a collection of Cookies.
@@ -171,7 +172,32 @@ export class CookieCollection {
     return new Map(
       Object
         .entries(parse(cookie))
-        .map(([name, value]) => [name, deserializeCookieValue(name, value, this.options, this.secret)])
+        .map(([name, value]) => [name, this.deserializeCookieValue(name, value, this.options, this.secret)])
     )
+  }
+
+  /**
+   * Deserialize the cookie value.
+   *
+   * @param name - Cookie name.
+   * @param rawValue - Cookie raw value.
+   * @param secret - Optional secret for unsigning.
+   * @returns A new cookie instance.
+   */
+  private deserializeCookieValue (name: string, rawValue: unknown, options: CookieOptions, secret?: string): Cookie {
+    let value = rawValue
+
+    if (secret !== undefined && isCookieValueSigned(value)) {
+      value = unsignCookieValue(value, secret)
+      if (value === false) {
+        throw new CookieError('Failed to unsign the value.')
+      }
+    }
+
+    if (isCookieValueSerialized(value) && typeof value === 'string') {
+      value = JSON.parse(value.replace('$$j$$:', ''))
+    }
+
+    return Cookie.create(name, value, options)
   }
 }

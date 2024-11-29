@@ -10,9 +10,9 @@ Represents the core HTTP config options for the application.
 
 ## Properties
 
-### app
+### stone
 
-> **app**: `object`
+> **stone**: `object`
 
 The application configuration namespace.
 
@@ -202,10 +202,10 @@ This interface defines the configuration for kernel-level options.
 
 #### kernel.middleware
 
-> **middleware**: `Partial`\<`KernelMiddlewareConfig`\>
+> **middleware**: `MixedPipe`[]
 
 Middleware configuration options for different stages of the kernel's lifecycle.
 
 #### Defined in
 
-[options/HttpConfig.ts:75](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/options/HttpConfig.ts#L75)
+[options/HttpConfig.ts:75](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/options/HttpConfig.ts#L75)

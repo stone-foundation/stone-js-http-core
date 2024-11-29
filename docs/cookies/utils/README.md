@@ -10,7 +10,6 @@
 
 ### Functions
 
-- [deserializeCookieValue](functions/deserializeCookieValue.md)
 - [isCookieValueSerialized](functions/isCookieValueSerialized.md)
 - [isCookieValueSigned](functions/isCookieValueSigned.md)
 - [signCookieValue](functions/signCookieValue.md)

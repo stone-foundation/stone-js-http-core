@@ -1,9 +1,9 @@
-import mime from 'mime'
+// import mime from 'mime'
 import { filesize } from 'filesize'
 import { createHash } from 'node:crypto'
-import { resolve, join } from 'node:path'
+// import { resolve, join } from 'node:path'
 import { File } from '../../src/file/File'
-import { mkdirSync, statSync, writeFileSync, renameSync, rmSync, accessSync, existsSync, readFileSync } from 'node:fs'
+// import { mkdirSync, statSync, writeFileSync, renameSync, rmSync, accessSync, existsSync, readFileSync } from 'node:fs'
 
 const mockHash = {
   update: vi.fn().mockReturnThis(),

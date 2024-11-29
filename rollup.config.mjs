@@ -34,6 +34,7 @@ export default Object.entries(inputs).map(([name, input]) => ({
     output: [{ format: 'es' , file: 'dist/index.d.ts' }],
     plugins: [
       multi(),
+      nodeExternals(), // Must always be before `nodeResolve()`.
       dts(),
       del({
         targets: [

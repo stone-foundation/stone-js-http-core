@@ -38,4 +38,4 @@ A promise that resolves with the uploaded files and fields.
 
 ## Defined in
 
-[utils.ts:145](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/utils.ts#L145)
+[utils.ts:145](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/utils.ts#L145)

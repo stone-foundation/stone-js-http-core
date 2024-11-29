@@ -10,4 +10,4 @@
 
 ## Defined in
 
-[constants.ts:30](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/constants.ts#L30)
+[constants.ts:30](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/constants.ts#L30)

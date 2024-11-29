@@ -1,6 +1,6 @@
 import { sign } from 'cookie-signature'
 import { CookieError } from '../../src/errors/CookieError'
-import { deserializeCookieValue, signCookieValue, unsignCookieValue } from '../../src/cookies/utils'
+import { signCookieValue, unsignCookieValue } from '../../src/cookies/utils'
 
 /**
  * Unit tests for the Cookie class.
@@ -32,7 +32,6 @@ describe('Utils', () => {
   })
 
   it('should throw error if trying to unsign non-signed value', () => {
-    // @ts-expect-error Testing for error
     expect(() => unsignCookieValue(undefined, 'mySecret')).toThrow(CookieError)
   })
 
@@ -43,16 +42,5 @@ describe('Utils', () => {
   it('should throw error if trying to unsign a value with no secret', () => {
     // @ts-expect-error Testing for error
     expect(() => unsignCookieValue('$$s$$:value', undefined)).toThrow(CookieError)
-  })
-
-  it('should deserialize a signed and serialized value', () => {
-    const secret = 'mySecret'
-    const value = { key: 'value' }
-    const newCookie = deserializeCookieValue('test', `$$s$$:${sign(`$$j$$:${JSON.stringify(value)}`, secret)}`, {}, secret)
-    expect(newCookie.value).toEqual(value)
-  })
-
-  it('should throw error if trying to deserialize modified-signed value', () => {
-    expect(() => deserializeCookieValue('test', '$$s$$:value.djdjdkdkd', {}, 'mySecret')).toThrow(CookieError)
   })
 })

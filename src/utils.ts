@@ -4,16 +4,16 @@ import Busboy from 'busboy'
 import typeIs from 'type-is'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
+import { File } from './file/File'
 import onFinished from 'on-finished'
 import contentType from 'content-type'
 import { randomUUID } from 'node:crypto'
 import ipRangeCheck from 'ip-range-check'
 import { createWriteStream } from 'node:fs'
 import { HttpError } from './errors/HttpError'
+import { IncomingHttpHeaders } from 'node:http'
 import { UploadedFile } from './file/UploadedFile'
 import { IncomingMessage, OutgoingMessage } from 'http'
-import { IncomingHttpHeaders } from 'node:http'
-import { File } from './file/File'
 
 /**
  * Check if multipart message.
@@ -87,7 +87,7 @@ export function getProtocol (ip: string, headers: Record<string, string>, encryp
   let protocol = encrypted ? 'https' : 'http'
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
-    protocol = (headers['X-Forwarded-Proto'] ?? headers['x-forwarded-proto'] ?? '').split(',').shift()?.trim() || protocol
+    protocol = (headers['X-Forwarded-Proto'] ?? headers['x-forwarded-proto'] ?? '').split(',').shift()?.trim() ?? protocol
   }
 
   return protocol
@@ -105,7 +105,7 @@ export function getHostname (ip: string, headers: Record<string, string>, { trus
   let hostname = headers.host ?? headers.Host
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
-    hostname = (headers['X-Forwarded-Host'] ?? headers['x-forwarded-host'] ?? '').split(',').shift() || hostname
+    hostname = (headers['X-Forwarded-Host'] ?? headers['x-forwarded-host'] ?? '').split(',').shift() ?? hostname
   }
 
   if (hostname === undefined) return hostname
@@ -157,14 +157,14 @@ export async function getFilesUploads (
 
     busboy
       .on('close', () => resolve(result))
-      .on('error', (error: any) => reject(getHttpError(500, 'Cannot upload files.', error.message, `HTTP_FILE-${error.code}`, error)))
+      .on('error', (error: any) => reject(getHttpError(500, 'Cannot upload files.', error.message, `HTTP_FILE-${String(error.code)}`, error)))
       .on('field', (fieldname, value) => {
         result.fields[fieldname] = value
       })
       .on('file', (fieldname, file, info) => {
         result.files[fieldname] ??= []
         const { filename, mimeType } = info
-        const filepath = join(tmpdir(), `${options.prefix ?? 'file'}-${randomUUID()}`)
+        const filepath = join(tmpdir(), `${String(options.prefix ?? 'file')}-${randomUUID()}`)
         const writeStream = createWriteStream(filepath)
 
         file.on('close', () => {
@@ -172,7 +172,7 @@ export async function getFilesUploads (
         })
 
         writeStream.on('error', (error: any) => {
-          reject(getHttpError(500, 'Error writing file.', error.message, `HTTP_FILE-${error.code}`, error))
+          reject(getHttpError(500, 'Error writing file.', error.message, `HTTP_FILE-${String(error.code)}`, error))
         })
 
         file.pipe(writeStream)
@@ -181,7 +181,7 @@ export async function getFilesUploads (
     if (event instanceof IncomingMessage) { // Handle streamed file uploads.
       event.pipe(busboy)
       event.on('error', (error: any) => {
-        reject(getHttpError(500, 'Incoming message error.', error.message, `HTTP_MSG-${error.code}`, error))
+        reject(getHttpError(500, 'Incoming message error.', error.message, `HTTP_MSG-${String(error.code)}`, error))
       })
     } else { // Handle pre-read file uploads.
       busboy.write(event.body)
@@ -210,19 +210,19 @@ export async function streamFile (
   return await new Promise((resolve, reject) => {
     let streaming = false
     const file = send(message, fileResponse.getEncodedPath(), options)
-    const onaborted = () => reject(getHttpError(400, 'Request aborted.', 'Request aborted.', 'HTTP_FILE-ECONNABORTED'))
+    const onaborted = (): void => reject(getHttpError(400, 'Request aborted.', 'Request aborted.', 'HTTP_FILE-ECONNABORTED'))
 
     onFinished(response, (error: any) => {
       if (error !== undefined) {
         if (error.code === 'ECONNRESET') return onaborted()
-        return reject(getHttpError(500, 'An unexpected error has occurred.', error.message, `HTTP_FILE-${error.code}`, error))
+        return reject(getHttpError(500, 'An unexpected error has occurred.', error.message, `HTTP_FILE-${String(error.code)}`, error))
       }
 
       setImmediate(() => { streaming ? onaborted() : resolve() })
     })
 
     file
-      .on('error', (error) => reject(getHttpError(500, 'An unexpected error has occurred.', error.message, `HTTP_FILE-${error.code}`, error)))
+      .on('error', (error) => reject(getHttpError(500, 'An unexpected error has occurred.', error.message, `HTTP_FILE-${String(error.code)}`, error)))
       .on('directory', () => reject(getHttpError(404, 'This file cannot be found.', 'EISDIR, read', 'HTTP_FILE-EISDIR')))
       .on('headers', (resp) => Object.entries(options.headers).forEach(([key, value]) => resp.setHeader(key, value)))
       .on('stream', () => { streaming = true })

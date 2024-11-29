@@ -1,6 +1,7 @@
-import { Cookie } from '../../src/cookies/Cookie'
+import { sign } from 'cookie-signature'
 import { CookieOptions } from '../../src/options/HttpConfig'
 import { CookieCollection } from '../../src/cookies/CookieCollection'
+import { CookieError } from '../../src/errors/CookieError'
 
 /**
  * Unit tests for the CookieCollection class.
@@ -94,5 +95,20 @@ describe('CookieCollection', () => {
     collection.cookies.forEach((cookie) => {
       expect((cookie).options.secure).toBe(true)
     })
+  })
+
+  it('should deserialize a signed and serialized value', () => {
+    const secret = 'mySecret'
+    const value = { key: 'value' }
+    const collection = CookieCollection.create()
+    // @ts-expect-error Testing private method
+    const newCookie = collection.deserializeCookieValue('test', `$$s$$:${sign(`$$j$$:${JSON.stringify(value)}`, secret)}`, {}, secret)
+    expect(newCookie.value).toEqual(value)
+  })
+
+  it('should throw error if trying to deserialize modified-signed value', () => {
+    const collection = CookieCollection.create()
+    // @ts-expect-error Testing private method
+    expect(() => collection.deserializeCookieValue('test', '$$s$$:value.djdjdkdkd', {}, 'mySecret')).toThrow(CookieError)
   })
 })

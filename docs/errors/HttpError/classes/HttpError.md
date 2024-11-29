@@ -49,7 +49,7 @@ The error options.
 
 #### Defined in
 
-[errors/HttpError.ts:33](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/errors/HttpError.ts#L33)
+[errors/HttpError.ts:31](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L31)
 
 ## Properties
 
@@ -59,7 +59,7 @@ The error options.
 
 #### Defined in
 
-[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/errors/HttpError.ts#L20)
+[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L20)
 
 ***
 
@@ -69,7 +69,7 @@ The error options.
 
 #### Defined in
 
-[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/errors/HttpError.ts#L21)
+[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L21)
 
 ***
 
@@ -79,7 +79,7 @@ The error options.
 
 #### Defined in
 
-[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/errors/HttpError.ts#L22)
+[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L22)
 
 ***
 
@@ -89,4 +89,4 @@ The error options.
 
 #### Defined in
 
-[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/3497087dac965583296f5092cd519a9aa0728373/src/errors/HttpError.ts#L23)
+[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/6c1adf9f449733e34ff7f08818342bd019b968a7/src/errors/HttpError.ts#L23)

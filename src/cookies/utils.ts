@@ -1,7 +1,5 @@
-import { Cookie } from './Cookie'
 import { sign, unsign } from 'cookie-signature'
 import { CookieError } from '../errors/CookieError'
-import { CookieOptions } from '../options/HttpConfig'
 
 /**
  * Check if the value is serialized.
@@ -29,7 +27,7 @@ export const signCookieValue = (value: unknown, secret: string): string => {
     throw new CookieError('Can only sign string value.')
   }
 
-  if (secret == undefined) {
+  if (secret === undefined) {
     throw new CookieError('A secret is required to sign the value.')
   }
 
@@ -59,29 +57,4 @@ export const unsignCookieValue = (value: unknown, secret: string): string | fals
   }
 
   return unsign(value.replace('$$s$$:', ''), secret)
-}
-
-/**
- * Deserialize the cookie value.
- *
- * @param name - Cookie name.
- * @param rawValue - Cookie raw value.
- * @param secret - Optional secret for unsigning.
- * @returns A new cookie instance.
- */
-export const deserializeCookieValue = (name: string, rawValue: unknown, options: CookieOptions, secret?: string): Cookie => {
-  let value = rawValue
-
-  if (secret !== undefined && isCookieValueSigned(value)) {
-    value = unsignCookieValue(value, secret)
-    if (value === false) {
-      throw new CookieError('Failed to unsign the value.')
-    }
-  }
-
-  if (isCookieValueSerialized(value) && typeof value === 'string') {
-    value = JSON.parse(value.replace('$$j$$:', ''))
-  }
-
-  return Cookie.create(name, value, options)
 }

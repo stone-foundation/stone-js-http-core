@@ -20,7 +20,7 @@ export class UploadedFile extends File {
    * @param mimeType - The MIME type of the file.
    * @returns A new UploadedFile instance.
    */
-  static createFile (path: string, originalName: string, mimeType?: string): UploadedFile {
+  static createFile (path: string, originalName: string, mimeType?: string, checkPath: boolean = true): UploadedFile {
     return new this(path, originalName, mimeType)
   }
 
@@ -31,8 +31,8 @@ export class UploadedFile extends File {
    * @param originalName - The original name of the uploaded file.
    * @param mimeType - The MIME type of the file.
    */
-  constructor (path: string, originalName: string, mimeType?: string) {
-    super(path)
+  constructor (path: string, originalName: string, mimeType?: string, checkPath: boolean = true) {
+    super(path, checkPath)
     this.originalName = basename(originalName)
     this.mimeType = mimeType ?? 'application/octet-stream'
   }

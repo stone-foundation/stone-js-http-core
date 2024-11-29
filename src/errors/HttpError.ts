@@ -25,8 +25,6 @@ export class HttpError extends RuntimeError {
   /**
    * Create an HttpError.
    *
-   * @param statusCode - The HTTP status code.
-   * @param body - The HTTP body.
    * @param message - The message to log.
    * @param options - The error options.
    */

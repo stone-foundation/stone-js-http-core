@@ -40,8 +40,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param options - Options for the outgoing HTTP response.
    * @returns A new instance of OutgoingHttpResponse.
    */
-  static create (options: OutgoingHttpResponseOptions): OutgoingHttpResponse {
-    return new this(options)
+  static create<T extends OutgoingHttpResponse = OutgoingHttpResponse>(options: OutgoingHttpResponseOptions): T {
+    return new this(options) as T
   }
 
   /**
@@ -185,7 +185,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    */
   appendHeader (key: string, value: string): this {
     const existingValue = this._headers.get(key)
-    if (existingValue) {
+    if (existingValue !== null) {
       this._headers.set(key, `${existingValue}, ${value}`)
     } else {
       this._headers.set(key, value)
@@ -284,7 +284,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   setCookie (name: string, value: unknown, options: CookieOptions = {}): this {
-    if (!name || typeof name !== 'string') { throw new HttpError('Cookie name must be a non-empty string.') }
+    if (typeof name !== 'string') { throw new HttpError('Cookie name must be a non-empty string.') }
     this._cookieCollection.add(name, value, options)
     return this
   }
@@ -297,7 +297,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   clearCookie (name: string, force = false): this {
-    if (!name || typeof name !== 'string') { throw new HttpError('Cookie name must be a non-empty string.') }
+    if (typeof name !== 'string') { throw new HttpError('Cookie name must be a non-empty string.') }
     this._cookieCollection.remove(name, force)
     return this
   }
@@ -344,7 +344,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    */
   setContentType (value: string): this {
     const mimeType = value.includes('/') ? value : mime.lookup(value)
-    if (mimeType) {
+    if (mimeType !== undefined) {
       return this.setHeader('Content-Type', mimeType)
     } else {
       throw new Error(`Invalid MIME type: ${value}`)
@@ -386,7 +386,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
 
     if (typeof type === 'string' && formats[type] !== undefined) {
       this.setContentType(type).setContent(formats[type]())
-    } else if (formats.default) {
+    } else if (formats.default !== undefined) {
       this.setContent(formats.default())
     } else {
       this.setStatus(HTTP_NOT_ACCEPTABLE).setContent(`Invalid types (${types.join(',')})`)
@@ -401,7 +401,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param field - The field to add to the Vary header.
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
-  addVary (field: string): this {
+  addVary (field: string | string[]): this {
     vary(this as any, field)
     return this
   }
@@ -533,9 +533,9 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param location - The optional location to check for redirection.
    * @returns True if the status code indicates a redirect, otherwise false.
    */
-  isRedirect (location: string | null = null): boolean {
+  isRedirect (location?: string): boolean {
     const code = this.statusCode ?? 500
-    return [301, 302, 303, 307, 308].includes(code) && (location === null || !!this.getHeader('Location'))
+    return [301, 302, 303, 307, 308].includes(code) && (location === undefined || this.getHeader('Location') === undefined)
   }
 
   /**
@@ -638,7 +638,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
             this.setContentType('bin')
           } else {
             this.setContentType('json')
-            this.setContent(this.content, this.blueprint?.get('app.http.json', {}))
+            this.setContent(this.content, this.blueprint?.get('stone.http.json', {}))
           }
           break
       }
@@ -682,7 +682,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   protected setContentHeaders (): this {
     let length = 0
     const type = this.getHeader('Content-Type')
-    const etagFn = this.blueprint?.get('app.http.etag.function', this.defaultEtagFn.bind(this))
+    const etagFn = this.blueprint?.get('stone.http.etag.function', this.defaultEtagFn.bind(this))
     const generateETag = !this.hasHeader('ETag') && typeof etagFn === 'function'
 
     if (typeof this.content === 'string' && typeof type === 'string' && !this.charsetRegExp.test(type)) {
@@ -780,8 +780,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   protected prepareCookies (): this {
     if (!this._cookieCollection.isEmpty()) {
       this._cookieCollection
-        .setSecret(this.blueprint?.get('app.secret') ?? '')
-        .setOptions(this.blueprint?.get('app.http.cookie.options') ?? {})
+        .setSecret(this.blueprint?.get('stone.secret') ?? '')
+        .setOptions(this.blueprint?.get('stone.http.cookie.options') ?? {})
 
       if (this.incomingEvent.isSecure) {
         this.secureCookies(true)
@@ -832,7 +832,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   ): string {
     const json = JSON.stringify(value, replacer, spaces)
 
-    if (escape) {
+    if (escape === true) {
       return json.replace(/[<>&]/g, (c) => {
         return { '<': '\u003c', '>': '\u003e', '&': '\u0026' }[c] ?? c
       })

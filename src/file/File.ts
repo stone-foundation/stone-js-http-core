@@ -99,8 +99,8 @@ export class File {
 
     try {
       renameSync(this.getPath(), target.getPath())
-    } catch (error) {
-      throw new FileError(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${error}).`)
+    } catch (error: any) {
+      throw new FileError(`Could not move the file "${this.getPath()}" to "${target.getPath()}" (${String(error.message)}).`)
     }
 
     chmodSync(target.getPath(), 0o666)
@@ -116,8 +116,8 @@ export class File {
   remove (force: boolean = false): this {
     try {
       rmSync(this.path, { force })
-    } catch (error) {
-      throw new FileError(`Could not remove this file (${this.path}) (${error}).`)
+    } catch (error: any) {
+      throw new FileError(`Could not remove this file (${this.path}) (${String(error.message)}).`)
     }
     return this
   }

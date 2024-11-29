@@ -1,6 +1,6 @@
 import { Encoding } from 'node:crypto'
+import { MixedPipe } from '@stone-js/pipeline'
 import { CookieSameSite } from '../declarations'
-import { KernelMiddlewareConfig } from '@stone-js/core'
 
 export interface HttpCorsConfig {
   /**
@@ -72,7 +72,7 @@ export interface HttpConfig {
   /**
    * The application configuration namespace.
    */
-  app: {
+  stone: {
     /**
      * HTTP configuration options that are commonly used across adapters.
      */
@@ -203,7 +203,7 @@ export interface HttpConfig {
       /**
        * Middleware configuration options for different stages of the kernel's lifecycle.
        */
-      middleware: Partial<KernelMiddlewareConfig>
+      middleware: MixedPipe[]
     }
   }
 }
@@ -212,7 +212,7 @@ export interface HttpConfig {
  * Default HTTP configuration options for the application.
  */
 export const http: HttpConfig = {
-  app: {
+  stone: {
     http: {
       hosts: {
         trusted: [],
@@ -265,9 +265,7 @@ export const http: HttpConfig = {
       }
     },
     kernel: {
-      middleware: {
-        event: []
-      }
+      middleware: []
     }
   }
 }

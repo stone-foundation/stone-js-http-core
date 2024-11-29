@@ -11,7 +11,7 @@ import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHtt
 /**
  * Options for creating a BinaryFile HTTP Response.
  */
-interface BinaryFileResponseOptions extends OutgoingHttpResponseOptions {
+export interface BinaryFileResponseOptions extends OutgoingHttpResponseOptions {
   autoEtag?: boolean
   file: string | File
   autoLastModified?: boolean
@@ -118,7 +118,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
    * @throws TypeError if content is provided.
    */
   setContent (content: unknown): this {
-    if (content) {
+    if (content !== undefined) {
       throw new FileError('The content cannot be set on a BinaryFileResponse instance.')
     }
 
@@ -180,7 +180,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
     const fileSize = this.file.getSize()
     if (fileSize === undefined) return this
 
-    const etagFn = this.blueprint?.get('app.http.etag.function', this.defaultEtagFn.bind(this))
+    const etagFn = this.blueprint?.get('stone.http.etag.function', this.defaultEtagFn.bind(this))
 
     this.removeHeader('Transfer-Encoding').setHeader('Content-Length', String(fileSize))
 
@@ -202,7 +202,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
    * @returns The validated file instance.
    */
   private getValidatedFile (file: string | File): File {
-    if (!file) {
+    if (file === undefined) {
       throw new FileError('file argument is required.')
     }
 
