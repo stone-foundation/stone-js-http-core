@@ -12,4 +12,4 @@ Default HTTP configuration options for the application.
 
 ## Defined in
 
-[options/HttpConfig.ts:214](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L214)
+[options/HttpConfig.ts:214](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L214)

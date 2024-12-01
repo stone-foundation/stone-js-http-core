@@ -83,11 +83,11 @@ export function isIpTrusted (trusted: string | string[], untrusted: string | str
  * @param options - Options for trusted and untrusted IPs.
  * @returns The protocol (http or https).
  */
-export function getProtocol (ip: string, headers: Record<string, string>, encrypted: boolean, { trustedIp, untrustedIp }: { trustedIp: string[], untrustedIp: string[] }): string {
+export function getProtocol (ip: string, headers: IncomingHttpHeaders, encrypted: boolean, { trustedIp, untrustedIp }: { trustedIp: string[], untrustedIp: string[] }): string {
   let protocol = encrypted ? 'https' : 'http'
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
-    protocol = (headers['X-Forwarded-Proto'] ?? headers['x-forwarded-proto'])?.split(',').shift()?.trim() ?? protocol
+    protocol = (headers['X-Forwarded-Proto'] as string ?? headers['x-forwarded-proto'] as string)?.split(',').shift()?.trim() ?? protocol
   }
 
   return protocol
@@ -101,11 +101,11 @@ export function getProtocol (ip: string, headers: Record<string, string>, encryp
  * @param options - Options for trusted IPs, fallback, etc.
  * @returns The hostname from the request.
  */
-export function getHostname (ip: string, headers: Record<string, string>, { trusted, trustedIp, untrustedIp }: { trusted: Array<string | RegExp>, trustedIp: string[], untrustedIp: string[] }): string {
-  let hostname = headers.host ?? headers.Host
+export function getHostname (ip: string, headers: IncomingHttpHeaders, { trusted, trustedIp, untrustedIp }: { trusted: Array<string | RegExp>, trustedIp: string[], untrustedIp: string[] }): string | undefined {
+  let hostname = (headers.host ?? headers.Host) as string | undefined
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
-    hostname = (headers['X-Forwarded-Host'] ?? headers['x-forwarded-host'])?.split(',').shift() ?? hostname
+    hostname = (headers['X-Forwarded-Host'] as string ?? headers['x-forwarded-host'] as string)?.split(',').shift() ?? hostname
   }
 
   if (hostname === undefined) return hostname
@@ -205,7 +205,7 @@ export async function streamFile (
   message: IncomingMessage,
   response: OutgoingMessage,
   fileResponse: File,
-  options: send.SendOptions & { headers: Record<string, string> }
+  options: send.SendOptions & { headers: IncomingHttpHeaders }
 ): Promise<void> {
   return await new Promise((resolve, reject) => {
     let streaming = false

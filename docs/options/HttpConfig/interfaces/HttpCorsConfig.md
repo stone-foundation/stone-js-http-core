@@ -16,7 +16,7 @@ The headers that are allowed in CORS requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:29](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L29)
+[options/HttpConfig.ts:29](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L29)
 
 ***
 
@@ -28,7 +28,7 @@ Whether credentials are allowed in CORS requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:21](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L21)
+[options/HttpConfig.ts:21](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L21)
 
 ***
 
@@ -40,7 +40,7 @@ The headers that are exposed to the client in CORS responses.
 
 #### Defined in
 
-[options/HttpConfig.ts:25](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L25)
+[options/HttpConfig.ts:25](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L25)
 
 ***
 
@@ -52,7 +52,7 @@ The maximum age for preflight requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:17](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L17)
+[options/HttpConfig.ts:17](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L17)
 
 ***
 
@@ -64,7 +64,7 @@ The allowed methods for CORS requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:13](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L13)
+[options/HttpConfig.ts:13](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L13)
 
 ***
 
@@ -76,7 +76,7 @@ The allowed origins for CORS requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:9](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L9)
+[options/HttpConfig.ts:9](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L9)
 
 ***
 
@@ -88,7 +88,7 @@ Whether to stop processing preflight requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:37](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L37)
+[options/HttpConfig.ts:37](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L37)
 
 ***
 
@@ -100,4 +100,4 @@ The HTTP status code to use for successful preflight requests.
 
 #### Defined in
 
-[options/HttpConfig.ts:33](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L33)
+[options/HttpConfig.ts:33](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L33)

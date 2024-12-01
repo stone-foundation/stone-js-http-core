@@ -40,4 +40,4 @@ HttpError with appropriate details.
 
 ## Defined in
 
-[utils.ts:243](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/utils.ts#L243)
+[utils.ts:243](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/utils.ts#L243)

@@ -46,7 +46,7 @@ If the URL option is not a valid instance of URL.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:83](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L83)
+[IncomingHttpEvent.ts:83](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L83)
 
 ## Properties
 
@@ -58,7 +58,7 @@ The headers of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:56](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L56)
+[IncomingHttpEvent.ts:56](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L56)
 
 ***
 
@@ -70,7 +70,7 @@ The content negotiation handler for the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:54](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L54)
+[IncomingHttpEvent.ts:54](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L54)
 
 ***
 
@@ -82,7 +82,7 @@ The body of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:46](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L46)
+[IncomingHttpEvent.ts:46](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L46)
 
 ***
 
@@ -94,7 +94,7 @@ The cookies included in the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:58](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L58)
+[IncomingHttpEvent.ts:58](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L58)
 
 ***
 
@@ -106,7 +106,7 @@ The files included in the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:48](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L48)
+[IncomingHttpEvent.ts:48](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L48)
 
 ***
 
@@ -118,7 +118,7 @@ The IP address of the client making the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:40](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L40)
+[IncomingHttpEvent.ts:40](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L40)
 
 ***
 
@@ -130,7 +130,7 @@ The list of IP addresses, typically for proxies.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:42](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L42)
+[IncomingHttpEvent.ts:42](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L42)
 
 ***
 
@@ -142,7 +142,7 @@ The HTTP method of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:52](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L52)
+[IncomingHttpEvent.ts:52](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L52)
 
 ***
 
@@ -154,7 +154,7 @@ The protocol used for the request (e.g., http or https).
 
 #### Defined in
 
-[IncomingHttpEvent.ts:60](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L60)
+[IncomingHttpEvent.ts:60](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L60)
 
 ***
 
@@ -166,7 +166,7 @@ The query parameters of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:50](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L50)
+[IncomingHttpEvent.ts:50](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L50)
 
 ***
 
@@ -178,7 +178,7 @@ The query string of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:62](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L62)
+[IncomingHttpEvent.ts:62](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L62)
 
 ***
 
@@ -192,7 +192,7 @@ The query string of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:65](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L65)
+[IncomingHttpEvent.ts:65](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L65)
 
 ***
 
@@ -204,7 +204,7 @@ The URL of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:44](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L44)
+[IncomingHttpEvent.ts:44](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L44)
 
 ***
 
@@ -218,7 +218,7 @@ The URL of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:64](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L64)
+[IncomingHttpEvent.ts:64](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L64)
 
 ***
 
@@ -228,7 +228,7 @@ The URL of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:37](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L37)
+[IncomingHttpEvent.ts:37](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L37)
 
 ## Accessors
 
@@ -246,7 +246,7 @@ The charset specified in the content-type header.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:230](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L230)
+[IncomingHttpEvent.ts:230](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L230)
 
 ***
 
@@ -264,7 +264,7 @@ An array of acceptable character sets for the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:215](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L215)
+[IncomingHttpEvent.ts:215](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L215)
 
 ***
 
@@ -282,7 +282,7 @@ The content type specified in the headers.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:235](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L235)
+[IncomingHttpEvent.ts:235](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L235)
 
 ***
 
@@ -300,7 +300,7 @@ The decoded pathname of the URL.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:126](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L126)
+[IncomingHttpEvent.ts:126](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L126)
 
 ***
 
@@ -318,7 +318,7 @@ An array of acceptable encodings for the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:225](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L225)
+[IncomingHttpEvent.ts:225](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L225)
 
 ***
 
@@ -336,7 +336,7 @@ The ETag of the request, if present.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:205](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L205)
+[IncomingHttpEvent.ts:205](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L205)
 
 ***
 
@@ -354,7 +354,7 @@ The hash part of the URL.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:135](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L135)
+[IncomingHttpEvent.ts:135](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L135)
 
 ***
 
@@ -372,7 +372,7 @@ The headers of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:121](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L121)
+[IncomingHttpEvent.ts:121](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L121)
 
 ***
 
@@ -390,7 +390,7 @@ The host of the URL (hostname:port).
 
 #### Defined in
 
-[IncomingHttpEvent.ts:140](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L140)
+[IncomingHttpEvent.ts:140](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L140)
 
 ***
 
@@ -408,7 +408,7 @@ The hostname of the URL.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:145](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L145)
+[IncomingHttpEvent.ts:145](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L145)
 
 ***
 
@@ -426,7 +426,7 @@ Whether the request is an AJAX request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:190](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L190)
+[IncomingHttpEvent.ts:190](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L190)
 
 ***
 
@@ -444,7 +444,7 @@ Whether the request was prefetch.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:200](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L200)
+[IncomingHttpEvent.ts:200](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L200)
 
 ***
 
@@ -462,7 +462,7 @@ Whether the request was made over a secure connection.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:180](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L180)
+[IncomingHttpEvent.ts:180](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L180)
 
 ***
 
@@ -480,7 +480,7 @@ Whether the request is an XMLHttpRequest.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:185](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L185)
+[IncomingHttpEvent.ts:185](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L185)
 
 ***
 
@@ -498,7 +498,7 @@ An array of acceptable languages for the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:220](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L220)
+[IncomingHttpEvent.ts:220](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L220)
 
 ***
 
@@ -516,7 +516,7 @@ The route parameters.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:150](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L150)
+[IncomingHttpEvent.ts:150](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L150)
 
 ***
 
@@ -534,7 +534,7 @@ The full path including pathname and search query.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:155](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L155)
+[IncomingHttpEvent.ts:155](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L155)
 
 ***
 
@@ -552,7 +552,7 @@ The pathname of the URL.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:160](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L160)
+[IncomingHttpEvent.ts:160](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L160)
 
 ***
 
@@ -570,7 +570,7 @@ The protocol of the URL (e.g., "http" or "https").
 
 #### Defined in
 
-[IncomingHttpEvent.ts:170](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L170)
+[IncomingHttpEvent.ts:170](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L170)
 
 ***
 
@@ -588,7 +588,7 @@ The URL segments split by '/'.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:175](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L175)
+[IncomingHttpEvent.ts:175](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L175)
 
 ***
 
@@ -606,7 +606,7 @@ An array of acceptable content types for the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:210](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L210)
+[IncomingHttpEvent.ts:210](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L210)
 
 ***
 
@@ -624,7 +624,7 @@ The full URL as a string.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:165](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L165)
+[IncomingHttpEvent.ts:165](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L165)
 
 ***
 
@@ -642,7 +642,7 @@ The user agent of the request.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:195](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L195)
+[IncomingHttpEvent.ts:195](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L195)
 
 ## Methods
 
@@ -668,7 +668,7 @@ The first accepted charset, or false if none are accepted.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:341](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L341)
+[IncomingHttpEvent.ts:341](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L341)
 
 ***
 
@@ -694,7 +694,7 @@ The first accepted encoding, or false if none are accepted.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:331](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L331)
+[IncomingHttpEvent.ts:331](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L331)
 
 ***
 
@@ -720,7 +720,7 @@ The first accepted language, or false if none are accepted.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:351](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L351)
+[IncomingHttpEvent.ts:351](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L351)
 
 ***
 
@@ -746,7 +746,7 @@ The first accepted type, or false if none are accepted.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:321](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L321)
+[IncomingHttpEvent.ts:321](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L321)
 
 ***
 
@@ -772,7 +772,7 @@ An object containing the filtered files.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:453](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L453)
+[IncomingHttpEvent.ts:453](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L453)
 
 ***
 
@@ -790,7 +790,7 @@ The generated fingerprint as a base64 string.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:588](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L588)
+[IncomingHttpEvent.ts:588](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L588)
 
 ***
 
@@ -835,7 +835,7 @@ The value of the key or the fallback.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:255](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L255)
+[IncomingHttpEvent.ts:255](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L255)
 
 ***
 
@@ -871,7 +871,7 @@ The cookie value or the fallback.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:299](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L299)
+[IncomingHttpEvent.ts:299](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L299)
 
 ***
 
@@ -897,7 +897,7 @@ The file if it exists, otherwise undefined.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:463](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L463)
+[IncomingHttpEvent.ts:463](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L463)
 
 ***
 
@@ -923,7 +923,7 @@ The corresponding file extension, or undefined if not found.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:371](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L371)
+[IncomingHttpEvent.ts:371](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L371)
 
 ***
 
@@ -963,7 +963,7 @@ If the header name is not a valid string.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:274](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L274)
+[IncomingHttpEvent.ts:274](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L274)
 
 ***
 
@@ -989,7 +989,7 @@ The corresponding MIME type, or undefined if not found.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:361](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L361)
+[IncomingHttpEvent.ts:361](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L361)
 
 ***
 
@@ -1021,7 +1021,7 @@ The value of the parameter if it exists, otherwise undefined.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:605](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L605)
+[IncomingHttpEvent.ts:605](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L605)
 
 ***
 
@@ -1039,7 +1039,7 @@ The route parameter or the route object.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:579](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L579)
+[IncomingHttpEvent.ts:579](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L579)
 
 ***
 
@@ -1061,7 +1061,7 @@ The route resolver function.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:559](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L559)
+[IncomingHttpEvent.ts:559](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L559)
 
 ***
 
@@ -1087,7 +1087,7 @@ The URI with or without the domain.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:521](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L521)
+[IncomingHttpEvent.ts:521](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L521)
 
 ***
 
@@ -1109,7 +1109,7 @@ The user object, resolved through a user resolver function if available.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:530](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L530)
+[IncomingHttpEvent.ts:530](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L530)
 
 ***
 
@@ -1131,7 +1131,7 @@ The user resolver function.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:539](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L539)
+[IncomingHttpEvent.ts:539](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L539)
 
 ***
 
@@ -1157,7 +1157,7 @@ True if the cookie exists, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:310](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L310)
+[IncomingHttpEvent.ts:310](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L310)
 
 ***
 
@@ -1183,7 +1183,7 @@ True if the file exists, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:473](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L473)
+[IncomingHttpEvent.ts:473](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L473)
 
 ***
 
@@ -1209,7 +1209,7 @@ True if the header exists, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:287](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L287)
+[IncomingHttpEvent.ts:287](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L287)
 
 ***
 
@@ -1235,7 +1235,7 @@ True if the key exists, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:417](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L417)
+[IncomingHttpEvent.ts:417](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L417)
 
 ***
 
@@ -1261,7 +1261,7 @@ The best match, or false if no match is found.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:381](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L381)
+[IncomingHttpEvent.ts:381](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L381)
 
 ***
 
@@ -1287,7 +1287,7 @@ True if the cache is fresh, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:427](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L427)
+[IncomingHttpEvent.ts:427](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L427)
 
 ***
 
@@ -1313,7 +1313,7 @@ True if the event method matches, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:483](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L483)
+[IncomingHttpEvent.ts:483](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L483)
 
 ***
 
@@ -1331,7 +1331,7 @@ True if the method is cacheable, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:501](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L501)
+[IncomingHttpEvent.ts:501](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L501)
 
 ***
 
@@ -1349,7 +1349,7 @@ True if the method is safe, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:492](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L492)
+[IncomingHttpEvent.ts:492](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L492)
 
 ***
 
@@ -1375,7 +1375,7 @@ True if the cache is stale, otherwise false.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:443](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L443)
+[IncomingHttpEvent.ts:443](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L443)
 
 ***
 
@@ -1407,7 +1407,7 @@ The value of the key or the fallback.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:404](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L404)
+[IncomingHttpEvent.ts:404](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L404)
 
 ***
 
@@ -1439,7 +1439,7 @@ The parsed range, or undefined if not applicable.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:392](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L392)
+[IncomingHttpEvent.ts:392](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L392)
 
 ***
 
@@ -1465,7 +1465,7 @@ The current instance for method chaining.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:569](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L569)
+[IncomingHttpEvent.ts:569](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L569)
 
 ***
 
@@ -1491,7 +1491,7 @@ The current instance for method chaining.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:549](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L549)
+[IncomingHttpEvent.ts:549](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L549)
 
 ***
 
@@ -1517,7 +1517,7 @@ The full URL for the given path.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:511](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L511)
+[IncomingHttpEvent.ts:511](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L511)
 
 ***
 
@@ -1547,4 +1547,4 @@ A new instance of IncomingHttpEvent.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:73](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/IncomingHttpEvent.ts#L73)
+[IncomingHttpEvent.ts:73](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L73)

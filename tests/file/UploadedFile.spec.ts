@@ -1,4 +1,4 @@
-import mime from 'mime'
+import mime from 'mime/lite'
 import { Mock } from 'vitest'
 import { existsSync } from 'node:fs'
 import { basename, extname } from 'node:path'
@@ -7,7 +7,7 @@ import { UploadedFile } from '../../src/file/UploadedFile'
 import { File } from '../../src/file/File'
 
 vi.mock('node:path')
-vi.mock('mime')
+vi.mock('mime/lite')
 vi.mock('node:fs', () => ({
   existsSync: vi.fn()
 }))

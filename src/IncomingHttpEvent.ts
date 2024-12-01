@@ -1,5 +1,5 @@
-import mime from 'mime'
 import fresh from 'fresh'
+import mime from 'mime/lite'
 import typeIs from 'type-is'
 import accepts from 'accepts'
 import { URL } from 'node:url'

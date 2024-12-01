@@ -1,4 +1,4 @@
-import mime from 'mime'
+import mime from 'mime/lite'
 import { filesize } from 'filesize'
 import { createHash } from 'node:crypto'
 import { FileError } from '../errors/FileError'

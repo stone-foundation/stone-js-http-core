@@ -38,4 +38,4 @@ A new instance of JsonpResponse.
 
 ## Defined in
 
-[HttpResponse.ts:161](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/HttpResponse.ts#L161)
+[HttpResponse.ts:161](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/HttpResponse.ts#L161)

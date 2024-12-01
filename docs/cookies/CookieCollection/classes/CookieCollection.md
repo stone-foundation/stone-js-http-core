@@ -42,7 +42,7 @@ Secret value to sign and unsign cookies.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:33](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L33)
+[cookies/CookieCollection.ts:33](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L33)
 
 ## Methods
 
@@ -78,7 +78,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:46](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L46)
+[cookies/CookieCollection.ts:46](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L46)
 
 ***
 
@@ -106,7 +106,7 @@ If true, serialize the cookies.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:105](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L105)
+[cookies/CookieCollection.ts:105](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L105)
 
 ***
 
@@ -130,7 +130,7 @@ If true, remove only from collection without setting expiry.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:124](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L124)
+[cookies/CookieCollection.ts:124](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L124)
 
 ***
 
@@ -160,7 +160,7 @@ Fallback value if the cookie does not exist.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:72](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L72)
+[cookies/CookieCollection.ts:72](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L72)
 
 ***
 
@@ -184,7 +184,7 @@ Cookie name.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:81](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L81)
+[cookies/CookieCollection.ts:81](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L81)
 
 ***
 
@@ -200,7 +200,7 @@ Check if the collection is empty.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:115](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L115)
+[cookies/CookieCollection.ts:115](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L115)
 
 ***
 
@@ -230,7 +230,7 @@ If true, remove only from collection without setting expiry.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:91](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L91)
+[cookies/CookieCollection.ts:91](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L91)
 
 ***
 
@@ -254,7 +254,7 @@ Whether the cookies are secure.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:138](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L138)
+[cookies/CookieCollection.ts:138](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L138)
 
 ***
 
@@ -278,7 +278,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:158](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L158)
+[cookies/CookieCollection.ts:158](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L158)
 
 ***
 
@@ -302,7 +302,7 @@ Secret value.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:148](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L148)
+[cookies/CookieCollection.ts:148](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L148)
 
 ***
 
@@ -338,7 +338,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:58](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L58)
+[cookies/CookieCollection.ts:58](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L58)
 
 ***
 
@@ -374,4 +374,4 @@ Secret value to sign and unsign cookies.
 
 #### Defined in
 
-[cookies/CookieCollection.ts:22](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/CookieCollection.ts#L22)
+[cookies/CookieCollection.ts:22](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/CookieCollection.ts#L22)

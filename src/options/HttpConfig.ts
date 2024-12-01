@@ -101,11 +101,11 @@ export interface HttpConfig {
         /**
          * A list of trusted proxies.
          */
-        trusted: string[]
+        trustedIp: string[]
         /**
          * A list of untrusted proxies.
          */
-        untrusted: string[]
+        untrustedIp: string[]
       }
       /**
        * Configuration for request body parsing.
@@ -118,7 +118,7 @@ export interface HttpConfig {
         /**
          * The content type of the request body.
          */
-        type: string
+        defaultType: string
         /**
          * The default character set for the request body.
          */
@@ -156,7 +156,7 @@ export interface HttpConfig {
         /**
          * Configuration for file responses.
          */
-        response: Record<string, any>
+        download: Record<string, any>
       }
       /**
        * JSONP-related configuration options.
@@ -220,12 +220,12 @@ export const http: HttpConfig = {
         onlySubdomain: true
       },
       proxies: {
-        trusted: [],
-        untrusted: []
+        trustedIp: [],
+        untrustedIp: []
       },
       body: {
         limit: '100kb',
-        type: 'text/plain',
+        defaultType: 'text/plain',
         defaultCharset: 'utf-8'
       },
       cache: {},
@@ -240,7 +240,7 @@ export const http: HttpConfig = {
       },
       files: {
         upload: {},
-        response: {}
+        download: {}
       },
       jsonp: {
         callback: {

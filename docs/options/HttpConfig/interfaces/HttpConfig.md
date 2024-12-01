@@ -34,17 +34,17 @@ Configuration for request body parsing.
 
 The default character set for the request body.
 
+##### http.body.defaultType
+
+> **defaultType**: `string`
+
+The content type of the request body.
+
 ##### http.body.limit
 
 > **limit**: `string`
 
 The maximum size of the request body.
-
-##### http.body.type
-
-> **type**: `string`
-
-The content type of the request body.
 
 ##### http.cache
 
@@ -108,9 +108,9 @@ A custom function for generating ETags.
 
 File upload and response configuration options.
 
-##### http.files.response
+##### http.files.download
 
-> **response**: `Record`\<`string`, `any`\>
+> **download**: `Record`\<`string`, `any`\>
 
 Configuration for file responses.
 
@@ -174,15 +174,15 @@ The name of the JSONP callback parameter.
 
 Proxy-related configuration options.
 
-##### http.proxies.trusted
+##### http.proxies.trustedIp
 
-> **trusted**: `string`[]
+> **trustedIp**: `string`[]
 
 A list of trusted proxies.
 
-##### http.proxies.untrusted
+##### http.proxies.untrustedIp
 
-> **untrusted**: `string`[]
+> **untrustedIp**: `string`[]
 
 A list of untrusted proxies.
 
@@ -212,4 +212,4 @@ Middleware configuration options for different stages of the kernel's lifecycle.
 
 #### Defined in
 
-[options/HttpConfig.ts:75](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/options/HttpConfig.ts#L75)
+[options/HttpConfig.ts:75](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/options/HttpConfig.ts#L75)

@@ -30,4 +30,4 @@ Secret for unsigning.
 
 ## Defined in
 
-[cookies/utils.ts:46](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/cookies/utils.ts#L46)
+[cookies/utils.ts:46](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/utils.ts#L46)

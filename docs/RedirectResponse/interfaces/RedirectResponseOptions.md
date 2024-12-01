@@ -28,7 +28,7 @@ Options for creating a Redirect HTTP Response.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/OutgoingHttpResponse.ts#L21)
+[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/OutgoingHttpResponse.ts#L21)
 
 ***
 
@@ -38,4 +38,4 @@ Options for creating a Redirect HTTP Response.
 
 #### Defined in
 
-[RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/RedirectResponse.ts#L12)
+[RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/RedirectResponse.ts#L12)

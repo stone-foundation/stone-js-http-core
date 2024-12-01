@@ -30,7 +30,7 @@ export default Object.entries(inputs).map(([name, input]) => ({
   ]
 })).concat([
   {
-    input: 'dist/*.d.ts',
+    input: 'dist/**/*.d.ts',
     output: [{ format: 'es' , file: 'dist/index.d.ts' }],
     plugins: [
       multi(),

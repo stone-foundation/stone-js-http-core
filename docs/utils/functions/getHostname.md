@@ -6,7 +6,7 @@
 
 # Function: getHostname()
 
-> **getHostname**(`ip`, `headers`, `options`): `string`
+> **getHostname**(`ip`, `headers`, `options`): `string` \| `undefined`
 
 Get hostname.
 
@@ -20,7 +20,7 @@ The IP address of the request.
 
 ### headers
 
-`Record`\<`string`, `string`\>
+`IncomingHttpHeaders`
 
 The headers from the incoming request.
 
@@ -42,10 +42,10 @@ Options for trusted IPs, fallback, etc.
 
 ## Returns
 
-`string`
+`string` \| `undefined`
 
 The hostname from the request.
 
 ## Defined in
 
-[utils.ts:104](https://github.com/stonemjs/http-core/blob/89981cacc9858cf786fba9df03b328b6b56a5b75/src/utils.ts#L104)
+[utils.ts:104](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/utils.ts#L104)
