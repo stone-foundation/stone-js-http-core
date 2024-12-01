@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md)
+[**HTTP Core Documentation v0.0.2**](../../../README.md)
 
 ***
 
@@ -40,7 +40,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/Cookie.ts:28](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L28)
+[cookies/Cookie.ts:28](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L28)
 
 ## Properties
 
@@ -50,7 +50,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/Cookie.ts:9](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L9)
+[cookies/Cookie.ts:9](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L9)
 
 ***
 
@@ -60,7 +60,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/Cookie.ts:11](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L11)
+[cookies/Cookie.ts:11](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L11)
 
 ***
 
@@ -70,7 +70,7 @@ Cookie options.
 
 #### Defined in
 
-[cookies/Cookie.ts:10](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L10)
+[cookies/Cookie.ts:10](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L10)
 
 ## Methods
 
@@ -102,7 +102,7 @@ A new cookie instance.
 
 #### Defined in
 
-[cookies/Cookie.ts:76](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L76)
+[cookies/Cookie.ts:76](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L76)
 
 ***
 
@@ -126,7 +126,7 @@ Optional secret for signing.
 
 #### Defined in
 
-[cookies/Cookie.ts:56](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L56)
+[cookies/Cookie.ts:56](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L56)
 
 ***
 
@@ -150,7 +150,7 @@ Expiration date.
 
 #### Defined in
 
-[cookies/Cookie.ts:38](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L38)
+[cookies/Cookie.ts:38](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L38)
 
 ***
 
@@ -174,7 +174,7 @@ Whether the cookie is secure.
 
 #### Defined in
 
-[cookies/Cookie.ts:47](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L47)
+[cookies/Cookie.ts:47](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L47)
 
 ***
 
@@ -210,4 +210,4 @@ Cookie options.
 
 #### Defined in
 
-[cookies/Cookie.ts:19](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/Cookie.ts#L19)
+[cookies/Cookie.ts:19](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/Cookie.ts#L19)

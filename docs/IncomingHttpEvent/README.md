@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.0**](../README.md)
+[**HTTP Core Documentation v0.0.2**](../README.md)
 
 ***
 

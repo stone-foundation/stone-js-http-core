@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.0**](../../../README.md)
+[**HTTP Core Documentation v0.0.2**](../../../README.md)
 
 ***
 
@@ -24,4 +24,4 @@ The value to check.
 
 ## Defined in
 
-[cookies/utils.ts:16](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/cookies/utils.ts#L16)
+[cookies/utils.ts:16](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/cookies/utils.ts#L16)

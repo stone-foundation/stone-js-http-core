@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md)
+[**HTTP Core Documentation v0.0.2**](../../README.md)
 
 ***
 
@@ -28,7 +28,7 @@ Options for creating a Redirect HTTP Response.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/OutgoingHttpResponse.ts#L21)
+[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/OutgoingHttpResponse.ts#L21)
 
 ***
 
@@ -38,4 +38,4 @@ Options for creating a Redirect HTTP Response.
 
 #### Defined in
 
-[RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/RedirectResponse.ts#L12)
+[RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/RedirectResponse.ts#L12)

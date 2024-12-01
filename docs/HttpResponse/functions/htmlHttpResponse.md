@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md)
+[**HTTP Core Documentation v0.0.2**](../../README.md)
 
 ***
 
@@ -38,4 +38,4 @@ A new instance of OutgoingHttpResponse.
 
 ## Defined in
 
-[HttpResponse.ts:137](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/HttpResponse.ts#L137)
+[HttpResponse.ts:137](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/HttpResponse.ts#L137)

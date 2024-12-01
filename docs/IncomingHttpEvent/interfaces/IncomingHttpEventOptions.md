@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.0**](../../README.md)
+[**HTTP Core Documentation v0.0.2**](../../README.md)
 
 ***
 
@@ -24,7 +24,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:26](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L26)
+[IncomingHttpEvent.ts:26](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L26)
 
 ***
 
@@ -34,7 +34,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:25](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L25)
+[IncomingHttpEvent.ts:25](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L25)
 
 ***
 
@@ -44,7 +44,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:27](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L27)
+[IncomingHttpEvent.ts:27](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L27)
 
 ***
 
@@ -54,7 +54,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:28](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L28)
+[IncomingHttpEvent.ts:28](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L28)
 
 ***
 
@@ -64,7 +64,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:20](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L20)
+[IncomingHttpEvent.ts:20](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L20)
 
 ***
 
@@ -74,7 +74,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:21](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L21)
+[IncomingHttpEvent.ts:21](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L21)
 
 ***
 
@@ -84,7 +84,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:23](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L23)
+[IncomingHttpEvent.ts:23](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L23)
 
 ***
 
@@ -94,7 +94,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:22](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L22)
+[IncomingHttpEvent.ts:22](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L22)
 
 ***
 
@@ -104,7 +104,7 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:24](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L24)
+[IncomingHttpEvent.ts:24](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L24)
 
 ***
 
@@ -114,4 +114,4 @@ IncomingHttpEventOptions interface.
 
 #### Defined in
 
-[IncomingHttpEvent.ts:19](https://github.com/stonemjs/http-core/blob/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41/src/IncomingHttpEvent.ts#L19)
+[IncomingHttpEvent.ts:19](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/IncomingHttpEvent.ts#L19)
