@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/stonemjs/http-core/compare/v0.0.2...v0.0.3) (2024-12-01)
+
+
+### Miscellaneous Chores
+
+* upgrade mime version ([ed7c218](https://github.com/stonemjs/http-core/commit/ed7c2187bd85b6877da7cd9f8c94448716446e07))
+
 ## 0.0.2 (2024-11-30)
 
 
