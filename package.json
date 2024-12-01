@@ -1,6 +1,6 @@
 {
   "name": "@stone-js/http-core",
-  "version": "0.0.3",
+  "version": "0.0.32",
   "description": "Stone.js HTTP Core",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "Apache-2.0",

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.32](https://github.com/stonemjs/http-core/compare/v0.0.3...v0.0.32) (2024-12-01)
+
+
+### Miscellaneous Chores
+
+* update Stone core dependency ([33a82b7](https://github.com/stonemjs/http-core/commit/33a82b77e98ade423889148c13f25ccd40b75c8a))
+
 ## [0.0.3](https://github.com/stonemjs/http-core/compare/v0.0.2...v0.0.3) (2024-12-01)
 
 
