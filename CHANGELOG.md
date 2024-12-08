@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.0.33](https://github.com/stonemjs/http-core/compare/v0.0.32...v0.0.33) (2024-12-08)
+
+
+### Build System
+
+* update @stone-js/core dependency ([34374e6](https://github.com/stonemjs/http-core/commit/34374e6c4f2f644afedac48ffd94e75996e1eca3))
+
 ## [0.0.32](https://github.com/stonemjs/http-core/compare/v0.0.3...v0.0.32) (2024-12-01)
 
 
@@ -25,4 +32,3 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ### Features
 
 * implement http-core ([24dd4b3](https://github.com/stonemjs/http-core/commit/24dd4b3f1e59fc19fb65fa5316121fe4b68e4f41))
-
