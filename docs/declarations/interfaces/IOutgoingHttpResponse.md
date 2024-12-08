@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../README.md)
 
 ***
 
@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[declarations.ts:32](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/declarations.ts#L32)
+[declarations.ts:32](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L32)
 
 ***
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[declarations.ts:34](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/declarations.ts#L34)
+[declarations.ts:34](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L34)
 
 ***
 
@@ -34,4 +34,4 @@
 
 #### Defined in
 
-[declarations.ts:33](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/declarations.ts#L33)
+[declarations.ts:33](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L33)

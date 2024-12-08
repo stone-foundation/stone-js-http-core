@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../../README.md)
 
 ***
 
@@ -37,7 +37,7 @@ Construct an instance of HandleCorsMiddleware.
 
 The configuration blueprint used for managing CORS settings.
 
-###### blueprint.blueprint
+###### blueprint
 
 `IBlueprint`
 
@@ -47,7 +47,7 @@ The configuration blueprint used for managing CORS settings.
 
 #### Defined in
 
-[middleware/HandleCorsMiddleware.ts:25](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/middleware/HandleCorsMiddleware.ts#L25)
+[middleware/HandleCorsMiddleware.ts:25](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/middleware/HandleCorsMiddleware.ts#L25)
 
 ## Methods
 
@@ -79,4 +79,4 @@ The modified kernel context or the next middleware function result.
 
 #### Defined in
 
-[middleware/HandleCorsMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/middleware/HandleCorsMiddleware.ts#L38)
+[middleware/HandleCorsMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/middleware/HandleCorsMiddleware.ts#L38)

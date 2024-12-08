@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../README.md)
 
 ***
 
@@ -14,9 +14,13 @@ Check if IP is trusted or not.
 
 ### trusted
 
+Array of trusted IPs or wildcard.
+
 `string` | `string`[]
 
 ### untrusted
+
+Array of untrusted IPs or wildcard.
 
 `string` | `string`[]
 
@@ -38,4 +42,4 @@ A function to verify if a given IP is trusted.
 
 ## Defined in
 
-[utils.ts:67](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/utils.ts#L67)
+[utils.ts:67](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/utils.ts#L67)

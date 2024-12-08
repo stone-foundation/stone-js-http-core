@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../../README.md)
 
 ***
 
@@ -16,7 +16,7 @@ Whether to escape HTML characters in JSON output.
 
 #### Defined in
 
-[options/HttpConfig.ts:48](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/options/HttpConfig.ts#L48)
+[options/HttpConfig.ts:48](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L48)
 
 ***
 
@@ -46,7 +46,7 @@ A custom replacer function for JSON serialization.
 
 #### Defined in
 
-[options/HttpConfig.ts:52](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/options/HttpConfig.ts#L52)
+[options/HttpConfig.ts:52](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L52)
 
 ***
 
@@ -58,4 +58,4 @@ The number of spaces to use for formatting JSON output.
 
 #### Defined in
 
-[options/HttpConfig.ts:44](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/options/HttpConfig.ts#L44)
+[options/HttpConfig.ts:44](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L44)

@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../README.md)
 
 ***
 
@@ -13,6 +13,8 @@ Create a 200(OK) file OutgoingHttpResponse.
 ## Parameters
 
 ### file
+
+The file to send as the response.
 
 `string` | [`File`](../../file/File/classes/File.md)
 
@@ -29,6 +31,8 @@ The status code of the response.
 The headers for the response.
 
 ### contentDispositionType
+
+The content disposition type (e.g., "inline" or "attachment").
 
 `null` | `string`
 
@@ -52,4 +56,4 @@ A new instance of BinaryFileResponse.
 
 ## Defined in
 
-[HttpResponse.ts:176](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/HttpResponse.ts#L176)
+[HttpResponse.ts:176](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/HttpResponse.ts#L176)

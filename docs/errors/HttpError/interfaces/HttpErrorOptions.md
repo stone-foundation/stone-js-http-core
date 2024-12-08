@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../../README.md)
 
 ***
 
@@ -20,7 +20,7 @@ Represents options for configuring an error.
 
 #### Defined in
 
-[errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L11)
+[errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L11)
 
 ***
 
@@ -30,7 +30,7 @@ Represents options for configuring an error.
 
 #### Defined in
 
-[errors/HttpError.ts:8](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L8)
+[errors/HttpError.ts:8](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L8)
 
 ***
 
@@ -40,7 +40,7 @@ Represents options for configuring an error.
 
 #### Defined in
 
-[errors/HttpError.ts:9](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L9)
+[errors/HttpError.ts:9](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L9)
 
 ***
 
@@ -50,4 +50,4 @@ Represents options for configuring an error.
 
 #### Defined in
 
-[errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L10)
+[errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L10)

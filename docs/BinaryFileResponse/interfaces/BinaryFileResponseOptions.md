@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../README.md)
 
 ***
 
@@ -24,7 +24,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/BinaryFileResponse.ts#L14)
+[BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/BinaryFileResponse.ts#L14)
 
 ***
 
@@ -34,7 +34,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/BinaryFileResponse.ts#L16)
+[BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/BinaryFileResponse.ts#L16)
 
 ***
 
@@ -44,7 +44,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/BinaryFileResponse.ts#L17)
+[BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/BinaryFileResponse.ts#L17)
 
 ***
 
@@ -54,7 +54,7 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/BinaryFileResponse.ts#L15)
+[BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/BinaryFileResponse.ts#L15)
 
 ***
 
@@ -68,4 +68,4 @@ Options for creating a BinaryFile HTTP Response.
 
 #### Defined in
 
-[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/OutgoingHttpResponse.ts#L21)
+[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L21)

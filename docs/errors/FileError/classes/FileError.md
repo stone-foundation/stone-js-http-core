@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../../README.md)
 
 ***
 
@@ -34,7 +34,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/FileError.ts:7](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/FileError.ts#L7)
+[errors/FileError.ts:7](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/FileError.ts#L7)
 
 ## Properties
 
@@ -48,7 +48,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L20)
+[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L20)
 
 ***
 
@@ -62,7 +62,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L21)
+[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L21)
 
 ***
 
@@ -76,7 +76,7 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L22)
+[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L22)
 
 ***
 
@@ -90,4 +90,4 @@ Custom error for error operations.
 
 #### Defined in
 
-[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/errors/HttpError.ts#L23)
+[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L23)

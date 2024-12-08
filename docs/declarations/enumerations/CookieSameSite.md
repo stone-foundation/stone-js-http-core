@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../README.md)
 
 ***
 
@@ -16,7 +16,7 @@ SameSite options for the cookie.
 
 #### Defined in
 
-[declarations.ts:8](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/declarations.ts#L8)
+[declarations.ts:8](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L8)
 
 ***
 
@@ -26,7 +26,7 @@ SameSite options for the cookie.
 
 #### Defined in
 
-[declarations.ts:9](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/declarations.ts#L9)
+[declarations.ts:9](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L9)
 
 ***
 
@@ -36,4 +36,4 @@ SameSite options for the cookie.
 
 #### Defined in
 
-[declarations.ts:10](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/declarations.ts#L10)
+[declarations.ts:10](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L10)

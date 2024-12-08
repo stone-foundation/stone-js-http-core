@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.2**](../../README.md)
+[**HTTP Core Documentation v0.0.3**](../../README.md)
 
 ***
 
@@ -34,11 +34,11 @@ Whether the connection is encrypted (HTTPS).
 
 Options for trusted and untrusted IPs.
 
-#### options.trustedIp
+#### trustedIp
 
 `string`[]
 
-#### options.untrustedIp
+#### untrustedIp
 
 `string`[]
 
@@ -50,4 +50,4 @@ The protocol (http or https).
 
 ## Defined in
 
-[utils.ts:86](https://github.com/stonemjs/http-core/blob/ed7c2187bd85b6877da7cd9f8c94448716446e07/src/utils.ts#L86)
+[utils.ts:86](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/utils.ts#L86)
