@@ -61,16 +61,18 @@ export class RedirectResponse extends OutgoingHttpResponse {
    * @returns The current instance of the response for chaining.
    */
   prepare (event: IncomingHttpEvent, blueprint?: IBlueprint): this {
+    this.setIncomingEventResolver(() => event)
+    this.prepareRedirection()
     super.prepare(event, blueprint)
-    return this.redirect()
+    return this
   }
 
   /**
-   * Perform the redirect.
+   * Prepare the redirection.
    *
    * @returns The current instance for method chaining.
    */
-  private redirect (): this {
+  private prepareRedirection (): this {
     const url = escape(this.location().getHeader('Location', '/'))
 
     return this

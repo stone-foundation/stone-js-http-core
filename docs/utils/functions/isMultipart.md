@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -7,6 +7,8 @@
 # Function: isMultipart()
 
 > **isMultipart**(`value`): `boolean`
+
+Defined in: [src/utils.ts:27](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/utils.ts#L27)
 
 Check if multipart message.
 
@@ -23,7 +25,3 @@ The incoming message or content type string.
 `boolean`
 
 True if the content type is multipart.
-
-## Defined in
-
-[utils.ts:24](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/utils.ts#L24)

@@ -1,10 +1,12 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
 [HTTP Core Documentation](../../modules.md) / [OutgoingHttpResponse](../README.md) / OutgoingHttpResponseOptions
 
 # Interface: OutgoingHttpResponseOptions
+
+Defined in: [src/OutgoingHttpResponse.ts:20](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L20)
 
 Options for creating an Outgoing HTTP Response.
 
@@ -19,7 +21,7 @@ Options for creating an Outgoing HTTP Response.
 
 ## Indexable
 
- \[`key`: `string`\]: `unknown`
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -27,6 +29,4 @@ Options for creating an Outgoing HTTP Response.
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L21)
+Defined in: [src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L21)

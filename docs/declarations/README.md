@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../README.md)
+[**HTTP Core Documentation v0.0.32**](../README.md)
 
 ***
 
@@ -6,18 +6,18 @@
 
 # declarations
 
-## Index
-
-### Enumerations
+## Enumerations
 
 - [CookieSameSite](enumerations/CookieSameSite.md)
 - [HttpMethods](enumerations/HttpMethods.md)
 
-### Interfaces
+## Interfaces
 
+- [CookieOptions](interfaces/CookieOptions.md)
 - [IOutgoingHttpResponse](interfaces/IOutgoingHttpResponse.md)
 - [IRoute](interfaces/IRoute.md)
 
-### Type Aliases
+## Type Aliases
 
 - [HeadersType](type-aliases/HeadersType.md)
+- [HttpMethod](type-aliases/HttpMethod.md)

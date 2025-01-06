@@ -1,6 +1,8 @@
 import { Encoding } from 'node:crypto'
-import { MixedPipe } from '@stone-js/pipeline'
-import { CookieSameSite } from '../declarations'
+import { HttpErrorHandler } from '../HttpErrorHandler'
+import { IncomingHttpEvent } from '../IncomingHttpEvent'
+import { AppConfig, StoneBlueprint } from '@stone-js/core'
+import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 
 export interface HttpCorsConfig {
   /**
@@ -53,166 +55,153 @@ export interface HttpJsonConfig {
 }
 
 /**
- * Options for configuring a cookie.
- */
-export interface CookieOptions {
-  path?: string
-  expires?: Date
-  domain?: string
-  maxAge?: number
-  secure?: boolean
-  httpOnly?: boolean
-  sameSite?: CookieSameSite
-}
-
-/**
  * Represents the core HTTP config options for the application.
+ * HTTP configuration options that are commonly used across adapters.
  */
 export interface HttpConfig {
   /**
-   * The application configuration namespace.
+   * Host-related configuration options.
    */
-  stone: {
+  hosts: {
     /**
-     * HTTP configuration options that are commonly used across adapters.
+     * A list of trusted hostnames.
      */
-    http: {
-      /**
-       * Host-related configuration options.
-       */
-      hosts: {
-        /**
-         * A list of trusted hostnames.
-         */
-        trusted: string[]
-        /**
-         * A list of trusted host patterns.
-         */
-        trustedPattern: string[]
-        /**
-         * Whether only subdomains are allowed.
-         */
-        onlySubdomain: boolean
-      }
-      /**
-       * Proxy-related configuration options.
-       */
-      proxies: {
-        /**
-         * A list of trusted proxies.
-         */
-        trustedIp: string[]
-        /**
-         * A list of untrusted proxies.
-         */
-        untrustedIp: string[]
-      }
-      /**
-       * Configuration for request body parsing.
-       */
-      body: {
-        /**
-         * The maximum size of the request body.
-         */
-        limit: string
-        /**
-         * The content type of the request body.
-         */
-        defaultType: string
-        /**
-         * The default character set for the request body.
-         */
-        defaultCharset: string
-      }
-      /**
-       * Cache configuration options.
-       */
-      cache: Record<string, any>
-      /**
-       * Cookie-related configuration options.
-       */
-      cookie: {
-        /**
-         * The secret used for signing cookies.
-         */
-        secret: string
-        /**
-         * Additional cookie options.
-         */
-        options: Record<string, any>
-      }
-      /**
-       * JSON-related configuration options.
-       */
-      json: HttpJsonConfig
-      /**
-       * File upload and response configuration options.
-       */
-      files: {
-        /**
-         * Configuration for file uploads.
-         */
-        upload: Record<string, any>
-        /**
-         * Configuration for file responses.
-         */
-        download: Record<string, any>
-      }
-      /**
-       * JSONP-related configuration options.
-       */
-      jsonp: {
-        /**
-         * Configuration for the JSONP callback function.
-         */
-        callback: {
-          /**
-           * The name of the JSONP callback parameter.
-           */
-          name: string
-        }
-      }
-      /**
-       * Subdomain-related configuration options.
-       */
-      subdomain: {
-        /**
-         * The offset to use when determining subdomains.
-         */
-        offset: number
-      }
-      /**
-       * ETag-related configuration options.
-       */
-      etag: {
-        /**
-         * A custom function for generating ETags.
-         */
-        function?: (content: string, encoding: Encoding) => string
-      }
-      /**
-       * Cross-Origin Resource Sharing (CORS) configuration options.
-       */
-      cors: HttpCorsConfig
-    }
-
+    trusted: string[]
     /**
-     * This interface defines the configuration for kernel-level options.
+     * A list of trusted host patterns.
      */
-    kernel: {
+    trustedPattern: string[]
+    /**
+     * Whether only subdomains are allowed.
+     */
+    onlySubdomain: boolean
+  }
+  /**
+   * Proxy-related configuration options.
+   */
+  proxies: {
+    /**
+     * A list of trusted proxies.
+     */
+    trustedIp: string[]
+    /**
+     * A list of untrusted proxies.
+     */
+    untrustedIp: string[]
+  }
+  /**
+   * Configuration for request body parsing.
+   */
+  body: {
+    /**
+     * The maximum size of the request body.
+     */
+    limit: string
+    /**
+     * The content type of the request body.
+     */
+    defaultType: string
+    /**
+     * The default character set for the request body.
+     */
+    defaultCharset: string
+  }
+  /**
+   * Cache configuration options.
+   */
+  cache: Record<string, any>
+  /**
+   * Cookie-related configuration options.
+   */
+  cookie: {
+    /**
+     * The secret used for signing cookies.
+     */
+    secret: string
+    /**
+     * Additional cookie options.
+     */
+    options: Record<string, any>
+  }
+  /**
+   * JSON-related configuration options.
+   */
+  json: HttpJsonConfig
+  /**
+   * File upload and response configuration options.
+   */
+  files: {
+    /**
+     * Configuration for file uploads.
+     */
+    upload: Record<string, any>
+    /**
+     * Configuration for file responses.
+     */
+    download: Record<string, any>
+  }
+  /**
+   * JSONP-related configuration options.
+   */
+  jsonp: {
+    /**
+     * Configuration for the JSONP callback function.
+     */
+    callback: {
       /**
-       * Middleware configuration options for different stages of the kernel's lifecycle.
+       * The name of the JSONP callback parameter.
        */
-      middleware: MixedPipe[]
+      name: string
     }
   }
+  /**
+   * Subdomain-related configuration options.
+   */
+  subdomain: {
+    /**
+     * The offset to use when determining subdomains.
+     */
+    offset: number
+  }
+  /**
+   * ETag-related configuration options.
+   */
+  etag: {
+    /**
+     * A custom function for generating ETags.
+     */
+    function?: (content: string, encoding: Encoding) => string
+  }
+  /**
+   * Cross-Origin Resource Sharing (CORS) configuration options.
+   */
+  cors: HttpCorsConfig
+}
+
+/**
+ * Represents the core HTTP configuration options for the application.
+ */
+export interface HttpCoreConfig extends Partial<AppConfig<IncomingHttpEvent, OutgoingHttpResponse>> {
+  http: Partial<HttpConfig>
+}
+
+/**
+ * Represents the core HTTP blueprint for the application.
+ */
+export interface HttpCoreBlueprint extends StoneBlueprint<IncomingHttpEvent, OutgoingHttpResponse> {
+  stone: HttpCoreConfig
 }
 
 /**
  * Default HTTP configuration options for the application.
  */
-export const http: HttpConfig = {
+export const http: HttpCoreBlueprint = {
   stone: {
+    kernel: {
+      errorHandlers: {
+        default: HttpErrorHandler
+      }
+    },
     http: {
       hosts: {
         trusted: [],
@@ -225,8 +214,8 @@ export const http: HttpConfig = {
       },
       body: {
         limit: '100kb',
-        defaultType: 'text/plain',
-        defaultCharset: 'utf-8'
+        defaultCharset: 'utf-8',
+        defaultType: 'text/plain'
       },
       cache: {},
       cookie: {
@@ -263,9 +252,6 @@ export const http: HttpConfig = {
         successStatus: 204,
         preflightStop: false
       }
-    },
-    kernel: {
-      middleware: []
     }
   }
 }

@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../../README.md)
 
 ***
 
@@ -6,23 +6,25 @@
 
 # Interface: HttpJsonConfig
 
+Defined in: [src/options/HttpConfig.ts:42](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L42)
+
 ## Properties
 
 ### escape
 
 > **escape**: `boolean`
 
+Defined in: [src/options/HttpConfig.ts:50](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L50)
+
 Whether to escape HTML characters in JSON output.
-
-#### Defined in
-
-[options/HttpConfig.ts:48](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L48)
 
 ***
 
 ### replacer()?
 
 > `optional` **replacer**: (`this`, `key`, `value`) => `unknown`
+
+Defined in: [src/options/HttpConfig.ts:54](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L54)
 
 A custom replacer function for JSON serialization.
 
@@ -44,18 +46,12 @@ A custom replacer function for JSON serialization.
 
 `unknown`
 
-#### Defined in
-
-[options/HttpConfig.ts:52](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L52)
-
 ***
 
 ### spaces
 
 > **spaces**: `string`
 
+Defined in: [src/options/HttpConfig.ts:46](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L46)
+
 The number of spaces to use for formatting JSON output.
-
-#### Defined in
-
-[options/HttpConfig.ts:44](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L44)

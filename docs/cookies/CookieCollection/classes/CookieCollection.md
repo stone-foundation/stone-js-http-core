@@ -1,10 +1,12 @@
-[**HTTP Core Documentation v0.0.3**](../../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../../README.md)
 
 ***
 
 [HTTP Core Documentation](../../../modules.md) / [cookies/CookieCollection](../README.md) / CookieCollection
 
 # Class: CookieCollection
+
+Defined in: [src/cookies/CookieCollection.ts:10](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L10)
 
 Class representing a collection of Cookies.
 
@@ -13,6 +15,8 @@ Class representing a collection of Cookies.
 ### new CookieCollection()
 
 > `protected` **new CookieCollection**(`cookie`?, `options`?, `secret`?): [`CookieCollection`](CookieCollection.md)
+
+Defined in: [src/cookies/CookieCollection.ts:33](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L33)
 
 Create a CookieCollection.
 
@@ -26,7 +30,7 @@ String cookie from header.
 
 ##### options?
 
-[`CookieOptions`](../../../options/HttpConfig/interfaces/CookieOptions.md) = `{}`
+[`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Cookies options.
 
@@ -40,15 +44,13 @@ Secret value to sign and unsign cookies.
 
 [`CookieCollection`](CookieCollection.md)
 
-#### Defined in
-
-[cookies/CookieCollection.ts:33](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L33)
-
 ## Methods
 
 ### add()
 
 > **add**(`name`, `value`, `options`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:46](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L46)
 
 Add a cookie to the collection.
 
@@ -68,7 +70,7 @@ Cookie value.
 
 ##### options
 
-[`CookieOptions`](../../../options/HttpConfig/interfaces/CookieOptions.md) = `{}`
+[`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Cookie options.
 
@@ -76,15 +78,13 @@ Cookie options.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:46](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L46)
-
 ***
 
 ### all()
 
 > **all**\<`S`\>(`serialize`): `S` *extends* `true` ? `string`[] : `Record`\<`string`, `unknown`\>
+
+Defined in: [src/cookies/CookieCollection.ts:120](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L120)
 
 Get all cookies in the collection.
 
@@ -104,15 +104,13 @@ If true, serialize the cookies.
 
 `S` *extends* `true` ? `string`[] : `Record`\<`string`, `unknown`\>
 
-#### Defined in
-
-[cookies/CookieCollection.ts:105](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L105)
-
 ***
 
 ### clear()
 
 > **clear**(`force`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:139](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L139)
 
 Clear all cookies from the collection.
 
@@ -128,45 +126,89 @@ If true, remove only from collection without setting expiry.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:124](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L124)
-
 ***
 
 ### get()
 
-> **get**(`name`, `fallback`?): `undefined` \| [`Cookie`](../../Cookie/classes/Cookie.md)
+Get a cookie from the collection.
+
+#### Param
+
+Cookie name.
+
+#### Param
+
+Fallback value if the cookie does not exist.
+
+#### Call Signature
+
+> **get**(`name`): `undefined` \| [`Cookie`](../../Cookie/classes/Cookie.md)
+
+Defined in: [src/cookies/CookieCollection.ts:71](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L71)
 
 Get a cookie from the collection.
 
-#### Parameters
+##### Parameters
 
-##### name
+###### name
 
 `string`
 
 Cookie name.
 
-##### fallback?
+##### Returns
+
+`undefined` \| [`Cookie`](../../Cookie/classes/Cookie.md)
+
+##### Param
+
+Cookie name.
+
+##### Param
+
+Fallback value if the cookie does not exist.
+
+#### Call Signature
+
+> **get**(`name`, `fallback`): [`Cookie`](../../Cookie/classes/Cookie.md)
+
+Defined in: [src/cookies/CookieCollection.ts:79](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L79)
+
+Get a cookie from the collection.
+
+##### Parameters
+
+###### name
+
+`string`
+
+Cookie name.
+
+###### fallback
 
 [`Cookie`](../../Cookie/classes/Cookie.md)
 
 Fallback value if the cookie does not exist.
 
-#### Returns
+##### Returns
 
-`undefined` \| [`Cookie`](../../Cookie/classes/Cookie.md)
+[`Cookie`](../../Cookie/classes/Cookie.md)
 
-#### Defined in
+##### Param
 
-[cookies/CookieCollection.ts:72](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L72)
+Cookie name.
+
+##### Param
+
+Fallback value if the cookie does not exist.
 
 ***
 
 ### has()
 
 > **has**(`name`): `boolean`
+
+Defined in: [src/cookies/CookieCollection.ts:96](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L96)
 
 Check if the collection has a cookie.
 
@@ -182,15 +224,13 @@ Cookie name.
 
 `boolean`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:81](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L81)
-
 ***
 
 ### isEmpty()
 
 > **isEmpty**(): `boolean`
+
+Defined in: [src/cookies/CookieCollection.ts:130](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L130)
 
 Check if the collection is empty.
 
@@ -198,15 +238,13 @@ Check if the collection is empty.
 
 `boolean`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:115](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L115)
-
 ***
 
 ### remove()
 
 > **remove**(`name`, `force`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:106](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L106)
 
 Remove a cookie from the collection.
 
@@ -228,15 +266,13 @@ If true, remove only from collection without setting expiry.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:91](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L91)
-
 ***
 
 ### secure()
 
 > **secure**(`value`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:153](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L153)
 
 Set secure flag for all cookies in the collection.
 
@@ -252,15 +288,13 @@ Whether the cookies are secure.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:138](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L138)
-
 ***
 
 ### setOptions()
 
 > **setOptions**(`options`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:173](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L173)
 
 Set options for all cookies in the collection.
 
@@ -268,7 +302,7 @@ Set options for all cookies in the collection.
 
 ##### options
 
-[`CookieOptions`](../../../options/HttpConfig/interfaces/CookieOptions.md)
+[`CookieOptions`](../../../declarations/interfaces/CookieOptions.md)
 
 Cookie options.
 
@@ -276,15 +310,13 @@ Cookie options.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:158](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L158)
-
 ***
 
 ### setSecret()
 
 > **setSecret**(`value`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:163](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L163)
 
 Set secret for signing and unsigning cookies.
 
@@ -300,15 +332,13 @@ Secret value.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:148](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L148)
-
 ***
 
 ### update()
 
 > **update**(`name`, `value`, `options`): `this`
+
+Defined in: [src/cookies/CookieCollection.ts:58](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L58)
 
 Update a cookie in the collection.
 
@@ -328,7 +358,7 @@ New cookie value.
 
 ##### options
 
-[`CookieOptions`](../../../options/HttpConfig/interfaces/CookieOptions.md) = `{}`
+[`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Cookie options.
 
@@ -336,15 +366,13 @@ Cookie options.
 
 `this`
 
-#### Defined in
-
-[cookies/CookieCollection.ts:58](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L58)
-
 ***
 
 ### create()
 
 > `static` **create**(`cookie`?, `options`?, `secret`?): [`CookieCollection`](CookieCollection.md)
+
+Defined in: [src/cookies/CookieCollection.ts:22](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/CookieCollection.ts#L22)
 
 Create a CookieCollection.
 
@@ -358,7 +386,7 @@ String cookie from header.
 
 ##### options?
 
-[`CookieOptions`](../../../options/HttpConfig/interfaces/CookieOptions.md) = `{}`
+[`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Cookies options.
 
@@ -371,7 +399,3 @@ Secret value to sign and unsign cookies.
 #### Returns
 
 [`CookieCollection`](CookieCollection.md)
-
-#### Defined in
-
-[cookies/CookieCollection.ts:22](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/cookies/CookieCollection.ts#L22)

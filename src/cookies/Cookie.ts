@@ -1,5 +1,5 @@
 import { serialize } from 'cookie'
-import { CookieOptions } from '../options/HttpConfig'
+import { CookieOptions } from '../declarations'
 import { isCookieValueSerialized, isCookieValueSigned, signCookieValue } from './utils'
 
 /**

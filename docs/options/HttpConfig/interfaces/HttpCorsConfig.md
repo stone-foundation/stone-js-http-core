@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../../README.md)
 
 ***
 
@@ -6,17 +6,17 @@
 
 # Interface: HttpCorsConfig
 
+Defined in: [src/options/HttpConfig.ts:7](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L7)
+
 ## Properties
 
 ### allowedHeaders
 
 > **allowedHeaders**: `string` \| `string`[]
 
+Defined in: [src/options/HttpConfig.ts:31](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L31)
+
 The headers that are allowed in CORS requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:29](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L29)
 
 ***
 
@@ -24,11 +24,9 @@ The headers that are allowed in CORS requests.
 
 > **credentials**: `boolean`
 
+Defined in: [src/options/HttpConfig.ts:23](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L23)
+
 Whether credentials are allowed in CORS requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:21](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L21)
 
 ***
 
@@ -36,11 +34,9 @@ Whether credentials are allowed in CORS requests.
 
 > **exposedHeaders**: `string` \| `string`[]
 
+Defined in: [src/options/HttpConfig.ts:27](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L27)
+
 The headers that are exposed to the client in CORS responses.
-
-#### Defined in
-
-[options/HttpConfig.ts:25](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L25)
 
 ***
 
@@ -48,11 +44,9 @@ The headers that are exposed to the client in CORS responses.
 
 > **maxAge**: `null` \| `number`
 
+Defined in: [src/options/HttpConfig.ts:19](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L19)
+
 The maximum age for preflight requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:17](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L17)
 
 ***
 
@@ -60,11 +54,9 @@ The maximum age for preflight requests.
 
 > **methods**: `string` \| `string`[]
 
+Defined in: [src/options/HttpConfig.ts:15](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L15)
+
 The allowed methods for CORS requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:13](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L13)
 
 ***
 
@@ -72,11 +64,9 @@ The allowed methods for CORS requests.
 
 > **origin**: `string` \| `string`[]
 
+Defined in: [src/options/HttpConfig.ts:11](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L11)
+
 The allowed origins for CORS requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:9](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L9)
 
 ***
 
@@ -84,11 +74,9 @@ The allowed origins for CORS requests.
 
 > **preflightStop**: `boolean`
 
+Defined in: [src/options/HttpConfig.ts:39](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L39)
+
 Whether to stop processing preflight requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:37](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L37)
 
 ***
 
@@ -96,8 +84,6 @@ Whether to stop processing preflight requests.
 
 > **successStatus**: `number`
 
+Defined in: [src/options/HttpConfig.ts:35](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L35)
+
 The HTTP status code to use for successful preflight requests.
-
-#### Defined in
-
-[options/HttpConfig.ts:33](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L33)

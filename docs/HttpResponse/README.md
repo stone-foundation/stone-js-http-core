@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../README.md)
+[**HTTP Core Documentation v0.0.32**](../README.md)
 
 ***
 
@@ -6,9 +6,11 @@
 
 # HttpResponse
 
-## Index
+## Variables
 
-### Functions
+- [HttpResponse](variables/HttpResponse.md)
+
+## Functions
 
 - [badRequestHttpResponse](functions/badRequestHttpResponse.md)
 - [createHttpResponse](functions/createHttpResponse.md)

@@ -5,7 +5,7 @@ import { CookieError } from '../errors/CookieError'
  * Check if the value is serialized.
  * @param value - The value to check.
  */
-export const isCookieValueSerialized = (value: unknown): boolean => {
+export const isCookieValueSerialized = (value: unknown): value is string => {
   return typeof value === 'string' && value.startsWith('$$j$$:')
 }
 

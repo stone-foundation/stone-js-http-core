@@ -1,10 +1,12 @@
-[**HTTP Core Documentation v0.0.3**](../../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../../README.md)
 
 ***
 
 [HTTP Core Documentation](../../../modules.md) / [errors/HttpError](../README.md) / HttpError
 
 # Class: HttpError
+
+Defined in: [src/errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L10)
 
 Class representing an HttpError.
 
@@ -16,16 +18,13 @@ Mr. Stone <evensstone@gmail.com>
 
 - `RuntimeError`
 
-## Extended by
-
-- [`CookieError`](../../CookieError/classes/CookieError.md)
-- [`FileError`](../../FileError/classes/FileError.md)
-
 ## Constructors
 
 ### new HttpError()
 
-> **new HttpError**(`message`, `options`): [`HttpError`](HttpError.md)
+> **new HttpError**(`message`, `statusCode`, `headers`, `options`): [`HttpError`](HttpError.md)
+
+Defined in: [src/errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L21)
 
 Create an HttpError.
 
@@ -37,9 +36,17 @@ Create an HttpError.
 
 The message to log.
 
+##### statusCode
+
+`number` = `500`
+
+##### headers
+
+[`HeadersType`](../../../declarations/type-aliases/HeadersType.md) = `...`
+
 ##### options
 
-[`HttpErrorOptions`](../interfaces/HttpErrorOptions.md) = `{}`
+`ErrorOptions` = `{}`
 
 The error options.
 
@@ -51,29 +58,13 @@ The error options.
 
 `RuntimeError.constructor`
 
-#### Defined in
-
-[errors/HttpError.ts:31](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L31)
-
 ## Properties
-
-### body
-
-> `readonly` **body**: `unknown`
-
-#### Defined in
-
-[errors/HttpError.ts:20](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L20)
-
-***
 
 ### headers
 
-> `readonly` **headers**: `Headers`
+> `readonly` **headers**: [`HeadersType`](../../../declarations/type-aliases/HeadersType.md)
 
-#### Defined in
-
-[errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L21)
+Defined in: [src/errors/HttpError.ts:12](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L12)
 
 ***
 
@@ -81,9 +72,7 @@ The error options.
 
 > `readonly` **statusCode**: `number`
 
-#### Defined in
-
-[errors/HttpError.ts:22](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L22)
+Defined in: [src/errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L11)
 
 ***
 
@@ -91,6 +80,4 @@ The error options.
 
 > `readonly` **statusMessage**: `string`
 
-#### Defined in
-
-[errors/HttpError.ts:23](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/errors/HttpError.ts#L23)
+Defined in: [src/errors/HttpError.ts:13](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L13)

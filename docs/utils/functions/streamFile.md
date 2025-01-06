@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -7,6 +7,8 @@
 # Function: streamFile()
 
 > **streamFile**(`message`, `response`, `fileResponse`, `options`): `Promise`\<`void`\>
+
+Defined in: [src/utils.ts:205](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/utils.ts#L205)
 
 Stream files from the file system as an HTTP response.
 
@@ -22,7 +24,7 @@ The incoming message.
 
 ### response
 
-`OutgoingMessage`\<`IncomingMessage`\>
+`OutgoingMessage`
 
 The outgoing response.
 
@@ -43,7 +45,3 @@ The options for streaming.
 `Promise`\<`void`\>
 
 A promise that resolves when the file streaming is complete.
-
-## Defined in
-
-[utils.ts:204](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/utils.ts#L204)

@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../README.md)
+[**HTTP Core Documentation v0.0.32**](../README.md)
 
 ***
 
@@ -6,12 +6,10 @@
 
 # RedirectResponse
 
-## Index
-
-### Classes
+## Classes
 
 - [RedirectResponse](classes/RedirectResponse.md)
 
-### Interfaces
+## Interfaces
 
 - [RedirectResponseOptions](interfaces/RedirectResponseOptions.md)

@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -6,15 +6,14 @@
 
 # options/HttpConfig
 
-## Index
+## Interfaces
 
-### Interfaces
-
-- [CookieOptions](interfaces/CookieOptions.md)
 - [HttpConfig](interfaces/HttpConfig.md)
+- [HttpCoreBlueprint](interfaces/HttpCoreBlueprint.md)
+- [HttpCoreConfig](interfaces/HttpCoreConfig.md)
 - [HttpCorsConfig](interfaces/HttpCorsConfig.md)
 - [HttpJsonConfig](interfaces/HttpJsonConfig.md)
 
-### Variables
+## Variables
 
 - [http](variables/http.md)

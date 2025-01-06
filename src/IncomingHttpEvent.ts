@@ -5,6 +5,7 @@ import accepts from 'accepts'
 import { URL } from 'node:url'
 import { get, has } from 'lodash-es'
 import rangeParser from 'range-parser'
+import { Cookie } from './cookies/Cookie'
 import contentTypeLib from 'content-type'
 import { HttpError } from './errors/HttpError'
 import { UploadedFile } from './file/UploadedFile'
@@ -148,7 +149,7 @@ export class IncomingHttpEvent extends IncomingEvent {
 
   /** @returns The route parameters. */
   get params (): Record<string, unknown> | undefined {
-    return this.getRoute()?.parameters?.()
+    return this.getRoute()?.params
   }
 
   /** @returns The full path including pathname and search query. */
@@ -249,10 +250,45 @@ export class IncomingHttpEvent extends IncomingEvent {
    * 7. Fallback value
    *
    * @param key - The key to look for.
+   * @returns The value of the key or the fallback.
+  */
+  get<TReturn = unknown>(key: string): TReturn | undefined
+
+  /**
+   * Get data from the request.
+   *
+   * Priority:
+   * 1. Route params
+   * 2. Body
+   * 3. Query params
+   * 4. Headers
+   * 5. Cookies
+   * 6. Metadata
+   * 7. Fallback value
+   *
+   * @param key - The key to look for.
    * @param fallback - A fallback value if the key is not found.
    * @returns The value of the key or the fallback.
   */
-  get<R = unknown>(key: string, fallback?: R): R {
+  get<TReturn = unknown>(key: string, fallback: TReturn): TReturn
+
+  /**
+   * Get data from the request.
+   *
+   * Priority:
+   * 1. Route params
+   * 2. Body
+   * 3. Query params
+   * 4. Headers
+   * 5. Cookies
+   * 6. Metadata
+   * 7. Fallback value
+   *
+   * @param key - The key to look for.
+   * @param fallback - A fallback value if the key is not found.
+   * @returns The value of the key or the fallback.
+  */
+  get<TReturn = unknown>(key: string, fallback?: TReturn): TReturn | undefined {
     return (
       this.getParam(key) ??
       this.getFromBody(key) ??
@@ -260,8 +296,17 @@ export class IncomingHttpEvent extends IncomingEvent {
       this.getFromHeaders(key) ??
       this.getFromCookies(key) ??
       this.getMetadataValue(key, fallback)
-    ) as R
+    ) as TReturn | undefined
   }
+
+  /**
+   * Get a header value.
+   *
+   * @param name - The header name.
+   * @returns The header value or the fallback value.
+   * @throws {HttpError} If the header name is not a valid string.
+   */
+  getHeader<TReturn = string>(name: string): TReturn | undefined
 
   /**
    * Get a header value.
@@ -271,11 +316,21 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns The header value or the fallback value.
    * @throws {HttpError} If the header name is not a valid string.
    */
-  getHeader<R = string>(name: string, fallback?: R): R {
+  getHeader<TReturn = string>(name: string, fallback: TReturn): TReturn
+
+  /**
+   * Get a header value.
+   *
+   * @param name - The header name.
+   * @param fallback - A fallback value if the header is not found.
+   * @returns The header value or the fallback value.
+   * @throws {HttpError} If the header name is not a valid string.
+   */
+  getHeader<TReturn = string>(name: string, fallback?: TReturn): TReturn | undefined {
     if (!this.isValidName(name)) { throw new HttpError('Header name must be a non-empty string.') }
     const lcName = name.toLowerCase()
-    if (['referer', 'referrer'].includes(lcName)) { return (this._headers.get('referer') ?? this._headers.get('referrer') ?? fallback) as R }
-    return (this._headers.get(lcName) ?? fallback) as R
+    if (['referer', 'referrer'].includes(lcName)) { return (this._headers.get('referer') ?? this._headers.get('referrer') ?? fallback) as TReturn }
+    return (this._headers.get(lcName) ?? fallback) as TReturn | undefined
   }
 
   /**
@@ -293,12 +348,29 @@ export class IncomingHttpEvent extends IncomingEvent {
    * Get a cookie value.
    *
    * @param name - The cookie name.
+   * @returns The cookie value or the fallback.
+   */
+  getCookie<TReturn extends Cookie = Cookie>(name: string): TReturn | undefined
+
+  /**
+   * Get a cookie value.
+   *
+   * @param name - The cookie name.
    * @param fallback - A fallback value if the cookie is not found.
    * @returns The cookie value or the fallback.
    */
-  getCookie<R = string>(name: string, fallback?: R): R {
+  getCookie<TReturn extends Cookie = Cookie>(name: string, fallback: TReturn): TReturn
+
+  /**
+   * Get a cookie value.
+   *
+   * @param name - The cookie name.
+   * @param fallback - A fallback value if the cookie is not found.
+   * @returns The cookie value or the fallback.
+   */
+  getCookie<TReturn extends Cookie = Cookie>(name: string, fallback?: TReturn): TReturn | undefined {
     if (!this.isValidName(name)) { throw new HttpError('Cookie name must be a non-empty string.') }
-    return (this.cookies.get(name) ?? this.cookies.get(name.toLowerCase()) ?? fallback) as R
+    return (this.cookies.get(name) ?? this.cookies.get(name.toLowerCase()) ?? fallback) as TReturn | undefined
   }
 
   /**
@@ -391,8 +463,16 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   range (size: number, combine = false): rangeParser.Result | rangeParser.Ranges | undefined {
     if (!this.hasHeader('Range')) return
-    return rangeParser(size, this.getHeader('Range'), { combine })
+    return rangeParser(size, this.getHeader('Range', ''), { combine })
   }
+
+  /**
+   * Get a value from the JSON body.
+   *
+   * @param key - The key to look for in the JSON body.
+   * @returns The value of the key or the fallback.
+   */
+  json<TReturn = unknown>(key: string): TReturn | undefined
 
   /**
    * Get a value from the JSON body.
@@ -401,9 +481,18 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param fallback - A fallback value if the key is not found.
    * @returns The value of the key or the fallback.
    */
-  json (key: string, fallback?: unknown): unknown {
+  json<TReturn = unknown>(key: string, fallback: TReturn): TReturn
+
+  /**
+   * Get a value from the JSON body.
+   *
+   * @param key - The key to look for in the JSON body.
+   * @param fallback - A fallback value if the key is not found.
+   * @returns The value of the key or the fallback.
+   */
+  json<TReturn = unknown>(key: string, fallback?: TReturn): TReturn | undefined {
     if (this.hasJson(key)) {
-      return get(this.body, key, fallback)
+      return get(this.body, key, fallback) as TReturn | undefined
     }
     return fallback
   }
@@ -592,18 +681,35 @@ export class IncomingHttpEvent extends IncomingEvent {
       throw new HttpError('Unable to generate fingerprint. Route unavailable.')
     }
 
-    return Buffer.from([route.methods, route.getDomain(), route.uri, this.ip].join('|')).toString('base64')
+    return Buffer.from([route.method, route.uri, this.userAgent, this.ip].join('|')).toString('base64')
   }
 
   /**
    * Retrieve a parameter from the route if it exists.
    *
-   * @param key - The name of the parameter to retrieve.
+   * @param name - The name of the parameter to retrieve.
+   * @returns The value of the parameter if it exists, otherwise undefined.
+   */
+  getParam<TReturn = unknown>(name: string): TReturn | undefined
+
+  /**
+   * Retrieve a parameter from the route if it exists.
+   *
+   * @param name - The name of the parameter to retrieve.
    * @param fallback - The fallback value if the parameter does not exist.
    * @returns The value of the parameter if it exists, otherwise undefined.
    */
-  getParam (key: string, fallback?: string): string | undefined {
-    return this.getRoute()?.parameter?.(key) ?? fallback
+  getParam<TReturn = unknown>(name: string, fallback: TReturn): TReturn
+
+  /**
+   * Retrieve a parameter from the route if it exists.
+   *
+   * @param name - The name of the parameter to retrieve.
+   * @param fallback - The fallback value if the parameter does not exist.
+   * @returns The value of the parameter if it exists, otherwise undefined.
+   */
+  getParam<TReturn = unknown>(name: string, fallback?: TReturn): TReturn | undefined {
+    return this.getRoute()?.getParam?.(name, fallback)
   }
 
   /**
@@ -642,8 +748,8 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param key - The name of the cookie to retrieve.
    * @returns The value of the cookie if it exists, otherwise undefined.
    */
-  private getFromCookies (key: string): string | undefined {
-    return this.hasCookie(key) ? this.getCookie(key) : undefined
+  private getFromCookies (key: string): unknown {
+    return this.getCookie(key)?.value ?? undefined
   }
 
   /**

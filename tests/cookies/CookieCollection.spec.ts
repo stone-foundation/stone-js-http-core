@@ -1,7 +1,7 @@
 import { sign } from 'cookie-signature'
-import { CookieOptions } from '../../src/options/HttpConfig'
-import { CookieCollection } from '../../src/cookies/CookieCollection'
+import { CookieOptions } from '../../src/declarations'
 import { CookieError } from '../../src/errors/CookieError'
+import { CookieCollection } from '../../src/cookies/CookieCollection'
 
 /**
  * Unit tests for the CookieCollection class.

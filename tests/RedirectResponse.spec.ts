@@ -88,8 +88,7 @@ describe('RedirectResponse', () => {
     }
 
     const response = new RedirectResponse(options)
-    response.prepare(mockIncomingEvent)
-    expect(response.getHeader('Location')).toBe('http://example.com')
+    expect(response.prepare(mockIncomingEvent).getHeader('Location')).toBe('http://example.com')
   })
 
   it('should keep user defined cache-control header for moved permanently', () => {

@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -7,6 +7,8 @@
 # Function: fileHttpResponse()
 
 > **fileHttpResponse**(`file`, `statusCode`, `headers`, `contentDispositionType`, `autoEtag`, `autoLastModified`): [`BinaryFileResponse`](../../BinaryFileResponse/classes/BinaryFileResponse.md)
+
+Defined in: [src/HttpResponse.ts:177](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpResponse.ts#L177)
 
 Create a 200(OK) file OutgoingHttpResponse.
 
@@ -26,7 +28,7 @@ The status code of the response.
 
 ### headers
 
-`Record`\<`string`, `string`\> = `{}`
+[`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 
 The headers for the response.
 
@@ -53,7 +55,3 @@ Whether to automatically set the Last-Modified header.
 [`BinaryFileResponse`](../../BinaryFileResponse/classes/BinaryFileResponse.md)
 
 A new instance of BinaryFileResponse.
-
-## Defined in
-
-[HttpResponse.ts:176](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/HttpResponse.ts#L176)

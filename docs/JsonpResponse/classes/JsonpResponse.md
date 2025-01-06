@@ -1,10 +1,12 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
 [HTTP Core Documentation](../../modules.md) / [JsonpResponse](../README.md) / JsonpResponse
 
 # Class: JsonpResponse
+
+Defined in: [src/JsonpResponse.ts:9](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/JsonpResponse.ts#L9)
 
 Class representing a JsonpResponse.
 
@@ -21,6 +23,8 @@ Mr. Stone <evensstone@gmail.com>
 ### new JsonpResponse()
 
 > **new JsonpResponse**(`options`): [`JsonpResponse`](JsonpResponse.md)
+
+Defined in: [src/OutgoingHttpResponse.ts:56](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L56)
 
 Constructor for OutgoingHttpResponse.
 Initializes headers and cookies based on the provided options.
@@ -41,15 +45,13 @@ Options for the outgoing HTTP response.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`constructor`](../../JsonResponse/classes/JsonResponse.md#constructors)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:55](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L55)
-
 ## Properties
 
 ### \_blueprintResolver()?
 
 > `protected` `optional` **\_blueprintResolver**: () => `undefined` \| `IBlueprint`
+
+Defined in: [src/OutgoingHttpResponse.ts:34](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L34)
 
 #### Returns
 
@@ -59,23 +61,17 @@ Options for the outgoing HTTP response.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`_blueprintResolver`](../../JsonResponse/classes/JsonResponse.md#_blueprintresolver)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:33](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L33)
-
 ***
 
 ### \_charset?
 
 > `protected` `optional` **\_charset**: `Encoding`
 
+Defined in: [src/OutgoingHttpResponse.ts:32](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L32)
+
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`_charset`](../../JsonResponse/classes/JsonResponse.md#_charset)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:32](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L32)
 
 ***
 
@@ -83,13 +79,23 @@ Options for the outgoing HTTP response.
 
 > `protected` `readonly` **\_cookieCollection**: [`CookieCollection`](../../cookies/CookieCollection/classes/CookieCollection.md)
 
+Defined in: [src/OutgoingHttpResponse.ts:38](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L38)
+
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`_cookieCollection`](../../JsonResponse/classes/JsonResponse.md#_cookiecollection)
 
-#### Defined in
+***
 
-[OutgoingHttpResponse.ts:37](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L37)
+### \_formats?
+
+> `protected` `optional` **\_formats**: `Record`\<`string`, () => `unknown`\>
+
+Defined in: [src/OutgoingHttpResponse.ts:33](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L33)
+
+#### Inherited from
+
+[`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`_formats`](../../JsonResponse/classes/JsonResponse.md#_formats)
 
 ***
 
@@ -97,19 +103,19 @@ Options for the outgoing HTTP response.
 
 > `protected` `readonly` **\_headers**: `Headers`
 
+Defined in: [src/OutgoingHttpResponse.ts:37](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L37)
+
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`_headers`](../../JsonResponse/classes/JsonResponse.md#_headers)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:36](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L36)
 
 ***
 
 ### \_incomingEventResolver()?
 
 > `protected` `optional` **\_incomingEventResolver**: () => [`IncomingHttpEvent`](../../IncomingHttpEvent/classes/IncomingHttpEvent.md)
+
+Defined in: [src/OutgoingHttpResponse.ts:35](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L35)
 
 #### Returns
 
@@ -119,23 +125,17 @@ Options for the outgoing HTTP response.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`_incomingEventResolver`](../../JsonResponse/classes/JsonResponse.md#_incomingeventresolver)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:34](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L34)
-
 ***
 
 ### OUTGOING\_HTTP\_RESPONSE
 
 > `static` **OUTGOING\_HTTP\_RESPONSE**: `string` = `'stonejs@outgoing_http_response'`
 
+Defined in: [src/OutgoingHttpResponse.ts:30](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L30)
+
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`OUTGOING_HTTP_RESPONSE`](../../JsonResponse/classes/JsonResponse.md#outgoing_http_response)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:30](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L30)
 
 ## Accessors
 
@@ -144,6 +144,8 @@ Options for the outgoing HTTP response.
 #### Get Signature
 
 > **get** **blueprint**(): `undefined` \| `IBlueprint`
+
+Defined in: [src/OutgoingHttpResponse.ts:139](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L139)
 
 Get the blueprint associated with the response.
 
@@ -157,10 +159,6 @@ The blueprint or undefined if not set.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`blueprint`](../../JsonResponse/classes/JsonResponse.md#blueprint)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:138](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L138)
-
 ***
 
 ### charset
@@ -168,6 +166,8 @@ The blueprint or undefined if not set.
 #### Get Signature
 
 > **get** **charset**(): `Encoding`
+
+Defined in: [src/OutgoingHttpResponse.ts:90](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L90)
 
 Get the character set encoding.
 Defaults to 'utf-8' if not explicitly set.
@@ -182,10 +182,6 @@ The character set encoding.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`charset`](../../JsonResponse/classes/JsonResponse.md#charset)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:89](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L89)
-
 ***
 
 ### charsetRegExp
@@ -193,6 +189,8 @@ The character set encoding.
 #### Get Signature
 
 > **get** `protected` **charsetRegExp**(): `RegExp`
+
+Defined in: [src/OutgoingHttpResponse.ts:149](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L149)
 
 Get the regular expression for matching charset in content type.
 
@@ -206,10 +204,6 @@ The regular expression for matching charset in content type.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`charsetRegExp`](../../JsonResponse/classes/JsonResponse.md#charsetregexp)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:148](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L148)
-
 ***
 
 ### etag
@@ -217,6 +211,8 @@ The regular expression for matching charset in content type.
 #### Get Signature
 
 > **get** **etag**(): `undefined` \| `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:99](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L99)
 
 Get the ETag of the response.
 
@@ -230,10 +226,6 @@ The value of the ETag header, if present.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`etag`](../../JsonResponse/classes/JsonResponse.md#etag)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:98](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L98)
-
 ***
 
 ### headers
@@ -241,6 +233,8 @@ The value of the ETag header, if present.
 #### Get Signature
 
 > **get** **headers**(): `Headers`
+
+Defined in: [src/OutgoingHttpResponse.ts:80](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L80)
 
 Get the headers of the response.
 
@@ -254,10 +248,6 @@ The headers of the response as a Headers object.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`headers`](../../JsonResponse/classes/JsonResponse.md#headers)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:79](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L79)
-
 ***
 
 ### incomingEvent
@@ -266,11 +256,13 @@ The headers of the response as a Headers object.
 
 > **get** **incomingEvent**(): [`IncomingHttpEvent`](../../IncomingHttpEvent/classes/IncomingHttpEvent.md)
 
+Defined in: [src/OutgoingHttpResponse.ts:127](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L127)
+
 Get the associated IncomingHttpEvent.
 
 ##### Throws
 
-HttpError if the IncomingHttpEvent resolver is not set.
+InternalServerError if the IncomingHttpEvent resolver is not set.
 
 ##### Returns
 
@@ -282,10 +274,6 @@ The associated IncomingHttpEvent.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`incomingEvent`](../../JsonResponse/classes/JsonResponse.md#incomingevent)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:126](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L126)
-
 ***
 
 ### lastModified
@@ -293,6 +281,8 @@ The associated IncomingHttpEvent.
 #### Get Signature
 
 > **get** **lastModified**(): `undefined` \| `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:117](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L117)
 
 Get the Last-Modified date of the response.
 
@@ -306,10 +296,6 @@ The value of the Last-Modified header, if present.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`lastModified`](../../JsonResponse/classes/JsonResponse.md#lastmodified)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:116](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L116)
-
 ***
 
 ### status
@@ -317,6 +303,8 @@ The value of the Last-Modified header, if present.
 #### Get Signature
 
 > **get** **status**(): `undefined` \| `number`
+
+Defined in: [src/OutgoingHttpResponse.ts:71](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L71)
 
 Get the HTTP status code.
 
@@ -330,10 +318,6 @@ The HTTP status code.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`status`](../../JsonResponse/classes/JsonResponse.md#status)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:70](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L70)
-
 ***
 
 ### vary
@@ -341,6 +325,8 @@ The HTTP status code.
 #### Get Signature
 
 > **get** **vary**(): `undefined` \| `string`[]
+
+Defined in: [src/OutgoingHttpResponse.ts:108](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L108)
 
 Get the Vary header as an array of values.
 
@@ -354,15 +340,13 @@ The Vary header values split by comma, or undefined if not present.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`vary`](../../JsonResponse/classes/JsonResponse.md#vary)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:107](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L107)
-
 ## Methods
 
 ### addVary()
 
 > **addVary**(`field`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:389](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L389)
 
 Add a field to the Vary header.
 
@@ -384,15 +368,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`addVary`](../../JsonResponse/classes/JsonResponse.md#addvary)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:398](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L398)
-
 ***
 
 ### appendHeader()
 
 > **appendHeader**(`key`, `value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:191](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L191)
 
 Append a value to an existing header or create a new header.
 
@@ -420,15 +402,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`appendHeader`](../../JsonResponse/classes/JsonResponse.md#appendheader)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:190](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L190)
-
 ***
 
 ### calculateContentLength()
 
 > `protected` **calculateContentLength**(`generateETag`): `number`
+
+Defined in: [src/OutgoingHttpResponse.ts:725](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L725)
 
 Calculate the content length.
 
@@ -450,15 +430,13 @@ The content length.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`calculateContentLength`](../../JsonResponse/classes/JsonResponse.md#calculatecontentlength)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:711](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L711)
-
 ***
 
 ### clearCookie()
 
 > **clearCookie**(`name`, `force`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:294](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L294)
 
 Clear a specific cookie from the response.
 
@@ -486,15 +464,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`clearCookie`](../../JsonResponse/classes/JsonResponse.md#clearcookie)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:293](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L293)
-
 ***
 
 ### clearCookies()
 
 > **clearCookies**(`force`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:306](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L306)
 
 Clear all cookies from the response.
 
@@ -516,15 +492,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`clearCookies`](../../JsonResponse/classes/JsonResponse.md#clearcookies)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:305](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L305)
-
 ***
 
 ### defaultEtagFn()
 
 > `protected` **defaultEtagFn**(`content`, `encoding`): `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:810](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L810)
 
 Generate a default ETag for the given content.
 
@@ -552,15 +526,13 @@ The generated ETag as a base64 string.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`defaultEtagFn`](../../JsonResponse/classes/JsonResponse.md#defaultetagfn)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:796](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L796)
-
 ***
 
 ### ensureCharset()
 
 > `protected` **ensureCharset**(`value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:743](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L743)
 
 Ensure that the "Content-Type" header has a charset specified.
 
@@ -582,15 +554,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`ensureCharset`](../../JsonResponse/classes/JsonResponse.md#ensurecharset)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:729](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L729)
-
 ***
 
 ### format()
 
 > **format**(`formats`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:378](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L378)
 
 Handles content negotiation based on the `Accept` header of the incoming request.
 
@@ -612,15 +582,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`format`](../../JsonResponse/classes/JsonResponse.md#format)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:377](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L377)
-
 ***
 
 ### getCallback()
 
 > **getCallback**(): `undefined` \| `string`
+
+Defined in: [src/JsonpResponse.ts:28](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/JsonpResponse.ts#L28)
 
 Get callback.
 
@@ -630,15 +598,13 @@ Get callback.
 
 The callback function name.
 
-#### Defined in
-
-[JsonpResponse.ts:28](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/JsonpResponse.ts#L28)
-
 ***
 
 ### getHashedContent()
 
 > `protected` **getHashedContent**(`content`, `encoding`): `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:821](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L821)
 
 Get the hashed content using the specified encoding.
 
@@ -666,15 +632,13 @@ The hashed content as a hexadecimal string.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`getHashedContent`](../../JsonResponse/classes/JsonResponse.md#gethashedcontent)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:807](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L807)
-
 ***
 
 ### getHeader()
 
 > **getHeader**(`key`, `fallback`?): `undefined` \| `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:208](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L208)
 
 Get a specific header by name.
 
@@ -702,15 +666,13 @@ The value of the header or the fallback value.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`getHeader`](../../JsonResponse/classes/JsonResponse.md#getheader)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:207](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L207)
-
 ***
 
 ### getHeaderNames()
 
 > **getHeaderNames**(): `string`[]
+
+Defined in: [src/OutgoingHttpResponse.ts:217](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L217)
 
 Get all header names.
 
@@ -724,15 +686,13 @@ An array of all header names.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`getHeaderNames`](../../JsonResponse/classes/JsonResponse.md#getheadernames)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:216](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L216)
-
 ***
 
 ### handleCacheHeaders()
 
 > `protected` **handleCacheHeaders**(): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:662](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L662)
 
 Handle cache headers like ETag and Last-Modified.
 
@@ -746,15 +706,33 @@ The current instance of the response for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`handleCacheHeaders`](../../JsonResponse/classes/JsonResponse.md#handlecacheheaders)
 
-#### Defined in
+***
 
-[OutgoingHttpResponse.ts:648](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L648)
+### handleContentNegotiation()
+
+> `protected` **handleContentNegotiation**(): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:614](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L614)
+
+Handles content negotiation based on the `Accept` header of the incoming request.
+
+#### Returns
+
+`this`
+
+The current instance of OutgoingHttpResponse for chaining.
+
+#### Inherited from
+
+[`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`handleContentNegotiation`](../../JsonResponse/classes/JsonResponse.md#handlecontentnegotiation)
 
 ***
 
 ### hasHeader()
 
 > **hasHeader**(`key`): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:227](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L227)
 
 Check if a specific header exists.
 
@@ -776,15 +754,13 @@ True if the header exists, false otherwise.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`hasHeader`](../../JsonResponse/classes/JsonResponse.md#hasheader)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:226](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L226)
-
 ***
 
 ### isClientError()
 
 > **isClientError**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:540](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L540)
 
 Check if the status code represents a client error.
 
@@ -798,15 +774,13 @@ True if the status code is a client error, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isClientError`](../../JsonResponse/classes/JsonResponse.md#isclienterror)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:549](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L549)
-
 ***
 
 ### isEmpty()
 
 > **isEmpty**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:501](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L501)
 
 Check if the response is empty.
 
@@ -820,15 +794,13 @@ True if the status code indicates an empty response, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isEmpty`](../../JsonResponse/classes/JsonResponse.md#isempty)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:510](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L510)
-
 ***
 
 ### isForbidden()
 
 > **isForbidden**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:559](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L559)
 
 Check if the status code is 403 (Forbidden).
 
@@ -842,15 +814,13 @@ True if the status code is 403, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isForbidden`](../../JsonResponse/classes/JsonResponse.md#isforbidden)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:568](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L568)
-
 ***
 
 ### isInformational()
 
 > **isInformational**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:463](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L463)
 
 Check if the status code represents an informational response.
 
@@ -864,15 +834,13 @@ True if the status code is informational, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isInformational`](../../JsonResponse/classes/JsonResponse.md#isinformational)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:472](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L472)
-
 ***
 
 ### isInvalid()
 
 > **isInvalid**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:453](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L453)
 
 Check if the status code is invalid.
 
@@ -886,15 +854,13 @@ True if the status code is invalid, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isInvalid`](../../JsonResponse/classes/JsonResponse.md#isinvalid)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:462](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L462)
-
 ***
 
 ### isMovedPermanently()
 
 > **isMovedPermanently**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:531](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L531)
 
 Check if the status code is 301 (Moved Permanently).
 
@@ -908,15 +874,13 @@ True if the status code is 301, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isMovedPermanently`](../../JsonResponse/classes/JsonResponse.md#ismovedpermanently)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:540](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L540)
-
 ***
 
 ### isNotFound()
 
 > **isNotFound**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:568](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L568)
 
 Check if the status code is 404 (Not Found).
 
@@ -930,15 +894,13 @@ True if the status code is 404, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isNotFound`](../../JsonResponse/classes/JsonResponse.md#isnotfound)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:577](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L577)
-
 ***
 
 ### isOk()
 
 > **isOk**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:483](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L483)
 
 Check if the status code is 200 (OK).
 
@@ -952,15 +914,13 @@ True if the status code is 200, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isOk`](../../JsonResponse/classes/JsonResponse.md#isok)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:492](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L492)
-
 ***
 
 ### isRedirect()
 
 > **isRedirect**(`location`?): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:521](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L521)
 
 Check if the response is a redirect.
 
@@ -982,15 +942,13 @@ True if the status code indicates a redirect, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isRedirect`](../../JsonResponse/classes/JsonResponse.md#isredirect)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:530](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L530)
-
 ***
 
 ### isRedirection()
 
 > **isRedirection**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:510](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L510)
 
 Check if the status code represents a redirection.
 
@@ -1004,15 +962,13 @@ True if the status code is a redirection, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isRedirection`](../../JsonResponse/classes/JsonResponse.md#isredirection)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:519](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L519)
-
 ***
 
 ### isResetContent()
 
 > **isResetContent**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:492](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L492)
 
 Check if the status code is 205 (Reset Content).
 
@@ -1026,15 +982,13 @@ True if the status code is 205, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isResetContent`](../../JsonResponse/classes/JsonResponse.md#isresetcontent)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:501](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L501)
-
 ***
 
 ### isServerError()
 
 > **isServerError**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:577](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L577)
 
 Check if the status code represents a server error.
 
@@ -1048,15 +1002,13 @@ True if the status code is a server error, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isServerError`](../../JsonResponse/classes/JsonResponse.md#isservererror)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:586](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L586)
-
 ***
 
 ### isSuccessful()
 
 > **isSuccessful**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:473](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L473)
 
 Check if the status code represents a successful response.
 
@@ -1070,15 +1022,13 @@ True if the status code is successful, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isSuccessful`](../../JsonResponse/classes/JsonResponse.md#issuccessful)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:482](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L482)
-
 ***
 
 ### isUnauthorized()
 
 > **isUnauthorized**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:550](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L550)
 
 Check if the status code is 401 (Unauthorized).
 
@@ -1092,15 +1042,13 @@ True if the status code is 401, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isUnauthorized`](../../JsonResponse/classes/JsonResponse.md#isunauthorized)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:559](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L559)
-
 ***
 
 ### isValidateable()
 
 > **isValidateable**(): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:587](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L587)
 
 Check if the response is validateable.
 
@@ -1114,15 +1062,13 @@ True if the response has Last-Modified or ETag headers, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`isValidateable`](../../JsonResponse/classes/JsonResponse.md#isvalidateable)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:596](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L596)
-
 ***
 
 ### makeJson()
 
 > `protected` **makeJson**(): `this`
+
+Defined in: [src/JsonpResponse.ts:39](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/JsonpResponse.ts#L39)
 
 Make JSONP response.
 
@@ -1140,15 +1086,13 @@ If no callback is provided.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`makeJson`](../../JsonResponse/classes/JsonResponse.md#makejson)
 
-#### Defined in
-
-[JsonpResponse.ts:39](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/JsonpResponse.ts#L39)
-
 ***
 
 ### morphToJson()
 
 > `protected` **morphToJson**(`content`, `options`): `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:774](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L774)
 
 Convert the given content to a JSON string.
 
@@ -1174,21 +1118,19 @@ A JSON string representation of the content.
 
 #### Throws
 
-HttpError if the content cannot be converted to JSON.
+InternalServerError if the content cannot be converted to JSON.
 
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`morphToJson`](../../JsonResponse/classes/JsonResponse.md#morphtojson)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:760](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L760)
 
 ***
 
 ### prepare()
 
 > **prepare**(`event`, `blueprint`?): `this`
+
+Defined in: [src/JsonResponse.ts:18](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/JsonResponse.ts#L18)
 
 Prepare the response before sending.
 
@@ -1216,15 +1158,13 @@ The current instance of the response for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`prepare`](../../JsonResponse/classes/JsonResponse.md#prepare)
 
-#### Defined in
-
-[JsonResponse.ts:18](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/JsonResponse.ts#L18)
-
 ***
 
 ### prepareContentHeaders()
 
 > `protected` **prepareContentHeaders**(): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:674](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L674)
 
 Prepare content-related headers such as Content-Length and ETag.
 
@@ -1238,15 +1178,13 @@ The current instance of the response for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`prepareContentHeaders`](../../JsonResponse/classes/JsonResponse.md#preparecontentheaders)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:660](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L660)
-
 ***
 
 ### prepareCookies()
 
 > `protected` **prepareCookies**(): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:787](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L787)
 
 Prepare cookies by setting the appropriate headers.
 
@@ -1260,15 +1198,13 @@ The current instance of the response for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`prepareCookies`](../../JsonResponse/classes/JsonResponse.md#preparecookies)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:773](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L773)
-
 ***
 
 ### removeHeader()
 
 > **removeHeader**(`key`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:237](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L237)
 
 Remove headers from the response.
 
@@ -1290,15 +1226,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`removeHeader`](../../JsonResponse/classes/JsonResponse.md#removeheader)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:236](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L236)
-
 ***
 
 ### secureCookies()
 
 > **secureCookies**(`value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:317](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L317)
 
 Secure all cookies by setting the "Secure" attribute.
 
@@ -1320,15 +1254,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`secureCookies`](../../JsonResponse/classes/JsonResponse.md#securecookies)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:316](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L316)
-
 ***
 
 ### setBlueprintResolver()
 
 > **setBlueprintResolver**(`resolver`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:443](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L443)
 
 Set the resolver for the blueprint.
 
@@ -1350,15 +1282,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setBlueprintResolver`](../../JsonResponse/classes/JsonResponse.md#setblueprintresolver)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:452](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L452)
-
 ***
 
 ### setCallback()
 
 > **setCallback**(`callback`): `this`
+
+Defined in: [src/JsonpResponse.ts:18](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/JsonpResponse.ts#L18)
 
 Set callback.
 
@@ -1376,15 +1306,13 @@ The callback function name or array of names.
 
 The current instance for method chaining.
 
-#### Defined in
-
-[JsonpResponse.ts:18](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/JsonpResponse.ts#L18)
-
 ***
 
 ### setCharset()
 
 > **setCharset**(`value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:328](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L328)
 
 Set the character set for the response.
 
@@ -1406,15 +1334,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setCharset`](../../JsonResponse/classes/JsonResponse.md#setcharset)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:327](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L327)
-
 ***
 
 ### setContent()
 
 > **setContent**(`value`, `options`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:268](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L268)
 
 Set the response content.
 If the content should be JSON, it will be converted appropriately.
@@ -1443,15 +1369,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setContent`](../../JsonResponse/classes/JsonResponse.md#setcontent)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:267](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L267)
-
 ***
 
 ### setContentHeaders()
 
 > `protected` **setContentHeaders**(): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:690](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L690)
 
 Set content headers such as Content-Length and ETag.
 
@@ -1465,15 +1389,13 @@ The current instance of the response for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setContentHeaders`](../../JsonResponse/classes/JsonResponse.md#setcontentheaders)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:676](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L676)
-
 ***
 
 ### setContentType()
 
 > **setContentType**(`value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:340](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L340)
 
 Set the content type of the response.
 
@@ -1493,21 +1415,19 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Throws
 
-HttpError if the provided MIME type is invalid.
+InternalServerError if the provided MIME type is invalid.
 
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setContentType`](../../JsonResponse/classes/JsonResponse.md#setcontenttype)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:339](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L339)
 
 ***
 
 ### setContentTypeIfNeeded()
 
 > `protected` **setContentTypeIfNeeded**(): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:636](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L636)
 
 Set the content type if it's not already set.
 
@@ -1521,15 +1441,13 @@ The current instance of the response for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setContentTypeIfNeeded`](../../JsonResponse/classes/JsonResponse.md#setcontenttypeifneeded)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:622](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L622)
-
 ***
 
 ### setCookie()
 
 > **setCookie**(`name`, `value`, `options`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:281](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L281)
 
 Set a cookie for the response.
 
@@ -1549,7 +1467,7 @@ The value of the cookie.
 
 ##### options
 
-[`CookieOptions`](../../options/HttpConfig/interfaces/CookieOptions.md) = `{}`
+[`CookieOptions`](../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Optional settings for the cookie.
 
@@ -1563,15 +1481,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setCookie`](../../JsonResponse/classes/JsonResponse.md#setcookie)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:280](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L280)
-
 ***
 
 ### setEtag()
 
 > **setEtag**(`etag`?, `weak`?): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:401](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L401)
 
 Set the ETag for the response.
 
@@ -1599,15 +1515,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setEtag`](../../JsonResponse/classes/JsonResponse.md#setetag)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:410](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L410)
-
 ***
 
 ### setHeader()
 
 > **setHeader**(`key`, `value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:173](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L173)
 
 Set a single header for the response.
 If the header is "Content-Type," ensures charset is set appropriately.
@@ -1636,15 +1550,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setHeader`](../../JsonResponse/classes/JsonResponse.md#setheader)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:172](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L172)
-
 ***
 
 ### setHeaders()
 
 > **setHeaders**(`values`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:159](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L159)
 
 Set multiple headers for the response.
 
@@ -1666,15 +1578,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setHeaders`](../../JsonResponse/classes/JsonResponse.md#setheaders)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:158](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L158)
-
 ***
 
 ### setIncomingEventResolver()
 
 > **setIncomingEventResolver**(`resolver`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:432](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L432)
 
 Set the resolver for the incoming HTTP event.
 
@@ -1696,15 +1606,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setIncomingEventResolver`](../../JsonResponse/classes/JsonResponse.md#setincomingeventresolver)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:441](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L441)
-
 ***
 
 ### setLastModified()
 
 > **setLastModified**(`date`?): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:417](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L417)
 
 Set the Last-Modified header for the response.
 
@@ -1726,15 +1634,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setLastModified`](../../JsonResponse/classes/JsonResponse.md#setlastmodified)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:426](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L426)
-
 ***
 
 ### setLinks()
 
 > **setLinks**(`links`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:365](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L365)
 
 Set link headers for the response.
 
@@ -1756,15 +1662,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setLinks`](../../JsonResponse/classes/JsonResponse.md#setlinks)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:364](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L364)
-
 ***
 
 ### setStatus()
 
 > **setStatus**(`code`, `text`?): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:251](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L251)
 
 Set the HTTP status code of the response.
 Also sets a default status message if none is provided.
@@ -1791,21 +1695,19 @@ The current instance of OutgoingHttpResponse for chaining.
 
 #### Throws
 
-HttpError if the status code is invalid.
+InternalServerError if the status code is invalid.
 
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setStatus`](../../JsonResponse/classes/JsonResponse.md#setstatus)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:250](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L250)
 
 ***
 
 ### setType()
 
 > **setType**(`value`): `this`
+
+Defined in: [src/OutgoingHttpResponse.ts:355](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L355)
 
 Set the content type by file extension.
 
@@ -1827,15 +1729,13 @@ The current instance of OutgoingHttpResponse for chaining.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`setType`](../../JsonResponse/classes/JsonResponse.md#settype)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:354](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L354)
-
 ***
 
 ### shouldBeJson()
 
 > `protected` **shouldBeJson**(`content`): `boolean`
+
+Defined in: [src/OutgoingHttpResponse.ts:762](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L762)
 
 Determine if the content should be serialized as JSON.
 
@@ -1857,15 +1757,13 @@ True if the content should be serialized as JSON, otherwise false.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`shouldBeJson`](../../JsonResponse/classes/JsonResponse.md#shouldbejson)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:748](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L748)
-
 ***
 
 ### stringify()
 
 > `protected` **stringify**(`value`, `replacer`?, `spaces`?, `escape`?): `string`
+
+Defined in: [src/OutgoingHttpResponse.ts:834](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L834)
 
 Convert the given value to a JSON string with optional escaping.
 
@@ -1905,15 +1803,13 @@ The JSON string representation of the value.
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`stringify`](../../JsonResponse/classes/JsonResponse.md#stringify)
 
-#### Defined in
-
-[OutgoingHttpResponse.ts:820](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L820)
-
 ***
 
 ### create()
 
 > `static` **create**\<`T`\>(`options`): `T`
+
+Defined in: [src/OutgoingHttpResponse.ts:46](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L46)
 
 Create an instance of OutgoingHttpResponse.
 
@@ -1938,7 +1834,3 @@ A new instance of OutgoingHttpResponse.
 #### Inherited from
 
 [`JsonResponse`](../../JsonResponse/classes/JsonResponse.md).[`create`](../../JsonResponse/classes/JsonResponse.md#create)
-
-#### Defined in
-
-[OutgoingHttpResponse.ts:45](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/OutgoingHttpResponse.ts#L45)

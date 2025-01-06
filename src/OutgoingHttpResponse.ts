@@ -4,14 +4,14 @@ import mime from 'mime/lite'
 import statuses from 'statuses'
 import { Buffer } from 'safe-buffer'
 import contentTypeLib from 'content-type'
-import { HttpError } from './errors/HttpError'
 import { isFunction, isString } from 'lodash-es'
 import { createHash, Encoding } from 'node:crypto'
+import { HttpJsonConfig } from './options/HttpConfig'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { CookieCollection } from './cookies/CookieCollection'
-import { HeadersType, IOutgoingHttpResponse } from './declarations'
-import { CookieOptions, HttpJsonConfig } from './options/HttpConfig'
+import { InternalServerError } from './errors/InternalServerError'
 import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants'
+import { HeadersType, IOutgoingHttpResponse, CookieOptions } from './declarations'
 import { IBlueprint, OutgoingResponse, OutgoingResponseOptions } from '@stone-js/core'
 
 /**
@@ -30,6 +30,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_response'
 
   protected _charset?: Encoding
+  protected _formats?: Record<string, () => unknown>
   protected _blueprintResolver?: () => IBlueprint | undefined
   protected _incomingEventResolver?: () => IncomingHttpEvent
 
@@ -53,7 +54,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param options - Options for the outgoing HTTP response.
    */
   constructor (options: OutgoingHttpResponseOptions) {
-    super(options)
+    super({ ...options, type: OutgoingHttpResponse.OUTGOING_HTTP_RESPONSE })
     this._headers = new Headers()
     this._cookieCollection = CookieCollection.create()
 
@@ -120,12 +121,12 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   /**
    * Get the associated IncomingHttpEvent.
    *
-   * @throws HttpError if the IncomingHttpEvent resolver is not set.
+   * @throws InternalServerError if the IncomingHttpEvent resolver is not set.
    * @returns The associated IncomingHttpEvent.
    */
   get incomingEvent (): IncomingHttpEvent {
     if (this._incomingEventResolver === undefined) {
-      throw new HttpError('Must set an IncomingHttpEvent resolver.')
+      throw new InternalServerError('Must set an IncomingHttpEvent resolver.')
     }
     return this._incomingEventResolver()
   }
@@ -245,11 +246,11 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param code - The HTTP status code.
    * @param text - Optional status message.
    * @returns The current instance of OutgoingHttpResponse for chaining.
-   * @throws HttpError if the status code is invalid.
+   * @throws InternalServerError if the status code is invalid.
    */
   setStatus (code: number, text?: string): this {
     if (code < 100 || code >= 600) {
-      throw new HttpError(`The HTTP status code "${code}" is not valid.`)
+      throw new InternalServerError(`The HTTP status code "${code}" is not valid.`)
     }
     this._statusCode = code
     this._statusMessage = text ?? statuses.message[code] ?? 'unknown status'
@@ -278,7 +279,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   setCookie (name: string, value: unknown, options: CookieOptions = {}): this {
-    if (!isString(name)) { throw new HttpError('Cookie name must be a non-empty string.') }
+    if (!isString(name)) { throw new InternalServerError('Cookie name must be a non-empty string.') }
     this._cookieCollection.add(name, value, options)
     return this
   }
@@ -291,7 +292,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   clearCookie (name: string, force = false): this {
-    if (!isString(name)) { throw new HttpError('Cookie name must be a non-empty string.') }
+    if (!isString(name)) { throw new InternalServerError('Cookie name must be a non-empty string.') }
     this._cookieCollection.remove(name, force)
     return this
   }
@@ -334,14 +335,14 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    *
    * @param value - The MIME type for the response.
    * @returns The current instance of OutgoingHttpResponse for chaining.
-   * @throws HttpError if the provided MIME type is invalid.
+   * @throws InternalServerError if the provided MIME type is invalid.
    */
   setContentType (value: string): this {
     const mimeType = isString(value) && value.includes('/') ? value : mime.getType(value) ?? undefined
     if (mimeType !== undefined) {
       return this.setHeader('Content-Type', mimeType)
     } else {
-      throw new HttpError(`Invalid MIME type: ${value}`)
+      throw new InternalServerError(`Invalid MIME type: ${value}`)
     }
   }
 
@@ -375,18 +376,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   format (formats: Record<string, () => unknown>): this {
-    const types = Object.keys(formats).filter(v => v !== 'default')
-    const type = types.length > 0 ? this.incomingEvent.acceptsTypes(...types) : undefined
-
-    if (isString(type) && formats[type] !== undefined) {
-      this.setContentType(type).setContent(formats[type]())
-    } else if (formats.default !== undefined) {
-      this.setContent(formats.default())
-    } else {
-      this.setStatus(HTTP_NOT_ACCEPTABLE).setContent(`Invalid types (${types.join(',')})`)
-    }
-
-    return this.addVary('Accept')
+    this._formats = formats
+    return this
   }
 
   /**
@@ -608,10 +599,33 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     return this
       .setBlueprintResolver(() => blueprint)
       .setIncomingEventResolver(() => event)
+      .handleContentNegotiation()
       .prepareCookies()
       .setContentTypeIfNeeded()
       .handleCacheHeaders()
       .prepareContentHeaders()
+  }
+
+  /**
+   * Handles content negotiation based on the `Accept` header of the incoming request.
+   *
+   * @returns The current instance of OutgoingHttpResponse for chaining.
+   */
+  protected handleContentNegotiation (): this {
+    if (this._formats === undefined) return this
+
+    const types = Object.keys(this._formats).filter(v => v !== 'default')
+    const type = types.length > 0 ? this.incomingEvent.acceptsTypes(...types) : undefined
+
+    if (isString(type) && this._formats[type] !== undefined) {
+      this.setContentType(type).setContent(this._formats[type]())
+    } else if (this._formats.default !== undefined) {
+      this.setContent(this._formats.default())
+    } else {
+      this.setStatus(HTTP_NOT_ACCEPTABLE).setContent(`Invalid types (${types.join(',')})`)
+    }
+
+    return this.addVary('Accept')
   }
 
   /**
@@ -755,13 +769,13 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param content - The content to convert.
    * @param options - Options to customize the serialization process.
    * @returns A JSON string representation of the content.
-   * @throws HttpError if the content cannot be converted to JSON.
+   * @throws InternalServerError if the content cannot be converted to JSON.
    */
   protected morphToJson (content: unknown, options: Partial<HttpJsonConfig> = {}): string {
     try {
       return this.stringify(content, options.replacer, options.spaces, options.escape)
     } catch (error: any) {
-      throw new HttpError(error.message, { cause: error })
+      throw new InternalServerError(error.message, { cause: error })
     }
   }
 

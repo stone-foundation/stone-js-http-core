@@ -1,7 +1,7 @@
 import { parse } from 'cookie'
 import { Cookie } from './Cookie'
+import { CookieOptions } from '../declarations'
 import { CookieError } from '../errors/CookieError'
-import { CookieOptions } from '../options/HttpConfig'
 import { isCookieValueSerialized, isCookieValueSigned, unsignCookieValue } from './utils'
 
 /**
@@ -62,6 +62,21 @@ export class CookieCollection {
     }
     return this
   }
+
+  /**
+   * Get a cookie from the collection.
+   *
+   * @param name - Cookie name.
+   */
+  get (name: string): Cookie | undefined
+
+  /**
+   * Get a cookie from the collection.
+   *
+   * @param name - Cookie name.
+   * @param fallback - Fallback value if the cookie does not exist.
+   */
+  get (name: string, fallback: Cookie): Cookie
 
   /**
    * Get a cookie from the collection.
@@ -194,7 +209,7 @@ export class CookieCollection {
       }
     }
 
-    if (isCookieValueSerialized(value) && typeof value === 'string') {
+    if (isCookieValueSerialized(value)) {
       value = JSON.parse(value.replace('$$j$$:', ''))
     }
 

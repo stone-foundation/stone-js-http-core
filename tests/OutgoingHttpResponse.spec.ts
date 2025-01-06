@@ -1,8 +1,8 @@
 import { IBlueprint } from '@stone-js/core'
-import { HttpError } from '../src/errors/HttpError'
 import { IncomingHttpEvent } from '../src/IncomingHttpEvent'
 import { HEAD, HTTP_NOT_ACCEPTABLE } from '../src/constants'
 import { OutgoingHttpResponse } from '../src/OutgoingHttpResponse'
+import { InternalServerError } from '../src/errors/InternalServerError'
 
 // Unit tests for the OutgoingHttpResponse
 describe('OutgoingHttpResponse', () => {
@@ -21,7 +21,7 @@ describe('OutgoingHttpResponse', () => {
   })
 
   it('should throw an error if no incomingEventResolver is provided when calling incomingEvent', () => {
-    expect(() => response.incomingEvent).toThrow(HttpError)
+    expect(() => response.incomingEvent).toThrow(InternalServerError)
   })
 
   it('should set headers as Map', () => {
@@ -32,7 +32,7 @@ describe('OutgoingHttpResponse', () => {
   })
 
   it('should throw an error when status code is invalid', () => {
-    expect(() => response.setStatus(40)).toThrow(HttpError)
+    expect(() => response.setStatus(40)).toThrow(InternalServerError)
   })
 
   it('should invoke cookie\'s methods', () => {
@@ -91,7 +91,8 @@ describe('OutgoingHttpResponse', () => {
     expect(response.getHeader('ETag')).toBe('W/"09344494439-934"')
     response.setLastModified(undefined)
     expect(response.getHeader('Last-Modified')).toBeUndefined()
-    response.setIncomingEventResolver(() => event).format({})
+    // @ts-expect-error - Accessing private method for testing purposes
+    response.setIncomingEventResolver(() => event).format({}).handleContentNegotiation()
     expect(response.status).toBe(HTTP_NOT_ACCEPTABLE)
     expect(response.content).toBe('Invalid types ()')
   })
@@ -180,20 +181,20 @@ describe('OutgoingHttpResponse', () => {
 
   it('should throw an error on invalid cookie name', () => {
     // @ts-expect-error - Invalid cookie name
-    expect(() => response.setCookie(40)).toThrow(HttpError)
+    expect(() => response.setCookie(40)).toThrow(InternalServerError)
     // @ts-expect-error - Invalid cookie name
-    expect(() => response.clearCookie(40)).toThrow(HttpError)
+    expect(() => response.clearCookie(40)).toThrow(InternalServerError)
   })
 
   it('should throw an error on invalid content-type when invoking setContentType', () => {
     // @ts-expect-error - Invalid cookie name
-    expect(() => response.setContentType(40)).toThrow(HttpError)
+    expect(() => response.setContentType(40)).toThrow(InternalServerError)
   })
 
   it('should throw an error on invalid content when invoking morphToJson', () => {
     const obj = { self: {} }
     obj.self = obj
     // @ts-expect-error - Invalid cookie name
-    expect(() => response.morphToJson(obj)).toThrow(HttpError)
+    expect(() => response.morphToJson(obj)).toThrow(InternalServerError)
   })
 })

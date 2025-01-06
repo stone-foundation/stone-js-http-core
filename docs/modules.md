@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.3**](README.md)
+[**HTTP Core Documentation v0.0.32**](README.md)
 
 ***
 
-# HTTP Core Documentation v0.0.3
+# HTTP Core Documentation v0.0.32
 
 ## Modules
 
@@ -12,11 +12,18 @@
 - [cookies/CookieCollection](cookies/CookieCollection/README.md)
 - [cookies/utils](cookies/utils/README.md)
 - [declarations](declarations/README.md)
+- [errors/BadRequestError](errors/BadRequestError/README.md)
 - [errors/CookieError](errors/CookieError/README.md)
 - [errors/FileError](errors/FileError/README.md)
+- [errors/ForbiddenError](errors/ForbiddenError/README.md)
 - [errors/HttpError](errors/HttpError/README.md)
+- [errors/InternalServerError](errors/InternalServerError/README.md)
+- [errors/MethodNotAllowedError](errors/MethodNotAllowedError/README.md)
+- [errors/NotFoundError](errors/NotFoundError/README.md)
+- [errors/UnauthorizedError](errors/UnauthorizedError/README.md)
 - [file/File](file/File/README.md)
 - [file/UploadedFile](file/UploadedFile/README.md)
+- [HttpErrorHandler](HttpErrorHandler/README.md)
 - [HttpResponse](HttpResponse/README.md)
 - [IncomingHttpEvent](IncomingHttpEvent/README.md)
 - [JsonpResponse](JsonpResponse/README.md)

@@ -1,4 +1,5 @@
 import { File } from './file/File'
+import { HeadersType } from './declarations'
 import { JsonResponse } from './JsonResponse'
 import { JsonpResponse } from './JsonpResponse'
 import { RedirectResponse } from './RedirectResponse'
@@ -24,7 +25,7 @@ import {
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const createHttpResponse = (content: unknown, statusCode: number = HTTP_OK, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const createHttpResponse = (content: unknown, statusCode: number = HTTP_OK, headers: HeadersType = {}): OutgoingHttpResponse => {
   return OutgoingHttpResponse.create({ content, statusCode, headers })
 }
 
@@ -35,7 +36,7 @@ export const createHttpResponse = (content: unknown, statusCode: number = HTTP_O
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const okHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const okHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_OK, headers)
 }
 
@@ -45,7 +46,7 @@ export const okHttpResponse = (content: unknown, headers: Record<string, string>
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const noContentHttpResponse = (headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const noContentHttpResponse = (headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(undefined, HTTP_NO_CONTENT, headers)
 }
 
@@ -56,7 +57,7 @@ export const noContentHttpResponse = (headers: Record<string, string> = {}): Out
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const badRequestHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const badRequestHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_BAD_REQUEST, headers)
 }
 
@@ -67,7 +68,7 @@ export const badRequestHttpResponse = (content: unknown, headers: Record<string,
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const unauthorizedHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const unauthorizedHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_UNAUTHORIZED, headers)
 }
 
@@ -78,7 +79,7 @@ export const unauthorizedHttpResponse = (content: unknown, headers: Record<strin
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const forbiddenHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const forbiddenHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_FORBIDDEN, headers)
 }
 
@@ -89,7 +90,7 @@ export const forbiddenHttpResponse = (content: unknown, headers: Record<string, 
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const notFoundHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const notFoundHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_NOT_FOUND, headers)
 }
 
@@ -100,7 +101,7 @@ export const notFoundHttpResponse = (content: unknown, headers: Record<string, s
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const methodNotAllowedHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const methodNotAllowedHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_METHOD_NOT_ALLOWED, headers)
 }
 
@@ -111,7 +112,7 @@ export const methodNotAllowedHttpResponse = (content: unknown, headers: Record<s
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const serverErrorHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const serverErrorHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_INTERNAL_SERVER_ERROR, headers)
 }
 
@@ -122,7 +123,7 @@ export const serverErrorHttpResponse = (content: unknown, headers: Record<string
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const unavailableHttpResponse = (content: unknown, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const unavailableHttpResponse = (content: unknown, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, HTTP_SERVICE_UNAVAILABLE, headers)
 }
 
@@ -134,7 +135,7 @@ export const unavailableHttpResponse = (content: unknown, headers: Record<string
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const htmlHttpResponse = (content: string, statusCode: number = HTTP_OK, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const htmlHttpResponse = (content: string, statusCode: number = HTTP_OK, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(content, statusCode, { 'Content-Type': 'text/html', ...headers })
 }
 
@@ -146,7 +147,7 @@ export const htmlHttpResponse = (content: string, statusCode: number = HTTP_OK, 
  * @param headers - The headers for the response.
  * @returns A new instance of JsonResponse.
  */
-export const jsonHttpResponse = (content: unknown, statusCode: number = HTTP_OK, headers: Record<string, string> = {}): JsonResponse => {
+export const jsonHttpResponse = (content: unknown, statusCode: number = HTTP_OK, headers: HeadersType = {}): JsonResponse => {
   return JsonResponse.create({ content, statusCode, headers })
 }
 
@@ -158,7 +159,7 @@ export const jsonHttpResponse = (content: unknown, statusCode: number = HTTP_OK,
  * @param headers - The headers for the response.
  * @returns A new instance of JsonpResponse.
  */
-export const jsonpHttpResponse = (content: unknown, statusCode: number = HTTP_OK, headers: Record<string, string> = {}): JsonpResponse => {
+export const jsonpHttpResponse = (content: unknown, statusCode: number = HTTP_OK, headers: HeadersType = {}): JsonpResponse => {
   return JsonpResponse.create({ content, statusCode, headers })
 }
 
@@ -176,7 +177,7 @@ export const jsonpHttpResponse = (content: unknown, statusCode: number = HTTP_OK
 export const fileHttpResponse = (
   file: string | File,
   statusCode: number = HTTP_OK,
-  headers: Record<string, string> = {},
+  headers: HeadersType = {},
   contentDispositionType: string | null = null,
   autoEtag: boolean = false,
   autoLastModified: boolean = true
@@ -192,7 +193,7 @@ export const fileHttpResponse = (
  * @param headers - The headers for the response.
  * @returns A new instance of RedirectResponse.
  */
-export const redirectHttpResponse = (url: string | URL, statusCode: number = 302, headers: Record<string, string> = {}): RedirectResponse => {
+export const redirectHttpResponse = (url: string | URL, statusCode: number = 302, headers: HeadersType = {}): RedirectResponse => {
   return RedirectResponse.create({ content: undefined, url, statusCode, headers })
 }
 
@@ -203,6 +204,91 @@ export const redirectHttpResponse = (url: string | URL, statusCode: number = 302
  * @param headers - The headers for the response.
  * @returns A new instance of OutgoingHttpResponse.
  */
-export const emptyHttpResponse = (statusCode: number = 204, headers: Record<string, string> = {}): OutgoingHttpResponse => {
+export const emptyHttpResponse = (statusCode: number = 204, headers: HeadersType = {}): OutgoingHttpResponse => {
   return createHttpResponse(undefined, statusCode, { 'Content-Type': 'application/json', ...headers })
+}
+
+/**
+ * A collection of factory methods for creating various types of HTTP responses.
+ */
+export const HttpResponse = {
+  /**
+   * Creates a generic HTTP response.
+   */
+  create: createHttpResponse,
+
+  /**
+   * Creates a 200 OK HTTP response.
+   */
+  ok: okHttpResponse,
+
+  /**
+   * Creates a 204 No Content HTTP response.
+   */
+  noContent: noContentHttpResponse,
+
+  /**
+   * Creates a 400 Bad Request HTTP response.
+   */
+  badRequest: badRequestHttpResponse,
+
+  /**
+   * Creates a 401 Unauthorized HTTP response.
+   */
+  unauthorized: unauthorizedHttpResponse,
+
+  /**
+   * Creates a 403 Forbidden HTTP response.
+   */
+  forbidden: forbiddenHttpResponse,
+
+  /**
+   * Creates a 404 Not Found HTTP response.
+   */
+  notFound: notFoundHttpResponse,
+
+  /**
+   * Creates a 405 Method Not Allowed HTTP response.
+   */
+  methodNotAllowed: methodNotAllowedHttpResponse,
+
+  /**
+   * Creates a 500 Internal Server Error HTTP response.
+   */
+  serverError: serverErrorHttpResponse,
+
+  /**
+   * Creates a 503 Service Unavailable HTTP response.
+   */
+  unavailable: unavailableHttpResponse,
+
+  /**
+   * Creates an HTTP response with HTML content.
+   */
+  html: htmlHttpResponse,
+
+  /**
+   * Creates an HTTP response with JSON content.
+   */
+  json: jsonHttpResponse,
+
+  /**
+   * Creates an HTTP response with JSONP content.
+   */
+  jsonp: jsonpHttpResponse,
+
+  /**
+   * Creates an HTTP response for serving a file.
+   */
+  file: fileHttpResponse,
+
+  /**
+   * Creates an HTTP response that redirects to a different URL.
+   */
+  redirect: redirectHttpResponse,
+
+  /**
+   * Creates an empty HTTP response.
+   */
+  empty: emptyHttpResponse
 }

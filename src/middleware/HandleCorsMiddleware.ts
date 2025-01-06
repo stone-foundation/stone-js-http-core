@@ -1,18 +1,18 @@
+import { IBlueprint } from '@stone-js/core'
 import { NextPipe } from '@stone-js/pipeline'
 import { HttpCorsConfig } from '../options/HttpConfig'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
-import { IBlueprint, KernelContext } from '@stone-js/core'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 
 /**
  * HandleCorsMiddleware is responsible for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
  * It allows controlling how clients from different origins can access the server's resources.
  *
- * @template U - Represents the type of the incoming HTTP event.
- * @template V - Represents the type of the outgoing HTTP response.
+ * @template TEvent - Represents the type of the incoming HTTP event.
+ * @template UResponse - Represents the type of the outgoing HTTP response.
  * @author Mr. Stone <evensstone@gmail.com>
  */
-export class HandleCorsMiddleware<U extends IncomingHttpEvent, V extends OutgoingHttpResponse> {
+export class HandleCorsMiddleware {
   private readonly headers: Headers
   private readonly headerVary: string[]
   private readonly blueprint: IBlueprint
@@ -31,12 +31,13 @@ export class HandleCorsMiddleware<U extends IncomingHttpEvent, V extends Outgoin
   /**
    * Handle CORS by modifying the response headers based on the configuration.
    *
-   * @param param0 - The context containing incoming HTTP event and outgoing HTTP response.
-   * @param next - The next middleware function to continue processing the request.
-   * @returns The modified kernel context or the next middleware function result.
+   * @param event - The incoming HTTP event.
+   * @param next - The next middleware function to continue processing the event.
+   * @returns The outgoing HTTP response with CORS headers.
    */
-  handle ({ event, response }: KernelContext<U, V>, next: NextPipe<KernelContext<U, V>>): KernelContext<U, V> | Promise<KernelContext<U, V>> {
+  async handle (event: IncomingHttpEvent, next: NextPipe<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
     const options = this.getOptions()
+    const response = await next(event)
 
     this
       .configureCredentials(options)
@@ -55,16 +56,17 @@ export class HandleCorsMiddleware<U extends IncomingHttpEvent, V extends Outgoin
           .setHeaders(this.headers)
           .setHeader('Content-Length', '0')
           .setStatus(options.successStatus ?? 204)
-        return next({ event, response })
+        return response
       }
     }
+
     if (response !== undefined) {
       response
         .addVary(this.headerVary)
         .setHeaders(this.headers)
     }
 
-    return next({ event, response })
+    return response
   }
 
   /**
@@ -96,19 +98,19 @@ export class HandleCorsMiddleware<U extends IncomingHttpEvent, V extends Outgoin
   }
 
   /**
-   * Configure the `Access-Control-Allow-Origin` header based on the request origin and CORS options.
+   * Configure the `Access-Control-Allow-Origin` header based on the event origin and CORS options.
    *
    * @param {origin} HttpCorsConfig - The CORS options.
-   * @param request - The incoming request.
+   * @param event - The incoming event.
    * @returns The middleware instance for method chaining.
    */
-  private configureOrigin ({ origin }: Partial<HttpCorsConfig>, request: U): this {
+  private configureOrigin ({ origin }: Partial<HttpCorsConfig>, event: IncomingHttpEvent): this {
     if (origin === undefined || origin === '*') {
       this.setHeader('Access-Control-Allow-Origin', '*')
     } else if (typeof origin === 'string') {
       this.addVary('Origin').setHeader('Access-Control-Allow-Origin', origin)
     } else {
-      const reqOrigin = request.getHeader('origin')
+      const reqOrigin = event.getHeader('origin', '')
       this.addVary('Origin').setHeader('Access-Control-Allow-Origin', this.isOriginAllowed(reqOrigin, origin) ? reqOrigin : 'false')
     }
 
@@ -136,18 +138,18 @@ export class HandleCorsMiddleware<U extends IncomingHttpEvent, V extends Outgoin
   }
 
   /**
-   * Configure the `Access-Control-Allow-Headers` header based on the request headers and CORS options.
+   * Configure the `Access-Control-Allow-Headers` header based on the event headers and CORS options.
    *
    * @param {allowedHeaders} HttpCorsConfig - The CORS options.
-   * @param request - The incoming request.
+   * @param event - The incoming event.
    * @returns The middleware instance for method chaining.
    */
-  private configureAllowedHeaders ({ allowedHeaders }: Partial<HttpCorsConfig>, request: U): this {
+  private configureAllowedHeaders ({ allowedHeaders }: Partial<HttpCorsConfig>, event: IncomingHttpEvent): this {
     if (Array.isArray(allowedHeaders) && allowedHeaders.length > 0) {
       allowedHeaders = allowedHeaders.join(',')
     } else {
       this.addVary('Access-Control-Request-Headers')
-      allowedHeaders = request.getHeader('access-control-request-headers')
+      allowedHeaders = event.getHeader('access-control-request-headers')
     }
 
     if (allowedHeaders !== undefined && allowedHeaders.length > 0 && typeof allowedHeaders === 'string') {

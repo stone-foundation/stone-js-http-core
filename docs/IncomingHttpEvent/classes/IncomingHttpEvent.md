@@ -1,10 +1,12 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
 [HTTP Core Documentation](../../modules.md) / [IncomingHttpEvent](../README.md) / IncomingHttpEvent
 
 # Class: IncomingHttpEvent
+
+Defined in: [src/IncomingHttpEvent.ts:37](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L37)
 
 Class representing an IncomingHttpEvent.
 
@@ -21,6 +23,8 @@ Mr. Stone <evensstone@gmail.com>
 ### new IncomingHttpEvent()
 
 > `protected` **new IncomingHttpEvent**(`options`): [`IncomingHttpEvent`](IncomingHttpEvent.md)
+
+Defined in: [src/IncomingHttpEvent.ts:84](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L84)
 
 Constructor for IncomingHttpEvent.
 
@@ -44,21 +48,15 @@ If the URL option is not a valid instance of URL.
 
 `IncomingEvent.constructor`
 
-#### Defined in
-
-[IncomingHttpEvent.ts:83](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L83)
-
 ## Properties
 
 ### \_headers
 
 > `protected` `readonly` **\_headers**: `Headers`
 
+Defined in: [src/IncomingHttpEvent.ts:57](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L57)
+
 The headers of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:56](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L56)
 
 ***
 
@@ -66,11 +64,9 @@ The headers of the request.
 
 > `readonly` **accepts**: `Accepts`
 
+Defined in: [src/IncomingHttpEvent.ts:55](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L55)
+
 The content negotiation handler for the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:54](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L54)
 
 ***
 
@@ -78,11 +74,9 @@ The content negotiation handler for the request.
 
 > `readonly` **body**: `Record`\<`string`, `unknown`\>
 
+Defined in: [src/IncomingHttpEvent.ts:47](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L47)
+
 The body of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:46](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L46)
 
 ***
 
@@ -90,11 +84,9 @@ The body of the request.
 
 > `readonly` **cookies**: [`CookieCollection`](../../cookies/CookieCollection/classes/CookieCollection.md)
 
+Defined in: [src/IncomingHttpEvent.ts:59](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L59)
+
 The cookies included in the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:58](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L58)
 
 ***
 
@@ -102,11 +94,9 @@ The cookies included in the request.
 
 > `readonly` **files**: `Record`\<`string`, [`UploadedFile`](../../file/UploadedFile/classes/UploadedFile.md)[]\>
 
+Defined in: [src/IncomingHttpEvent.ts:49](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L49)
+
 The files included in the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:48](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L48)
 
 ***
 
@@ -114,11 +104,9 @@ The files included in the request.
 
 > `readonly` **ip**: `string`
 
+Defined in: [src/IncomingHttpEvent.ts:41](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L41)
+
 The IP address of the client making the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:40](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L40)
 
 ***
 
@@ -126,11 +114,9 @@ The IP address of the client making the request.
 
 > `readonly` **ips**: `string`[]
 
+Defined in: [src/IncomingHttpEvent.ts:43](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L43)
+
 The list of IP addresses, typically for proxies.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:42](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L42)
 
 ***
 
@@ -138,11 +124,9 @@ The list of IP addresses, typically for proxies.
 
 > `readonly` **method**: [`HttpMethods`](../../declarations/enumerations/HttpMethods.md)
 
+Defined in: [src/IncomingHttpEvent.ts:53](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L53)
+
 The HTTP method of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:52](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L52)
 
 ***
 
@@ -150,11 +134,9 @@ The HTTP method of the request.
 
 > `readonly` **protocol**: `string`
 
+Defined in: [src/IncomingHttpEvent.ts:61](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L61)
+
 The protocol used for the request (e.g., http or https).
-
-#### Defined in
-
-[IncomingHttpEvent.ts:60](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L60)
 
 ***
 
@@ -162,11 +144,9 @@ The protocol used for the request (e.g., http or https).
 
 > `readonly` **query**: `URLSearchParams`
 
+Defined in: [src/IncomingHttpEvent.ts:51](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L51)
+
 The query parameters of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:50](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L50)
 
 ***
 
@@ -174,11 +154,9 @@ The query parameters of the request.
 
 > `readonly` `optional` **queryString**: `string`
 
+Defined in: [src/IncomingHttpEvent.ts:63](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L63)
+
 The query string of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:62](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L62)
 
 ***
 
@@ -186,13 +164,11 @@ The query string of the request.
 
 > `protected` `optional` **routeResolver**: () => [`IRoute`](../../declarations/interfaces/IRoute.md)
 
+Defined in: [src/IncomingHttpEvent.ts:66](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L66)
+
 #### Returns
 
 [`IRoute`](../../declarations/interfaces/IRoute.md)
-
-#### Defined in
-
-[IncomingHttpEvent.ts:65](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L65)
 
 ***
 
@@ -200,11 +176,9 @@ The query string of the request.
 
 > `readonly` **url**: `URL`
 
+Defined in: [src/IncomingHttpEvent.ts:45](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L45)
+
 The URL of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:44](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L44)
 
 ***
 
@@ -212,13 +186,11 @@ The URL of the request.
 
 > `protected` `optional` **userResolver**: () => `unknown`
 
+Defined in: [src/IncomingHttpEvent.ts:65](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L65)
+
 #### Returns
 
 `unknown`
-
-#### Defined in
-
-[IncomingHttpEvent.ts:64](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L64)
 
 ***
 
@@ -226,9 +198,7 @@ The URL of the request.
 
 > `static` **INCOMING\_HTTP\_EVENT**: `string` = `'stonejs@incoming_http_event'`
 
-#### Defined in
-
-[IncomingHttpEvent.ts:37](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L37)
+Defined in: [src/IncomingHttpEvent.ts:38](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L38)
 
 ## Accessors
 
@@ -238,15 +208,13 @@ The URL of the request.
 
 > **get** **charset**(): `undefined` \| `string`
 
+Defined in: [src/IncomingHttpEvent.ts:231](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L231)
+
 ##### Returns
 
 `undefined` \| `string`
 
 The charset specified in the content-type header.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:230](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L230)
 
 ***
 
@@ -256,15 +224,13 @@ The charset specified in the content-type header.
 
 > **get** **charsets**(): `string`[]
 
+Defined in: [src/IncomingHttpEvent.ts:216](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L216)
+
 ##### Returns
 
 `string`[]
 
 An array of acceptable character sets for the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:215](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L215)
 
 ***
 
@@ -274,15 +240,13 @@ An array of acceptable character sets for the request.
 
 > **get** **contentType**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:236](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L236)
+
 ##### Returns
 
 `string`
 
 The content type specified in the headers.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:235](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L235)
 
 ***
 
@@ -292,15 +256,13 @@ The content type specified in the headers.
 
 > **get** **decodedPathname**(): `undefined` \| `string`
 
+Defined in: [src/IncomingHttpEvent.ts:127](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L127)
+
 ##### Returns
 
 `undefined` \| `string`
 
 The decoded pathname of the URL.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:126](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L126)
 
 ***
 
@@ -310,15 +272,13 @@ The decoded pathname of the URL.
 
 > **get** **encodings**(): `string`[]
 
+Defined in: [src/IncomingHttpEvent.ts:226](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L226)
+
 ##### Returns
 
 `string`[]
 
 An array of acceptable encodings for the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:225](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L225)
 
 ***
 
@@ -328,15 +288,13 @@ An array of acceptable encodings for the request.
 
 > **get** **etag**(): `undefined` \| `string`
 
+Defined in: [src/IncomingHttpEvent.ts:206](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L206)
+
 ##### Returns
 
 `undefined` \| `string`
 
 The ETag of the request, if present.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:205](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L205)
 
 ***
 
@@ -346,15 +304,13 @@ The ETag of the request, if present.
 
 > **get** **hash**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:136](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L136)
+
 ##### Returns
 
 `string`
 
 The hash part of the URL.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:135](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L135)
 
 ***
 
@@ -364,15 +320,13 @@ The hash part of the URL.
 
 > **get** **headers**(): `Record`\<`string`, `string`\>
 
+Defined in: [src/IncomingHttpEvent.ts:122](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L122)
+
 ##### Returns
 
 `Record`\<`string`, `string`\>
 
 The headers of the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:121](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L121)
 
 ***
 
@@ -382,15 +336,13 @@ The headers of the request.
 
 > **get** **host**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:141](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L141)
+
 ##### Returns
 
 `string`
 
 The host of the URL (hostname:port).
-
-#### Defined in
-
-[IncomingHttpEvent.ts:140](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L140)
 
 ***
 
@@ -400,15 +352,13 @@ The host of the URL (hostname:port).
 
 > **get** **hostname**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:146](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L146)
+
 ##### Returns
 
 `string`
 
 The hostname of the URL.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:145](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L145)
 
 ***
 
@@ -418,15 +368,13 @@ The hostname of the URL.
 
 > **get** **isAjax**(): `boolean`
 
+Defined in: [src/IncomingHttpEvent.ts:191](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L191)
+
 ##### Returns
 
 `boolean`
 
 Whether the request is an AJAX request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:190](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L190)
 
 ***
 
@@ -436,15 +384,13 @@ Whether the request is an AJAX request.
 
 > **get** **isPrefetch**(): `boolean`
 
+Defined in: [src/IncomingHttpEvent.ts:201](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L201)
+
 ##### Returns
 
 `boolean`
 
 Whether the request was prefetch.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:200](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L200)
 
 ***
 
@@ -454,15 +400,13 @@ Whether the request was prefetch.
 
 > **get** **isSecure**(): `boolean`
 
+Defined in: [src/IncomingHttpEvent.ts:181](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L181)
+
 ##### Returns
 
 `boolean`
 
 Whether the request was made over a secure connection.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:180](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L180)
 
 ***
 
@@ -472,15 +416,13 @@ Whether the request was made over a secure connection.
 
 > **get** **isXhr**(): `boolean`
 
+Defined in: [src/IncomingHttpEvent.ts:186](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L186)
+
 ##### Returns
 
 `boolean`
 
 Whether the request is an XMLHttpRequest.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:185](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L185)
 
 ***
 
@@ -490,15 +432,13 @@ Whether the request is an XMLHttpRequest.
 
 > **get** **languages**(): `string`[]
 
+Defined in: [src/IncomingHttpEvent.ts:221](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L221)
+
 ##### Returns
 
 `string`[]
 
 An array of acceptable languages for the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:220](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L220)
 
 ***
 
@@ -508,15 +448,13 @@ An array of acceptable languages for the request.
 
 > **get** **params**(): `undefined` \| `Record`\<`string`, `unknown`\>
 
+Defined in: [src/IncomingHttpEvent.ts:151](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L151)
+
 ##### Returns
 
 `undefined` \| `Record`\<`string`, `unknown`\>
 
 The route parameters.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:150](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L150)
 
 ***
 
@@ -526,15 +464,13 @@ The route parameters.
 
 > **get** **path**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:156](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L156)
+
 ##### Returns
 
 `string`
 
 The full path including pathname and search query.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:155](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L155)
 
 ***
 
@@ -544,15 +480,13 @@ The full path including pathname and search query.
 
 > **get** **pathname**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:161](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L161)
+
 ##### Returns
 
 `string`
 
 The pathname of the URL.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:160](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L160)
 
 ***
 
@@ -562,15 +496,13 @@ The pathname of the URL.
 
 > **get** **scheme**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:171](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L171)
+
 ##### Returns
 
 `string`
 
 The protocol of the URL (e.g., "http" or "https").
-
-#### Defined in
-
-[IncomingHttpEvent.ts:170](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L170)
 
 ***
 
@@ -580,15 +512,13 @@ The protocol of the URL (e.g., "http" or "https").
 
 > **get** **segments**(): `string`[]
 
+Defined in: [src/IncomingHttpEvent.ts:176](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L176)
+
 ##### Returns
 
 `string`[]
 
 The URL segments split by '/'.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:175](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L175)
 
 ***
 
@@ -598,15 +528,13 @@ The URL segments split by '/'.
 
 > **get** **types**(): `string`[]
 
+Defined in: [src/IncomingHttpEvent.ts:211](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L211)
+
 ##### Returns
 
 `string`[]
 
 An array of acceptable content types for the request.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:210](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L210)
 
 ***
 
@@ -616,15 +544,13 @@ An array of acceptable content types for the request.
 
 > **get** **uri**(): `string`
 
+Defined in: [src/IncomingHttpEvent.ts:166](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L166)
+
 ##### Returns
 
 `string`
 
 The full URL as a string.
-
-#### Defined in
-
-[IncomingHttpEvent.ts:165](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L165)
 
 ***
 
@@ -634,21 +560,21 @@ The full URL as a string.
 
 > **get** **userAgent**(): `undefined` \| `string`
 
+Defined in: [src/IncomingHttpEvent.ts:196](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L196)
+
 ##### Returns
 
 `undefined` \| `string`
 
 The user agent of the request.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:195](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L195)
-
 ## Methods
 
 ### acceptsCharsets()
 
 > **acceptsCharsets**(...`values`): `string` \| `false` \| `string`[]
+
+Defined in: [src/IncomingHttpEvent.ts:413](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L413)
 
 Return the first accepted charset.
 
@@ -666,15 +592,13 @@ The charsets to check.
 
 The first accepted charset, or false if none are accepted.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:341](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L341)
-
 ***
 
 ### acceptsEncodings()
 
 > **acceptsEncodings**(...`values`): `string` \| `false` \| `string`[]
+
+Defined in: [src/IncomingHttpEvent.ts:403](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L403)
 
 Return the first accepted encoding.
 
@@ -692,15 +616,13 @@ The encodings to check.
 
 The first accepted encoding, or false if none are accepted.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:331](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L331)
-
 ***
 
 ### acceptsLanguages()
 
 > **acceptsLanguages**(...`values`): `string` \| `false` \| `string`[]
+
+Defined in: [src/IncomingHttpEvent.ts:423](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L423)
 
 Return the first accepted language.
 
@@ -718,15 +640,13 @@ The languages to check.
 
 The first accepted language, or false if none are accepted.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:351](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L351)
-
 ***
 
 ### acceptsTypes()
 
 > **acceptsTypes**(...`values`): `string` \| `false` \| `string`[]
+
+Defined in: [src/IncomingHttpEvent.ts:393](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L393)
 
 Return the first accepted content type.
 
@@ -744,15 +664,13 @@ The content types to check.
 
 The first accepted type, or false if none are accepted.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:321](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L321)
-
 ***
 
 ### filterFiles()
 
 > **filterFiles**(`files`): `Record`\<`string`, [`UploadedFile`](../../file/UploadedFile/classes/UploadedFile.md)[]\>
+
+Defined in: [src/IncomingHttpEvent.ts:542](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L542)
 
 Filter and return files based on their names.
 
@@ -770,15 +688,13 @@ The array of file names to filter.
 
 An object containing the filtered files.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:453](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L453)
-
 ***
 
 ### fingerprint()
 
 > **fingerprint**(): `string`
+
+Defined in: [src/IncomingHttpEvent.ts:677](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L677)
 
 Generate a unique fingerprint for the event.
 
@@ -788,15 +704,9 @@ Generate a unique fingerprint for the event.
 
 The generated fingerprint as a base64 string.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:588](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L588)
-
 ***
 
 ### get()
-
-> **get**\<`R`\>(`key`, `fallback`?): `R`
 
 Get data from the request.
 
@@ -809,79 +719,217 @@ Priority:
 6. Metadata
 7. Fallback value
 
-#### Type Parameters
+#### Param
 
-• **R** = `unknown`
+The key to look for.
 
-#### Parameters
+#### Param
 
-##### key
+A fallback value if the key is not found.
+
+#### Call Signature
+
+> **get**\<`TReturn`\>(`key`): `undefined` \| `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:255](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L255)
+
+Get data from the request.
+
+Priority:
+1. Route params
+2. Body
+3. Query params
+4. Headers
+5. Cookies
+6. Metadata
+7. Fallback value
+
+##### Type Parameters
+
+• **TReturn** = `unknown`
+
+##### Parameters
+
+###### key
 
 `string`
 
 The key to look for.
 
-##### fallback?
+##### Returns
 
-`R`
-
-A fallback value if the key is not found.
-
-#### Returns
-
-`R`
+`undefined` \| `TReturn`
 
 The value of the key or the fallback.
 
-#### Overrides
+The value of the key or the fallback.
+
+##### Param
+
+The key to look for.
+
+##### Param
+
+A fallback value if the key is not found.
+
+##### Overrides
 
 `IncomingEvent.get`
 
-#### Defined in
+#### Call Signature
 
-[IncomingHttpEvent.ts:255](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L255)
+> **get**\<`TReturn`\>(`key`, `fallback`): `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:273](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L273)
+
+Get data from the request.
+
+Priority:
+1. Route params
+2. Body
+3. Query params
+4. Headers
+5. Cookies
+6. Metadata
+7. Fallback value
+
+##### Type Parameters
+
+• **TReturn** = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to look for.
+
+###### fallback
+
+`TReturn`
+
+A fallback value if the key is not found.
+
+##### Returns
+
+`TReturn`
+
+The value of the key or the fallback.
+
+The value of the key or the fallback.
+
+##### Param
+
+The key to look for.
+
+##### Param
+
+A fallback value if the key is not found.
+
+##### Overrides
+
+`IncomingEvent.get`
 
 ***
 
 ### getCookie()
 
-> **getCookie**\<`R`\>(`name`, `fallback`?): `R`
+Get a cookie value.
+
+#### Param
+
+The cookie name.
+
+#### Param
+
+A fallback value if the cookie is not found.
+
+#### Call Signature
+
+> **getCookie**\<`TReturn`\>(`name`): `undefined` \| `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:353](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L353)
 
 Get a cookie value.
 
-#### Type Parameters
+##### Type Parameters
 
-• **R** = `string`
+• **TReturn** *extends* [`Cookie`](../../cookies/Cookie/classes/Cookie.md) = [`Cookie`](../../cookies/Cookie/classes/Cookie.md)
 
-#### Parameters
+##### Parameters
 
-##### name
+###### name
 
 `string`
 
 The cookie name.
 
-##### fallback?
+##### Returns
 
-`R`
-
-A fallback value if the cookie is not found.
-
-#### Returns
-
-`R`
+`undefined` \| `TReturn`
 
 The cookie value or the fallback.
 
-#### Defined in
+The cookie value or the fallback.
 
-[IncomingHttpEvent.ts:299](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L299)
+##### Param
+
+The cookie name.
+
+##### Param
+
+A fallback value if the cookie is not found.
+
+#### Call Signature
+
+> **getCookie**\<`TReturn`\>(`name`, `fallback`): `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:362](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L362)
+
+Get a cookie value.
+
+##### Type Parameters
+
+• **TReturn** *extends* [`Cookie`](../../cookies/Cookie/classes/Cookie.md) = [`Cookie`](../../cookies/Cookie/classes/Cookie.md)
+
+##### Parameters
+
+###### name
+
+`string`
+
+The cookie name.
+
+###### fallback
+
+`TReturn`
+
+A fallback value if the cookie is not found.
+
+##### Returns
+
+`TReturn`
+
+The cookie value or the fallback.
+
+The cookie value or the fallback.
+
+##### Param
+
+The cookie name.
+
+##### Param
+
+A fallback value if the cookie is not found.
 
 ***
 
 ### getFile()
 
 > **getFile**(`name`): `undefined` \| [`UploadedFile`](../../file/UploadedFile/classes/UploadedFile.md)[]
+
+Defined in: [src/IncomingHttpEvent.ts:552](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L552)
 
 Get a file by its name.
 
@@ -899,15 +947,13 @@ The name of the file.
 
 The file if it exists, otherwise undefined.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:463](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L463)
-
 ***
 
 ### getFormat()
 
 > **getFormat**(`mimeType`): `undefined` \| `string`
+
+Defined in: [src/IncomingHttpEvent.ts:443](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L443)
 
 Get file extension for a given MIME type.
 
@@ -925,55 +971,125 @@ The MIME type.
 
 The corresponding file extension, or undefined if not found.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:371](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L371)
-
 ***
 
 ### getHeader()
 
-> **getHeader**\<`R`\>(`name`, `fallback`?): `R`
-
 Get a header value.
 
-#### Type Parameters
-
-• **R** = `string`
-
-#### Parameters
-
-##### name
-
-`string`
+#### Param
 
 The header name.
 
-##### fallback?
-
-`R`
+#### Param
 
 A fallback value if the header is not found.
-
-#### Returns
-
-`R`
-
-The header value or the fallback value.
 
 #### Throws
 
 If the header name is not a valid string.
 
-#### Defined in
+#### Call Signature
 
-[IncomingHttpEvent.ts:274](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L274)
+> **getHeader**\<`TReturn`\>(`name`): `undefined` \| `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:309](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L309)
+
+Get a header value.
+
+##### Type Parameters
+
+• **TReturn** = `string`
+
+##### Parameters
+
+###### name
+
+`string`
+
+The header name.
+
+##### Returns
+
+`undefined` \| `TReturn`
+
+The header value or the fallback value.
+
+The header value or the fallback value.
+
+##### Param
+
+The header name.
+
+##### Param
+
+A fallback value if the header is not found.
+
+##### Throws
+
+If the header name is not a valid string.
+
+##### Throws
+
+If the header name is not a valid string.
+
+#### Call Signature
+
+> **getHeader**\<`TReturn`\>(`name`, `fallback`): `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:319](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L319)
+
+Get a header value.
+
+##### Type Parameters
+
+• **TReturn** = `string`
+
+##### Parameters
+
+###### name
+
+`string`
+
+The header name.
+
+###### fallback
+
+`TReturn`
+
+A fallback value if the header is not found.
+
+##### Returns
+
+`TReturn`
+
+The header value or the fallback value.
+
+The header value or the fallback value.
+
+##### Param
+
+The header name.
+
+##### Param
+
+A fallback value if the header is not found.
+
+##### Throws
+
+If the header name is not a valid string.
+
+##### Throws
+
+If the header name is not a valid string.
 
 ***
 
 ### getMimeType()
 
 > **getMimeType**(`format`): `undefined` \| `string`
+
+Defined in: [src/IncomingHttpEvent.ts:433](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L433)
 
 Get MIME type for a given file path or extension.
 
@@ -991,47 +1107,105 @@ The file path or extension.
 
 The corresponding MIME type, or undefined if not found.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:361](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L361)
-
 ***
 
 ### getParam()
 
-> **getParam**(`key`, `fallback`?): `undefined` \| `string`
+Retrieve a parameter from the route if it exists.
+
+#### Param
+
+The name of the parameter to retrieve.
+
+#### Param
+
+The fallback value if the parameter does not exist.
+
+#### Call Signature
+
+> **getParam**\<`TReturn`\>(`name`): `undefined` \| `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:693](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L693)
 
 Retrieve a parameter from the route if it exists.
 
-#### Parameters
+##### Type Parameters
 
-##### key
+• **TReturn** = `unknown`
+
+##### Parameters
+
+###### name
 
 `string`
 
 The name of the parameter to retrieve.
 
-##### fallback?
+##### Returns
 
-`string`
-
-The fallback value if the parameter does not exist.
-
-#### Returns
-
-`undefined` \| `string`
+`undefined` \| `TReturn`
 
 The value of the parameter if it exists, otherwise undefined.
 
-#### Defined in
+The value of the parameter if it exists, otherwise undefined.
 
-[IncomingHttpEvent.ts:605](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L605)
+##### Param
+
+The name of the parameter to retrieve.
+
+##### Param
+
+The fallback value if the parameter does not exist.
+
+#### Call Signature
+
+> **getParam**\<`TReturn`\>(`name`, `fallback`): `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:702](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L702)
+
+Retrieve a parameter from the route if it exists.
+
+##### Type Parameters
+
+• **TReturn** = `unknown`
+
+##### Parameters
+
+###### name
+
+`string`
+
+The name of the parameter to retrieve.
+
+###### fallback
+
+`TReturn`
+
+The fallback value if the parameter does not exist.
+
+##### Returns
+
+`TReturn`
+
+The value of the parameter if it exists, otherwise undefined.
+
+The value of the parameter if it exists, otherwise undefined.
+
+##### Param
+
+The name of the parameter to retrieve.
+
+##### Param
+
+The fallback value if the parameter does not exist.
 
 ***
 
 ### getRoute()
 
 > **getRoute**(): `undefined` \| [`IRoute`](../../declarations/interfaces/IRoute.md)
+
+Defined in: [src/IncomingHttpEvent.ts:668](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L668)
 
 Return the current route or a route parameter.
 
@@ -1041,15 +1215,13 @@ Return the current route or a route parameter.
 
 The route parameter or the route object.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:579](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L579)
-
 ***
 
 ### getRouteResolver()
 
 > **getRouteResolver**(): () => `undefined` \| [`IRoute`](../../declarations/interfaces/IRoute.md)
+
+Defined in: [src/IncomingHttpEvent.ts:648](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L648)
 
 Get the route resolver function.
 
@@ -1063,15 +1235,13 @@ The route resolver function.
 
 `undefined` \| [`IRoute`](../../declarations/interfaces/IRoute.md)
 
-#### Defined in
-
-[IncomingHttpEvent.ts:559](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L559)
-
 ***
 
 ### getUri()
 
 > **getUri**(`withDomain`): `undefined` \| `string`
+
+Defined in: [src/IncomingHttpEvent.ts:610](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L610)
 
 Get the URI with or without the domain.
 
@@ -1089,15 +1259,13 @@ Whether to include the domain in the URI.
 
 The URI with or without the domain.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:521](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L521)
-
 ***
 
 ### getUser()
 
 > **getUser**\<`T`\>(): `undefined` \| `T`
+
+Defined in: [src/IncomingHttpEvent.ts:619](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L619)
 
 Get the user instance.
 
@@ -1111,15 +1279,13 @@ Get the user instance.
 
 The user object, resolved through a user resolver function if available.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:530](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L530)
-
 ***
 
 ### getUserResolver()
 
 > **getUserResolver**(): () => `unknown`
+
+Defined in: [src/IncomingHttpEvent.ts:628](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L628)
 
 Get the user resolver function.
 
@@ -1133,15 +1299,13 @@ The user resolver function.
 
 `unknown`
 
-#### Defined in
-
-[IncomingHttpEvent.ts:539](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L539)
-
 ***
 
 ### hasCookie()
 
 > **hasCookie**(`name`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:382](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L382)
 
 Check if a cookie exists.
 
@@ -1159,15 +1323,13 @@ The cookie name to check.
 
 True if the cookie exists, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:310](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L310)
-
 ***
 
 ### hasFile()
 
 > **hasFile**(`name`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:562](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L562)
 
 Check if a file exists by its name.
 
@@ -1185,15 +1347,13 @@ The name of the file.
 
 True if the file exists, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:473](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L473)
-
 ***
 
 ### hasHeader()
 
 > **hasHeader**(`name`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:342](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L342)
 
 Check if a header exists.
 
@@ -1211,15 +1371,13 @@ The header name to check.
 
 True if the header exists, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:287](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L287)
-
 ***
 
 ### hasJson()
 
 > **hasJson**(`key`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:506](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L506)
 
 Check if a key exists in the JSON body.
 
@@ -1237,15 +1395,13 @@ The key to check for.
 
 True if the key exists, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:417](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L417)
-
 ***
 
 ### is()
 
 > **is**(`types`): `string` \| `false`
+
+Defined in: [src/IncomingHttpEvent.ts:453](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L453)
 
 Check if the request matches one of the given content types.
 
@@ -1263,15 +1419,13 @@ The content types to check.
 
 The best match, or false if no match is found.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:381](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L381)
-
 ***
 
 ### isFresh()
 
 > **isFresh**(`response`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:516](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L516)
 
 Determine if the response cache is fresh.
 
@@ -1289,15 +1443,13 @@ The outgoing HTTP response to check freshness against.
 
 True if the cache is fresh, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:427](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L427)
-
 ***
 
 ### isMethod()
 
 > **isMethod**(`method`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:572](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L572)
 
 Check if the current event method matches the given method.
 
@@ -1315,15 +1467,13 @@ The method to check.
 
 True if the event method matches, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:483](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L483)
-
 ***
 
 ### isMethodCacheable()
 
 > **isMethodCacheable**(): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:590](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L590)
 
 Check if the current event method is cacheable.
 
@@ -1333,15 +1483,13 @@ Check if the current event method is cacheable.
 
 True if the method is cacheable, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:501](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L501)
-
 ***
 
 ### isMethodSafe()
 
 > **isMethodSafe**(): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:581](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L581)
 
 Check if the current event method is considered safe.
 
@@ -1351,15 +1499,13 @@ Check if the current event method is considered safe.
 
 True if the method is safe, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:492](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L492)
-
 ***
 
 ### isStale()
 
 > **isStale**(`response`): `boolean`
+
+Defined in: [src/IncomingHttpEvent.ts:532](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L532)
 
 Determine if the response cache is stale.
 
@@ -1377,47 +1523,105 @@ The outgoing HTTP response to check staleness against.
 
 True if the cache is stale, otherwise false.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:443](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L443)
-
 ***
 
 ### json()
 
-> **json**(`key`, `fallback`?): `unknown`
+Get a value from the JSON body.
+
+#### Param
+
+The key to look for in the JSON body.
+
+#### Param
+
+A fallback value if the key is not found.
+
+#### Call Signature
+
+> **json**\<`TReturn`\>(`key`): `undefined` \| `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:475](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L475)
 
 Get a value from the JSON body.
 
-#### Parameters
+##### Type Parameters
 
-##### key
+• **TReturn** = `unknown`
+
+##### Parameters
+
+###### key
 
 `string`
 
 The key to look for in the JSON body.
 
-##### fallback?
+##### Returns
 
-`unknown`
-
-A fallback value if the key is not found.
-
-#### Returns
-
-`unknown`
+`undefined` \| `TReturn`
 
 The value of the key or the fallback.
 
-#### Defined in
+The value of the key or the fallback.
 
-[IncomingHttpEvent.ts:404](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L404)
+##### Param
+
+The key to look for in the JSON body.
+
+##### Param
+
+A fallback value if the key is not found.
+
+#### Call Signature
+
+> **json**\<`TReturn`\>(`key`, `fallback`): `TReturn`
+
+Defined in: [src/IncomingHttpEvent.ts:484](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L484)
+
+Get a value from the JSON body.
+
+##### Type Parameters
+
+• **TReturn** = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to look for in the JSON body.
+
+###### fallback
+
+`TReturn`
+
+A fallback value if the key is not found.
+
+##### Returns
+
+`TReturn`
+
+The value of the key or the fallback.
+
+The value of the key or the fallback.
+
+##### Param
+
+The key to look for in the JSON body.
+
+##### Param
+
+A fallback value if the key is not found.
 
 ***
 
 ### range()
 
 > **range**(`size`, `combine`): `undefined` \| `Result` \| `Ranges`
+
+Defined in: [src/IncomingHttpEvent.ts:464](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L464)
 
 Get request range.
 
@@ -1441,15 +1645,13 @@ Specifies if overlapping & adjacent ranges should be combined.
 
 The parsed range, or undefined if not applicable.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:392](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L392)
-
 ***
 
 ### setRouteResolver()
 
 > **setRouteResolver**(`resolver`): `this`
+
+Defined in: [src/IncomingHttpEvent.ts:658](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L658)
 
 Set the route resolver function.
 
@@ -1467,15 +1669,13 @@ The route resolver function.
 
 The current instance for method chaining.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:569](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L569)
-
 ***
 
 ### setUserResolver()
 
 > **setUserResolver**(`resolver`): `this`
+
+Defined in: [src/IncomingHttpEvent.ts:638](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L638)
 
 Set the user resolver function.
 
@@ -1493,15 +1693,13 @@ The user resolver function.
 
 The current instance for method chaining.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:549](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L549)
-
 ***
 
 ### uriForPath()
 
 > **uriForPath**(`path`): `string`
+
+Defined in: [src/IncomingHttpEvent.ts:600](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L600)
 
 Generate a full URL for the given path.
 
@@ -1519,15 +1717,13 @@ The path to append to the base URL.
 
 The full URL for the given path.
 
-#### Defined in
-
-[IncomingHttpEvent.ts:511](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L511)
-
 ***
 
 ### create()
 
 > `static` **create**(`options`): [`IncomingHttpEvent`](IncomingHttpEvent.md)
+
+Defined in: [src/IncomingHttpEvent.ts:74](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/IncomingHttpEvent.ts#L74)
 
 Create an IncomingHttpEvent.
 
@@ -1548,7 +1744,3 @@ A new instance of IncomingHttpEvent.
 #### Overrides
 
 `IncomingEvent.create`
-
-#### Defined in
-
-[IncomingHttpEvent.ts:73](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/IncomingHttpEvent.ts#L73)

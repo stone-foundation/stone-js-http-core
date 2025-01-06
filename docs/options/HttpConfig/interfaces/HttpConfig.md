@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../../README.md)
 
 ***
 
@@ -6,89 +6,98 @@
 
 # Interface: HttpConfig
 
+Defined in: [src/options/HttpConfig.ts:61](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L61)
+
 Represents the core HTTP config options for the application.
+HTTP configuration options that are commonly used across adapters.
 
 ## Properties
 
-### stone
-
-> **stone**: `object`
-
-The application configuration namespace.
-
-#### http
-
-> **http**: `object`
-
-HTTP configuration options that are commonly used across adapters.
-
-##### http.body
+### body
 
 > **body**: `object`
 
+Defined in: [src/options/HttpConfig.ts:95](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L95)
+
 Configuration for request body parsing.
 
-##### http.body.defaultCharset
+#### defaultCharset
 
 > **defaultCharset**: `string`
 
 The default character set for the request body.
 
-##### http.body.defaultType
+#### defaultType
 
 > **defaultType**: `string`
 
 The content type of the request body.
 
-##### http.body.limit
+#### limit
 
 > **limit**: `string`
 
 The maximum size of the request body.
 
-##### http.cache
+***
+
+### cache
 
 > **cache**: `Record`\<`string`, `any`\>
 
+Defined in: [src/options/HttpConfig.ts:112](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L112)
+
 Cache configuration options.
 
-##### http.cookie
+***
+
+### cookie
 
 > **cookie**: `object`
 
+Defined in: [src/options/HttpConfig.ts:116](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L116)
+
 Cookie-related configuration options.
 
-##### http.cookie.options
+#### options
 
 > **options**: `Record`\<`string`, `any`\>
 
 Additional cookie options.
 
-##### http.cookie.secret
+#### secret
 
 > **secret**: `string`
 
 The secret used for signing cookies.
 
-##### http.cors
+***
+
+### cors
 
 > **cors**: [`HttpCorsConfig`](HttpCorsConfig.md)
 
+Defined in: [src/options/HttpConfig.ts:178](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L178)
+
 Cross-Origin Resource Sharing (CORS) configuration options.
 
-##### http.etag
+***
+
+### etag
 
 > **etag**: `object`
 
+Defined in: [src/options/HttpConfig.ts:169](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L169)
+
 ETag-related configuration options.
 
-##### http.etag.function()?
+#### function()?
 
 > `optional` **function**: (`content`, `encoding`) => `string`
 
 A custom function for generating ETags.
 
-###### Parameters
+##### Parameters
 
 ###### content
 
@@ -98,118 +107,126 @@ A custom function for generating ETags.
 
 `Encoding`
 
-###### Returns
+##### Returns
 
 `string`
 
-##### http.files
+***
+
+### files
 
 > **files**: `object`
 
+Defined in: [src/options/HttpConfig.ts:133](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L133)
+
 File upload and response configuration options.
 
-##### http.files.download
+#### download
 
 > **download**: `Record`\<`string`, `any`\>
 
 Configuration for file responses.
 
-##### http.files.upload
+#### upload
 
 > **upload**: `Record`\<`string`, `any`\>
 
 Configuration for file uploads.
 
-##### http.hosts
+***
+
+### hosts
 
 > **hosts**: `object`
 
+Defined in: [src/options/HttpConfig.ts:65](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L65)
+
 Host-related configuration options.
 
-##### http.hosts.onlySubdomain
+#### onlySubdomain
 
 > **onlySubdomain**: `boolean`
 
 Whether only subdomains are allowed.
 
-##### http.hosts.trusted
+#### trusted
 
 > **trusted**: `string`[]
 
 A list of trusted hostnames.
 
-##### http.hosts.trustedPattern
+#### trustedPattern
 
 > **trustedPattern**: `string`[]
 
 A list of trusted host patterns.
 
-##### http.json
+***
+
+### json
 
 > **json**: [`HttpJsonConfig`](HttpJsonConfig.md)
 
+Defined in: [src/options/HttpConfig.ts:129](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L129)
+
 JSON-related configuration options.
 
-##### http.jsonp
+***
+
+### jsonp
 
 > **jsonp**: `object`
 
+Defined in: [src/options/HttpConfig.ts:146](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L146)
+
 JSONP-related configuration options.
 
-##### http.jsonp.callback
+#### callback
 
 > **callback**: `object`
 
 Configuration for the JSONP callback function.
 
-##### http.jsonp.callback.name
+##### callback.name
 
 > **name**: `string`
 
 The name of the JSONP callback parameter.
 
-##### http.proxies
+***
+
+### proxies
 
 > **proxies**: `object`
 
+Defined in: [src/options/HttpConfig.ts:82](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L82)
+
 Proxy-related configuration options.
 
-##### http.proxies.trustedIp
+#### trustedIp
 
 > **trustedIp**: `string`[]
 
 A list of trusted proxies.
 
-##### http.proxies.untrustedIp
+#### untrustedIp
 
 > **untrustedIp**: `string`[]
 
 A list of untrusted proxies.
 
-##### http.subdomain
+***
+
+### subdomain
 
 > **subdomain**: `object`
 
+Defined in: [src/options/HttpConfig.ts:160](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L160)
+
 Subdomain-related configuration options.
 
-##### http.subdomain.offset
+#### offset
 
 > **offset**: `number`
 
 The offset to use when determining subdomains.
-
-#### kernel
-
-> **kernel**: `object`
-
-This interface defines the configuration for kernel-level options.
-
-##### kernel.middleware
-
-> **middleware**: `MixedPipe`[]
-
-Middleware configuration options for different stages of the kernel's lifecycle.
-
-#### Defined in
-
-[options/HttpConfig.ts:75](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/options/HttpConfig.ts#L75)

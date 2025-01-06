@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../README.md)
+[**HTTP Core Documentation v0.0.32**](../README.md)
 
 ***
 
@@ -6,12 +6,10 @@
 
 # IncomingHttpEvent
 
-## Index
-
-### Classes
+## Classes
 
 - [IncomingHttpEvent](classes/IncomingHttpEvent.md)
 
-### Interfaces
+## Interfaces
 
 - [IncomingHttpEventOptions](interfaces/IncomingHttpEventOptions.md)

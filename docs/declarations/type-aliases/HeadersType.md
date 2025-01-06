@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -8,6 +8,8 @@
 
 > **HeadersType**: `Headers` \| `Map`\<`string`, `string` \| `string`[]\> \| `Record`\<`string`, `string` \| `string`[]\>
 
-## Defined in
+Defined in: [src/declarations.ts:6](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/declarations.ts#L6)
 
-[declarations.ts:2](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/declarations.ts#L2)
+Represents the type of HTTP headers.
+
+It supports standard Fetch API `Headers`, `Map` of string keys and values, or a plain object.

@@ -1,6 +1,5 @@
 import { URL } from 'node:url'
 import RangeParser from 'range-parser'
-import { Cookie } from '../src/cookies/Cookie'
 import { HttpMethods } from '../src/declarations'
 import { HttpError } from '../src/errors/HttpError'
 import { UploadedFile } from '../src/file/UploadedFile'
@@ -45,11 +44,11 @@ describe('IncomingHttpEvent', () => {
   it('should create an instance of IncomingHttpEvent', () => {
     const event = IncomingHttpEvent.create({ ...mockOptions, headers: new Headers() })
     // @ts-expect-error - Invalid method value for testing purposes
-    event.getRoute = vi.fn(() => ({ parameters: () => ['test'] }))
+    event.getRoute = vi.fn(() => ({ params: { env: 'test' } }))
     // @ts-expect-error - Invalid value for testing purposes
     event.url = { pathname: '%' }
     expect(event).toBeInstanceOf(IncomingHttpEvent)
-    expect(event.params).toEqual(['test'])
+    expect(event.params).toEqual({ env: 'test' })
     expect(event.decodedPathname).toBeUndefined()
   })
 
@@ -104,7 +103,7 @@ describe('IncomingHttpEvent', () => {
     expect(event.getHeader('content-type')).toBe('application/json; charset=utf-8')
     expect(event.hasCookie('test-cookie')).toBe(false)
     expect(event.acceptsEncodings('gzip', 'br')).toBe('gzip')
-    expect(event.getCookie('test-cookie', 'none')).toBe('none')
+    expect(event.getCookie('test-cookie')).toBeUndefined()
     expect((event.range(1000) as RangeParser.Ranges)[0]).toEqual({ start: 0, end: 499 })
     expect((event.range(1000, true) as RangeParser.Ranges)[0]).toEqual({ start: 0, end: 499 })
     expect((event.range(200, true) as RangeParser.Ranges)[0]).toEqual({ start: 0, end: 199 })
@@ -128,7 +127,7 @@ describe('IncomingHttpEvent', () => {
   describe('get', () => {
     it('should correctly return the value from the path params', () => {
       // @ts-expect-error - Invalid method value for testing purposes
-      event.getRoute = vi.fn(() => ({ parameter: () => 'Stone' }))
+      event.getRoute = vi.fn(() => ({ getParam: () => 'Stone' }))
       expect(event.get('name')).toBe('Stone')
     })
 
@@ -148,7 +147,7 @@ describe('IncomingHttpEvent', () => {
 
     it('should correctly return the value from the cookies', () => {
       const event = IncomingHttpEvent.create({ ...mockOptions })
-      expect(event.get<Cookie>('test').value).toBe('value')
+      expect(event.get<string>('test')).toBe('value')
     })
 
     it('should correctly return the value from the metadata', () => {
@@ -158,10 +157,10 @@ describe('IncomingHttpEvent', () => {
   })
 
   it('should generate a valid fingerprint', () => {
-    const route = { methods: [HttpMethods.GET], getDomain: () => 'localhost', uri: '/test' }
+    const route = { method: HttpMethods.GET, uri: '/test' }
     // @ts-expect-error - Invalid route value for testing purposes
     event.setRouteResolver(() => (route))
-    const fingerprint = Buffer.from([route.methods, route.getDomain(), route.uri, event.ip].join('|')).toString('base64')
+    const fingerprint = Buffer.from([route.method, route.uri, event.userAgent, event.ip].join('|')).toString('base64')
     expect(event.fingerprint()).toBe(fingerprint)
     expect(event.getRouteResolver()).toBeInstanceOf(Function)
   })

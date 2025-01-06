@@ -1,33 +1,35 @@
-[**HTTP Core Documentation v0.0.3**](../../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../../README.md)
 
 ***
 
 [HTTP Core Documentation](../../../modules.md) / [middleware/HandleCorsMiddleware](../README.md) / HandleCorsMiddleware
 
-# Class: HandleCorsMiddleware\<U, V\>
+# Class: HandleCorsMiddleware
+
+Defined in: [src/middleware/HandleCorsMiddleware.ts:15](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/middleware/HandleCorsMiddleware.ts#L15)
 
 HandleCorsMiddleware is responsible for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
 It allows controlling how clients from different origins can access the server's resources.
+
+## Template
+
+Represents the type of the incoming HTTP event.
+
+## Template
+
+Represents the type of the outgoing HTTP response.
 
 ## Author
 
 Mr. Stone <evensstone@gmail.com>
 
-## Type Parameters
-
-• **U** *extends* [`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md)
-
-Represents the type of the incoming HTTP event.
-
-• **V** *extends* [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
-
-Represents the type of the outgoing HTTP response.
-
 ## Constructors
 
 ### new HandleCorsMiddleware()
 
-> **new HandleCorsMiddleware**\<`U`, `V`\>(`blueprint`): [`HandleCorsMiddleware`](HandleCorsMiddleware.md)\<`U`, `V`\>
+> **new HandleCorsMiddleware**(`blueprint`): [`HandleCorsMiddleware`](HandleCorsMiddleware.md)
+
+Defined in: [src/middleware/HandleCorsMiddleware.ts:25](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/middleware/HandleCorsMiddleware.ts#L25)
 
 Construct an instance of HandleCorsMiddleware.
 
@@ -43,40 +45,34 @@ The configuration blueprint used for managing CORS settings.
 
 #### Returns
 
-[`HandleCorsMiddleware`](HandleCorsMiddleware.md)\<`U`, `V`\>
-
-#### Defined in
-
-[middleware/HandleCorsMiddleware.ts:25](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/middleware/HandleCorsMiddleware.ts#L25)
+[`HandleCorsMiddleware`](HandleCorsMiddleware.md)
 
 ## Methods
 
 ### handle()
 
-> **handle**(`param0`, `next`): `KernelContext`\<`U`, `V`\> \| `Promise`\<`KernelContext`\<`U`, `V`\>\>
+> **handle**(`event`, `next`): `Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
+
+Defined in: [src/middleware/HandleCorsMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/middleware/HandleCorsMiddleware.ts#L38)
 
 Handle CORS by modifying the response headers based on the configuration.
 
 #### Parameters
 
-##### param0
+##### event
 
-`KernelContext`\<`U`, `V`\>
+[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md)
 
-The context containing incoming HTTP event and outgoing HTTP response.
+The incoming HTTP event.
 
 ##### next
 
-`NextPipe`\<`KernelContext`\<`U`, `V`\>\>
+`NextPipe`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-The next middleware function to continue processing the request.
+The next middleware function to continue processing the event.
 
 #### Returns
 
-`KernelContext`\<`U`, `V`\> \| `Promise`\<`KernelContext`\<`U`, `V`\>\>
+`Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-The modified kernel context or the next middleware function result.
-
-#### Defined in
-
-[middleware/HandleCorsMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/middleware/HandleCorsMiddleware.ts#L38)
+The outgoing HTTP response with CORS headers.

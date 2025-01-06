@@ -10,10 +10,13 @@ import contentType from 'content-type'
 import { randomUUID } from 'node:crypto'
 import ipRangeCheck from 'ip-range-check'
 import { createWriteStream } from 'node:fs'
-import { HttpError } from './errors/HttpError'
+import { FileError } from './errors/FileError'
 import { IncomingHttpHeaders } from 'node:http'
 import { UploadedFile } from './file/UploadedFile'
+import { NotFoundError } from './errors/NotFoundError'
 import { IncomingMessage, OutgoingMessage } from 'http'
+import { BadRequestError } from './errors/BadRequestError'
+import { InternalServerError } from './errors/InternalServerError'
 
 /**
  * Check if multipart message.
@@ -119,14 +122,14 @@ export function getHostname (ip: string, headers: IncomingHttpHeaders, { trusted
   }
 
   if (!/^[[]?(?![0-9]+$)(?!-)(?:[a-zA-Z0-9-:\]]{1,63}\.?)+$/.test(hostname)) {
-    throwSuspiciousOperationError('Invalid Host', ip, hostname)
+    throw new BadRequestError(`SuspiciousOperation: Invalid Host ${hostname} with ip(${ip})`)
   }
 
   if (trusted?.length > 0) {
     const isValid = trusted.some((pattern) => (pattern instanceof RegExp && pattern.test(hostname)) || pattern === hostname)
 
     if (!isValid) {
-      throwSuspiciousOperationError('Untrusted Host', ip, hostname)
+      throw new BadRequestError(`SuspiciousOperation: Untrusted Host ${hostname} with ip(${ip})`)
     }
   }
 
@@ -157,10 +160,8 @@ export async function getFilesUploads (
 
     busboy
       .on('close', () => resolve(result))
-      .on('error', (error: any) => reject(getHttpError(500, 'Cannot upload files.', error.message, `HTTP_FILE-${String(error.code)}`, error)))
-      .on('field', (fieldname, value) => {
-        result.fields[fieldname] = value
-      })
+      .on('error', (error: any) => reject(new FileError(error.message, { cause: error })))
+      .on('field', (fieldname, value) => { result.fields[fieldname] = value })
       .on('file', (fieldname, file, info) => {
         result.files[fieldname] ??= []
         const { filename, mimeType } = info
@@ -172,7 +173,7 @@ export async function getFilesUploads (
         })
 
         writeStream.on('error', (error: any) => {
-          reject(getHttpError(500, 'Error writing file.', error.message, `HTTP_FILE-${String(error.code)}`, error))
+          reject(new FileError(error.message, { cause: error }))
         })
 
         file.pipe(writeStream)
@@ -181,7 +182,7 @@ export async function getFilesUploads (
     if (event instanceof IncomingMessage) { // Handle streamed file uploads.
       event.pipe(busboy)
       event.on('error', (error: any) => {
-        reject(getHttpError(500, 'Incoming message error.', error.message, `HTTP_MSG-${String(error.code)}`, error))
+        reject(new InternalServerError(error.message, { cause: error }))
       })
     } else { // Handle pre-read file uploads.
       busboy.write(event.body)
@@ -210,50 +211,24 @@ export async function streamFile (
   return await new Promise((resolve, reject) => {
     let streaming = false
     const file = send(message, fileResponse.getEncodedPath(), options)
-    const onaborted = (): void => reject(getHttpError(400, 'Request aborted.', 'Request aborted.', 'HTTP_FILE-ECONNABORTED'))
+    const onaborted = (): void => reject(new BadRequestError('Request aborted.'))
 
     onFinished(response, (error: any) => {
       if (error !== undefined) {
         if (error.code === 'ECONNRESET') return onaborted()
-        return reject(getHttpError(500, 'An unexpected error has occurred.', error.message, `HTTP_FILE-${String(error.code)}`, error))
+        return reject(new InternalServerError(error.message, { cause: error }))
       }
 
       setImmediate(() => { streaming ? onaborted() : resolve() })
     })
 
     file
-      .on('error', (error) => reject(getHttpError(500, 'An unexpected error has occurred.', error.message, `HTTP_FILE-${String(error.code)}`, error)))
-      .on('directory', () => reject(getHttpError(404, 'This file cannot be found.', 'EISDIR, read', 'HTTP_FILE-EISDIR')))
+      .on('error', (error) => reject(new InternalServerError(error.message, { cause: error })))
       .on('headers', (resp) => Object.entries(options.headers).forEach(([key, value]) => resp.setHeader(key, value)))
+      .on('directory', () => reject(new NotFoundError('EISDIR, read')))
       .on('stream', () => { streaming = true })
       .on('file', () => { streaming = false })
       .on('end', () => resolve())
       .pipe(response)
   })
-}
-
-/**
- * Throw Suspicious Operation Error.
- *
- * @param message - The error message.
- * @param ip - The IP address involved.
- * @param host - The hostname involved.
- * @throws HttpError with appropriate details.
- */
-export function throwSuspiciousOperationError (message: string, ip: string, host: string): void {
-  throw getHttpError(400, `${message} ${host}`, `SuspiciousOperation: ${message} ${host} with ip(${ip})`)
-}
-
-/**
- * Return HttpError instance.
- *
- * @param statusCode - The HTTP status code.
- * @param body - The response body.
- * @param message - The error message.
- * @param code - A custom error code.
- * @param cause - Optional cause of the error.
- * @returns An instance of HttpError.
- */
-export function getHttpError (statusCode: number, body: string, message: string, code?: string, cause?: Error): HttpError {
-  return new HttpError(message, { statusCode, body, code, cause })
 }

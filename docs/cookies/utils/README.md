@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -6,9 +6,7 @@
 
 # cookies/utils
 
-## Index
-
-### Functions
+## Functions
 
 - [isCookieValueSerialized](functions/isCookieValueSerialized.md)
 - [isCookieValueSigned](functions/isCookieValueSigned.md)

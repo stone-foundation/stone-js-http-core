@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.3**](../../README.md)
+[**HTTP Core Documentation v0.0.32**](../../README.md)
 
 ***
 
@@ -7,6 +7,8 @@
 # Function: badRequestHttpResponse()
 
 > **badRequestHttpResponse**(`content`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
+
+Defined in: [src/HttpResponse.ts:60](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpResponse.ts#L60)
 
 Create a 400(Bad Request) OutgoingHttpResponse.
 
@@ -20,7 +22,7 @@ The content of the response.
 
 ### headers
 
-`Record`\<`string`, `string`\> = `{}`
+[`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 
 The headers for the response.
 
@@ -29,7 +31,3 @@ The headers for the response.
 [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
 A new instance of OutgoingHttpResponse.
-
-## Defined in
-
-[HttpResponse.ts:59](https://github.com/stonemjs/http-core/blob/33a82b77e98ade423889148c13f25ccd40b75c8a/src/HttpResponse.ts#L59)

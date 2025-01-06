@@ -1,8 +1,10 @@
 import { File } from '../src/file/File'
 import { createWriteStream } from 'node:fs'
-import { HttpError } from '../src/errors/HttpError'
+import { FileError } from '../src/errors/FileError'
+import { BadRequestError } from '../src/errors/BadRequestError'
+import { InternalServerError } from '../src/errors/InternalServerError'
 import { IncomingMessage, IncomingHttpHeaders, OutgoingMessage } from 'http'
-import { getCharset, getHostname, getProtocol, getType, isIpTrusted, isMultipart, throwSuspiciousOperationError, getHttpError, streamFile, getFilesUploads } from '../src/utils'
+import { getCharset, getHostname, getProtocol, getType, isIpTrusted, isMultipart, streamFile, getFilesUploads } from '../src/utils'
 
 // Mocking values and spies
 let MockSend: any
@@ -184,20 +186,6 @@ describe('Utility Functions', () => {
     })
   })
 
-  describe('throwSuspiciousOperationError', () => {
-    it('should throw HttpError with appropriate details', () => {
-      expect(() => throwSuspiciousOperationError('Invalid operation', '192.168.1.1', 'example.com')).toThrow(HttpError)
-    })
-  })
-
-  describe('getHttpError', () => {
-    it('should return an HttpError instance', () => {
-      const error = getHttpError(400, 'Bad request', 'Invalid input', 'HTTP_BAD_REQUEST')
-      expect(error).toBeInstanceOf(HttpError)
-      expect(error.message).toBe('Invalid input')
-    })
-  })
-
   describe('getFilesUploads', () => {
     it('should resolve with fields and files for pre-read file uploads', async () => {
       const options = { limits: { fileSize: '1mb' } }
@@ -225,7 +213,7 @@ describe('Utility Functions', () => {
       event.pipe = vi.fn()
       event.on = (event: string, handler: Function) => handler({ message: 'Error', code: 'EIO' })
 
-      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(HttpError)
+      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(InternalServerError)
     })
 
     it('should throw an error on when file cannot be saved', async () => {
@@ -236,7 +224,7 @@ describe('Utility Functions', () => {
       // @ts-expect-error
       createWriteStream.mockReturnValue({ on: (event: string, handler: Function) => handler({ message: 'Error', code: 'EIO' }) })
 
-      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(HttpError)
+      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(FileError)
     })
   })
 
@@ -264,7 +252,7 @@ describe('Utility Functions', () => {
         }
       }
 
-      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(HttpError)
+      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(InternalServerError)
     })
 
     it('should throw a request aborted error when there is an error while handling file', async () => {
@@ -279,7 +267,7 @@ describe('Utility Functions', () => {
         }
       }
 
-      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(HttpError)
+      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(BadRequestError)
     })
 
     it('should throw a request aborted error when file not completely streamed', async () => {
@@ -295,7 +283,7 @@ describe('Utility Functions', () => {
         }
       }
 
-      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(HttpError)
+      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(BadRequestError)
     })
   })
 })
