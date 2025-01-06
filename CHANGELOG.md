@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.0.34](https://github.com/stonemjs/http-core/compare/v0.0.33...v0.0.34) (2025-01-06)
+
+
+### Features
+
+* add new error classes and implement default error handler ([01ff480](https://github.com/stonemjs/http-core/commit/01ff4806cd9165b6846329e5f909f61f5c067d6a))
+
 ## [0.0.33](https://github.com/stonemjs/http-core/compare/v0.0.32...v0.0.33) (2024-12-08)
 
 
