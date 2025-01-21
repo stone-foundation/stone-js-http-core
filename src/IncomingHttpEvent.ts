@@ -84,6 +84,7 @@ export class IncomingHttpEvent extends IncomingEvent {
   protected constructor ({
     ip,
     url,
+    source,
     ips = [],
     body = {},
     files = {},
@@ -91,7 +92,6 @@ export class IncomingHttpEvent extends IncomingEvent {
     headers = {},
     metadata = {},
     protocol = 'http',
-    source = undefined,
     cookies = undefined,
     queryString = undefined,
     method = HttpMethods.GET

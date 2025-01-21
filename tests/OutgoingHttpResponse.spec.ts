@@ -11,7 +11,7 @@ describe('OutgoingHttpResponse', () => {
 
   beforeEach(() => {
     response = OutgoingHttpResponse.create({ content: 'Hello World', statusCode: 200 })
-    event = IncomingHttpEvent.create({ url: new URL('http://localhost'), ip: '127.0.0.1' })
+    event = IncomingHttpEvent.create({ url: new URL('http://localhost'), source: {} as any, ip: '127.0.0.1' })
   })
 
   it('should create an OutgoingHttpResponse and invoke getters', () => {
@@ -61,17 +61,19 @@ describe('OutgoingHttpResponse', () => {
     // @ts-expect-error - Invalid status code
     response.setStatus(undefined)
     expect(response.isInvalid()).toBe(false)
-    expect(response.isInformational()).toBe(false)
-    expect(response.isSuccessful()).toBe(false)
+    expect(response.is1xx()).toBe(false)
+    expect(response.is2xx()).toBe(false)
     expect(response.isOk()).toBe(false)
     expect(response.isEmpty()).toBe(false)
-    expect(response.isRedirection()).toBe(false)
+    expect(response.is3xx()).toBe(false)
     expect(response.isRedirect()).toBe(false)
-    expect(response.isClientError()).toBe(false)
+    expect(response.is4xx()).toBe(false)
+    expect(response.isError()).toBe(true)
+    expect(response.isNotError()).toBe(false)
     expect(response.isUnauthorized()).toBe(false)
     expect(response.isForbidden()).toBe(false)
     expect(response.isNotFound()).toBe(false)
-    expect(response.isServerError()).toBe(true)
+    expect(response.is5xx()).toBe(true)
     expect(response.isValidateable()).toBe(false)
 
     response.setStatus(301)

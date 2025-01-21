@@ -9,6 +9,7 @@ import { IncomingHttpEvent, IncomingHttpEventOptions } from '../src/IncomingHttp
 // Mock options for IncomingHttpEvent
 const mockOptions: IncomingHttpEventOptions = {
   ip: '127.0.0.1',
+  source: {} as any,
   url: new URL('http://localhost/test#title'),
   ips: ['127.0.0.1', '192.168.0.1'],
   body: { key: 'value' },

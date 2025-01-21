@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: FileError
 
-Defined in: [src/errors/FileError.ts:6](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/FileError.ts#L6)
+Defined in: [src/errors/FileError.ts:6](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/FileError.ts#L6)
 
 Custom error for error operations.
 
@@ -20,7 +20,7 @@ Custom error for error operations.
 
 > **new FileError**(`message`, `options`): [`FileError`](FileError.md)
 
-Defined in: [src/errors/FileError.ts:7](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/FileError.ts#L7)
+Defined in: [src/errors/FileError.ts:7](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/FileError.ts#L7)
 
 #### Parameters
 

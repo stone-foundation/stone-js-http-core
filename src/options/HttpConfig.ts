@@ -1,4 +1,5 @@
 import { Encoding } from 'node:crypto'
+import { CookieOptions } from '../declarations'
 import { HttpErrorHandler } from '../HttpErrorHandler'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { AppConfig, StoneBlueprint } from '@stone-js/core'
@@ -121,7 +122,7 @@ export interface HttpConfig {
     /**
      * Additional cookie options.
      */
-    options: Record<string, any>
+    options: CookieOptions
   }
   /**
    * JSON-related configuration options.
@@ -195,7 +196,7 @@ export interface HttpCoreBlueprint extends StoneBlueprint<IncomingHttpEvent, Out
 /**
  * Default HTTP configuration options for the application.
  */
-export const http: HttpCoreBlueprint = {
+export const httpCoreBlueprint: HttpCoreBlueprint = {
   stone: {
     kernel: {
       errorHandlers: {

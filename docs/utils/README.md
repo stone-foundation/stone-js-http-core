@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../README.md)
+[**HTTP Core Documentation v0.0.34**](../README.md)
 
 ***
 
@@ -8,6 +8,7 @@
 
 ## Functions
 
+- [decoratorResponseCallback](functions/decoratorResponseCallback.md)
 - [getCharset](functions/getCharset.md)
 - [getFilesUploads](functions/getFilesUploads.md)
 - [getHostname](functions/getHostname.md)

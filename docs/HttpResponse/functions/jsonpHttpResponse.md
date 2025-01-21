@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **jsonpHttpResponse**(`content`, `statusCode`, `headers`): [`JsonpResponse`](../../JsonpResponse/classes/JsonpResponse.md)
 
-Defined in: [src/HttpResponse.ts:162](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpResponse.ts#L162)
+Defined in: [src/HttpResponse.ts:162](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpResponse.ts#L162)
 
 Create a 200(OK) JSONP OutgoingHttpResponse.
 

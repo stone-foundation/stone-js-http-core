@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: IRoute
 
-Defined in: [src/declarations.ts:51](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/declarations.ts#L51)
+Defined in: [src/declarations.ts:51](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/declarations.ts#L51)
 
 Describes a route definition, including its URI, method, and parameters.
 
@@ -16,7 +16,7 @@ Describes a route definition, including its URI, method, and parameters.
 
 > **getParam**: \<`TReturn`\>(`name`, `fallback`?) => `undefined` \| `TReturn`
 
-Defined in: [src/declarations.ts:55](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/declarations.ts#L55)
+Defined in: [src/declarations.ts:55](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/declarations.ts#L55)
 
 #### Type Parameters
 
@@ -42,7 +42,7 @@ Defined in: [src/declarations.ts:55](https://github.com/stonemjs/http-core/blob/
 
 > **method**: [`HttpMethod`](../type-aliases/HttpMethod.md)
 
-Defined in: [src/declarations.ts:53](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/declarations.ts#L53)
+Defined in: [src/declarations.ts:53](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/declarations.ts#L53)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [src/declarations.ts:53](https://github.com/stonemjs/http-core/blob/
 
 > **params**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/declarations.ts:54](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/declarations.ts#L54)
+Defined in: [src/declarations.ts:54](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/declarations.ts#L54)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [src/declarations.ts:54](https://github.com/stonemjs/http-core/blob/
 
 > **uri**: `string`
 
-Defined in: [src/declarations.ts:52](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/declarations.ts#L52)
+Defined in: [src/declarations.ts:52](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/declarations.ts#L52)

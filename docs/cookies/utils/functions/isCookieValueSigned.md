@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isCookieValueSigned**(`value`): `boolean`
 
-Defined in: [src/cookies/utils.ts:16](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/cookies/utils.ts#L16)
+Defined in: [src/cookies/utils.ts:16](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/cookies/utils.ts#L16)
 
 Check if the value is signed.
 

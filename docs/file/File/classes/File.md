@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: File
 
-Defined in: [src/file/File.ts:24](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L24)
+Defined in: [src/file/File.ts:24](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L24)
 
 Class representing a File.
 
@@ -24,7 +24,7 @@ Mr. Stone <evensstone@gmail.com>
 
 > `protected` **new File**(`path`, `checkPath`): [`File`](File.md)
 
-Defined in: [src/file/File.ts:45](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L45)
+Defined in: [src/file/File.ts:45](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L45)
 
 Create a File.
 
@@ -52,7 +52,7 @@ Whether to check if the file path is valid.
 
 > **edit**(`callback`): `this`
 
-Defined in: [src/file/File.ts:85](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L85)
+Defined in: [src/file/File.ts:85](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L85)
 
 Edit file content.
 
@@ -76,7 +76,7 @@ The current File instance.
 
 > **exists**(): `boolean`
 
-Defined in: [src/file/File.ts:272](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L272)
+Defined in: [src/file/File.ts:272](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L272)
 
 Check if the file exists.
 
@@ -92,7 +92,7 @@ True if the file exists, otherwise false.
 
 > **getAbsolutePath**(`root`): `string`
 
-Defined in: [src/file/File.ts:189](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L189)
+Defined in: [src/file/File.ts:189](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L189)
 
 Get the absolute file path.
 
@@ -116,7 +116,7 @@ The absolute file path.
 
 > **getATime**(): `undefined` \| `number` \| `bigint`
 
-Defined in: [src/file/File.ts:245](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L245)
+Defined in: [src/file/File.ts:245](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L245)
 
 Get the last access time of the file.
 
@@ -132,7 +132,7 @@ The last access time in milliseconds.
 
 > **getBasename**(`exclude`): `string`
 
-Defined in: [src/file/File.ts:209](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L209)
+Defined in: [src/file/File.ts:209](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L209)
 
 Get the basename of the file.
 
@@ -156,7 +156,7 @@ The basename of the file.
 
 > **getContent**(): `string`
 
-Defined in: [src/file/File.ts:57](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L57)
+Defined in: [src/file/File.ts:57](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L57)
 
 Get file content.
 
@@ -172,7 +172,7 @@ The content of the file as a string.
 
 > **getCTime**(): `undefined` \| `number` \| `bigint`
 
-Defined in: [src/file/File.ts:263](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L263)
+Defined in: [src/file/File.ts:263](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L263)
 
 Get the created time of the file.
 
@@ -188,7 +188,7 @@ The created time in milliseconds.
 
 > **getDirname**(): `string`
 
-Defined in: [src/file/File.ts:161](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L161)
+Defined in: [src/file/File.ts:161](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L161)
 
 Get the directory name of the file.
 
@@ -204,7 +204,7 @@ The directory name.
 
 > **getEncodedAbsolutePath**(`root`): `string`
 
-Defined in: [src/file/File.ts:199](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L199)
+Defined in: [src/file/File.ts:199](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L199)
 
 Get the encoded absolute file path.
 
@@ -228,7 +228,7 @@ The encoded absolute file path.
 
 > **getEncodedPath**(): `string`
 
-Defined in: [src/file/File.ts:179](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L179)
+Defined in: [src/file/File.ts:179](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L179)
 
 Get the encoded file path.
 
@@ -244,7 +244,7 @@ The encoded file path.
 
 > **getExtension**(): `string`
 
-Defined in: [src/file/File.ts:236](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L236)
+Defined in: [src/file/File.ts:236](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L236)
 
 Get the file extension.
 
@@ -260,7 +260,7 @@ The file extension.
 
 > **getFilename**(): `string`
 
-Defined in: [src/file/File.ts:218](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L218)
+Defined in: [src/file/File.ts:218](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L218)
 
 Get the filename of the file.
 
@@ -276,7 +276,7 @@ The filename of the file.
 
 > **getHashedContent**(`algo`): `string`
 
-Defined in: [src/file/File.ts:131](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L131)
+Defined in: [src/file/File.ts:131](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L131)
 
 Get the hashed content of the file.
 
@@ -300,7 +300,7 @@ The hashed content of the file as a hex string.
 
 > **getMimeType**(`fallback`?): `undefined` \| `string`
 
-Defined in: [src/file/File.ts:152](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L152)
+Defined in: [src/file/File.ts:152](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L152)
 
 Get the MIME type of the file.
 
@@ -324,7 +324,7 @@ The MIME type of the file.
 
 > **getMTime**(): `undefined` \| `number` \| `bigint`
 
-Defined in: [src/file/File.ts:254](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L254)
+Defined in: [src/file/File.ts:254](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L254)
 
 Get the last modified time of the file.
 
@@ -340,7 +340,7 @@ The last modified time in milliseconds.
 
 > **getName**(): `string`
 
-Defined in: [src/file/File.ts:227](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L227)
+Defined in: [src/file/File.ts:227](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L227)
 
 Get the name of the file without extension.
 
@@ -356,7 +356,7 @@ The name of the file.
 
 > **getPath**(): `string`
 
-Defined in: [src/file/File.ts:170](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L170)
+Defined in: [src/file/File.ts:170](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L170)
 
 Get the file path.
 
@@ -372,7 +372,7 @@ The file path.
 
 > **getSize**(`formatted`): `undefined` \| `string` \| `number` \| `bigint`
 
-Defined in: [src/file/File.ts:141](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L141)
+Defined in: [src/file/File.ts:141](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L141)
 
 Get file size.
 
@@ -396,7 +396,7 @@ The file size as a string or number.
 
 > **isAbsolute**(): `boolean`
 
-Defined in: [src/file/File.ts:308](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L308)
+Defined in: [src/file/File.ts:308](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L308)
 
 Check if the file path is absolute.
 
@@ -412,7 +412,7 @@ True if the file path is absolute, otherwise false.
 
 > **isDir**(): `boolean`
 
-Defined in: [src/file/File.ts:281](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L281)
+Defined in: [src/file/File.ts:281](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L281)
 
 Check if the file is a directory.
 
@@ -428,7 +428,7 @@ True if the file is a directory, otherwise false.
 
 > **isExecutable**(): `boolean`
 
-Defined in: [src/file/File.ts:345](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L345)
+Defined in: [src/file/File.ts:345](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L345)
 
 Check if the file is executable.
 
@@ -444,7 +444,7 @@ True if the file is executable, otherwise false.
 
 > **isFile**(): `boolean`
 
-Defined in: [src/file/File.ts:290](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L290)
+Defined in: [src/file/File.ts:290](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L290)
 
 Check if the file is a regular file.
 
@@ -460,7 +460,7 @@ True if the file is a regular file, otherwise false.
 
 > **isLink**(): `boolean`
 
-Defined in: [src/file/File.ts:299](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L299)
+Defined in: [src/file/File.ts:299](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L299)
 
 Check if the file is a symbolic link.
 
@@ -476,7 +476,7 @@ True if the file is a symbolic link, otherwise false.
 
 > **isReadable**(): `boolean`
 
-Defined in: [src/file/File.ts:331](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L331)
+Defined in: [src/file/File.ts:331](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L331)
 
 Check if the file is readable.
 
@@ -492,7 +492,7 @@ True if the file is readable, otherwise false.
 
 > **isWritable**(): `boolean`
 
-Defined in: [src/file/File.ts:317](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L317)
+Defined in: [src/file/File.ts:317](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L317)
 
 Check if the file is writable.
 
@@ -508,7 +508,7 @@ True if the file is writable, otherwise false.
 
 > **move**(`directory`, `name`?): [`File`](File.md)
 
-Defined in: [src/file/File.ts:97](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L97)
+Defined in: [src/file/File.ts:97](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L97)
 
 Move file to a new directory.
 
@@ -542,7 +542,7 @@ FileError if the file could not be moved.
 
 > **remove**(`force`): `this`
 
-Defined in: [src/file/File.ts:116](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L116)
+Defined in: [src/file/File.ts:116](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L116)
 
 Remove file.
 
@@ -566,7 +566,7 @@ The current File instance.
 
 > **write**(`content`): `this`
 
-Defined in: [src/file/File.ts:70](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L70)
+Defined in: [src/file/File.ts:70](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L70)
 
 Write content to file.
 
@@ -590,7 +590,7 @@ The current File instance.
 
 > `static` **create**(`path`, `checkPath`): [`File`](File.md)
 
-Defined in: [src/file/File.ts:35](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/file/File.ts#L35)
+Defined in: [src/file/File.ts:35](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/file/File.ts#L35)
 
 Create a File.
 

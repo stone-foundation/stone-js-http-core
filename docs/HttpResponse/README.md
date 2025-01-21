@@ -1,14 +1,10 @@
-[**HTTP Core Documentation v0.0.32**](../README.md)
+[**HTTP Core Documentation v0.0.34**](../README.md)
 
 ***
 
 [HTTP Core Documentation](../modules.md) / HttpResponse
 
 # HttpResponse
-
-## Variables
-
-- [HttpResponse](variables/HttpResponse.md)
 
 ## Functions
 

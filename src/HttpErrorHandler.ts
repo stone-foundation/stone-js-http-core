@@ -5,26 +5,26 @@ import { IntegrationError, ILogger, IErrorHandler } from '@stone-js/core'
 import { badRequestHttpResponse, createHttpResponse, forbiddenHttpResponse, methodNotAllowedHttpResponse, notFoundHttpResponse, serverErrorHttpResponse, unauthorizedHttpResponse } from './HttpResponse'
 
 /**
- * BrowserErrorHandler options.
+ * HttpErrorHandler options.
  */
 export interface HttpErrorHandlerOptions {
   logger: ILogger
 }
 
 /**
- * Class representing an BrowserErrorHandler.
+ * Class representing an HttpErrorHandler.
  */
 export class HttpErrorHandler implements IErrorHandler<IncomingHttpEvent, OutgoingHttpResponse> {
   private readonly logger: ILogger
 
   /**
-   * Create an BrowserErrorHandler.
+   * Create an HttpErrorHandler.
    *
-   * @param options - BrowserErrorHandler options.
+   * @param options - HttpErrorHandler options.
    */
   constructor ({ logger }: HttpErrorHandlerOptions) {
     if (logger === undefined) {
-      throw new IntegrationError('Logger is required to create an BrowserErrorHandler instance.')
+      throw new IntegrationError('Logger is required to create an HttpErrorHandler instance.')
     }
 
     this.logger = logger

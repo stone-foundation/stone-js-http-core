@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getHostname**(`ip`, `headers`, `options`): `string` \| `undefined`
 
-Defined in: [src/utils.ts:107](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/utils.ts#L107)
+Defined in: [src/utils.ts:125](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L125)
 
 Get hostname.
 

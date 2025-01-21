@@ -1,4 +1,4 @@
-**HTTP Core Documentation v0.0.32**
+**HTTP Core Documentation v0.0.34**
 
 ***
 

@@ -98,7 +98,7 @@ describe('BinaryFileResponse', () => {
       expect(response.getHeader('Content-Disposition')).toBe(contentDisposition(mockFile.getPath(), { type: 'inline' }))
     })
 
-    it('should set Content-Disposition and Content-Type headers with the default', () => {
+    it('should set Content-Disposition and Content-Type headers with the default', async () => {
       (File as any).create = vi.fn().mockReturnValue({
         ...mockFile,
         getSize: vi.fn().mockReturnValue(undefined),
@@ -112,14 +112,14 @@ describe('BinaryFileResponse', () => {
         contentDispositionType: 'attachment',
         content: ''
       }
-      const response = BinaryFileResponse.download(options).prepare(event)
+      const response = await BinaryFileResponse.download(options).prepare(event)
       expect(response.getHeader('Content-Type')).toBe('application/octet-stream; charset=utf-8')
       expect(response.getHeader('Content-Disposition')).toBe(contentDisposition(mockFile.getPath(), { type: 'attachment' }))
     })
   })
 
   describe('prepareContentHeaders', () => {
-    it('should set ETag and Content-Type headers if not exist', () => {
+    it('should set ETag and Content-Type headers if not exist', async () => {
       const event = {
         isFresh: () => false
       } as unknown as IncomingHttpEvent;
@@ -138,7 +138,7 @@ describe('BinaryFileResponse', () => {
         get: vi.fn(() => response.defaultEtagFn.bind(response))
       } as unknown as IBlueprint
 
-      response.removeHeader('Content-Type').prepare(event, blueprint)
+      await response.removeHeader('Content-Type').prepare(event, { make: () => blueprint } as any)
 
       // @ts-expect-error - Accessing private method for testing purposes
       expect(response.getHeader('ETag')).toBe(`"${response.defaultEtagFn(mockFile.getContent())}"`)
@@ -159,7 +159,7 @@ describe('BinaryFileResponse', () => {
   })
 
   describe('prepare', () => {
-    it('should set status to HTTP_NOT_MODIFIED if event is fresh', () => {
+    it('should set status to HTTP_NOT_MODIFIED if event is fresh', async () => {
       const event = {
         isFresh: () => true
       } as unknown as IncomingHttpEvent
@@ -168,7 +168,7 @@ describe('BinaryFileResponse', () => {
         content: ''
       }
       const response = BinaryFileResponse.file(options)
-      response.prepare(event)
+      await response.prepare(event)
       expect(response.status).toBe(HTTP_NOT_MODIFIED)
     })
   })

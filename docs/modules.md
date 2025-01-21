@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.32**](README.md)
+[**HTTP Core Documentation v0.0.34**](README.md)
 
 ***
 
-# HTTP Core Documentation v0.0.32
+# HTTP Core Documentation v0.0.34
 
 ## Modules
 
@@ -12,6 +12,14 @@
 - [cookies/CookieCollection](cookies/CookieCollection/README.md)
 - [cookies/utils](cookies/utils/README.md)
 - [declarations](declarations/README.md)
+- [decorators/FileHttpResponse](decorators/FileHttpResponse/README.md)
+- [decorators/HtmlHttpResponse](decorators/HtmlHttpResponse/README.md)
+- [decorators/HttpResponse](decorators/HttpResponse/README.md)
+- [decorators/JsonHttpResponse](decorators/JsonHttpResponse/README.md)
+- [decorators/JsonpHttpResponse](decorators/JsonpHttpResponse/README.md)
+- [decorators/NoContentHttpResponse](decorators/NoContentHttpResponse/README.md)
+- [decorators/OkHttpResponse](decorators/OkHttpResponse/README.md)
+- [decorators/RedirectHttpResponse](decorators/RedirectHttpResponse/README.md)
 - [errors/BadRequestError](errors/BadRequestError/README.md)
 - [errors/CookieError](errors/CookieError/README.md)
 - [errors/FileError](errors/FileError/README.md)

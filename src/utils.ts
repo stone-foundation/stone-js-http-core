@@ -16,7 +16,25 @@ import { UploadedFile } from './file/UploadedFile'
 import { NotFoundError } from './errors/NotFoundError'
 import { IncomingMessage, OutgoingMessage } from 'http'
 import { BadRequestError } from './errors/BadRequestError'
+import { OutgoingHttpResponse } from './OutgoingHttpResponse'
 import { InternalServerError } from './errors/InternalServerError'
+
+/**
+ * Decorator response callback.
+ *
+ * @param target - The target function.
+ * @param responseCallback - The response callback.
+ * @returns The function with the response callback.
+ */
+export function decoratorResponseCallback<TTarget, TFunction, UReturn extends OutgoingHttpResponse> (
+  target: TTarget,
+  responseCallback: (content: any) => Promise<UReturn>
+): TFunction {
+  return async function (this: TTarget, ...args: any[]): Promise<UReturn> {
+    const content = await (target as Function).apply(this, args)
+    return await responseCallback(content)
+  } as TFunction
+}
 
 /**
  * Check if multipart message.

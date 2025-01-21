@@ -11,101 +11,101 @@ import { badRequestHttpResponse, createHttpResponse, emptyHttpResponse, fileHttp
 
 // Unit tests for the HttpResponse utility functions
 describe('HttpResponse', () => {
-  const event = IncomingHttpEvent.create({ url: new URL('http://localhost'), ip: '127.0.0.1' })
+  const event = IncomingHttpEvent.create({ url: new URL('http://localhost'), ip: '127.0.0.1', source: {} as any })
 
-  it('should create a basic OutgoingHttpResponse', () => {
+  it('should create a basic OutgoingHttpResponse', async () => {
     const blueprint = {
       get: vi.fn(() => undefined)
     } as unknown as IBlueprint
     // @ts-expect-error - Testing private property
     event.protocol = 'https'
-    const response = createHttpResponse('Hello World', HTTP_OK)
+    const response = await createHttpResponse('Hello World', HTTP_OK)
       .setCookie('username', 'Jonh')
-      .prepare(event, blueprint)
+      .prepare(event, { make: () => blueprint } as any)
     expect(response).toBeInstanceOf(OutgoingHttpResponse)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.content).toBe('Hello World')
     expect(response.headers.get('Content-Type')).toBe('text/html; charset=utf-8')
   })
 
-  it('should create an OK response', () => {
-    const response = okHttpResponse('All Good', { 'Content-Type': 'text/plain' }).prepare(event)
+  it('should create an OK response', async () => {
+    const response = await okHttpResponse('All Good', { 'Content-Type': 'text/plain' }).prepare(event)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.content).toBe('All Good')
     expect(response.headers.get('Content-Type')).toBe('text/plain; charset=utf-8')
   })
 
-  it('should create a No Content response', () => {
-    const response = noContentHttpResponse().prepare(event)
+  it('should create a No Content response', async () => {
+    const response = await noContentHttpResponse().prepare(event)
     expect(response.statusCode).toBe(HTTP_NO_CONTENT)
     expect(response.content).toBeFalsy()
   })
 
-  it('should create a Bad Request response', () => {
-    const response = badRequestHttpResponse('Bad Request').prepare(event)
+  it('should create a Bad Request response', async () => {
+    const response = await badRequestHttpResponse('Bad Request').prepare(event)
     expect(response.statusCode).toBe(HTTP_BAD_REQUEST)
     expect(response.content).toBe('Bad Request')
   })
 
-  it('should create a Unauthorized response', () => {
-    const response = unauthorizedHttpResponse('Unauthorized').prepare(event)
+  it('should create a Unauthorized response', async () => {
+    const response = await unauthorizedHttpResponse('Unauthorized').prepare(event)
     expect(response.statusCode).toBe(HTTP_UNAUTHORIZED)
     expect(response.content).toBe('Unauthorized')
   })
 
-  it('should create a Forbidden response', () => {
-    const response = forbiddenHttpResponse('Forbidden').prepare(event)
+  it('should create a Forbidden response', async () => {
+    const response = await forbiddenHttpResponse('Forbidden').prepare(event)
     expect(response.statusCode).toBe(HTTP_FORBIDDEN)
     expect(response.content).toBe('Forbidden')
   })
 
-  it('should create a Not Found response', () => {
-    const response = notFoundHttpResponse('Not Found').prepare(event)
+  it('should create a Not Found response', async () => {
+    const response = await notFoundHttpResponse('Not Found').prepare(event)
     expect(response.statusCode).toBe(HTTP_NOT_FOUND)
     expect(response.content).toBe('Not Found')
   })
 
-  it('should create a Method Not Allowed response', () => {
-    const response = methodNotAllowedHttpResponse('Method Not Allowed').prepare(event)
+  it('should create a Method Not Allowed response', async () => {
+    const response = await methodNotAllowedHttpResponse('Method Not Allowed').prepare(event)
     expect(response.statusCode).toBe(HTTP_METHOD_NOT_ALLOWED)
     expect(response.content).toBe('Method Not Allowed')
   })
 
-  it('should create a Service Unavailable response', () => {
-    const response = unavailableHttpResponse('Service Unavailable').prepare(event)
+  it('should create a Service Unavailable response', async () => {
+    const response = await unavailableHttpResponse('Service Unavailable').prepare(event)
     expect(response.statusCode).toBe(HTTP_SERVICE_UNAVAILABLE)
     expect(response.content).toBe('Service Unavailable')
   })
 
-  it('should create a HTML response', () => {
-    const response = htmlHttpResponse('<h1>Hello</h1>').prepare(event)
+  it('should create a HTML response', async () => {
+    const response = await htmlHttpResponse('<h1>Hello</h1>').prepare(event)
     expect(response).toBeInstanceOf(OutgoingHttpResponse)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.content).toEqual('<h1>Hello</h1>')
   })
 
-  it('should create an empty response', () => {
-    const response = emptyHttpResponse().prepare(event)
+  it('should create an empty response', async () => {
+    const response = await emptyHttpResponse().prepare(event)
     expect(response).toBeInstanceOf(OutgoingHttpResponse)
     expect(response.statusCode).toBe(HTTP_NO_CONTENT)
     expect(response.content).toBeFalsy()
   })
 
-  it('should create a JSON response', () => {
-    const response = jsonHttpResponse({ key: 'value' }).prepare(event)
+  it('should create a JSON response', async () => {
+    const response = await jsonHttpResponse({ key: 'value' }).prepare(event)
     expect(response).toBeInstanceOf(JsonResponse)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.content).toEqual('{"key":"value"}')
   })
 
-  it('should create a JSONP response', () => {
-    const response = jsonpHttpResponse({ key: 'value' }).setCallback('callback').prepare(event)
+  it('should create a JSONP response', async () => {
+    const response = await jsonpHttpResponse({ key: 'value' }).setCallback('callback').prepare(event)
     expect(response).toBeInstanceOf(JsonpResponse)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.content).toEqual("/**/ typeof callback === 'function' && callback({\"key\":\"value\"});")
   })
 
-  it('should create a File response', () => {
+  it('should create a File response', async () => {
     const file = File.create('test.txt', false)
     file.isReadable = vi.fn().mockReturnValue(true)
     file.getHashedContent = vi.fn().mockReturnValue('test')
@@ -114,21 +114,21 @@ describe('HttpResponse', () => {
     file.getMimeType = vi.fn().mockReturnValue('text/plain')
     file.getSize = vi.fn().mockReturnValue(10)
     file.getContent = vi.fn().mockReturnValue('test')
-    const response = fileHttpResponse(file).prepare(event)
+    const response = await fileHttpResponse(file).prepare(event)
     expect(response).toBeInstanceOf(BinaryFileResponse)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.file).toBe(file)
   })
 
-  it('should create a Redirect response', () => {
-    const response = redirectHttpResponse('http://example.com').prepare(event)
+  it('should create a Redirect response', async () => {
+    const response = await redirectHttpResponse('http://example.com').prepare(event)
     expect(response).toBeInstanceOf(RedirectResponse)
     expect(response.statusCode).toBe(302)
     expect(response.headers.get('Location')).toBe('http://example.com')
   })
 
-  it('should create a Server Error response', () => {
-    const response = serverErrorHttpResponse('Internal Server Error').prepare(event)
+  it('should create a Server Error response', async () => {
+    const response = await serverErrorHttpResponse('Internal Server Error').prepare(event)
     expect(response.statusCode).toBe(HTTP_INTERNAL_SERVER_ERROR)
     expect(response.content).toBe('Internal Server Error')
   })

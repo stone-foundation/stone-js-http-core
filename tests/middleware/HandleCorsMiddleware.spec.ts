@@ -1,14 +1,14 @@
 import { IBlueprint } from '@stone-js/core'
-import { http } from '../../src/options/HttpConfig'
 import { HttpMethods } from '../../src/declarations'
 import { IncomingHttpEvent } from '../../src/IncomingHttpEvent'
+import { httpCoreBlueprint } from '../../src/options/HttpConfig'
 import { OutgoingHttpResponse } from '../../src/OutgoingHttpResponse'
 import { HandleCorsMiddleware } from '../../src/middleware/HandleCorsMiddleware'
 
 // Make a blueprint
 const makeBlueprint = (options: any): IBlueprint => {
   return {
-    get: vi.fn().mockReturnValue({ ...http.stone.http.cors, ...options })
+    get: vi.fn().mockReturnValue({ ...httpCoreBlueprint.stone.http.cors, ...options })
   } as unknown as IBlueprint
 }
 
@@ -36,6 +36,7 @@ describe('HandleCorsMiddleware', () => {
     })
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       method: HttpMethods.GET,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
@@ -53,6 +54,7 @@ describe('HandleCorsMiddleware', () => {
   it('should handle OPTIONS method and set preflight headers', async () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       method: HttpMethods.GET,
       url: new URL('https://example.com'),
       headers: { 'access-control-request-headers': 'Content-Type' }
@@ -82,6 +84,7 @@ describe('HandleCorsMiddleware', () => {
     })
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       method: HttpMethods.GET,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
@@ -109,6 +112,7 @@ describe('HandleCorsMiddleware', () => {
     })
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       method: HttpMethods.GET,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
@@ -135,6 +139,7 @@ describe('HandleCorsMiddleware', () => {
     })
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       method: HttpMethods.GET,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
@@ -159,6 +164,7 @@ describe('HandleCorsMiddleware', () => {
     })
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       method: HttpMethods.GET,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }

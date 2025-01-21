@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BinaryFileResponseOptions
 
-Defined in: [src/BinaryFileResponse.ts:13](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/BinaryFileResponse.ts#L13)
+Defined in: [src/BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/BinaryFileResponse.ts#L14)
 
 Options for creating a BinaryFile HTTP Response.
 
@@ -24,7 +24,7 @@ Options for creating a BinaryFile HTTP Response.
 
 > `optional` **autoEtag**: `boolean`
 
-Defined in: [src/BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/BinaryFileResponse.ts#L14)
+Defined in: [src/BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/BinaryFileResponse.ts#L15)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core
 
 > `optional` **autoLastModified**: `boolean`
 
-Defined in: [src/BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/BinaryFileResponse.ts#L16)
+Defined in: [src/BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/BinaryFileResponse.ts#L17)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core
 
 > `optional` **contentDispositionType**: `string`
 
-Defined in: [src/BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/BinaryFileResponse.ts#L17)
+Defined in: [src/BinaryFileResponse.ts:18](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/BinaryFileResponse.ts#L18)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core
 
 > **file**: `string` \| [`File`](../../file/File/classes/File.md)
 
-Defined in: [src/BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/BinaryFileResponse.ts#L15)
+Defined in: [src/BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/BinaryFileResponse.ts#L16)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/OutgoingHttpResponse.ts#L21)
+Defined in: [src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/OutgoingHttpResponse.ts#L22)
 
 #### Inherited from
 

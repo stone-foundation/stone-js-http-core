@@ -4,6 +4,7 @@ import { IBlueprint } from '@stone-js/core'
 import { FileError } from './errors/FileError'
 import { HTTP_NOT_MODIFIED } from './constants'
 import contentDisposition from 'content-disposition'
+import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
 
@@ -148,12 +149,12 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
    * Prepare the response before sending.
    *
    * @param event - The incoming HTTP event.
-   * @param blueprint - Optional blueprint settings for the response.
+   * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, blueprint?: IBlueprint): this {
+  prepare (event: IncomingHttpEvent, container?: Container): this | Promise<this> {
     this
-      .setBlueprintResolver(() => blueprint)
+      .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
       .setIncomingEventResolver(() => event)
       .prepareCookies()
 
@@ -161,7 +162,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
       this.setStatus(HTTP_NOT_MODIFIED)
     }
 
-    if (this.isInformational() || this.isEmpty()) {
+    if (this.is1xx() || this.isEmpty()) {
       this.removeHeader(['Content-Type', 'Content-Length', 'Transfer-Encoding'])
     } else {
       this.prepareContentHeaders()

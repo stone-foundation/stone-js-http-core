@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Class: HttpErrorHandler
 
-Defined in: [src/HttpErrorHandler.ts:17](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpErrorHandler.ts#L17)
+Defined in: [src/HttpErrorHandler.ts:17](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L17)
 
-Class representing an BrowserErrorHandler.
+Class representing an HttpErrorHandler.
 
 ## Implements
 
@@ -20,9 +20,9 @@ Class representing an BrowserErrorHandler.
 
 > **new HttpErrorHandler**(`options`): [`HttpErrorHandler`](HttpErrorHandler.md)
 
-Defined in: [src/HttpErrorHandler.ts:25](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpErrorHandler.ts#L25)
+Defined in: [src/HttpErrorHandler.ts:25](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L25)
 
-Create an BrowserErrorHandler.
+Create an HttpErrorHandler.
 
 #### Parameters
 
@@ -30,7 +30,7 @@ Create an BrowserErrorHandler.
 
 [`HttpErrorHandlerOptions`](../interfaces/HttpErrorHandlerOptions.md)
 
-BrowserErrorHandler options.
+HttpErrorHandler options.
 
 #### Returns
 
@@ -42,7 +42,7 @@ BrowserErrorHandler options.
 
 > **handle**(`error`, `_event`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpErrorHandler.ts:40](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpErrorHandler.ts#L40)
+Defined in: [src/HttpErrorHandler.ts:40](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L40)
 
 Handle an error.
 

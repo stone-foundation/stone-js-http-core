@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Interface: HttpErrorHandlerOptions
 
-Defined in: [src/HttpErrorHandler.ts:10](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpErrorHandler.ts#L10)
+Defined in: [src/HttpErrorHandler.ts:10](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L10)
 
-BrowserErrorHandler options.
+HttpErrorHandler options.
 
 ## Properties
 
@@ -16,4 +16,4 @@ BrowserErrorHandler options.
 
 > **logger**: `ILogger`
 
-Defined in: [src/HttpErrorHandler.ts:11](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/HttpErrorHandler.ts#L11)
+Defined in: [src/HttpErrorHandler.ts:11](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L11)

@@ -1,7 +1,7 @@
 import { escape } from 'lodash-es'
 import { Buffer } from 'safe-buffer'
-import { IBlueprint } from '@stone-js/core'
 import { HttpError } from './errors/HttpError'
+import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
 
@@ -37,7 +37,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
       this.setHeader('Cache-Control', 'public, max-age=31536000')
     }
 
-    this.setTargetUrl(options.url)
+    this.setTargetUrl(options.url ?? options.content)
   }
 
   /**
@@ -57,13 +57,13 @@ export class RedirectResponse extends OutgoingHttpResponse {
    * Prepare the response before sending.
    *
    * @param event - The incoming HTTP event.
-   * @param blueprint - Optional blueprint settings for the response.
+   * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, blueprint?: IBlueprint): this {
+  async prepare (event: IncomingHttpEvent, container?: Container): Promise<this> {
     this.setIncomingEventResolver(() => event)
     this.prepareRedirection()
-    super.prepare(event, blueprint)
+    await super.prepare(event, container)
     return this
   }
 

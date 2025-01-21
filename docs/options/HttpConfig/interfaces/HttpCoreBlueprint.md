@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: HttpCoreBlueprint
 
-Defined in: [src/options/HttpConfig.ts:191](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L191)
+Defined in: [src/options/HttpConfig.ts:192](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L192)
 
 Represents the core HTTP blueprint for the application.
 
@@ -24,7 +24,7 @@ Represents the core HTTP blueprint for the application.
 
 > **stone**: [`HttpCoreConfig`](HttpCoreConfig.md)
 
-Defined in: [src/options/HttpConfig.ts:192](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/options/HttpConfig.ts#L192)
+Defined in: [src/options/HttpConfig.ts:193](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L193)
 
 Application-level settings, including environment, middleware, logging, and service registration.
 

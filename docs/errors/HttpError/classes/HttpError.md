@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: HttpError
 
-Defined in: [src/errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L10)
+Defined in: [src/errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/HttpError.ts#L10)
 
 Class representing an HttpError.
 
@@ -24,7 +24,7 @@ Mr. Stone <evensstone@gmail.com>
 
 > **new HttpError**(`message`, `statusCode`, `headers`, `options`): [`HttpError`](HttpError.md)
 
-Defined in: [src/errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L21)
+Defined in: [src/errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/HttpError.ts#L21)
 
 Create an HttpError.
 
@@ -64,7 +64,7 @@ The error options.
 
 > `readonly` **headers**: [`HeadersType`](../../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [src/errors/HttpError.ts:12](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L12)
+Defined in: [src/errors/HttpError.ts:12](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/HttpError.ts#L12)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/errors/HttpError.ts:12](https://github.com/stonemjs/http-core/b
 
 > `readonly` **statusCode**: `number`
 
-Defined in: [src/errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L11)
+Defined in: [src/errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/HttpError.ts#L11)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [src/errors/HttpError.ts:11](https://github.com/stonemjs/http-core/b
 
 > `readonly` **statusMessage**: `string`
 
-Defined in: [src/errors/HttpError.ts:13](https://github.com/stonemjs/http-core/blob/680e946aeb5100b42b4836417719aba730586478/src/errors/HttpError.ts#L13)
+Defined in: [src/errors/HttpError.ts:13](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/HttpError.ts#L13)

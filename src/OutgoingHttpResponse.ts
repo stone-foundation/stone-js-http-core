@@ -7,6 +7,7 @@ import contentTypeLib from 'content-type'
 import { isFunction, isString } from 'lodash-es'
 import { createHash, Encoding } from 'node:crypto'
 import { HttpJsonConfig } from './options/HttpConfig'
+import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { CookieCollection } from './cookies/CookieCollection'
 import { InternalServerError } from './errors/InternalServerError'
@@ -446,6 +447,18 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   }
 
   /**
+   * Check if the status code falls within the specified range.
+   *
+   * @param start - The starting value of the range (inclusive).
+   * @param end - The ending value of the range (exclusive).
+   * @returns True if the status code is within the specified range, otherwise false.
+   */
+  isInStatusRange (start: number, end: number): boolean {
+    const code = this.statusCode ?? 500
+    return code >= start && code < end
+  }
+
+  /**
    * Check if the status code is invalid.
    *
    * @returns True if the status code is invalid, otherwise false.
@@ -456,23 +469,66 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   }
 
   /**
-   * Check if the status code represents an informational response.
+   * Check if the status code represents an informational response (1xx).
    *
    * @returns True if the status code is informational, otherwise false.
    */
-  isInformational (): boolean {
-    const code = this.statusCode ?? 500
-    return code >= 100 && code < 200
+  is1xx (): boolean {
+    return this.isInStatusRange(100, 200)
   }
 
   /**
-   * Check if the status code represents a successful response.
+   * Check if the status code represents a successful response (2xx).
    *
    * @returns True if the status code is successful, otherwise false.
    */
-  isSuccessful (): boolean {
-    const code = this.statusCode ?? 500
-    return code >= 200 && code < 300
+  is2xx (): boolean {
+    return this.isInStatusRange(200, 300)
+  }
+
+  /**
+   * Check if the status code represents a redirection response (3xx).
+   *
+   * @returns True if the status code is a redirection, otherwise false.
+   */
+  is3xx (): boolean {
+    return this.isInStatusRange(300, 400)
+  }
+
+  /**
+   * Check if the status code represents a client error response (4xx).
+   *
+   * @returns True if the status code is a client error, otherwise false.
+   */
+  is4xx (): boolean {
+    return this.isInStatusRange(400, 500)
+  }
+
+  /**
+   * Check if the status code represents a server error response (5xx).
+   *
+   * @returns True if the status code is a server error, otherwise false.
+   */
+  is5xx (): boolean {
+    return this.isInStatusRange(500, 600)
+  }
+
+  /**
+   * Check if the status code is not an error (i.e., not 4xx or 5xx).
+   *
+   * @returns True if the status code is not an error, otherwise false.
+   */
+  isNotError (): boolean {
+    return !this.isError()
+  }
+
+  /**
+   * Check if the status code is an error (i.e., 4xx or 5xx).
+   *
+   * @returns True if the status code is an error, otherwise false.
+   */
+  isError (): boolean {
+    return this.is4xx() || this.is5xx()
   }
 
   /**
@@ -503,16 +559,6 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   }
 
   /**
-   * Check if the status code represents a redirection.
-   *
-   * @returns True if the status code is a redirection, otherwise false.
-   */
-  isRedirection (): boolean {
-    const code = this.statusCode ?? 500
-    return code >= 300 && code < 400
-  }
-
-  /**
    * Check if the response is a redirect.
    *
    * @param location - The optional location to check for redirection.
@@ -530,16 +576,6 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    */
   isMovedPermanently (): boolean {
     return this.statusCode === 301
-  }
-
-  /**
-   * Check if the status code represents a client error.
-   *
-   * @returns True if the status code is a client error, otherwise false.
-   */
-  isClientError (): boolean {
-    const code = this.statusCode ?? 500
-    return code >= 400 && code < 500
   }
 
   /**
@@ -570,16 +606,6 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   }
 
   /**
-   * Check if the status code represents a server error.
-   *
-   * @returns True if the status code is a server error, otherwise false.
-   */
-  isServerError (): boolean {
-    const code = this.statusCode ?? 500
-    return code >= 500 && code < 600
-  }
-
-  /**
    * Check if the response is validateable.
    *
    * @returns True if the response has Last-Modified or ETag headers, otherwise false.
@@ -592,12 +618,12 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * Prepare the response before sending.
    *
    * @param event - The incoming HTTP event.
-   * @param blueprint - Optional blueprint settings for the response.
+   * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, blueprint?: IBlueprint): this {
+  prepare (event: IncomingHttpEvent, container?: Container): this | Promise<this> {
     return this
-      .setBlueprintResolver(() => blueprint)
+      .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
       .setIncomingEventResolver(() => event)
       .handleContentNegotiation()
       .prepareCookies()
@@ -672,7 +698,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of the response for chaining.
    */
   protected prepareContentHeaders (): this {
-    if (this.isInformational() || this.isEmpty()) {
+    if (this.is1xx() || this.isEmpty()) {
       this.setContent(undefined).removeHeader(['Content-Type', 'Content-Length', 'Transfer-Encoding'])
     } else if (this.isResetContent()) {
       this.setContent(undefined).setHeader('Content-Length', '0').removeHeader('Transfer-Encoding')

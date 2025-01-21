@@ -16,29 +16,31 @@ describe('JsonpResponse', () => {
     expect(response.getCallback()).toBe('callback1')
   })
 
-  it('should get the callback from incomingEvent query if not explicitly set', () => {
+  it('should get the callback from incomingEvent query if not explicitly set', async () => {
     const incomingEvent = IncomingHttpEvent.create({
       queryString: '?callback=dynamicCallback',
       ip: '127.0.0.1',
+      source: {} as any,
       url: new URL('http://localhost')
     })
     const blueprint = {
       get: vi.fn().mockReturnValue('callback')
     } as unknown as IBlueprint
 
-    const response: JsonpResponse = JsonpResponse.create({ content: { name: 'test' } })
+    const response = await JsonpResponse.create<JsonpResponse>({ content: { name: 'test' } }).prepare(incomingEvent, { make: () => blueprint } as any)
 
-    expect(response.prepare(incomingEvent, blueprint).getCallback()).toBe('dynamicCallback')
+    expect(response.getCallback()).toBe('dynamicCallback')
     expect(blueprint.get).toHaveBeenCalledWith('stone.http.jsonp.callback.name')
   })
 
-  it('should throw an error if no callback is provided', () => {
+  it('should throw an error if no callback is provided', async () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       url: new URL('http://localhost')
     })
     const response = new JsonpResponse({ content: 'test' })
-    expect(() => response.prepare(incomingEvent)).toThrow(HttpError)
+    await expect(async () => await response.prepare(incomingEvent)).rejects.toThrow(HttpError)
   })
 
   it('should set content type to application/javascript if callback is provided', () => {

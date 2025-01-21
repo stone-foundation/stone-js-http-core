@@ -3,17 +3,17 @@ import { IncomingHttpEvent } from '../src/IncomingHttpEvent'
 import { RedirectResponse, RedirectResponseOptions } from '../src/RedirectResponse'
 
 // Mock dependencies
-const mockIncomingEvent = IncomingHttpEvent.create({ url: new URL('http://localhost'), ip: '127.0.0.1', headers: { referrer: 'http://example.com' } })
+const mockIncomingEvent = IncomingHttpEvent.create({ url: new URL('http://localhost'), ip: '127.0.0.1', source: {} as any, headers: { referrer: 'http://example.com' } })
 
 describe('RedirectResponse', () => {
-  it('should create a RedirectResponse with a valid redirect status code', () => {
+  it('should create a RedirectResponse with a valid redirect status code', async () => {
     const options: RedirectResponseOptions = {
       url: 'http://example.com/api/v1',
       statusCode: 302,
       content: 'Redirecting...'
     }
 
-    const response = new RedirectResponse(options).prepare(mockIncomingEvent)
+    const response = await RedirectResponse.create<RedirectResponse>(options).prepare(mockIncomingEvent)
     expect(response).toBeInstanceOf(RedirectResponse)
     expect(response.getHeader('Location')).toBe('http://example.com/api%2Fv1')
     // @ts-expect-error - accessing private property for testing
@@ -30,20 +30,21 @@ describe('RedirectResponse', () => {
     expect(() => new RedirectResponse(options)).toThrow(HttpError)
   })
 
-  it('should set the target URL correctly', () => {
+  it('should set the target URL correctly', async () => {
+    // @ts-expect-error - ignore type checking for testing purposes
     const options: RedirectResponseOptions = {
-      url: 'http://example.com',
       statusCode: 301,
-      content: 'Redirecting...'
+      content: 'http://example.com'
     }
     const mockIncomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       url: new URL('http://localhost'),
       headers: { accept: 'text/html' }
     })
 
     const response = new RedirectResponse(options)
-    response.setTargetUrl('http://newexample.com').prepare(mockIncomingEvent)
+    await response.setTargetUrl('http://newexample.com').prepare(mockIncomingEvent)
     expect(response.getHeader('Location')).toBe('http://newexample.com')
     expect(response.getHeader('cache-control')).toBe('public, max-age=31536000')
     // @ts-expect-error - accessing private property for testing
@@ -61,7 +62,7 @@ describe('RedirectResponse', () => {
     expect(() => response.setTargetUrl(undefined as unknown as string)).toThrow(HttpError)
   })
 
-  it('should prepare the response correctly', () => {
+  it('should prepare the response correctly', async () => {
     const options: RedirectResponseOptions = {
       url: 'http://example.com',
       statusCode: 302,
@@ -69,29 +70,30 @@ describe('RedirectResponse', () => {
     }
     const mockIncomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
+      source: {} as any,
       url: new URL('http://localhost'),
       headers: { accept: 'application/json' }
     })
 
     const response = new RedirectResponse(options)
-    response.prepare(mockIncomingEvent)
+    await response.prepare(mockIncomingEvent)
     expect(response.getHeader('Location')).toBe('http://example.com')
     // @ts-expect-error - accessing private property for testing
     expect(response._content).toBe('')
   })
 
-  it('should handle "back" as target URL and use the Referrer header', () => {
+  it('should handle "back" as target URL and use the Referrer header', async () => {
     const options: RedirectResponseOptions = {
       url: 'back',
       statusCode: 302,
       content: 'Redirecting...'
     }
 
-    const response = new RedirectResponse(options)
-    expect(response.prepare(mockIncomingEvent).getHeader('Location')).toBe('http://example.com')
+    const response = await RedirectResponse.create<RedirectResponse>(options).prepare(mockIncomingEvent)
+    expect(response.getHeader('Location')).toBe('http://example.com')
   })
 
-  it('should keep user defined cache-control header for moved permanently', () => {
+  it('should keep user defined cache-control header for moved permanently', async () => {
     const options: RedirectResponseOptions = {
       url: 'http:/example.com',
       statusCode: 301,
@@ -101,7 +103,7 @@ describe('RedirectResponse', () => {
       content: 'Redirecting...'
     }
 
-    const response = new RedirectResponse(options)
-    expect(response.prepare(mockIncomingEvent).getHeader('cache-control')).toBe('no-store')
+    const response = await RedirectResponse.create<RedirectResponse>(options).prepare(mockIncomingEvent)
+    expect(response.getHeader('cache-control')).toBe('no-store')
   })
 })

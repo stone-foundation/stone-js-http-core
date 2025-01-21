@@ -1,4 +1,4 @@
-[**HTTP Core Documentation v0.0.32**](../../README.md)
+[**HTTP Core Documentation v0.0.34**](../../README.md)
 
 ***
 
@@ -16,4 +16,4 @@
 
 ## Variables
 
-- [http](variables/http.md)
+- [httpCoreBlueprint](variables/httpCoreBlueprint.md)
