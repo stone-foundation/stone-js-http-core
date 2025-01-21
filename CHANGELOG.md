@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.0.4](https://github.com/stonemjs/http-core/compare/v0.0.34...v0.0.4) (2025-01-21)
+
+
+### Features
+
+* add response util methods and response decorator ([1848d2c](https://github.com/stonemjs/http-core/commit/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a))
+
 ## [0.0.34](https://github.com/stonemjs/http-core/compare/v0.0.33...v0.0.34) (2025-01-06)
 
 
