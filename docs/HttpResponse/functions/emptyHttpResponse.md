@@ -8,7 +8,7 @@
 
 > **emptyHttpResponse**(`statusCode`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpResponse.ts:207](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpResponse.ts#L207)
+Defined in: [http-core/src/HttpResponse.ts:207](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/HttpResponse.ts#L207)
 
 Create a 204(No content) empty JSON OutgoingHttpResponse.
 

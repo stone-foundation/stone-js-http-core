@@ -8,7 +8,7 @@
 
 > **jsonpHttpResponse**(`content`, `statusCode`, `headers`): [`JsonpResponse`](../../JsonpResponse/classes/JsonpResponse.md)
 
-Defined in: [src/HttpResponse.ts:162](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpResponse.ts#L162)
+Defined in: [http-core/src/HttpResponse.ts:162](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/HttpResponse.ts#L162)
 
 Create a 200(OK) JSONP OutgoingHttpResponse.
 

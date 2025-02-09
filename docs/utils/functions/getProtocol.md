@@ -8,7 +8,7 @@
 
 > **getProtocol**(`ip`, `headers`, `encrypted`, `options`): `string`
 
-Defined in: [src/utils.ts:107](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L107)
+Defined in: [http-core/src/utils.ts:106](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/utils.ts#L106)
 
 Get protocol.
 

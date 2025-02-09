@@ -8,7 +8,7 @@
 
 > **getCharset**(`value`, `fallback`): `string`
 
-Defined in: [src/utils.ts:73](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L73)
+Defined in: [http-core/src/utils.ts:72](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/utils.ts#L72)
 
 Get message content charset.
 

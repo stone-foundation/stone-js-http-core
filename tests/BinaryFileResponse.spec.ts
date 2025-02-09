@@ -1,9 +1,8 @@
-import { File } from '../src/file/File'
 import { IBlueprint } from '@stone-js/core'
-import { FileError } from '../src/errors/FileError'
 import { HTTP_NOT_MODIFIED } from '../src/constants'
 import contentDisposition from 'content-disposition'
 import { IncomingHttpEvent } from '../src/IncomingHttpEvent'
+import { File, FilesystemError } from '@stone-js/filesystem'
 import { BinaryFileResponse, BinaryFileResponseOptions } from '../src/BinaryFileResponse'
 
 // Mocking dependencies
@@ -44,7 +43,7 @@ describe('BinaryFileResponse', () => {
         content: ''
       };
       (File.create as any).mockReturnValueOnce({ ...mockFile, isReadable: () => false })
-      expect(() => new BinaryFileResponse(options)).toThrow(FileError)
+      expect(() => new BinaryFileResponse(options)).toThrow(FilesystemError)
     })
   })
 
@@ -175,11 +174,11 @@ describe('BinaryFileResponse', () => {
 
   it('should throw an error if no File are provided', () => {
     // @ts-expect-error - Invalid file value for testing purposes
-    expect(() => BinaryFileResponse.file({ file: undefined, content: '' })).toThrow(FileError)
+    expect(() => BinaryFileResponse.file({ file: undefined, content: '' })).toThrow(FilesystemError)
   })
 
   it('should throw an error when calling setContent with a valid value', () => {
     const response = BinaryFileResponse.file({ file: '/file/path', content: '' })
-    expect(() => response.setContent('')).toThrow(FileError)
+    expect(() => response.setContent('')).toThrow(FilesystemError)
   })
 })

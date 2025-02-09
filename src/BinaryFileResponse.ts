@@ -1,11 +1,10 @@
-import { File } from './file/File'
 import { Buffer } from 'safe-buffer'
 import { IBlueprint } from '@stone-js/core'
-import { FileError } from './errors/FileError'
 import { HTTP_NOT_MODIFIED } from './constants'
 import contentDisposition from 'content-disposition'
 import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
+import { File, FilesystemError } from '@stone-js/filesystem'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
 
 /**
@@ -14,6 +13,7 @@ import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHtt
 export interface BinaryFileResponseOptions extends OutgoingHttpResponseOptions {
   autoEtag?: boolean
   file: string | File
+  autoEncoding?: boolean
   autoLastModified?: boolean
   contentDispositionType?: string
 }
@@ -57,6 +57,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
     this.file = this.getValidatedFile(options.file)
 
     options.autoEtag === true && this.autoEtag()
+    options.autoEncoding === true && this.autoEncoding()
     options.autoLastModified === true && this.autoLastModified()
 
     this.setContentDisposition(options.contentDispositionType)
@@ -99,6 +100,21 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
   }
 
   /**
+   * Automatically set the Content-Encoding header based on the file's extension.
+   *
+   * @returns The current instance for method chaining.
+   */
+  autoEncoding (): this {
+    const encoding: Record<string, string> = { '.br': 'br', '.brotli': 'br', '.gzip': 'gzip' }
+
+    if (this.file.isCompressed(Object.keys(encoding))) {
+      return this.setHeader('Content-Encoding', encoding[this.file.getExtension()])
+    }
+
+    return this
+  }
+
+  /**
    * Set the content disposition header.
    *
    * @param type - The content disposition type (e.g., 'inline', 'attachment').
@@ -119,7 +135,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
    */
   setContent (content: unknown): this {
     if (content !== undefined) {
-      throw new FileError('The content cannot be set on a BinaryFileResponse instance.')
+      throw new FilesystemError('The content cannot be set on a BinaryFileResponse instance.')
     }
 
     return this
@@ -203,7 +219,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
    */
   private getValidatedFile (file: string | File): File {
     if (file === undefined) {
-      throw new FileError('file argument is required.')
+      throw new FilesystemError('file argument is required.')
     }
 
     if (!(file instanceof File)) {
@@ -211,7 +227,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
     }
 
     if (!file.isReadable()) {
-      throw new FileError('File must be readable.')
+      throw new FilesystemError('File must be readable.')
     }
 
     return file

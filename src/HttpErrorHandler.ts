@@ -34,21 +34,24 @@ export class HttpErrorHandler implements IErrorHandler<IncomingHttpEvent, Outgoi
    * Handle an error.
    *
    * @param error - The error to handle.
-   * @param _event - The incoming http event.
+   * @param event - The incoming http event.
    * @returns The outgoing http response.
    */
-  public handle (error: Error, _event: IncomingHttpEvent): OutgoingHttpResponse {
+  public handle (error: Error, event: IncomingHttpEvent): OutgoingHttpResponse {
     const httpError = error as HttpError
+    const message = (error: string): string | { error: string } => event.is(['json']) === false ? error : { error }
 
     this.logger.error(error.message, { error })
 
-    return {
-      NotFoundError: notFoundHttpResponse('Not Found'),
-      ForbiddenError: forbiddenHttpResponse('Forbidden'),
-      BadRequestError: badRequestHttpResponse('Bad Request'),
-      UnauthorizedError: unauthorizedHttpResponse('Unauthorized'),
-      MethodNotAllowedError: methodNotAllowedHttpResponse('Method Not Allowed'),
-      HttpError: createHttpResponse(httpError.statusMessage, httpError.statusCode, httpError.headers)
-    }[error.name] ?? serverErrorHttpResponse('Internal Server Error')
+    const response = {
+      NotFoundError: () => notFoundHttpResponse(message('Not Found')),
+      ForbiddenError: () => forbiddenHttpResponse(message('Forbidden')),
+      BadRequestError: () => badRequestHttpResponse(message('Bad Request')),
+      UnauthorizedError: () => unauthorizedHttpResponse(message('Unauthorized')),
+      MethodNotAllowedError: () => methodNotAllowedHttpResponse(message('Method Not Allowed')),
+      HttpError: () => createHttpResponse(message(httpError.statusMessage), httpError.statusCode, httpError.headers)
+    }[error.name] ?? (() => serverErrorHttpResponse(message('Internal Server Error')))
+
+    return response()
   }
 }

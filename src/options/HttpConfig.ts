@@ -140,6 +140,18 @@ export interface HttpConfig {
      * Configuration for file responses.
      */
     download: Record<string, any>
+    /**
+     * The root directory for serving static files.
+     */
+    rootDir?: string
+    /**
+     * The list of accepted file extensions.
+     */
+    extensions?: string[]
+    /**
+     * The default encoding for compressed static files.
+     */
+    defaultCompressionEncoding: Record<string, string>
   }
   /**
    * JSONP-related configuration options.
@@ -200,7 +212,7 @@ export const httpCoreBlueprint: HttpCoreBlueprint = {
   stone: {
     kernel: {
       errorHandlers: {
-        default: HttpErrorHandler
+        default: { module: HttpErrorHandler, isClass: true }
       }
     },
     http: {
@@ -230,7 +242,13 @@ export const httpCoreBlueprint: HttpCoreBlueprint = {
       },
       files: {
         upload: {},
-        download: {}
+        download: {},
+        defaultCompressionEncoding: {
+          '.br': 'br',
+          '.brotli': 'br',
+          '.gzip': 'gzip',
+          '.gz': 'gzip'
+        }
       },
       jsonp: {
         callback: {

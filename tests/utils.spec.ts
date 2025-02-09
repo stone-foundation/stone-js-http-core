@@ -1,6 +1,5 @@
-import { File } from '../src/file/File'
 import { createWriteStream } from 'node:fs'
-import { FileError } from '../src/errors/FileError'
+import { File, FilesystemError, UploadedFile } from '@stone-js/filesystem'
 import { BadRequestError } from '../src/errors/BadRequestError'
 import { InternalServerError } from '../src/errors/InternalServerError'
 import { IncomingMessage, IncomingHttpHeaders, OutgoingMessage } from 'http'
@@ -15,7 +14,6 @@ const MockSendOnSpy = vi.fn()
 vi.mock('node:fs')
 vi.mock('node:os')
 vi.mock('node:path')
-vi.mock('../src/file/UploadedFile')
 vi.mock('send', () => ({ default: (...args: any[]) => (MockSend) }))
 vi.mock('busboy', () => ({ default: (...args: any[]) => (MockBusboy) }))
 vi.mock('on-finished', () => ({ default: (res: OutgoingMessage, cb: (error: Error) => void) => MockSend.on('close', cb) }))
@@ -81,6 +79,7 @@ describe('Utility Functions', () => {
     }
     // @ts-expect-error
     createWriteStream.mockReturnValue({ on: vi.fn(), pipe: vi.fn() })
+    UploadedFile.createFile = vi.fn().mockReturnValue({ filename: 'test.txt', mimeType: 'text/plain' })
   })
 
   describe('isMultipart', () => {
@@ -224,7 +223,7 @@ describe('Utility Functions', () => {
       // @ts-expect-error
       createWriteStream.mockReturnValue({ on: (event: string, handler: Function) => handler({ message: 'Error', code: 'EIO' }) })
 
-      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(FileError)
+      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(FilesystemError)
     })
   })
 

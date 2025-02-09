@@ -6,7 +6,7 @@
 
 # Interface: HttpConfig
 
-Defined in: [src/options/HttpConfig.ts:62](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L62)
+Defined in: [http-core/src/options/HttpConfig.ts:62](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L62)
 
 Represents the core HTTP config options for the application.
 HTTP configuration options that are commonly used across adapters.
@@ -17,7 +17,7 @@ HTTP configuration options that are commonly used across adapters.
 
 > **body**: `object`
 
-Defined in: [src/options/HttpConfig.ts:96](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L96)
+Defined in: [http-core/src/options/HttpConfig.ts:96](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L96)
 
 Configuration for request body parsing.
 
@@ -45,7 +45,7 @@ The maximum size of the request body.
 
 > **cache**: `Record`\<`string`, `any`\>
 
-Defined in: [src/options/HttpConfig.ts:113](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L113)
+Defined in: [http-core/src/options/HttpConfig.ts:113](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L113)
 
 Cache configuration options.
 
@@ -55,7 +55,7 @@ Cache configuration options.
 
 > **cookie**: `object`
 
-Defined in: [src/options/HttpConfig.ts:117](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L117)
+Defined in: [http-core/src/options/HttpConfig.ts:117](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L117)
 
 Cookie-related configuration options.
 
@@ -77,7 +77,7 @@ The secret used for signing cookies.
 
 > **cors**: [`HttpCorsConfig`](HttpCorsConfig.md)
 
-Defined in: [src/options/HttpConfig.ts:179](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L179)
+Defined in: [http-core/src/options/HttpConfig.ts:191](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L191)
 
 Cross-Origin Resource Sharing (CORS) configuration options.
 
@@ -87,7 +87,7 @@ Cross-Origin Resource Sharing (CORS) configuration options.
 
 > **etag**: `object`
 
-Defined in: [src/options/HttpConfig.ts:170](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L170)
+Defined in: [http-core/src/options/HttpConfig.ts:182](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L182)
 
 ETag-related configuration options.
 
@@ -117,15 +117,33 @@ A custom function for generating ETags.
 
 > **files**: `object`
 
-Defined in: [src/options/HttpConfig.ts:134](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L134)
+Defined in: [http-core/src/options/HttpConfig.ts:134](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L134)
 
 File upload and response configuration options.
+
+#### defaultCompressionEncoding
+
+> **defaultCompressionEncoding**: `Record`\<`string`, `string`\>
+
+The default encoding for compressed static files.
 
 #### download
 
 > **download**: `Record`\<`string`, `any`\>
 
 Configuration for file responses.
+
+#### extensions?
+
+> `optional` **extensions**: `string`[]
+
+The list of accepted file extensions.
+
+#### rootDir?
+
+> `optional` **rootDir**: `string`
+
+The root directory for serving static files.
 
 #### upload
 
@@ -139,7 +157,7 @@ Configuration for file uploads.
 
 > **hosts**: `object`
 
-Defined in: [src/options/HttpConfig.ts:66](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L66)
+Defined in: [http-core/src/options/HttpConfig.ts:66](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L66)
 
 Host-related configuration options.
 
@@ -167,7 +185,7 @@ A list of trusted host patterns.
 
 > **json**: [`HttpJsonConfig`](HttpJsonConfig.md)
 
-Defined in: [src/options/HttpConfig.ts:130](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L130)
+Defined in: [http-core/src/options/HttpConfig.ts:130](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L130)
 
 JSON-related configuration options.
 
@@ -177,7 +195,7 @@ JSON-related configuration options.
 
 > **jsonp**: `object`
 
-Defined in: [src/options/HttpConfig.ts:147](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L147)
+Defined in: [http-core/src/options/HttpConfig.ts:159](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L159)
 
 JSONP-related configuration options.
 
@@ -199,7 +217,7 @@ The name of the JSONP callback parameter.
 
 > **proxies**: `object`
 
-Defined in: [src/options/HttpConfig.ts:83](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L83)
+Defined in: [http-core/src/options/HttpConfig.ts:83](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L83)
 
 Proxy-related configuration options.
 
@@ -221,7 +239,7 @@ A list of untrusted proxies.
 
 > **subdomain**: `object`
 
-Defined in: [src/options/HttpConfig.ts:161](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L161)
+Defined in: [http-core/src/options/HttpConfig.ts:173](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L173)
 
 Subdomain-related configuration options.
 

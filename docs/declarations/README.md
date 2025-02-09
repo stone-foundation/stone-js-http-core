@@ -21,3 +21,5 @@
 
 - [HeadersType](type-aliases/HeadersType.md)
 - [HttpMethod](type-aliases/HttpMethod.md)
+- [IIncomingHttpEvent](type-aliases/IIncomingHttpEvent.md)
+- [StreamFileOptions](type-aliases/StreamFileOptions.md)

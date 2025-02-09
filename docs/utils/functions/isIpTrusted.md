@@ -8,7 +8,7 @@
 
 > **isIpTrusted**(`trusted`, `untrusted`): (`ip`) => `boolean`
 
-Defined in: [src/utils.ts:88](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L88)
+Defined in: [http-core/src/utils.ts:87](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/utils.ts#L87)
 
 Check if IP is trusted or not.
 

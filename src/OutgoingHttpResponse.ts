@@ -32,8 +32,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
 
   protected _charset?: Encoding
   protected _formats?: Record<string, () => unknown>
-  protected _blueprintResolver?: () => IBlueprint | undefined
   protected _incomingEventResolver?: () => IncomingHttpEvent
+  protected _blueprintResolver?: () => IBlueprint | undefined
 
   protected readonly _headers: Headers
   protected readonly _cookieCollection: CookieCollection
@@ -61,7 +61,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
 
     this
       .setHeaders(options.headers ?? {})
-      .setStatus(options.statusCode ?? 500)
+      .setStatus(options.statusCode ?? 200)
   }
 
   /**
@@ -200,14 +200,31 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   }
 
   /**
-   * Get a specific header by name.
+   * Get a header value.
    *
-   * @param key - The header name.
-   * @param fallback - A fallback value if the header does not exist.
-   * @returns The value of the header or the fallback value.
+   * @param name - The header name.
+   * @returns The header value or the fallback value.
    */
-  getHeader (key: string, fallback?: string): string | undefined {
-    return this._headers.get(key) ?? fallback
+  getHeader<TReturn = string>(name: string): TReturn | undefined
+
+  /**
+   * Get a header value.
+   *
+   * @param name - The header name.
+   * @param fallback - A fallback value if the header is not found.
+   * @returns The header value or the fallback value.
+   */
+  getHeader<TReturn = string>(name: string, fallback: TReturn): TReturn
+
+  /**
+   * Get a header value.
+   *
+   * @param name - The header name.
+   * @param fallback - A fallback value if the header is not found.
+   * @returns The header value or the fallback value.
+   */
+  getHeader<TReturn = string>(name: string, fallback?: TReturn): TReturn | undefined {
+    return (this._headers.get(name) ?? fallback) as TReturn | undefined
   }
 
   /**
@@ -739,6 +756,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     if (this.incomingEvent.isMethod('HEAD')) {
       this.setContent(null)
     }
+
     return this
   }
 
@@ -756,7 +774,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     } else {
       this._content = Buffer.from(String(this.content), this.charset)
       this._charset = undefined
-      return (this._content as { length: number }).length
+      return (this._content as Buffer).length
     }
   }
 

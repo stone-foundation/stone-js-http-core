@@ -4,20 +4,19 @@ import Busboy from 'busboy'
 import typeIs from 'type-is'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
-import { File } from './file/File'
 import onFinished from 'on-finished'
 import contentType from 'content-type'
 import { randomUUID } from 'node:crypto'
 import ipRangeCheck from 'ip-range-check'
 import { createWriteStream } from 'node:fs'
-import { FileError } from './errors/FileError'
 import { IncomingHttpHeaders } from 'node:http'
-import { UploadedFile } from './file/UploadedFile'
+import { StreamFileOptions } from './declarations'
 import { NotFoundError } from './errors/NotFoundError'
 import { IncomingMessage, OutgoingMessage } from 'http'
 import { BadRequestError } from './errors/BadRequestError'
 import { OutgoingHttpResponse } from './OutgoingHttpResponse'
 import { InternalServerError } from './errors/InternalServerError'
+import { File, UploadedFile, FilesystemError } from '@stone-js/filesystem'
 
 /**
  * Decorator response callback.
@@ -178,7 +177,7 @@ export async function getFilesUploads (
 
     busboy
       .on('close', () => resolve(result))
-      .on('error', (error: any) => reject(new FileError(error.message, { cause: error })))
+      .on('error', (error: any) => reject(new FilesystemError(error.message, { cause: error })))
       .on('field', (fieldname, value) => { result.fields[fieldname] = value })
       .on('file', (fieldname, file, info) => {
         result.files[fieldname] ??= []
@@ -191,7 +190,7 @@ export async function getFilesUploads (
         })
 
         writeStream.on('error', (error: any) => {
-          reject(new FileError(error.message, { cause: error }))
+          reject(new FilesystemError(error.message, { cause: error }))
         })
 
         file.pipe(writeStream)
@@ -224,7 +223,7 @@ export async function streamFile (
   message: IncomingMessage,
   response: OutgoingMessage,
   fileResponse: File,
-  options: send.SendOptions & { headers: IncomingHttpHeaders }
+  options: StreamFileOptions
 ): Promise<void> {
   return await new Promise((resolve, reject) => {
     let streaming = false
@@ -242,7 +241,7 @@ export async function streamFile (
 
     file
       .on('error', (error) => reject(new InternalServerError(error.message, { cause: error })))
-      .on('headers', (resp) => Object.entries(options.headers).forEach(([key, value]) => resp.setHeader(key, value)))
+      .on('headers', (resp) => Object.entries(options.headers ?? {}).forEach(([key, value]) => resp.setHeader(key, value)))
       .on('directory', () => reject(new NotFoundError('EISDIR, read')))
       .on('stream', () => { streaming = true })
       .on('file', () => { streaming = false })

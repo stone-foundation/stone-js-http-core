@@ -6,7 +6,7 @@
 
 # Interface: RedirectResponseOptions
 
-Defined in: [src/RedirectResponse.ts:11](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/RedirectResponse.ts#L11)
+Defined in: [http-core/src/RedirectResponse.ts:11](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/RedirectResponse.ts#L11)
 
 Options for creating a Redirect HTTP Response.
 
@@ -20,11 +20,23 @@ Options for creating a Redirect HTTP Response.
 
 ## Properties
 
+### content?
+
+> `optional` **content**: `unknown`
+
+Defined in: core/dist/index.d.ts:256
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`content`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#content)
+
+***
+
 ### headers?
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/OutgoingHttpResponse.ts#L22)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/OutgoingHttpResponse.ts#L22)
 
 #### Inherited from
 
@@ -32,8 +44,80 @@ Defined in: [src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-co
 
 ***
 
+### metadata?
+
+> `optional` **metadata**: `Record`\<`string`, `unknown`\>
+
+Defined in: core/dist/index.d.ts:32
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`metadata`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#metadata)
+
+***
+
+### source?
+
+> `optional` **source**: `object`
+
+Defined in: core/dist/index.d.ts:30
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`source`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#source)
+
+***
+
+### statusCode?
+
+> `optional` **statusCode**: `number`
+
+Defined in: core/dist/index.d.ts:257
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`statusCode`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#statuscode)
+
+***
+
+### statusMessage?
+
+> `optional` **statusMessage**: `string`
+
+Defined in: core/dist/index.d.ts:258
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`statusMessage`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#statusmessage)
+
+***
+
+### timeStamp?
+
+> `optional` **timeStamp**: `number`
+
+Defined in: core/dist/index.d.ts:31
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`timeStamp`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#timestamp)
+
+***
+
+### type?
+
+> `optional` **type**: `string`
+
+Defined in: core/dist/index.d.ts:29
+
+#### Inherited from
+
+[`OutgoingHttpResponseOptions`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md).[`type`](../../OutgoingHttpResponse/interfaces/OutgoingHttpResponseOptions.md#type)
+
+***
+
 ### url
 
 > **url**: `string` \| `URL`
 
-Defined in: [src/RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/RedirectResponse.ts#L12)
+Defined in: [http-core/src/RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/RedirectResponse.ts#L12)

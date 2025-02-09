@@ -1,4 +1,4 @@
-import { File } from '../src/file/File'
+import { File } from '@stone-js/filesystem'
 import { IBlueprint } from '@stone-js/core'
 import { JsonResponse } from '../src/JsonResponse'
 import { JsonpResponse } from '../src/JsonpResponse'

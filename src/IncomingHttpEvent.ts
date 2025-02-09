@@ -8,7 +8,7 @@ import rangeParser from 'range-parser'
 import { Cookie } from './cookies/Cookie'
 import contentTypeLib from 'content-type'
 import { HttpError } from './errors/HttpError'
-import { UploadedFile } from './file/UploadedFile'
+import { UploadedFile } from '@stone-js/filesystem'
 import { CookieCollection } from './cookies/CookieCollection'
 import { IncomingEvent, IncomingEventOptions } from '@stone-js/core'
 import { HttpMethods, IOutgoingHttpResponse, IRoute } from './declarations'
@@ -655,7 +655,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param resolver - The route resolver function.
    * @returns The current instance for method chaining.
    */
-  setRouteResolver (resolver: () => IRoute): this {
+  setRouteResolver<RouteType extends IRoute = IRoute>(resolver: () => RouteType): this {
     this.routeResolver = resolver
     return this
   }
@@ -665,8 +665,8 @@ export class IncomingHttpEvent extends IncomingEvent {
    *
    * @returns The route parameter or the route object.
    */
-  getRoute (): IRoute | undefined {
-    return this.routeResolver?.()
+  getRoute<RouteType extends IRoute = IRoute>(): RouteType | undefined {
+    return this.routeResolver?.() as (RouteType | undefined)
   }
 
   /**

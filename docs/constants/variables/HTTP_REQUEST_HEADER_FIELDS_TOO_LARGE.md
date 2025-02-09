@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_REQUEST\_HEADER\_FIELDS\_TOO\_LARGE**: `431` = `431`
 
-Defined in: [src/constants.ts:65](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/constants.ts#L65)
+Defined in: [http-core/src/constants.ts:65](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/constants.ts#L65)

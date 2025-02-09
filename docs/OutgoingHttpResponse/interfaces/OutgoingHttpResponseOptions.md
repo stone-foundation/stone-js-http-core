@@ -6,7 +6,7 @@
 
 # Interface: OutgoingHttpResponseOptions
 
-Defined in: [src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/OutgoingHttpResponse.ts#L21)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/OutgoingHttpResponse.ts#L21)
 
 Options for creating an Outgoing HTTP Response.
 
@@ -25,8 +25,92 @@ Options for creating an Outgoing HTTP Response.
 
 ## Properties
 
+### content?
+
+> `optional` **content**: `unknown`
+
+Defined in: core/dist/index.d.ts:256
+
+#### Inherited from
+
+`OutgoingResponseOptions.content`
+
+***
+
 ### headers?
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/OutgoingHttpResponse.ts#L22)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/OutgoingHttpResponse.ts#L22)
+
+***
+
+### metadata?
+
+> `optional` **metadata**: `Record`\<`string`, `unknown`\>
+
+Defined in: core/dist/index.d.ts:32
+
+#### Inherited from
+
+`OutgoingResponseOptions.metadata`
+
+***
+
+### source?
+
+> `optional` **source**: `object`
+
+Defined in: core/dist/index.d.ts:30
+
+#### Inherited from
+
+`OutgoingResponseOptions.source`
+
+***
+
+### statusCode?
+
+> `optional` **statusCode**: `number`
+
+Defined in: core/dist/index.d.ts:257
+
+#### Inherited from
+
+`OutgoingResponseOptions.statusCode`
+
+***
+
+### statusMessage?
+
+> `optional` **statusMessage**: `string`
+
+Defined in: core/dist/index.d.ts:258
+
+#### Inherited from
+
+`OutgoingResponseOptions.statusMessage`
+
+***
+
+### timeStamp?
+
+> `optional` **timeStamp**: `number`
+
+Defined in: core/dist/index.d.ts:31
+
+#### Inherited from
+
+`OutgoingResponseOptions.timeStamp`
+
+***
+
+### type?
+
+> `optional` **type**: `string`
+
+Defined in: core/dist/index.d.ts:29
+
+#### Inherited from
+
+`OutgoingResponseOptions.type`

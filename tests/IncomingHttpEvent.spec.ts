@@ -2,7 +2,7 @@ import { URL } from 'node:url'
 import RangeParser from 'range-parser'
 import { HttpMethods } from '../src/declarations'
 import { HttpError } from '../src/errors/HttpError'
-import { UploadedFile } from '../src/file/UploadedFile'
+import { UploadedFile } from '@stone-js/filesystem'
 import { CookieCollection } from '../src/cookies/CookieCollection'
 import { IncomingHttpEvent, IncomingHttpEventOptions } from '../src/IncomingHttpEvent'
 

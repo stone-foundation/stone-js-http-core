@@ -1,4 +1,4 @@
-import { File } from './file/File'
+import { File } from '@stone-js/filesystem'
 import { HeadersType } from './declarations'
 import { JsonResponse } from './JsonResponse'
 import { JsonpResponse } from './JsonpResponse'

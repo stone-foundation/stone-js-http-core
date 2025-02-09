@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_METHOD\_NOT\_ALLOWED**: `405` = `405`
 
-Defined in: [src/constants.ts:43](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/constants.ts#L43)
+Defined in: [http-core/src/constants.ts:43](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/constants.ts#L43)
