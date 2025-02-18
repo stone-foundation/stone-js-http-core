@@ -6,7 +6,7 @@
 
 # Class: CompressionMiddleware
 
-Defined in: http-core/src/middleware/CompressionMiddleware.ts:9
+Defined in: [http-core/src/middleware/CompressionMiddleware.ts:9](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/middleware/CompressionMiddleware.ts#L9)
 
 Middleware to compress response content based on the Accept-Encoding header.
 
@@ -26,7 +26,7 @@ Middleware to compress response content based on the Accept-Encoding header.
 
 > **handle**(`event`, `next`): `Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: http-core/src/middleware/CompressionMiddleware.ts:17
+Defined in: [http-core/src/middleware/CompressionMiddleware.ts:17](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/middleware/CompressionMiddleware.ts#L17)
 
 Compress the response content based on the Accept-Encoding header.
 

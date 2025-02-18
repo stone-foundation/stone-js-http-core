@@ -6,7 +6,7 @@
 
 # Class: InternalServerError
 
-Defined in: [http-core/src/errors/InternalServerError.ts:6](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/errors/InternalServerError.ts#L6)
+Defined in: [http-core/src/errors/InternalServerError.ts:6](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/errors/InternalServerError.ts#L6)
 
 InternalServer http error.
 
@@ -20,7 +20,7 @@ InternalServer http error.
 
 > **new InternalServerError**(`message`, `options`): [`InternalServerError`](InternalServerError.md)
 
-Defined in: [http-core/src/errors/InternalServerError.ts:7](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/errors/InternalServerError.ts#L7)
+Defined in: [http-core/src/errors/InternalServerError.ts:7](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/errors/InternalServerError.ts#L7)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [http-core/src/errors/InternalServerError.ts:7](https://github.com/s
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: core/dist/index.d.ts:2800
+Defined in: core/dist/index.d.ts:3296
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: core/dist/index.d.ts:2800
 
 > `readonly` `optional` **code**: `string`
 
-Defined in: core/dist/index.d.ts:2799
+Defined in: core/dist/index.d.ts:3295
 
 #### Inherited from
 
@@ -70,7 +70,7 @@ Defined in: core/dist/index.d.ts:2799
 
 > `readonly` `optional` **metadata**: `unknown`
 
-Defined in: core/dist/index.d.ts:2801
+Defined in: core/dist/index.d.ts:3297
 
 #### Inherited from
 
@@ -82,7 +82,7 @@ Defined in: core/dist/index.d.ts:2801
 
 > **toString**(`multiline`?): `string`
 
-Defined in: core/dist/index.d.ts:2822
+Defined in: core/dist/index.d.ts:3318
 
 Converts the error to a formatted string representation.
 
@@ -110,7 +110,7 @@ A formatted error string.
 
 > `static` **create**\<`T`\>(`message`, `options`?): `T`
 
-Defined in: core/dist/index.d.ts:2808
+Defined in: core/dist/index.d.ts:3304
 
 Create a RuntimeError.
 

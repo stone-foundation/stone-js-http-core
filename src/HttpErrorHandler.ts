@@ -39,7 +39,10 @@ export class HttpErrorHandler implements IErrorHandler<IncomingHttpEvent, Outgoi
    */
   public handle (error: Error, event: IncomingHttpEvent): OutgoingHttpResponse {
     const httpError = error as HttpError
-    const message = (error: string): string | { error: string } => event.is(['json']) === false ? error : { error }
+    const types = ['json', 'html', 'xml', 'text']
+    const message = (error: string): string | { error: string } => {
+      return event.preferredType(types, 'html') === 'json' ? { error } : error
+    }
 
     this.logger.error(error.message, { error })
 

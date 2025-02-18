@@ -4,7 +4,6 @@ import Busboy from 'busboy'
 import typeIs from 'type-is'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
-import onFinished from 'on-finished'
 import contentType from 'content-type'
 import { randomUUID } from 'node:crypto'
 import ipRangeCheck from 'ip-range-check'
@@ -226,26 +225,17 @@ export async function streamFile (
   options: StreamFileOptions
 ): Promise<void> {
   return await new Promise((resolve, reject) => {
-    let streaming = false
     const file = send(message, fileResponse.getEncodedPath(), options)
-    const onaborted = (): void => reject(new BadRequestError('Request aborted.'))
 
-    onFinished(response, (error: any) => {
-      if (error !== undefined) {
-        if (error.code === 'ECONNRESET') return onaborted()
-        return reject(new InternalServerError(error.message, { cause: error }))
-      }
-
-      setImmediate(() => { streaming ? onaborted() : resolve() })
-    })
+    response
+      .on('finish', resolve)
+      .on('close', (): void => reject(new BadRequestError('Request aborted by client.')))
 
     file
-      .on('error', (error) => reject(new InternalServerError(error.message, { cause: error })))
+      .on('error', (error: any): void => reject(new InternalServerError(error.message, { cause: error })))
       .on('headers', (resp) => Object.entries(options.headers ?? {}).forEach(([key, value]) => resp.setHeader(key, value)))
       .on('directory', () => reject(new NotFoundError('EISDIR, read')))
-      .on('stream', () => { streaming = true })
-      .on('file', () => { streaming = false })
-      .on('end', () => resolve())
+      .on('end', resolve)
       .pipe(response)
   })
 }

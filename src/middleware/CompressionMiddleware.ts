@@ -1,4 +1,5 @@
 import { NextPipe } from '@stone-js/pipeline'
+import { classMiddleware } from '@stone-js/core'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 
@@ -77,3 +78,8 @@ export class CompressionMiddleware {
     return (typeof content === 'string' && content.length > 1000) || Buffer.isBuffer(content)
   }
 }
+
+/**
+ * Meta Middleware for compressing response content.
+ */
+export const MetaCompressionMiddleware = classMiddleware(CompressionMiddleware)

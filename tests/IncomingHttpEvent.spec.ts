@@ -120,7 +120,7 @@ describe('IncomingHttpEvent', () => {
     const event = IncomingHttpEvent.create({ ...mockOptions, headers: new Headers() })
     // @ts-expect-error - Accessing private property for testing purposes
     event.url = { pathname: '%', href: 'http://localhost/test#title' }
-    expect(event.is(['json'])).toBe(false)
+    expect(event.is('json')).toBe(false)
     expect(event.range(200)).toBeUndefined()
     expect(event.getUri(true)).toBe('http://localhost/')
   })

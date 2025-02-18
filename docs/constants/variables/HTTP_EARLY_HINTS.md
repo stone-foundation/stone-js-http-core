@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_EARLY\_HINTS**: `103` = `103`
 
-Defined in: [http-core/src/constants.ts:18](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/constants.ts#L18)
+Defined in: [http-core/src/constants.ts:18](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/constants.ts#L18)

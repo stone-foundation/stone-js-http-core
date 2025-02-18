@@ -6,7 +6,7 @@
 
 # Class: Cookie
 
-Defined in: [http-core/src/cookies/Cookie.ts:8](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L8)
+Defined in: [http-core/src/cookies/Cookie.ts:8](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L8)
 
 Class representing a Cookie.
 
@@ -16,7 +16,7 @@ Class representing a Cookie.
 
 > `protected` **new Cookie**(`name`, `value`, `options`): [`Cookie`](Cookie.md)
 
-Defined in: [http-core/src/cookies/Cookie.ts:28](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L28)
+Defined in: [http-core/src/cookies/Cookie.ts:28](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L28)
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Cookie options.
 
 > `readonly` **name**: `string`
 
-Defined in: [http-core/src/cookies/Cookie.ts:9](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L9)
+Defined in: [http-core/src/cookies/Cookie.ts:9](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L9)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [http-core/src/cookies/Cookie.ts:9](https://github.com/stonemjs/http
 
 > `readonly` **options**: [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md)
 
-Defined in: [http-core/src/cookies/Cookie.ts:11](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L11)
+Defined in: [http-core/src/cookies/Cookie.ts:11](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L11)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [http-core/src/cookies/Cookie.ts:11](https://github.com/stonemjs/htt
 
 > `readonly` **value**: `unknown`
 
-Defined in: [http-core/src/cookies/Cookie.ts:10](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L10)
+Defined in: [http-core/src/cookies/Cookie.ts:10](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L10)
 
 ## Methods
 
@@ -72,7 +72,7 @@ Defined in: [http-core/src/cookies/Cookie.ts:10](https://github.com/stonemjs/htt
 
 > **cloneWith**(`value`, `options`): [`Cookie`](Cookie.md)
 
-Defined in: [http-core/src/cookies/Cookie.ts:76](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L76)
+Defined in: [http-core/src/cookies/Cookie.ts:84](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L84)
 
 Clone the cookie with new name, value, and options.
 
@@ -98,11 +98,31 @@ A new cookie instance.
 
 ***
 
+### getValue()
+
+> **getValue**\<`ValueType`\>(): `ValueType`
+
+Defined in: [http-core/src/cookies/Cookie.ts:38](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L38)
+
+Get the cookie value.
+
+#### Type Parameters
+
+• **ValueType** = `unknown`
+
+#### Returns
+
+`ValueType`
+
+The cookie value.
+
+***
+
 ### serialize()
 
 > **serialize**(`secret`?): `string`
 
-Defined in: [http-core/src/cookies/Cookie.ts:56](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L56)
+Defined in: [http-core/src/cookies/Cookie.ts:64](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L64)
 
 Serialize the cookie value.
 
@@ -124,7 +144,7 @@ Optional secret for signing.
 
 > **setExpires**(`value`): `this`
 
-Defined in: [http-core/src/cookies/Cookie.ts:38](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L38)
+Defined in: [http-core/src/cookies/Cookie.ts:46](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L46)
 
 Set expiration date for the cookie.
 
@@ -146,7 +166,7 @@ Expiration date.
 
 > **setSecure**(`value`): `this`
 
-Defined in: [http-core/src/cookies/Cookie.ts:47](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L47)
+Defined in: [http-core/src/cookies/Cookie.ts:55](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L55)
 
 Set secure flag for the cookie.
 
@@ -168,7 +188,7 @@ Whether the cookie is secure.
 
 > `static` **create**(`name`, `value`, `options`): [`Cookie`](Cookie.md)
 
-Defined in: [http-core/src/cookies/Cookie.ts:19](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/cookies/Cookie.ts#L19)
+Defined in: [http-core/src/cookies/Cookie.ts:19](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/cookies/Cookie.ts#L19)
 
 Create a Cookie.
 

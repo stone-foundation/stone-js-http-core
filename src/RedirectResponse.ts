@@ -37,7 +37,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
       this.setHeader('Cache-Control', 'public, max-age=31536000')
     }
 
-    this.setTargetUrl(options.url ?? options.content)
+    this.setTargetUrl(options.url ?? (options.content as any)?.redirect ?? options.content)
   }
 
   /**

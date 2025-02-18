@@ -3,10 +3,10 @@ import mime from 'mime/lite'
 import typeIs from 'type-is'
 import accepts from 'accepts'
 import { URL } from 'node:url'
-import { get, has } from 'lodash-es'
 import rangeParser from 'range-parser'
 import { Cookie } from './cookies/Cookie'
 import contentTypeLib from 'content-type'
+import { get, has, isArray } from 'lodash-es'
 import { HttpError } from './errors/HttpError'
 import { UploadedFile } from '@stone-js/filesystem'
 import { CookieCollection } from './cookies/CookieCollection'
@@ -227,14 +227,14 @@ export class IncomingHttpEvent extends IncomingEvent {
     return this.accepts.encodings()
   }
 
-  /** @returns The charset specified in the content-type header. */
-  get charset (): string | undefined {
-    return contentTypeLib.parse(this).parameters.charset
-  }
-
   /** @returns The content type specified in the headers. */
   get contentType (): string {
     return contentTypeLib.parse(this._headers.get('content-type') ?? 'text/html').type
+  }
+
+  /** @returns The charset specified in the content-type header. */
+  get charset (): string | undefined {
+    return contentTypeLib.parse(this._headers.get('content-type') ?? 'text/html').parameters.charset
   }
 
   /**
@@ -385,6 +385,31 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
+   * Get the body of the request.
+   *
+   * @returns The body of the request or the fallback.
+   */
+  getBody<TReturn = unknown>(): TReturn | undefined
+
+  /**
+   * Get the body of the request.
+   *
+   * @param fallback - The fallback value if the body is not found.
+   * @returns The body of the request or the fallback.
+   */
+  getBody<TReturn = unknown>(fallback: TReturn): TReturn
+
+  /**
+   * Get the body of the request.
+   *
+   * @param fallback - The fallback value if the body is not found.
+   * @returns The body of the request or the fallback.
+   */
+  getBody<TReturn = unknown>(fallback?: TReturn): TReturn | undefined {
+    return (this.body ?? fallback) as TReturn | undefined
+  }
+
+  /**
    * Return the first accepted content type.
    *
    * @param values - The content types to check.
@@ -450,8 +475,35 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param types - The content types to check.
    * @returns The best match, or false if no match is found.
    */
-  is (types: string[]): string | false {
+  is (...types: string[]): string | false {
     return typeIs.is(this.contentType, types.flat())
+  }
+
+  /**
+   * Determines the preferred response type based on content negotiation.
+   * Uses Accept, Content-Type, User-Agent, and AJAX detection.
+   *
+   * @param types - Allowed response types, in priority order.
+   * @param defaultType - Default type if none match.
+   * @returns The best response type as a string.
+   */
+  preferredType (types: string[] = ['json', 'html', 'xml', 'text'], defaultType: string = 'json'): string {
+    // 1. Check Accept header (highest priority)
+    const acceptType = this.acceptsTypes(...types)
+    if (acceptType !== false) return isArray(acceptType) ? acceptType[0] : acceptType
+
+    // 2. Check Content-Type (valid if the request is sending data)
+    const contentType = this.is(...types)
+    if (contentType !== false) return contentType
+
+    // 3. Check if the request is AJAX/XHR (favoring JSON responses)
+    if (this.isAjax || this.isXhr) return 'json'
+
+    // 4. Check User-Agent for CLI tools like `curl` (favor plain text)
+    if ((this.userAgent?.includes('curl') ?? this.userAgent?.includes('wget')) === true) return 'text'
+
+    // 5. Return the default type
+    return defaultType
   }
 
   /**
@@ -504,7 +556,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns True if the key exists, otherwise false.
    */
   hasJson (key: string): boolean {
-    return this.is(['json']) === 'json' && has(this.body, key)
+    return this.is('json') === 'json' && has(this.body, key)
   }
 
   /**
@@ -672,16 +724,13 @@ export class IncomingHttpEvent extends IncomingEvent {
   /**
    * Generate a unique fingerprint for the event.
    *
+   * @param full - Whether to include the user agent and IP address in the fingerprint.
    * @returns The generated fingerprint as a base64 string.
    */
-  fingerprint (): string {
-    const route = this.getRoute()
-
-    if (typeof route !== 'object') {
-      throw new HttpError('Unable to generate fingerprint. Route unavailable.')
-    }
-
-    return Buffer.from([route.method, route.uri, this.userAgent, this.ip].join('|')).toString('base64')
+  fingerprint (full?: boolean): string {
+    return full === true
+      ? btoa([this.method, this.uri, this.userAgent, this.ip].join('|'))
+      : btoa([this.method, this.pathname].join('|'))
   }
 
   /**

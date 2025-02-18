@@ -1,10 +1,10 @@
 import { join } from 'node:path'
 import { File } from '@stone-js/filesystem'
 import { NextPipe } from '@stone-js/pipeline'
-import { IBlueprint, ILogger } from '@stone-js/core'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { BinaryFileResponse } from '../BinaryFileResponse'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
+import { classMiddleware, IBlueprint, ILogger } from '@stone-js/core'
 
 /**
  * Middleware for serving static files from a directory.
@@ -98,3 +98,8 @@ export class StaticFileMiddleware {
     return file
   }
 }
+
+/**
+ * Meta Middleware for serving static files from a directory.
+ */
+export const MetaStaticFileMiddleware = classMiddleware(StaticFileMiddleware)

@@ -1,8 +1,8 @@
-import { IBlueprint } from '@stone-js/core'
 import { NextPipe } from '@stone-js/pipeline'
 import { HttpCorsConfig } from '../options/HttpConfig'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
+import { classMiddleware, IBlueprint, isNotEmpty, isEmpty } from '@stone-js/core'
 
 /**
  * HandleCorsMiddleware is responsible for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
@@ -50,7 +50,7 @@ export class HandleCorsMiddleware {
         .configureMethods(options)
         .configureAllowedHeaders(options, event)
 
-      if (options.preflightStop === true && response !== undefined) {
+      if (options.preflightStop === true && isNotEmpty(response)) {
         response
           .addVary(this.headerVary)
           .setHeaders(this.headers)
@@ -60,7 +60,7 @@ export class HandleCorsMiddleware {
       }
     }
 
-    if (response !== undefined) {
+    if (isNotEmpty(response)) {
       response
         .addVary(this.headerVary)
         .setHeaders(this.headers)
@@ -105,13 +105,16 @@ export class HandleCorsMiddleware {
    * @returns The middleware instance for method chaining.
    */
   private configureOrigin ({ origin }: Partial<HttpCorsConfig>, event: IncomingHttpEvent): this {
-    if (origin === undefined || origin === '*') {
+    if (isEmpty(origin) || origin === '*') {
       this.setHeader('Access-Control-Allow-Origin', '*')
     } else if (typeof origin === 'string') {
       this.addVary('Origin').setHeader('Access-Control-Allow-Origin', origin)
     } else {
       const reqOrigin = event.getHeader('origin', '')
-      this.addVary('Origin').setHeader('Access-Control-Allow-Origin', this.isOriginAllowed(reqOrigin, origin) ? reqOrigin : 'false')
+      this.addVary('Origin').setHeader(
+        'Access-Control-Allow-Origin',
+        this.isOriginAllowed(reqOrigin, origin) ? reqOrigin : 'false'
+      )
     }
 
     return this
@@ -124,7 +127,12 @@ export class HandleCorsMiddleware {
    * @returns The middleware instance for method chaining.
    */
   private configureMethods ({ methods }: Partial<HttpCorsConfig>): this {
-    return this.setHeader('Access-Control-Allow-Methods', Array.isArray(methods) ? methods.join(',') : methods ?? '*')
+    return this.setHeader(
+      'Access-Control-Allow-Methods',
+      Array.isArray(methods)
+        ? (isNotEmpty(methods) ? methods.join(',') : '*')
+        : (methods ?? '*')
+    )
   }
 
   /**
@@ -152,7 +160,7 @@ export class HandleCorsMiddleware {
       allowedHeaders = event.getHeader('access-control-request-headers')
     }
 
-    if (allowedHeaders !== undefined && allowedHeaders.length > 0 && typeof allowedHeaders === 'string') {
+    if (isNotEmpty<string>(allowedHeaders) && typeof allowedHeaders === 'string') {
       this.setHeader('Access-Control-Allow-Headers', allowedHeaders)
     }
 
@@ -170,7 +178,7 @@ export class HandleCorsMiddleware {
       exposedHeaders = exposedHeaders.join(',')
     }
 
-    if (exposedHeaders !== undefined && exposedHeaders.length > 0) {
+    if (isNotEmpty<string>(exposedHeaders)) {
       this.setHeader('Access-Control-Expose-Headers', exposedHeaders)
     }
 
@@ -186,7 +194,7 @@ export class HandleCorsMiddleware {
   private configureMaxAge ({ maxAge }: Partial<HttpCorsConfig>): this {
     const newMaxAge = String(maxAge)
 
-    if (newMaxAge.length > 0) {
+    if (isNotEmpty<string>(newMaxAge)) {
       this.setHeader('Access-Control-Max-Age', newMaxAge)
     }
 
@@ -224,8 +232,13 @@ export class HandleCorsMiddleware {
   private getDefaults (): Record<string, string | boolean> {
     return {
       origin: '*',
-      preflightContinue: true,
+      preflightStop: true,
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
     }
   }
 }
+
+/**
+ * Meta Middleware for processing CORS headers.
+ */
+export const MetaHandleCorsMiddleware = classMiddleware(HandleCorsMiddleware)

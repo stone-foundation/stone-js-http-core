@@ -8,6 +8,6 @@
 
 > `const` **httpCoreBlueprint**: [`HttpCoreBlueprint`](../interfaces/HttpCoreBlueprint.md)
 
-Defined in: [http-core/src/options/HttpConfig.ts:211](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L211)
+Defined in: [http-core/src/options/HttpConfig.ts:211](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/options/HttpConfig.ts#L211)
 
 Default HTTP configuration options for the application.

@@ -6,7 +6,7 @@
 
 # Interface: HttpCoreConfig
 
-Defined in: [http-core/src/options/HttpConfig.ts:197](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L197)
+Defined in: [http-core/src/options/HttpConfig.ts:197](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/options/HttpConfig.ts#L197)
 
 Represents the core HTTP configuration options for the application.
 
@@ -154,7 +154,7 @@ Every Stone.js application must have an handler function.
 
 > **http**: `Partial`\<[`HttpConfig`](HttpConfig.md)\>
 
-Defined in: [http-core/src/options/HttpConfig.ts:198](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/options/HttpConfig.ts#L198)
+Defined in: [http-core/src/options/HttpConfig.ts:198](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/options/HttpConfig.ts#L198)
 
 ***
 

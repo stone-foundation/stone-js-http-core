@@ -6,7 +6,7 @@
 
 # Interface: RedirectResponseOptions
 
-Defined in: [http-core/src/RedirectResponse.ts:11](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/RedirectResponse.ts#L11)
+Defined in: [http-core/src/RedirectResponse.ts:11](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/RedirectResponse.ts#L11)
 
 Options for creating a Redirect HTTP Response.
 
@@ -36,7 +36,7 @@ Defined in: core/dist/index.d.ts:256
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/OutgoingHttpResponse.ts#L22)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/OutgoingHttpResponse.ts#L22)
 
 #### Inherited from
 
@@ -120,4 +120,4 @@ Defined in: core/dist/index.d.ts:29
 
 > **url**: `string` \| `URL`
 
-Defined in: [http-core/src/RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/1848d2cc8e9419d9e370ae707c528a45d3c2ac5a/src/RedirectResponse.ts#L12)
+Defined in: [http-core/src/RedirectResponse.ts:12](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/RedirectResponse.ts#L12)
