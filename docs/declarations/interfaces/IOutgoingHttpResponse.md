@@ -6,7 +6,7 @@
 
 # Interface: IOutgoingHttpResponse
 
-Defined in: [http-core/src/declarations.ts:76](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/declarations.ts#L76)
+Defined in: [http-core/src/declarations.ts:76](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/declarations.ts#L76)
 
 Represents an outgoing HTTP response.
 
@@ -16,7 +16,7 @@ Represents an outgoing HTTP response.
 
 > **etag**: `undefined` \| `string`
 
-Defined in: [http-core/src/declarations.ts:77](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/declarations.ts#L77)
+Defined in: [http-core/src/declarations.ts:77](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/declarations.ts#L77)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [http-core/src/declarations.ts:77](https://github.com/stonemjs/http-
 
 > **lastModified**: `undefined` \| `string`
 
-Defined in: [http-core/src/declarations.ts:79](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/declarations.ts#L79)
+Defined in: [http-core/src/declarations.ts:79](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/declarations.ts#L79)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [http-core/src/declarations.ts:79](https://github.com/stonemjs/http-
 
 > **status**: `undefined` \| `number`
 
-Defined in: [http-core/src/declarations.ts:78](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/declarations.ts#L78)
+Defined in: [http-core/src/declarations.ts:78](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/declarations.ts#L78)

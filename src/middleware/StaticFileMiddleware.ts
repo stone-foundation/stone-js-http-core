@@ -7,7 +7,7 @@ import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 import { classMiddleware, IBlueprint, ILogger } from '@stone-js/core'
 
 /**
- * Middleware for serving static files from a directory.
+ * Kernel Middleware for serving static files from a directory.
  * If a static file is found, it serves the file; otherwise, the request is passed to the next middleware.
  */
 export class StaticFileMiddleware {

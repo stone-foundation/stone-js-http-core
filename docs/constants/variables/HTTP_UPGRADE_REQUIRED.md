@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_UPGRADE\_REQUIRED**: `426` = `426`
 
-Defined in: [http-core/src/constants.ts:62](https://github.com/stonemjs/http-core/blob/6ce19e93bd5f8b28975217f6c01558c07c7c03c7/src/constants.ts#L62)
+Defined in: [http-core/src/constants.ts:62](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/constants.ts#L62)

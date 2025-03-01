@@ -4,7 +4,7 @@ import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 
 /**
- * Middleware to compress response content based on the Accept-Encoding header.
+ * Kernel Middleware to compress response content based on the Accept-Encoding header.
  */
 export class CompressionMiddleware {
   /**

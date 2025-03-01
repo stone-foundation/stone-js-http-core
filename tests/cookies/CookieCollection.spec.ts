@@ -36,7 +36,7 @@ describe('CookieCollection', () => {
 
   it('should remove a cookie from the collection', () => {
     const collection = CookieCollection.create(mockCookieString, mockOptions)
-    collection.remove('test', true)
+    collection.remove('test', {}, true)
     expect(collection.has('test')).toBe(false)
   })
 

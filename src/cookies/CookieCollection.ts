@@ -132,13 +132,14 @@ export class CookieCollection {
    * Remove a cookie from the collection.
    *
    * @param name - Cookie name to remove.
+   * @param options - Cookie options.
    * @param force - If true, remove only from collection without setting expiry.
    */
-  remove (name: string, force: boolean = false): this {
+  remove (name: string, options: CookieOptions = {}, force: boolean = false): this {
     if (force) {
       this.cookies.delete(name)
     } else {
-      this.update(name, '', { expires: new Date(1) })
+      this.update(name, '', { ...options, maxAge: -1 })
     }
     return this
   }

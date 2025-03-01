@@ -306,12 +306,13 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * Clear a specific cookie from the response.
    *
    * @param name - The name of the cookie to be cleared.
+   * @param options - Optional settings for the cookie.
    * @param force - Whether to force the removal of the cookie, even if it doesn't exist.
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
-  clearCookie (name: string, force = false): this {
+  clearCookie (name: string, options: CookieOptions = {}, force = false): this {
     if (!isString(name)) { throw new InternalServerError('Cookie name must be a non-empty string.') }
-    this._cookieCollection.remove(name, force)
+    this._cookieCollection.remove(name, options, force)
     return this
   }
 

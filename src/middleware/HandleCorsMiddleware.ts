@@ -5,7 +5,7 @@ import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 import { classMiddleware, IBlueprint, isNotEmpty, isEmpty } from '@stone-js/core'
 
 /**
- * HandleCorsMiddleware is responsible for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
+ * Kernel Middleware for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
  * It allows controlling how clients from different origins can access the server's resources.
  *
  * @template TEvent - Represents the type of the incoming HTTP event.
