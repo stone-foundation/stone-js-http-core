@@ -18,6 +18,7 @@ export interface RedirectResponseOptions extends OutgoingHttpResponseOptions {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class RedirectResponse extends OutgoingHttpResponse {
+  static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_redirect_response'
   private targetUrl?: string | URL
 
   /**
@@ -64,7 +65,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
     this.setIncomingEventResolver(() => event)
     this.prepareRedirection()
     await super.prepare(event, container)
-    return this
+    return this.setPrepared(true)
   }
 
   /**
@@ -93,11 +94,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
     if (this.targetUrl === 'back') {
       this.targetUrl = this.incomingEvent.getHeader('Referrer', '/')
     }
-
-    const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\/?]+/.exec(String(this.targetUrl))
-    const position = (matches !== null) ? matches[0].length + 1 : 0
-
-    return this.setHeader('Location', `${String(this.targetUrl).slice(0, position)}${encodeURIComponent(String(this.targetUrl).slice(position))}`)
+    return this.setHeader('Location', String(this.targetUrl))
   }
 
   /**

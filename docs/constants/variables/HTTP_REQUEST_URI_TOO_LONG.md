@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_REQUEST\_URI\_TOO\_LONG**: `414` = `414`
 
-Defined in: [http-core/src/constants.ts:52](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/constants.ts#L52)
+Defined in: [http-core/src/constants.ts:52](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/constants.ts#L52)

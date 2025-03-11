@@ -9,6 +9,7 @@ import { OutgoingHttpResponse } from './OutgoingHttpResponse'
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class JsonResponse extends OutgoingHttpResponse {
+  static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_json_response'
   /**
    * Prepare the response before sending.
    *
@@ -23,6 +24,7 @@ export class JsonResponse extends OutgoingHttpResponse {
       .setContentType('json')
       .prepareCookies()
       .makeJson()
+      .setPrepared(true)
   }
 
   /**

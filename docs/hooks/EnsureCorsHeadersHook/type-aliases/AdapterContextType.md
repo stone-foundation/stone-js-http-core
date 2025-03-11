@@ -2,12 +2,12 @@
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [hooks/HandleCorsAdapterHook](../README.md) / AdapterContextType
+[HTTP Core Documentation](../../../modules.md) / [hooks/EnsureCorsHeadersHook](../README.md) / AdapterContextType
 
 # Type Alias: AdapterContextType
 
 > **AdapterContextType**: `AdapterContext`\<`any`, `any`, `any`, [`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`IncomingHttpEventOptions`](../../../IncomingHttpEvent/interfaces/IncomingHttpEventOptions.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: http-core/src/hooks/HandleCorsAdapterHook.ts:9
+Defined in: [http-core/src/hooks/EnsureCorsHeadersHook.ts:9](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/hooks/EnsureCorsHeadersHook.ts#L9)
 
 Defines the adapter context type for handling HTTP events in a Node.js server or AWS Lambda function.

@@ -2,18 +2,20 @@
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [middleware/configMiddleware](../README.md) / CORSHeadersMiddleware
+[HTTP Core Documentation](../../../modules.md) / [middleware/CORSHeadersMiddleware](../README.md) / CORSHeadersMiddleware
 
 # Function: CORSHeadersMiddleware()
 
 > **CORSHeadersMiddleware**(`context`, `next`): `Promise`\<`IBlueprint`\>
 
-Defined in: http-core/src/middleware/configMiddleware.ts:21
+Defined in: [http-core/src/middleware/CORSHeadersMiddleware.ts:23](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/middleware/CORSHeadersMiddleware.ts#L23)
 
-Middleware for setting Cross-Origin Resource Sharing (CORS) headers in the HTTP response.
+Blueprint Middleware for setting Cross-Origin Resource Sharing (CORS) headers in the HTTP response.
 
 This middleware adds the necessary headers to the HTTP response
 to allow clients from different origins to access the server's resources.
+
+And also ensures that CORS headers are applied even when the middleware is not executed.
 
 ## Parameters
 

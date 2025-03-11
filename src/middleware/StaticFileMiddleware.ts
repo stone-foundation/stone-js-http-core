@@ -38,17 +38,9 @@ export class StaticFileMiddleware {
     try {
       const file = this.makeFile(event)
 
-      if (file.exists()) {
-        if (file.isDir()) {
-          const indexFile = File.create(join(file.getPath(), 'index.html'), false)
-          if (indexFile.exists()) {
-            this.logger.info(`Serving index file: ${indexFile.getPath()}`)
-            return this.serveFile(indexFile)
-          }
-        } else {
-          this.logger.info(`Serving file: ${file.getPath()}`)
-          return this.serveFile(file)
-        }
+      if (file.exists() && !file.isDir()) {
+        this.logger.info(`Serving file: ${file.getPath()}`)
+        return this.serveFile(file)
       }
     } catch (error: any) {
       // Ignore errors and pass the request to the next middleware

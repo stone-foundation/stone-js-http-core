@@ -2,9 +2,9 @@
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / middleware/configMiddleware
+[HTTP Core Documentation](../../modules.md) / middleware/CORSHeadersMiddleware
 
-# middleware/configMiddleware
+# middleware/CORSHeadersMiddleware
 
 ## Variables
 

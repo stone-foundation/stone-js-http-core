@@ -8,6 +8,6 @@
 
 > `const` **MetaHandleCorsMiddleware**: `MetaMiddleware`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: [http-core/src/middleware/HandleCorsMiddleware.ts:244](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/middleware/HandleCorsMiddleware.ts#L244)
+Defined in: [http-core/src/middleware/HandleCorsMiddleware.ts:244](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/middleware/HandleCorsMiddleware.ts#L244)
 
 Meta Middleware for processing CORS headers.

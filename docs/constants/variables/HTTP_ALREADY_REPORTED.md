@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_ALREADY\_REPORTED**: `208` = `208`
 
-Defined in: [http-core/src/constants.ts:27](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/constants.ts#L27)
+Defined in: [http-core/src/constants.ts:27](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/constants.ts#L27)

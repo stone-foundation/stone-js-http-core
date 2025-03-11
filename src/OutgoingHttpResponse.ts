@@ -648,6 +648,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
       .setContentTypeIfNeeded()
       .handleCacheHeaders()
       .prepareContentHeaders()
+      .setPrepared(true)
   }
 
   /**

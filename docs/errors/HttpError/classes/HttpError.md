@@ -6,7 +6,7 @@
 
 # Class: HttpError
 
-Defined in: [http-core/src/errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/errors/HttpError.ts#L10)
+Defined in: [http-core/src/errors/HttpError.ts:10](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/HttpError.ts#L10)
 
 Class representing an HttpError.
 
@@ -24,7 +24,7 @@ Mr. Stone <evensstone@gmail.com>
 
 > **new HttpError**(`message`, `statusCode`, `headers`, `options`): [`HttpError`](HttpError.md)
 
-Defined in: [http-core/src/errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/errors/HttpError.ts#L21)
+Defined in: [http-core/src/errors/HttpError.ts:21](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/HttpError.ts#L21)
 
 Create an HttpError.
 
@@ -64,7 +64,7 @@ The error options.
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: core/dist/index.d.ts:2854
+Defined in: core/dist/index.d.ts:2856
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ Defined in: core/dist/index.d.ts:2854
 
 > `readonly` `optional` **code**: `string`
 
-Defined in: core/dist/index.d.ts:2853
+Defined in: core/dist/index.d.ts:2855
 
 #### Inherited from
 
@@ -88,7 +88,7 @@ Defined in: core/dist/index.d.ts:2853
 
 > `readonly` **headers**: [`HeadersType`](../../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [http-core/src/errors/HttpError.ts:12](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/errors/HttpError.ts#L12)
+Defined in: [http-core/src/errors/HttpError.ts:12](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/HttpError.ts#L12)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [http-core/src/errors/HttpError.ts:12](https://github.com/stonemjs/h
 
 > `readonly` `optional` **metadata**: `unknown`
 
-Defined in: core/dist/index.d.ts:2855
+Defined in: core/dist/index.d.ts:2857
 
 #### Inherited from
 
@@ -108,7 +108,7 @@ Defined in: core/dist/index.d.ts:2855
 
 > `readonly` **statusCode**: `number`
 
-Defined in: [http-core/src/errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/errors/HttpError.ts#L11)
+Defined in: [http-core/src/errors/HttpError.ts:11](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/HttpError.ts#L11)
 
 ***
 
@@ -116,7 +116,7 @@ Defined in: [http-core/src/errors/HttpError.ts:11](https://github.com/stonemjs/h
 
 > `readonly` **statusMessage**: `string`
 
-Defined in: [http-core/src/errors/HttpError.ts:13](https://github.com/stonemjs/http-core/blob/fb38b6d1cb0bd2bb4e252ff611571ec3c006aa1e/src/errors/HttpError.ts#L13)
+Defined in: [http-core/src/errors/HttpError.ts:13](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/HttpError.ts#L13)
 
 ## Methods
 
@@ -124,7 +124,7 @@ Defined in: [http-core/src/errors/HttpError.ts:13](https://github.com/stonemjs/h
 
 > **toString**(`multiline`?): `string`
 
-Defined in: core/dist/index.d.ts:2876
+Defined in: core/dist/index.d.ts:2878
 
 Converts the error to a formatted string representation.
 
@@ -152,7 +152,7 @@ A formatted error string.
 
 > `static` **create**\<`T`\>(`message`, `options`?): `T`
 
-Defined in: core/dist/index.d.ts:2862
+Defined in: core/dist/index.d.ts:2864
 
 Create a RuntimeError.
 
