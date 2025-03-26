@@ -1,10 +1,3 @@
-import { File } from '@stone-js/filesystem'
-import { HeadersType } from './declarations'
-import { JsonResponse } from './JsonResponse'
-import { JsonpResponse } from './JsonpResponse'
-import { RedirectResponse } from './RedirectResponse'
-import { BinaryFileResponse } from './BinaryFileResponse'
-import { OutgoingHttpResponse } from './OutgoingHttpResponse'
 import {
   HTTP_OK,
   HTTP_NOT_FOUND,
@@ -16,6 +9,13 @@ import {
   HTTP_SERVICE_UNAVAILABLE,
   HTTP_INTERNAL_SERVER_ERROR
 } from './constants'
+import { File } from '@stone-js/filesystem'
+import { HeadersType } from './declarations'
+import { JsonResponse } from './JsonResponse'
+import { JsonpResponse } from './JsonpResponse'
+import { RedirectResponse } from './RedirectResponse'
+import { BinaryFileResponse } from './BinaryFileResponse'
+import { OutgoingHttpResponse } from './OutgoingHttpResponse'
 
 /**
  * Create an OutgoingHttpResponse.

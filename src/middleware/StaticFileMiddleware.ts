@@ -4,7 +4,7 @@ import { NextPipe } from '@stone-js/pipeline'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { BinaryFileResponse } from '../BinaryFileResponse'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
-import { classMiddleware, IBlueprint, ILogger } from '@stone-js/core'
+import { defineClassMiddleware, IBlueprint, ILogger } from '@stone-js/core'
 
 /**
  * Kernel Middleware for serving static files from a directory.
@@ -94,4 +94,4 @@ export class StaticFileMiddleware {
 /**
  * Meta Middleware for serving static files from a directory.
  */
-export const MetaStaticFileMiddleware = classMiddleware(StaticFileMiddleware)
+export const MetaStaticFileMiddleware = defineClassMiddleware(StaticFileMiddleware)

@@ -8,7 +8,7 @@
 
 > **JsonpHttpResponse**\<`T`\>(`statusCode`, `headers`): `MethodDecorator`
 
-Defined in: [http-core/src/decorators/JsonpHttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/decorators/JsonpHttpResponse.ts#L26)
+Defined in: [http-core/src/decorators/JsonpHttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/decorators/JsonpHttpResponse.ts#L26)
 
 Decorator to mark a class method as a JsonP outgoing http response.
 

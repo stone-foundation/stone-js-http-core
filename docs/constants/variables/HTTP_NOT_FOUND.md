@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_NOT\_FOUND**: `404` = `404`
 
-Defined in: [http-core/src/constants.ts:42](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/constants.ts#L42)
+Defined in: [http-core/src/constants.ts:42](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/constants.ts#L42)

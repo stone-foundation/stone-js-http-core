@@ -6,7 +6,7 @@
 
 # Class: UnauthorizedError
 
-Defined in: [http-core/src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/UnauthorizedError.ts#L6)
+Defined in: [http-core/src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/errors/UnauthorizedError.ts#L6)
 
 Unauthorized http error.
 
@@ -20,7 +20,7 @@ Unauthorized http error.
 
 > **new UnauthorizedError**(`message`, `options`): [`UnauthorizedError`](UnauthorizedError.md)
 
-Defined in: [http-core/src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/errors/UnauthorizedError.ts#L7)
+Defined in: [http-core/src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/errors/UnauthorizedError.ts#L7)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [http-core/src/errors/UnauthorizedError.ts:7](https://github.com/sto
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: core/dist/index.d.ts:2856
+Defined in: core/dist/index.d.ts:3343
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: core/dist/index.d.ts:2856
 
 > `readonly` `optional` **code**: `string`
 
-Defined in: core/dist/index.d.ts:2855
+Defined in: core/dist/index.d.ts:3342
 
 #### Inherited from
 
@@ -70,7 +70,7 @@ Defined in: core/dist/index.d.ts:2855
 
 > `readonly` `optional` **metadata**: `unknown`
 
-Defined in: core/dist/index.d.ts:2857
+Defined in: core/dist/index.d.ts:3344
 
 #### Inherited from
 
@@ -82,7 +82,7 @@ Defined in: core/dist/index.d.ts:2857
 
 > **toString**(`multiline`?): `string`
 
-Defined in: core/dist/index.d.ts:2878
+Defined in: core/dist/index.d.ts:3365
 
 Converts the error to a formatted string representation.
 
@@ -110,7 +110,7 @@ A formatted error string.
 
 > `static` **create**\<`T`\>(`message`, `options`?): `T`
 
-Defined in: core/dist/index.d.ts:2864
+Defined in: core/dist/index.d.ts:3351
 
 Create a RuntimeError.
 

@@ -102,7 +102,12 @@ export function isIpTrusted (trusted: string | string[], untrusted: string | str
  * @param options - Options for trusted and untrusted IPs.
  * @returns The protocol (http or https).
  */
-export function getProtocol (ip: string, headers: IncomingHttpHeaders, encrypted: boolean, { trustedIp, untrustedIp }: { trustedIp: string[], untrustedIp: string[] }): string {
+export function getProtocol (
+  ip: string,
+  headers: IncomingHttpHeaders,
+  encrypted: boolean,
+  { trustedIp, untrustedIp }: { trustedIp: string[], untrustedIp: string[] }
+): string {
   let protocol = encrypted ? 'https' : 'http'
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
@@ -120,7 +125,11 @@ export function getProtocol (ip: string, headers: IncomingHttpHeaders, encrypted
  * @param options - Options for trusted IPs, fallback, etc.
  * @returns The hostname from the request.
  */
-export function getHostname (ip: string, headers: IncomingHttpHeaders, { trusted, trustedIp, untrustedIp }: { trusted: Array<string | RegExp>, trustedIp: string[], untrustedIp: string[] }): string | undefined {
+export function getHostname (
+  ip: string,
+  headers: IncomingHttpHeaders,
+  { trusted, trustedIp, untrustedIp }: { trusted: Array<string | RegExp>, trustedIp: string[], untrustedIp: string[] }
+): string | undefined {
   let hostname = (headers.host ?? headers.Host) as string | undefined
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {

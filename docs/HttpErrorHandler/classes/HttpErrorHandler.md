@@ -6,7 +6,7 @@
 
 # Class: HttpErrorHandler
 
-Defined in: [http-core/src/HttpErrorHandler.ts:17](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/HttpErrorHandler.ts#L17)
+Defined in: [http-core/src/HttpErrorHandler.ts:25](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/HttpErrorHandler.ts#L25)
 
 Class representing an HttpErrorHandler.
 
@@ -20,7 +20,7 @@ Class representing an HttpErrorHandler.
 
 > **new HttpErrorHandler**(`options`): [`HttpErrorHandler`](HttpErrorHandler.md)
 
-Defined in: [http-core/src/HttpErrorHandler.ts:25](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/HttpErrorHandler.ts#L25)
+Defined in: [http-core/src/HttpErrorHandler.ts:33](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/HttpErrorHandler.ts#L33)
 
 Create an HttpErrorHandler.
 
@@ -42,7 +42,7 @@ HttpErrorHandler options.
 
 > **handle**(`error`, `event`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [http-core/src/HttpErrorHandler.ts:40](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/HttpErrorHandler.ts#L40)
+Defined in: [http-core/src/HttpErrorHandler.ts:48](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/HttpErrorHandler.ts#L48)
 
 Handle an error.
 

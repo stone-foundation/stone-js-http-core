@@ -8,7 +8,7 @@
 
 > **getFilesUploads**(`event`, `options`): `Promise`\<\{ `fields`: `Record`\<`string`, `string`\>; `files`: `Record`\<`string`, `UploadedFile`[]\>; \}\>
 
-Defined in: [http-core/src/utils.ts:164](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/utils.ts#L164)
+Defined in: [http-core/src/utils.ts:173](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/utils.ts#L173)
 
 Get file uploads.
 

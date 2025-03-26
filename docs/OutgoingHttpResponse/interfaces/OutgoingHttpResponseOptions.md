@@ -6,7 +6,7 @@
 
 # Interface: OutgoingHttpResponseOptions
 
-Defined in: [http-core/src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/OutgoingHttpResponse.ts#L21)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/OutgoingHttpResponse.ts#L21)
 
 Options for creating an Outgoing HTTP Response.
 
@@ -29,7 +29,7 @@ Options for creating an Outgoing HTTP Response.
 
 > `optional` **content**: `unknown`
 
-Defined in: core/dist/index.d.ts:256
+Defined in: core/dist/index.d.ts:275
 
 #### Inherited from
 
@@ -41,7 +41,7 @@ Defined in: core/dist/index.d.ts:256
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/OutgoingHttpResponse.ts#L22)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/OutgoingHttpResponse.ts#L22)
 
 ***
 
@@ -73,7 +73,7 @@ Defined in: core/dist/index.d.ts:30
 
 > `optional` **statusCode**: `number`
 
-Defined in: core/dist/index.d.ts:257
+Defined in: core/dist/index.d.ts:276
 
 #### Inherited from
 
@@ -85,7 +85,7 @@ Defined in: core/dist/index.d.ts:257
 
 > `optional` **statusMessage**: `string`
 
-Defined in: core/dist/index.d.ts:258
+Defined in: core/dist/index.d.ts:277
 
 #### Inherited from
 

@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_PRECONDITION\_REQUIRED**: `428` = `428`
 
-Defined in: [http-core/src/constants.ts:63](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/constants.ts#L63)
+Defined in: [http-core/src/constants.ts:63](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/constants.ts#L63)

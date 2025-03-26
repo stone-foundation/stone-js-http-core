@@ -8,7 +8,7 @@
 
 > **isMultipart**(`value`): `boolean`
 
-Defined in: [http-core/src/utils.ts:43](https://github.com/stonemjs/http-core/blob/eaa01dbfed8a1d56fab239821e27802dd54ab017/src/utils.ts#L43)
+Defined in: [http-core/src/utils.ts:43](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/utils.ts#L43)
 
 Check if multipart message.
 

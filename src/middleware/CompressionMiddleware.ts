@@ -1,7 +1,7 @@
 import { NextPipe } from '@stone-js/pipeline'
-import { classMiddleware } from '@stone-js/core'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
+import { defineClassMiddleware, isNotEmpty } from '@stone-js/core'
 
 /**
  * Kernel Middleware to compress response content based on the Accept-Encoding header.
@@ -19,7 +19,13 @@ export class CompressionMiddleware {
 
     if (this.isCompressibleContent(response.content)) {
       const encoding = this.getCompressionFormatFromEvent(event)
-      response.setContent(await this.compressContent(response.content, encoding))
+
+      if (isNotEmpty<string>(encoding)) {
+        response.removeHeader('Content-Length')
+        response.setHeader('Vary', 'Accept-Encoding')
+        response.setHeader('Content-Encoding', encoding)
+        response.setContent(await this.compressContent(response.content, encoding))
+      }
     }
 
     return response
@@ -82,4 +88,4 @@ export class CompressionMiddleware {
 /**
  * Meta Middleware for compressing response content.
  */
-export const MetaCompressionMiddleware = classMiddleware(CompressionMiddleware)
+export const MetaCompressionMiddleware = defineClassMiddleware(CompressionMiddleware)
