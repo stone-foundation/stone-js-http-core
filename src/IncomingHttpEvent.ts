@@ -497,10 +497,10 @@ export class IncomingHttpEvent extends IncomingEvent {
     if (contentType !== false) return contentType
 
     // 3. Check if the request is AJAX/XHR (favoring JSON responses)
-    if (this.isAjax || this.isXhr) return 'json'
+    if (this.isXhr) return 'json'
 
     // 4. Check User-Agent for CLI tools like `curl` (favor plain text)
-    if ((this.userAgent?.includes('curl') ?? this.userAgent?.includes('wget')) === true) return 'text'
+    if (this.userAgent?.includes('curl') === true || this.userAgent?.includes('wget') === true) return 'text'
 
     // 5. Return the default type
     return defaultType

@@ -17,6 +17,8 @@ describe('BinaryFileResponse', () => {
     getMimeType: vi.fn().mockReturnValue('application/octet-stream'),
     isReadable: vi.fn().mockReturnValue(true),
     getPath: vi.fn().mockReturnValue('/file/path'),
+    isCompressed: vi.fn().mockReturnValue(false),
+    getExtension: vi.fn().mockReturnValue('.gzip'),
     getContent: vi.fn().mockReturnValue(Buffer.from('file content'))
   }
 
@@ -28,6 +30,7 @@ describe('BinaryFileResponse', () => {
     it('should create a BinaryFileResponse instance with valid options', () => {
       const options: BinaryFileResponseOptions = {
         file: '/file/path',
+        autoEncoding: true,
         autoLastModified: true,
         content: ''
       }
@@ -56,6 +59,19 @@ describe('BinaryFileResponse', () => {
       }
       const response = new BinaryFileResponse(options)
       expect(response.getHeader('ETag')).toBe(`"${Buffer.from(mockFile.getHashedContent()).toString('base64')}"`)
+    })
+  })
+
+  describe('autoEncoding', () => {
+    it('should set the Content-Encoding header based on file extension', () => {
+      const options: BinaryFileResponseOptions = {
+        file: '/file/path',
+        autoEncoding: true,
+        content: ''
+      }
+      mockFile.isCompressed.mockReturnValue(true)
+      const response = new BinaryFileResponse(options)
+      expect(response.getHeader('Content-Encoding')).toBe('gzip')
     })
   })
 

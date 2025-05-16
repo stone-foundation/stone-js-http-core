@@ -6,7 +6,7 @@
 
 # Class: UnauthorizedError
 
-Defined in: [http-core/src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/errors/UnauthorizedError.ts#L6)
+Defined in: [http-core/src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/errors/UnauthorizedError.ts#L6)
 
 Unauthorized http error.
 
@@ -20,7 +20,7 @@ Unauthorized http error.
 
 > **new UnauthorizedError**(`message`, `options`): [`UnauthorizedError`](UnauthorizedError.md)
 
-Defined in: [http-core/src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/errors/UnauthorizedError.ts#L7)
+Defined in: [http-core/src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/errors/UnauthorizedError.ts#L7)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [http-core/src/errors/UnauthorizedError.ts:7](https://github.com/sto
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: core/dist/index.d.ts:3343
+Defined in: core/dist/index.d.ts:2602
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: core/dist/index.d.ts:3343
 
 > `readonly` `optional` **code**: `string`
 
-Defined in: core/dist/index.d.ts:3342
+Defined in: core/dist/index.d.ts:2601
 
 #### Inherited from
 
@@ -70,7 +70,7 @@ Defined in: core/dist/index.d.ts:3342
 
 > `readonly` `optional` **metadata**: `unknown`
 
-Defined in: core/dist/index.d.ts:3344
+Defined in: core/dist/index.d.ts:2603
 
 #### Inherited from
 
@@ -82,7 +82,7 @@ Defined in: core/dist/index.d.ts:3344
 
 > **toString**(`multiline`?): `string`
 
-Defined in: core/dist/index.d.ts:3365
+Defined in: core/dist/index.d.ts:2624
 
 Converts the error to a formatted string representation.
 
@@ -110,7 +110,7 @@ A formatted error string.
 
 > `static` **create**\<`T`\>(`message`, `options`?): `T`
 
-Defined in: core/dist/index.d.ts:3351
+Defined in: core/dist/index.d.ts:2610
 
 Create a RuntimeError.
 

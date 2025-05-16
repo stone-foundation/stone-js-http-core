@@ -20,6 +20,8 @@ describe('CookieCollection', () => {
     const collection = CookieCollection.create(undefined, mockOptions)
     collection.add('newCookie', 'newValue')
     expect(collection.has('newCookie')).toBe(true)
+    expect(collection.getValue<string>('newCookie')).toBe('newValue')
+    expect(collection.getValue<string>('newCookie2', 'default')).toBe('default')
   })
 
   it('should update an existing cookie in the collection', () => {

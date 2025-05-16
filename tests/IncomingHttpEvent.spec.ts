@@ -98,6 +98,7 @@ describe('IncomingHttpEvent', () => {
     expect(event.getMimeType('htmlp')).toBeUndefined()
     expect(event.getMimeType('json')).toBe('application/json')
     expect(event.isMethodCacheable()).toBe(true)
+    expect(event.isMethod('get')).toBe(true)
     expect(event.acceptsCharsets('utf-8')).toBe('utf-8')
     expect(event.hasHeader('content-type')).toBe(true)
     expect(event.getHeader('referrer', 'none')).toBe('none')
@@ -105,6 +106,7 @@ describe('IncomingHttpEvent', () => {
     expect(event.hasCookie('test-cookie')).toBe(false)
     expect(event.acceptsEncodings('gzip', 'br')).toBe('gzip')
     expect(event.getCookie('test-cookie')).toBeUndefined()
+    expect(event.getBody()).toEqual({ key: 'value' })
     expect((event.range(1000) as RangeParser.Ranges)[0]).toEqual({ start: 0, end: 499 })
     expect((event.range(1000, true) as RangeParser.Ranges)[0]).toEqual({ start: 0, end: 499 })
     expect((event.range(200, true) as RangeParser.Ranges)[0]).toEqual({ start: 0, end: 199 })
@@ -117,12 +119,18 @@ describe('IncomingHttpEvent', () => {
   })
 
   it('should correctly invoke getters in some edge conditions', () => {
-    const event = IncomingHttpEvent.create({ ...mockOptions, headers: new Headers() })
+    // @ts-expect-error - Invalid method value for testing purposes
+    const event = IncomingHttpEvent.create({ ...mockOptions, body: null, cookies: undefined, queryString: undefined, headers: {} })
     // @ts-expect-error - Accessing private property for testing purposes
     event.url = { pathname: '%', href: 'http://localhost/test#title' }
     expect(event.is('json')).toBe(false)
     expect(event.range(200)).toBeUndefined()
     expect(event.getUri(true)).toBe('http://localhost/')
+    expect(event.cookies).toBeInstanceOf(CookieCollection)
+    expect(event.queryString).toBeUndefined()
+    expect(event.headers).toEqual({})
+    expect(event.charset).toBeUndefined()
+    expect(event.getBody({ name: 'patate' })).toEqual({ name: 'patate' })
   })
 
   describe('get', () => {
@@ -157,11 +165,75 @@ describe('IncomingHttpEvent', () => {
     })
   })
 
-  it('should generate a valid fingerprint', () => {
-    const route = { method: HttpMethods.GET, uri: '/test' }
+  describe('preferredType', () => {
+    it('should return accepted type from acceptsTypes (string)', () => {
+      event.acceptsTypes = () => 'html'
+      expect(event.preferredType()).toBe('html')
+    })
+
+    it('should return first accepted type from acceptsTypes (array)', () => {
+      event.acceptsTypes = () => ['html', 'json']
+      expect(event.preferredType()).toBe('html')
+    })
+
+    it('should return type from is() if acceptsTypes fails', () => {
+      event.acceptsTypes = () => false
+      event.is = vi.fn(() => 'xml')
+      expect(event.preferredType(['xml'])).toBe('xml')
+      expect(event.is).toBeCalledWith('xml')
+    })
+
+    it('should return json if isXhr is true and no accepts or content-type', () => {
+      event.is = () => false
+      event.acceptsTypes = () => false
+      event.getHeader = () => 'xmlhttprequest'
+      expect(event.preferredType()).toBe('json')
+    })
+
+    it('should return text if userAgent contains curl and nothing else matches', () => {
+      event.is = () => false
+      event.acceptsTypes = () => false
+      event.getHeader = vi.fn(() => 'curl/7.64.1')
+      expect(event.preferredType()).toBe('text')
+    })
+
+    it('should return text if userAgent contains wget and nothing else matches', () => {
+      event.is = () => false
+      event.acceptsTypes = () => false
+      event.getHeader = () => 'wget/1.20.3'
+      expect(event.preferredType()).toBe('text')
+    })
+
+    it('should return defaultType if nothing matches', () => {
+      event.is = () => false
+      event.acceptsTypes = () => false
+      expect(event.preferredType(['json', 'html'], 'html')).toBe('html')
+    })
+
+    it('should default to json when no args are passed and nothing matches', () => {
+      event.is = () => false
+      event.acceptsTypes = () => false
+      expect(event.preferredType()).toBe('json')
+    })
+  })
+
+  it('should set the route resolver', () => {
+    const route = { params: { env: 'test' } }
     // @ts-expect-error - Invalid route value for testing purposes
     event.setRouteResolver(() => (route))
-    const fingerprint = Buffer.from([route.method, route.uri, event.userAgent, event.ip].join('|')).toString('base64')
+    expect(event.getRouteResolver()).toBeInstanceOf(Function)
+    expect(event.getRoute()).toEqual(route)
+    expect(event.params).toEqual(route.params)
+  })
+
+  it('should generate a valid backend fingerprint', () => {
+    const fingerprint = btoa([event.method, event.uri, event.userAgent, event.ip].join('|'))
+    expect(event.fingerprint(true)).toBe(fingerprint)
+    expect(event.getRouteResolver()).toBeInstanceOf(Function)
+  })
+
+  it('should generate a valid browser fingerprint', () => {
+    const fingerprint = btoa([event.method, event.pathname].join('|'))
     expect(event.fingerprint()).toBe(fingerprint)
     expect(event.getRouteResolver()).toBeInstanceOf(Function)
   })
@@ -182,9 +254,5 @@ describe('IncomingHttpEvent', () => {
 
   it('should throw an error if an invalid URL is provided', () => {
     expect(() => IncomingHttpEvent.create({ ...mockOptions, url: 'invalid-url' as unknown as URL })).toThrow(HttpError)
-  })
-
-  it('should throw an error when generating fingerprint with no routes', () => {
-    expect(() => event.fingerprint()).toThrow('Unable to generate fingerprint. Route unavailable.')
   })
 })

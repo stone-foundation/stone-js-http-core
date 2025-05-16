@@ -6,8 +6,18 @@
 
 # Variable: MetaCompressionMiddleware
 
-> `const` **MetaCompressionMiddleware**: `MetaMiddleware`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
+> `const` **MetaCompressionMiddleware**: `object`
 
-Defined in: [http-core/src/middleware/CompressionMiddleware.ts:91](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/middleware/CompressionMiddleware.ts#L91)
+Defined in: [http-core/src/middleware/CompressionMiddleware.ts:91](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/middleware/CompressionMiddleware.ts#L91)
 
 Meta Middleware for compressing response content.
+
+## Type declaration
+
+### isClass
+
+> **isClass**: `boolean` = `true`
+
+### module
+
+> **module**: *typeof* [`CompressionMiddleware`](../classes/CompressionMiddleware.md) = `CompressionMiddleware`

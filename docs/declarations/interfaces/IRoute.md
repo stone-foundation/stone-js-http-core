@@ -6,7 +6,7 @@
 
 # Interface: IRoute
 
-Defined in: [http-core/src/declarations.ts:55](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L55)
+Defined in: [http-core/src/declarations.ts:55](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L55)
 
 Describes a route definition, including its URI, method, and parameters.
 
@@ -16,7 +16,7 @@ Describes a route definition, including its URI, method, and parameters.
 
 > **getOptions**: \<`TReturn`\>(`keys`) => `Record`\<`string`, `TReturn`\>
 
-Defined in: [http-core/src/declarations.ts:59](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L59)
+Defined in: [http-core/src/declarations.ts:59](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L59)
 
 #### Type Parameters
 
@@ -38,7 +38,7 @@ Defined in: [http-core/src/declarations.ts:59](https://github.com/stonemjs/http-
 
 > **getParam**: \<`TReturn`\>(`name`, `fallback`?) => `undefined` \| `TReturn`
 
-Defined in: [http-core/src/declarations.ts:60](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L60)
+Defined in: [http-core/src/declarations.ts:60](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L60)
 
 #### Type Parameters
 
@@ -64,7 +64,7 @@ Defined in: [http-core/src/declarations.ts:60](https://github.com/stonemjs/http-
 
 > **method**: [`HttpMethod`](../type-aliases/HttpMethod.md)
 
-Defined in: [http-core/src/declarations.ts:57](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L57)
+Defined in: [http-core/src/declarations.ts:57](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L57)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [http-core/src/declarations.ts:57](https://github.com/stonemjs/http-
 
 > **params**: `Record`\<`string`, `unknown`\>
 
-Defined in: [http-core/src/declarations.ts:58](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L58)
+Defined in: [http-core/src/declarations.ts:58](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L58)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [http-core/src/declarations.ts:58](https://github.com/stonemjs/http-
 
 > **uri**: `string`
 
-Defined in: [http-core/src/declarations.ts:56](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L56)
+Defined in: [http-core/src/declarations.ts:56](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L56)

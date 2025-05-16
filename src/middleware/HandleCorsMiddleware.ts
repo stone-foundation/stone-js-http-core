@@ -2,7 +2,7 @@ import { NextPipe } from '@stone-js/pipeline'
 import { HttpCorsConfig } from '../options/HttpConfig'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
-import { defineClassMiddleware, IBlueprint, isNotEmpty, isEmpty } from '@stone-js/core'
+import { IBlueprint, isNotEmpty, isEmpty } from '@stone-js/core'
 
 /**
  * Kernel Middleware for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
@@ -88,8 +88,6 @@ export class HandleCorsMiddleware {
   private isOriginAllowed (origin: string, allowedOrigin: unknown): boolean {
     if (Array.isArray(allowedOrigin)) {
       return allowedOrigin.reduce((prev, curr) => this.isOriginAllowed(origin, curr) || prev, false)
-    } else if (allowedOrigin instanceof RegExp) {
-      return allowedOrigin.test(origin)
     } else if (typeof allowedOrigin === 'string') {
       return origin === allowedOrigin
     } else {
@@ -241,4 +239,4 @@ export class HandleCorsMiddleware {
 /**
  * Meta Middleware for processing CORS headers.
  */
-export const MetaHandleCorsMiddleware = defineClassMiddleware(HandleCorsMiddleware)
+export const MetaHandleCorsMiddleware = { module: HandleCorsMiddleware, isClass: true }

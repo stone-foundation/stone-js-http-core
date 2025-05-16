@@ -1,9 +1,10 @@
 import { createWriteStream } from 'node:fs'
-import { File, FilesystemError, UploadedFile } from '@stone-js/filesystem'
 import { BadRequestError } from '../src/errors/BadRequestError'
 import { InternalServerError } from '../src/errors/InternalServerError'
+import { File, FilesystemError, UploadedFile } from '@stone-js/filesystem'
 import { IncomingMessage, IncomingHttpHeaders, OutgoingMessage } from 'http'
 import { getCharset, getHostname, getProtocol, getType, isIpTrusted, isMultipart, streamFile, getFilesUploads } from '../src/utils'
+import { NotFoundError } from '../src/errors/NotFoundError'
 
 // Mocking values and spies
 let MockSend: any
@@ -16,7 +17,6 @@ vi.mock('node:os')
 vi.mock('node:path')
 vi.mock('send', () => ({ default: (...args: any[]) => (MockSend) }))
 vi.mock('busboy', () => ({ default: (...args: any[]) => (MockBusboy) }))
-vi.mock('on-finished', () => ({ default: (res: OutgoingMessage, cb: (error: Error) => void) => MockSend.on('close', cb) }))
 
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 
@@ -41,9 +41,6 @@ describe('Utility Functions', () => {
       listeners: {} as any,
       pipe (res: OutgoingMessage) {
         this.emit('headers', res)
-        this.emit('stream')
-        this.emit('file')
-        this.emit('close')
         this.emit('end')
       },
       on (event: string, callback: Function) {
@@ -53,6 +50,12 @@ describe('Utility Functions', () => {
       emit (event: string, ...args: any[]) {
         this.listeners[event](...args)
         MockSendOnSpy(event)
+      },
+      error (error: Error) {
+        this.emit('error', error)
+      },
+      directory () {
+        this.emit('directory')
       }
     }
     MockBusboy = {
@@ -239,6 +242,18 @@ describe('Utility Functions', () => {
       expect(MockSendOnSpy).toHaveBeenCalled()
     })
 
+    it('should handle file streaming successfully with no headers options', async () => {
+      const message = new MockIncomingMessage({})
+      const response = new MockOutgoingMessage()
+      const file = File.create('test/path', false)
+
+      // @ts-expect-error - Invalid type
+      const res = await streamFile(message, response, file, {})
+
+      expect(res).toBeUndefined()
+      expect(MockSendOnSpy).toHaveBeenCalled()
+    })
+
     it('should throw an unexpected error while handling file', async () => {
       const message = new MockIncomingMessage({})
       const response = new MockOutgoingMessage()
@@ -246,30 +261,30 @@ describe('Utility Functions', () => {
 
       MockSend = {
         ...MockSend,
-        pipe (res: OutgoingMessage) {
-          this.emit('close', { message: 'Error', code: 'EIO' })
+        pipe (_res: OutgoingMessage) {
+          this.error(new Error('Unexpected error'))
         }
       }
 
       await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(InternalServerError)
     })
 
-    it('should throw a request aborted error when there is an error while handling file', async () => {
+    it('should throw a NotFoundError while acessing directory', async () => {
       const message = new MockIncomingMessage({})
       const response = new MockOutgoingMessage()
       const file = File.create('test/path', false)
 
       MockSend = {
         ...MockSend,
-        pipe (res: OutgoingMessage) {
-          this.emit('close', { message: 'Error', code: 'ECONNRESET' })
+        pipe (_res: OutgoingMessage) {
+          this.directory()
         }
       }
 
-      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(BadRequestError)
+      await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(NotFoundError)
     })
 
-    it('should throw a request aborted error when file not completely streamed', async () => {
+    it('should throw a BadRequestError on client error', async () => {
       const message = new MockIncomingMessage({})
       const response = new MockOutgoingMessage()
       const file = File.create('test/path', false)
@@ -277,8 +292,7 @@ describe('Utility Functions', () => {
       MockSend = {
         ...MockSend,
         pipe (res: OutgoingMessage) {
-          this.emit('stream')
-          this.emit('close')
+          res.emit('close')
         }
       }
 

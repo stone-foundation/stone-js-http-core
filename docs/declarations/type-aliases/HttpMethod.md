@@ -8,6 +8,6 @@
 
 > **HttpMethod**: `"GET"` \| `"POST"` \| `"PUT"` \| `"PATCH"` \| `"DELETE"` \| `"OPTIONS"` \| `"HEAD"`
 
-Defined in: [http-core/src/declarations.ts:50](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/declarations.ts#L50)
+Defined in: [http-core/src/declarations.ts:50](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L50)
 
 Represents valid HTTP methods as string literals.

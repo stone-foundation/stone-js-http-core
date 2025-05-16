@@ -15,9 +15,9 @@ describe('RedirectResponse', () => {
 
     const response = await RedirectResponse.create<RedirectResponse>(options).prepare(mockIncomingEvent)
     expect(response).toBeInstanceOf(RedirectResponse)
-    expect(response.getHeader('Location')).toBe('http://example.com/api%2Fv1')
+    expect(response.getHeader('Location')).toBe('http://example.com/api/v1')
     // @ts-expect-error - accessing private property for testing
-    expect(response._content).toBe('Found. Redirecting to http://example.com/api%2Fv1')
+    expect(response._content).toBe('Found. Redirecting to http://example.com/api/v1')
   })
 
   it('should throw an error if the status code is not a redirect code', () => {

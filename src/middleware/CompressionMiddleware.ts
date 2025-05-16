@@ -1,7 +1,7 @@
+import { isNotEmpty } from '@stone-js/core'
 import { NextPipe } from '@stone-js/pipeline'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
-import { defineClassMiddleware, isNotEmpty } from '@stone-js/core'
 
 /**
  * Kernel Middleware to compress response content based on the Accept-Encoding header.
@@ -18,14 +18,18 @@ export class CompressionMiddleware {
     const response = await next(event)
 
     if (this.isCompressibleContent(response.content)) {
-      const encoding = this.getCompressionFormatFromEvent(event)
+      const { content, encoding } = await this.compressContent(
+        response.content,
+        this.getCompressionFormatFromEvent(event)
+      )
 
       if (isNotEmpty<string>(encoding)) {
-        response.removeHeader('Content-Length')
-        response.setHeader('Vary', 'Accept-Encoding')
+        response.setContent(content)
         response.setHeader('Content-Encoding', encoding)
-        response.setContent(await this.compressContent(response.content, encoding))
       }
+
+      response.removeHeader('Content-Length')
+      response.setHeader('Vary', 'Accept-Encoding')
     }
 
     return response
@@ -54,23 +58,29 @@ export class CompressionMiddleware {
    * @param encoding - The encoding to use (gzip, deflate, br).
    * @returns The compressed content.
    */
-  private async compressContent (content: string | Buffer, encoding: 'gzip' | 'deflate' | 'br' | undefined = 'gzip'): Promise<Buffer> {
+  private async compressContent (
+    content: string | Buffer,
+    encoding: 'gzip' | 'deflate' | 'br' | undefined
+  ): Promise<{ content: Buffer, encoding?: 'gzip' | 'deflate' | 'br' }> {
     const { gzip, deflate, brotliCompress } = await import('node:zlib')
+    const buffer = Buffer.isBuffer(content) ? content : Buffer.from(content, 'utf-8')
 
-    return await new Promise((resolve, reject) => {
-      const buffer = Buffer.isBuffer(content) ? content : Buffer.from(content, 'utf-8')
-
-      switch (encoding) {
-        case 'gzip':
-          return gzip(buffer, (err, compressed) => ((err != null) ? reject(err) : resolve(compressed)))
-        case 'deflate':
-          return deflate(buffer, (err, compressed) => ((err != null) ? reject(err) : resolve(compressed)))
-        case 'br':
-          return brotliCompress(buffer, (err, compressed) => ((err != null) ? reject(err) : resolve(compressed)))
-        default:
-          resolve(buffer)
-      }
-    })
+    try {
+      return await new Promise((resolve, reject) => {
+        switch (encoding) {
+          case 'gzip':
+            return gzip(buffer, (err, compressed) => ((err != null) ? reject(err) : resolve({ content: compressed, encoding })))
+          case 'deflate':
+            return deflate(buffer, (err, compressed) => ((err != null) ? reject(err) : resolve({ content: compressed, encoding })))
+          case 'br':
+            return brotliCompress(buffer, (err, compressed) => ((err != null) ? reject(err) : resolve({ content: compressed, encoding })))
+          default:
+            return resolve({ content: buffer })
+        }
+      })
+    } catch {
+      return { content: buffer }
+    }
   }
 
   /**
@@ -88,4 +98,4 @@ export class CompressionMiddleware {
 /**
  * Meta Middleware for compressing response content.
  */
-export const MetaCompressionMiddleware = defineClassMiddleware(CompressionMiddleware)
+export const MetaCompressionMiddleware = { module: CompressionMiddleware, isClass: true }

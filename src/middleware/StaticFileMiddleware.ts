@@ -1,10 +1,10 @@
 import { join } from 'node:path'
 import { File } from '@stone-js/filesystem'
 import { NextPipe } from '@stone-js/pipeline'
+import { IBlueprint, ILogger } from '@stone-js/core'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { BinaryFileResponse } from '../BinaryFileResponse'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
-import { defineClassMiddleware, IBlueprint, ILogger } from '@stone-js/core'
 
 /**
  * Kernel Middleware for serving static files from a directory.
@@ -47,9 +47,11 @@ export class StaticFileMiddleware {
       this.logger.error(`Error handling file request: ${String(error.message)}`, { event })
     }
 
-    this.logger.debug(`No static file found for path: ${event.pathname}`)
+    const response = await next(event)
 
-    return await next(event)
+    response.isNotFound() && this.logger.info(`No static file found for path: ${event.pathname}`)
+
+    return response
   }
 
   /**
@@ -94,4 +96,4 @@ export class StaticFileMiddleware {
 /**
  * Meta Middleware for serving static files from a directory.
  */
-export const MetaStaticFileMiddleware = defineClassMiddleware(StaticFileMiddleware)
+export const MetaStaticFileMiddleware = { module: StaticFileMiddleware, isClass: true }

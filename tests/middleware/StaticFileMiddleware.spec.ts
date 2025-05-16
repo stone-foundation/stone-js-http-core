@@ -12,6 +12,7 @@ vi.mock('../../src/BinaryFileResponse') // Mock the BinaryFileResponse class
 describe('StaticFileMiddleware', () => {
   let blueprintMock: any
   let loggerMock: ILogger
+  let responseMock: any
   let middleware: StaticFileMiddleware
 
   beforeEach(() => {
@@ -19,6 +20,8 @@ describe('StaticFileMiddleware', () => {
     blueprintMock = {
       get: vi.fn()
     } as unknown as IBlueprint
+
+    responseMock = { content: 'nextResponse', isNotFound: vi.fn(() => false) }
 
     loggerMock = {
       info: vi.fn(),
@@ -54,7 +57,7 @@ describe('StaticFileMiddleware', () => {
     };
     (File.create as Mock).mockReturnValue(fileMock)
 
-    const nextMock = vi.fn()
+    const nextMock = vi.fn(() => responseMock)
     const eventMock = { pathname: '/file.txt', getHeader: vi.fn(() => '') } as any
 
     const response = await middleware.handle(eventMock, nextMock)
@@ -72,38 +75,6 @@ describe('StaticFileMiddleware', () => {
     expect(nextMock).not.toHaveBeenCalled()
   })
 
-  it('should serve an index file if the request points to a directory', async () => {
-    const dirMock = {
-      exists: vi.fn().mockReturnValue(true),
-      isDir: vi.fn().mockReturnValue(true),
-      isPathPrefix: vi.fn().mockReturnValue(true),
-      getPath: vi.fn().mockReturnValue('/root')
-    }
-    const indexFileMock = {
-      exists: vi.fn().mockReturnValue(true),
-      getPath: vi.fn().mockReturnValue('/root/index.html')
-    };
-    (File.create as Mock).mockImplementation((path: string) =>
-      path.endsWith('index.html') ? indexFileMock : dirMock
-    )
-
-    const nextMock = vi.fn()
-    const eventMock = { pathname: '/', getHeader: vi.fn(() => 'gzip, br') } as any
-
-    const response = await middleware.handle(eventMock, nextMock)
-
-    expect(File.create).toHaveBeenCalledWith('/root/index.html', false)
-    expect(indexFileMock.exists).toHaveBeenCalled()
-    expect(BinaryFileResponse.file).toHaveBeenCalledWith({
-      file: indexFileMock,
-      autoEtag: true,
-      autoLastModified: true,
-      autoEncoding: true
-    })
-    expect(response).toBeDefined()
-    expect(nextMock).not.toHaveBeenCalled()
-  })
-
   it('should pass the request to the next middleware if the file does not exist', async () => {
     const fileMock = {
       exists: vi.fn().mockReturnValue(false),
@@ -112,7 +83,8 @@ describe('StaticFileMiddleware', () => {
     };
     (File.create as Mock).mockReturnValue(fileMock)
 
-    const nextMock = vi.fn().mockResolvedValue('nextResponse')
+    responseMock.isNotFound.mockReturnValue(true)
+    const nextMock = vi.fn().mockResolvedValue(responseMock)
     const eventMock = { pathname: '/nonexistent.txt', getHeader: vi.fn(() => 'gzip, br') } as any
 
     const response = await middleware.handle(eventMock, nextMock)
@@ -120,7 +92,30 @@ describe('StaticFileMiddleware', () => {
     expect(File.create).toHaveBeenCalledWith('/root/nonexistent.txt', false)
     expect(fileMock.exists).toHaveBeenCalled()
     expect(nextMock).toHaveBeenCalled()
-    expect(response).toBe('nextResponse')
+    expect(response.content).toBe('nextResponse')
+    expect(loggerMock.info).toHaveBeenCalledWith('No static file found for path: /nonexistent.txt')
+  })
+
+  it('should pass the request to the next middleware if the requested path is a directory', async () => {
+    const fileMock = {
+      exists: vi.fn().mockReturnValue(true),
+      isDir: vi.fn().mockReturnValue(true),
+      getPath: vi.fn().mockReturnValue('/root/directory/'),
+      isPathPrefix: vi.fn().mockReturnValue(false)
+    };
+    (File.create as Mock).mockReturnValue(fileMock)
+
+    responseMock.isNotFound.mockReturnValue(true)
+    const nextMock = vi.fn().mockResolvedValue(responseMock)
+    const eventMock = { pathname: '/directory/', getHeader: vi.fn(() => 'gzip, br') } as any
+
+    const response = await middleware.handle(eventMock, nextMock)
+
+    expect(File.create).toHaveBeenCalledWith('/root/directory/', false)
+    expect(fileMock.exists).toHaveBeenCalled()
+    expect(nextMock).toHaveBeenCalled()
+    expect(response.content).toBe('nextResponse')
+    expect(loggerMock.info).toHaveBeenCalledWith('No static file found for path: /directory/')
   })
 
   it('should prioritize compressed files if supported by the client', async () => {
@@ -134,7 +129,7 @@ describe('StaticFileMiddleware', () => {
       path.endsWith('.gz') ? compressedFileMock : { exists: vi.fn().mockReturnValue(false), isPathPrefix: vi.fn().mockReturnValue(true) }
     )
 
-    const nextMock = vi.fn()
+    const nextMock = vi.fn().mockResolvedValue(responseMock)
     const eventMock = {
       pathname: '/filexx.txt',
       getHeader: vi.fn(() => 'gz')
@@ -164,7 +159,7 @@ describe('StaticFileMiddleware', () => {
     };
     (File.create as Mock).mockReturnValue(fileMock)
 
-    const nextMock = vi.fn().mockResolvedValue('nextResponse')
+    const nextMock = vi.fn().mockResolvedValue(responseMock)
     const eventMock = { pathname: '/error.txt', getHeader: vi.fn(() => 'gzip, br') } as any
 
     const response = await middleware.handle(eventMock, nextMock)
@@ -174,6 +169,6 @@ describe('StaticFileMiddleware', () => {
       expect.anything()
     )
     expect(nextMock).toHaveBeenCalled()
-    expect(response).toBe('nextResponse')
+    expect(response.content).toBe('nextResponse')
   })
 })

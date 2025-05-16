@@ -18,7 +18,12 @@ vi.mock('../src/HttpResponse', () => ({
 }))
 
 describe('HttpErrorHandler', () => {
-  const event: any = {}
+  const event: any = {
+    tempType: 'html',
+    preferredType: (_types: string[], defaultType: string) => {
+      return event.tempType ?? defaultType
+    }
+  }
   let mockLogger: ILogger
   let handler: HttpErrorHandler
 
@@ -80,13 +85,14 @@ describe('HttpErrorHandler', () => {
   })
 
   test('should log an error and return an OutgoingHttpResponse', () => {
+    event.tempType = 'json'
     const error = new HttpError('Custom error', 503, { 'Content-Type': 'application/json' })
 
     const response = handler.handle(error, event)
 
     expect(mockLogger.error).toHaveBeenCalledWith('Custom error', { error })
     expect(response).toEqual({
-      body: 'Service Unavailable',
+      body: { error: 'Service Unavailable' },
       status: 503,
       headers: { 'Content-Type': 'application/json' }
     })
@@ -99,7 +105,7 @@ describe('HttpErrorHandler', () => {
 
     expect(mockLogger.error).toHaveBeenCalledWith('Custom error', { error })
     expect(response).toEqual({
-      body: 'Unknown Status',
+      body: { error: 'Unknown Status' },
       status: 700,
       headers: new Headers()
     })

@@ -6,8 +6,18 @@
 
 # Variable: MetaStaticFileMiddleware
 
-> `const` **MetaStaticFileMiddleware**: `MetaMiddleware`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
+> `const` **MetaStaticFileMiddleware**: `object`
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:97](https://github.com/stonemjs/http-core/blob/8d2f265873c2a6f093cdaa7580ed7328bd078613/src/middleware/StaticFileMiddleware.ts#L97)
+Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:97](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/middleware/StaticFileMiddleware.ts#L97)
 
 Meta Middleware for serving static files from a directory.
+
+## Type declaration
+
+### isClass
+
+> **isClass**: `boolean` = `true`
+
+### module
+
+> **module**: *typeof* [`StaticFileMiddleware`](../classes/StaticFileMiddleware.md) = `StaticFileMiddleware`

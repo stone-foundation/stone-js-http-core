@@ -9,6 +9,7 @@ describe('Cookie', () => {
     expect(cookie.name).toBe('test')
     expect(cookie.value).toBe('value')
     expect(cookie.options).toEqual({})
+    expect(cookie.getValue<string>()).toBe('value')
   })
 
   it('should set expires', () => {
