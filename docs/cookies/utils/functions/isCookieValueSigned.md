@@ -8,7 +8,7 @@
 
 > **isCookieValueSigned**(`value`): `boolean`
 
-Defined in: [http-core/src/cookies/utils.ts:16](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/cookies/utils.ts#L16)
+Defined in: [http-core/src/cookies/utils.ts:16](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/cookies/utils.ts#L16)
 
 Check if the value is signed.
 

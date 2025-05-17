@@ -8,7 +8,7 @@
 
 > `const` **MetaStaticFileMiddleware**: `object`
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:97](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/middleware/StaticFileMiddleware.ts#L97)
+Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:99](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L99)
 
 Meta Middleware for serving static files from a directory.
 

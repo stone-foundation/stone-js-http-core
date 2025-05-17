@@ -4,7 +4,7 @@
 
 # Stone.js: HTTP Core
 
-[![npm](https://img.shields.io/npm/l/@stone-js/http-core)](https://opensource.org/licenses/Apache-2.0)
+[![npm](https://img.shields.io/npm/l/@stone-js/core)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/@stone-js/http-core)](https://www.npmjs.com/package/@stone-js/http-core)
 [![npm](https://img.shields.io/npm/dm/@stone-js/http-core)](https://www.npmjs.com/package/@stone-js/http-core)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025)
@@ -16,7 +16,7 @@ Stone.js Pure ESM HTTP core with typings.
 
 ---
 
-Get started with the [documentation](https://stonejs.com/cookbook/http-core).
+Get started with the [documentation](https://stonejs.com/docs/essentials/incoming-event.html).
 
 ## Contributing
 

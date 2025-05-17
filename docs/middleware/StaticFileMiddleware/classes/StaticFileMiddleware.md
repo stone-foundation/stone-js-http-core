@@ -6,7 +6,7 @@
 
 # Class: StaticFileMiddleware
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:13](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/middleware/StaticFileMiddleware.ts#L13)
+Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:13](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L13)
 
 Kernel Middleware for serving static files from a directory.
 If a static file is found, it serves the file; otherwise, the request is passed to the next middleware.
@@ -17,7 +17,7 @@ If a static file is found, it serves the file; otherwise, the request is passed 
 
 > **new StaticFileMiddleware**(`container`): [`StaticFileMiddleware`](StaticFileMiddleware.md)
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:23](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/middleware/StaticFileMiddleware.ts#L23)
+Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:23](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L23)
 
 Create a new StaticFileMiddleware instance.
 
@@ -45,7 +45,7 @@ The service container to inject dependencies.
 
 > **handle**(`event`, `next`): `Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/middleware/StaticFileMiddleware.ts#L37)
+Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L37)
 
 Handle incoming HTTP events and serve static files if applicable.
 

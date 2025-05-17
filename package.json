@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "Stone.js HTTP Core",
   "author": "Mr. Stone <evensstone@gmail.com>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/stonemjs/http-core.git"
@@ -112,6 +112,7 @@
   "ts-standard": {
     "globals": [
       "it",
+      "test",
       "expect",
       "describe",
       "beforeEach"

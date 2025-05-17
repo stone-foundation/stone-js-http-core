@@ -6,7 +6,7 @@
 
 # Interface: HttpJsonConfig
 
-Defined in: [http-core/src/options/HttpConfig.ts:43](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L43)
+Defined in: [http-core/src/options/HttpConfig.ts:43](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L43)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [http-core/src/options/HttpConfig.ts:43](https://github.com/stonemjs
 
 > **escape**: `boolean`
 
-Defined in: [http-core/src/options/HttpConfig.ts:51](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L51)
+Defined in: [http-core/src/options/HttpConfig.ts:51](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L51)
 
 Whether to escape HTML characters in JSON output.
 
@@ -24,7 +24,7 @@ Whether to escape HTML characters in JSON output.
 
 > `optional` **replacer**: (`this`, `key`, `value`) => `unknown`
 
-Defined in: [http-core/src/options/HttpConfig.ts:55](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L55)
+Defined in: [http-core/src/options/HttpConfig.ts:55](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L55)
 
 A custom replacer function for JSON serialization.
 
@@ -52,6 +52,6 @@ A custom replacer function for JSON serialization.
 
 > **spaces**: `string`
 
-Defined in: [http-core/src/options/HttpConfig.ts:47](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L47)
+Defined in: [http-core/src/options/HttpConfig.ts:47](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L47)
 
 The number of spaces to use for formatting JSON output.

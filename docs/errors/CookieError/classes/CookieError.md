@@ -6,7 +6,7 @@
 
 # Class: CookieError
 
-Defined in: [http-core/src/errors/CookieError.ts:6](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/errors/CookieError.ts#L6)
+Defined in: [http-core/src/errors/CookieError.ts:6](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/errors/CookieError.ts#L6)
 
 Custom error for cookie operations.
 
@@ -20,7 +20,7 @@ Custom error for cookie operations.
 
 > **new CookieError**(`message`, `options`): [`CookieError`](CookieError.md)
 
-Defined in: [http-core/src/errors/CookieError.ts:7](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/errors/CookieError.ts#L7)
+Defined in: [http-core/src/errors/CookieError.ts:7](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/errors/CookieError.ts#L7)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [http-core/src/errors/CookieError.ts:7](https://github.com/stonemjs/
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: core/dist/index.d.ts:2602
+Defined in: core/dist/index.d.ts:3372
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: core/dist/index.d.ts:2602
 
 > `readonly` `optional` **code**: `string`
 
-Defined in: core/dist/index.d.ts:2601
+Defined in: core/dist/index.d.ts:3371
 
 #### Inherited from
 
@@ -70,7 +70,7 @@ Defined in: core/dist/index.d.ts:2601
 
 > `readonly` `optional` **metadata**: `unknown`
 
-Defined in: core/dist/index.d.ts:2603
+Defined in: core/dist/index.d.ts:3373
 
 #### Inherited from
 
@@ -82,7 +82,7 @@ Defined in: core/dist/index.d.ts:2603
 
 > **toString**(`multiline`?): `string`
 
-Defined in: core/dist/index.d.ts:2624
+Defined in: core/dist/index.d.ts:3394
 
 Converts the error to a formatted string representation.
 
@@ -110,7 +110,7 @@ A formatted error string.
 
 > `static` **create**\<`T`\>(`message`, `options`?): `T`
 
-Defined in: core/dist/index.d.ts:2610
+Defined in: core/dist/index.d.ts:3380
 
 Create a RuntimeError.
 

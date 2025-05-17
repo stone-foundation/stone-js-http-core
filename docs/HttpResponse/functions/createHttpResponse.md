@@ -8,7 +8,7 @@
 
 > **createHttpResponse**(`content`, `statusCode`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [http-core/src/HttpResponse.ts:28](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/HttpResponse.ts#L28)
+Defined in: [http-core/src/HttpResponse.ts:28](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/HttpResponse.ts#L28)
 
 Create an OutgoingHttpResponse.
 

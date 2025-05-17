@@ -8,7 +8,7 @@
 
 > **getType**(`value`, `fallback`): `string`
 
-Defined in: [http-core/src/utils.ts:56](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/utils.ts#L56)
+Defined in: [http-core/src/utils.ts:56](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/utils.ts#L56)
 
 Get message content type.
 

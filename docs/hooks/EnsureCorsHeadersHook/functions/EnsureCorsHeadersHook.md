@@ -8,7 +8,7 @@
 
 > **EnsureCorsHeadersHook**(`options`): `Promise`\<`void`\>
 
-Defined in: [http-core/src/hooks/EnsureCorsHeadersHook.ts:27](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/hooks/EnsureCorsHeadersHook.ts#L27)
+Defined in: [http-core/src/hooks/EnsureCorsHeadersHook.ts:27](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/hooks/EnsureCorsHeadersHook.ts#L27)
 
 Ensure CORS headers at the "onBuildingRawResponse" stage.
 

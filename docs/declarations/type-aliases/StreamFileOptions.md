@@ -8,7 +8,7 @@
 
 > **StreamFileOptions**: `send.SendOptions` & `object`
 
-Defined in: [http-core/src/declarations.ts:66](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/declarations.ts#L66)
+Defined in: [http-core/src/declarations.ts:66](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L66)
 
 Represents a file stream options.
 

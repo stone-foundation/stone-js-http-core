@@ -6,7 +6,7 @@
 
 # Interface: BinaryFileResponseOptions
 
-Defined in: [http-core/src/BinaryFileResponse.ts:13](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/BinaryFileResponse.ts#L13)
+Defined in: [http-core/src/BinaryFileResponse.ts:13](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/BinaryFileResponse.ts#L13)
 
 Options for creating a BinaryFile HTTP Response.
 
@@ -24,7 +24,7 @@ Options for creating a BinaryFile HTTP Response.
 
 > `optional` **autoEncoding**: `boolean`
 
-Defined in: [http-core/src/BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/BinaryFileResponse.ts#L16)
+Defined in: [http-core/src/BinaryFileResponse.ts:16](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/BinaryFileResponse.ts#L16)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [http-core/src/BinaryFileResponse.ts:16](https://github.com/stonemjs
 
 > `optional` **autoEtag**: `boolean`
 
-Defined in: [http-core/src/BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/BinaryFileResponse.ts#L14)
+Defined in: [http-core/src/BinaryFileResponse.ts:14](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/BinaryFileResponse.ts#L14)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [http-core/src/BinaryFileResponse.ts:14](https://github.com/stonemjs
 
 > `optional` **autoLastModified**: `boolean`
 
-Defined in: [http-core/src/BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/BinaryFileResponse.ts#L17)
+Defined in: [http-core/src/BinaryFileResponse.ts:17](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/BinaryFileResponse.ts#L17)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: core/dist/index.d.ts:275
 
 > `optional` **contentDispositionType**: `string`
 
-Defined in: [http-core/src/BinaryFileResponse.ts:18](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/BinaryFileResponse.ts#L18)
+Defined in: [http-core/src/BinaryFileResponse.ts:18](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/BinaryFileResponse.ts#L18)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [http-core/src/BinaryFileResponse.ts:18](https://github.com/stonemjs
 
 > **file**: `string` \| `File`
 
-Defined in: [http-core/src/BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/BinaryFileResponse.ts#L15)
+Defined in: [http-core/src/BinaryFileResponse.ts:15](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/BinaryFileResponse.ts#L15)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [http-core/src/BinaryFileResponse.ts:15](https://github.com/stonemjs
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/OutgoingHttpResponse.ts#L22)
+Defined in: [http-core/src/OutgoingHttpResponse.ts:22](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/OutgoingHttpResponse.ts#L22)
 
 #### Inherited from
 

@@ -6,7 +6,7 @@
 
 # Interface: HttpCoreBlueprint
 
-Defined in: [http-core/src/options/HttpConfig.ts:204](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L204)
+Defined in: [http-core/src/options/HttpConfig.ts:204](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L204)
 
 Represents the core HTTP blueprint for the application.
 
@@ -24,7 +24,7 @@ Represents the core HTTP blueprint for the application.
 
 > **stone**: [`HttpCoreConfig`](HttpCoreConfig.md)
 
-Defined in: [http-core/src/options/HttpConfig.ts:205](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L205)
+Defined in: [http-core/src/options/HttpConfig.ts:205](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L205)
 
 Application-level settings, including environment, middleware, logging, and service registration.
 

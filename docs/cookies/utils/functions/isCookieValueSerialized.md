@@ -8,7 +8,7 @@
 
 > **isCookieValueSerialized**(`value`): `value is string`
 
-Defined in: [http-core/src/cookies/utils.ts:8](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/cookies/utils.ts#L8)
+Defined in: [http-core/src/cookies/utils.ts:8](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/cookies/utils.ts#L8)
 
 Check if the value is serialized.
 

@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_IM\_USED**: `226` = `226`
 
-Defined in: [http-core/src/constants.ts:28](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/constants.ts#L28)
+Defined in: [http-core/src/constants.ts:28](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/constants.ts#L28)

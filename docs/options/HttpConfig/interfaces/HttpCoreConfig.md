@@ -6,7 +6,7 @@
 
 # Interface: HttpCoreConfig
 
-Defined in: [http-core/src/options/HttpConfig.ts:197](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L197)
+Defined in: [http-core/src/options/HttpConfig.ts:197](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L197)
 
 Represents the core HTTP configuration options for the application.
 
@@ -127,7 +127,7 @@ The fallback locale used when a translation for the default locale is unavailabl
 
 > **http**: `Partial`\<[`HttpConfig`](HttpConfig.md)\>
 
-Defined in: [http-core/src/options/HttpConfig.ts:198](https://github.com/stonemjs/http-core/blob/16d44b2a21e4f4bf5742d6461b8beebcd7cc1d0b/src/options/HttpConfig.ts#L198)
+Defined in: [http-core/src/options/HttpConfig.ts:198](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L198)
 
 ***
 
