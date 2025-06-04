@@ -12,6 +12,19 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 
 * major internal restructuring and cleanup ([#52](https://github.com/stonemjs/http-core/issues/52)) ([5dc19e8](https://github.com/stonemjs/http-core/commit/5dc19e88b97a10a08254fe79d8071a9023d59ff6))
 
+This update delivers a comprehensive internal refactoring of the `http-core` module to align with the latest Stone.js standards and improve consistency across the ecosystem.
+
+#### Changes included:
+
+* Refactored core logic for `IncomingHttpEvent` and `OutgoingHttpResponse` to improve maintainability and clarity
+* Enhanced typings across all exported utilities for stronger TypeScript support
+* Introduced new HTTP features and options for response control and cookie handling
+* Improved test coverage with additional cases for edge scenarios
+* Fixed various internal inconsistencies and cleaned up outdated code
+* Minor typo fixes in documentation
+
+This refactoring ensures a more stable, extensible foundation for HTTP event processing in all Stone.js runtime adapters.
+
 ## [0.0.4](https://github.com/stonemjs/http-core/compare/v0.0.34...v0.0.4) (2025-01-21)
 
 
