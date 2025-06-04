@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [middleware/CompressionMiddleware](../README.md) / MetaCompressionMiddleware
+[HTTP Core Documentation](../../../README.md) / [middleware/CompressionMiddleware](../README.md) / MetaCompressionMiddleware
 
 # Variable: MetaCompressionMiddleware
 
 > `const` **MetaCompressionMiddleware**: `object`
 
-Defined in: [http-core/src/middleware/CompressionMiddleware.ts:101](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/CompressionMiddleware.ts#L101)
+Defined in: [src/middleware/CompressionMiddleware.ts:100](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/CompressionMiddleware.ts#L100)
 
 Meta Middleware for compressing response content.
 

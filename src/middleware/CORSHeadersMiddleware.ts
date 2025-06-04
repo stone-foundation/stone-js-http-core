@@ -1,7 +1,6 @@
-import { NextPipe } from '@stone-js/pipeline'
 import { MetaHandleCorsMiddleware } from './HandleCorsMiddleware'
 import { EnsureCorsHeadersHook } from '../hooks/EnsureCorsHeadersHook'
-import { BlueprintContext, IBlueprint, ClassType } from '@stone-js/core'
+import { BlueprintContext, IBlueprint, ClassType, NextMiddleware } from '@stone-js/core'
 
 /**
  * Blueprint Middleware for setting Cross-Origin Resource Sharing (CORS) headers in the HTTP response.
@@ -22,7 +21,7 @@ import { BlueprintContext, IBlueprint, ClassType } from '@stone-js/core'
  */
 export const CORSHeadersMiddleware = async (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promise<IBlueprint> => {
   context
     .blueprint

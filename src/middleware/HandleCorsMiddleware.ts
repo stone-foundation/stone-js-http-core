@@ -1,8 +1,7 @@
-import { NextPipe } from '@stone-js/pipeline'
 import { HttpCorsConfig } from '../options/HttpConfig'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
-import { IBlueprint, isNotEmpty, isEmpty } from '@stone-js/core'
+import { IBlueprint, isNotEmpty, isEmpty, NextMiddleware } from '@stone-js/core'
 
 /**
  * Kernel Middleware for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
@@ -35,7 +34,7 @@ export class HandleCorsMiddleware {
    * @param next - The next middleware function to continue processing the event.
    * @returns The outgoing HTTP response with CORS headers.
    */
-  async handle (event: IncomingHttpEvent, next: NextPipe<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
+  async handle (event: IncomingHttpEvent, next: NextMiddleware<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
     const options = this.getOptions()
     const response = await next(event)
 

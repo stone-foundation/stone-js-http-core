@@ -475,7 +475,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @param types - The content types to check.
    * @returns The best match, or false if no match is found.
    */
-  is (...types: string[]): string | false {
+  isType (...types: string[]): string | false {
     return typeIs.is(this.contentType, types.flat())
   }
 
@@ -493,7 +493,7 @@ export class IncomingHttpEvent extends IncomingEvent {
     if (acceptType !== false) return isArray(acceptType) ? acceptType[0] : acceptType
 
     // 2. Check Content-Type (valid if the request is sending data)
-    const contentType = this.is(...types)
+    const contentType = this.isType(...types)
     if (contentType !== false) return contentType
 
     // 3. Check if the request is AJAX/XHR (favoring JSON responses)
@@ -556,7 +556,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns True if the key exists, otherwise false.
    */
   hasJson (key: string): boolean {
-    return this.is('json') === 'json' && has(this.body, key)
+    return this.isType('json') === 'json' && has(this.body, key)
   }
 
   /**

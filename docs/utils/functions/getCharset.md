@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getCharset
+[HTTP Core Documentation](../../README.md) / [utils](../README.md) / getCharset
 
 # Function: getCharset()
 
 > **getCharset**(`value`, `fallback`): `string`
 
-Defined in: [http-core/src/utils.ts:71](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/utils.ts#L71)
+Defined in: [src/utils.ts:71](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L71)
 
 Get message content charset.
 

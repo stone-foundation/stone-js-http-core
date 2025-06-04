@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [options/HttpConfig](../README.md) / HttpJsonConfig
+[HTTP Core Documentation](../../../README.md) / [options/HttpConfig](../README.md) / HttpJsonConfig
 
 # Interface: HttpJsonConfig
 
-Defined in: [http-core/src/options/HttpConfig.ts:43](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L43)
+Defined in: [src/options/HttpConfig.ts:43](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/options/HttpConfig.ts#L43)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [http-core/src/options/HttpConfig.ts:43](https://github.com/stonemjs
 
 > **escape**: `boolean`
 
-Defined in: [http-core/src/options/HttpConfig.ts:51](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L51)
+Defined in: [src/options/HttpConfig.ts:51](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/options/HttpConfig.ts#L51)
 
 Whether to escape HTML characters in JSON output.
 
@@ -24,7 +24,7 @@ Whether to escape HTML characters in JSON output.
 
 > `optional` **replacer**: (`this`, `key`, `value`) => `unknown`
 
-Defined in: [http-core/src/options/HttpConfig.ts:55](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L55)
+Defined in: [src/options/HttpConfig.ts:55](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/options/HttpConfig.ts#L55)
 
 A custom replacer function for JSON serialization.
 
@@ -52,6 +52,6 @@ A custom replacer function for JSON serialization.
 
 > **spaces**: `string`
 
-Defined in: [http-core/src/options/HttpConfig.ts:47](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/options/HttpConfig.ts#L47)
+Defined in: [src/options/HttpConfig.ts:47](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/options/HttpConfig.ts#L47)
 
 The number of spaces to use for formatting JSON output.

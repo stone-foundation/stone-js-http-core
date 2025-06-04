@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / HttpMethods
+[HTTP Core Documentation](../../README.md) / [declarations](../README.md) / HttpMethods
 
 # Enumeration: HttpMethods
 
-Defined in: [http-core/src/declarations.ts:37](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L37)
+Defined in: [src/declarations.ts:37](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L37)
 
 Enum representing standard HTTP methods.
 
@@ -16,7 +16,7 @@ Enum representing standard HTTP methods.
 
 > **DELETE**: `"DELETE"`
 
-Defined in: [http-core/src/declarations.ts:43](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L43)
+Defined in: [src/declarations.ts:43](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L43)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [http-core/src/declarations.ts:43](https://github.com/stonemjs/http-
 
 > **GET**: `"GET"`
 
-Defined in: [http-core/src/declarations.ts:38](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L38)
+Defined in: [src/declarations.ts:38](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L38)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [http-core/src/declarations.ts:38](https://github.com/stonemjs/http-
 
 > **HEAD**: `"HEAD"`
 
-Defined in: [http-core/src/declarations.ts:40](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L40)
+Defined in: [src/declarations.ts:40](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L40)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [http-core/src/declarations.ts:40](https://github.com/stonemjs/http-
 
 > **OPTIONS**: `"OPTIONS"`
 
-Defined in: [http-core/src/declarations.ts:44](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L44)
+Defined in: [src/declarations.ts:44](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L44)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [http-core/src/declarations.ts:44](https://github.com/stonemjs/http-
 
 > **PATCH**: `"PATCH"`
 
-Defined in: [http-core/src/declarations.ts:42](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L42)
+Defined in: [src/declarations.ts:42](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L42)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [http-core/src/declarations.ts:42](https://github.com/stonemjs/http-
 
 > **POST**: `"POST"`
 
-Defined in: [http-core/src/declarations.ts:41](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L41)
+Defined in: [src/declarations.ts:41](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L41)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [http-core/src/declarations.ts:41](https://github.com/stonemjs/http-
 
 > **PUT**: `"PUT"`
 
-Defined in: [http-core/src/declarations.ts:39](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L39)
+Defined in: [src/declarations.ts:39](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L39)

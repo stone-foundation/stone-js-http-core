@@ -1,6 +1,5 @@
-import { IBlueprint } from '@stone-js/core'
-import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
+import { IBlueprint, IContainer } from '@stone-js/core'
 import { OutgoingHttpResponse } from './OutgoingHttpResponse'
 
 /**
@@ -17,7 +16,7 @@ export class JsonResponse extends OutgoingHttpResponse {
    * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, container?: Container): this | Promise<this> {
+  prepare (event: IncomingHttpEvent, container?: IContainer): this | Promise<this> {
     return this
       .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
       .setIncomingEventResolver(() => event)

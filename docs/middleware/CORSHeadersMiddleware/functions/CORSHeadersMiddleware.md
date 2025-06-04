@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [middleware/CORSHeadersMiddleware](../README.md) / CORSHeadersMiddleware
+[HTTP Core Documentation](../../../README.md) / [middleware/CORSHeadersMiddleware](../README.md) / CORSHeadersMiddleware
 
 # Function: CORSHeadersMiddleware()
 
 > **CORSHeadersMiddleware**(`context`, `next`): `Promise`\<`IBlueprint`\>
 
-Defined in: [http-core/src/middleware/CORSHeadersMiddleware.ts:23](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/CORSHeadersMiddleware.ts#L23)
+Defined in: [src/middleware/CORSHeadersMiddleware.ts:22](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/CORSHeadersMiddleware.ts#L22)
 
 Blueprint Middleware for setting Cross-Origin Resource Sharing (CORS) headers in the HTTP response.
 
@@ -27,7 +27,7 @@ The configuration context containing modules and blueprint.
 
 ### next
 
-`NextPipe`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>
+`NextMiddleware`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>
 
 The next function in the pipeline.
 

@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [cookies/utils](../README.md) / unsignCookieValue
+[HTTP Core Documentation](../../../README.md) / [cookies/utils](../README.md) / unsignCookieValue
 
 # Function: unsignCookieValue()
 
 > **unsignCookieValue**(`value`, `secret`): `string` \| `false`
 
-Defined in: [http-core/src/cookies/utils.ts:46](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/cookies/utils.ts#L46)
+Defined in: [src/cookies/utils.ts:46](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/cookies/utils.ts#L46)
 
 Unsign the cookie value.
 

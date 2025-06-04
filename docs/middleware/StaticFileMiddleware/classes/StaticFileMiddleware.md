@@ -1,23 +1,23 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [middleware/StaticFileMiddleware](../README.md) / StaticFileMiddleware
+[HTTP Core Documentation](../../../README.md) / [middleware/StaticFileMiddleware](../README.md) / StaticFileMiddleware
 
 # Class: StaticFileMiddleware
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:13](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L13)
+Defined in: [src/middleware/StaticFileMiddleware.ts:12](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/StaticFileMiddleware.ts#L12)
 
 Kernel Middleware for serving static files from a directory.
 If a static file is found, it serves the file; otherwise, the request is passed to the next middleware.
 
 ## Constructors
 
-### new StaticFileMiddleware()
+### Constructor
 
-> **new StaticFileMiddleware**(`container`): [`StaticFileMiddleware`](StaticFileMiddleware.md)
+> **new StaticFileMiddleware**(`container`): `StaticFileMiddleware`
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:23](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L23)
+Defined in: [src/middleware/StaticFileMiddleware.ts:22](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/StaticFileMiddleware.ts#L22)
 
 Create a new StaticFileMiddleware instance.
 
@@ -37,7 +37,7 @@ The service container to inject dependencies.
 
 #### Returns
 
-[`StaticFileMiddleware`](StaticFileMiddleware.md)
+`StaticFileMiddleware`
 
 ## Methods
 
@@ -45,7 +45,7 @@ The service container to inject dependencies.
 
 > **handle**(`event`, `next`): `Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: [http-core/src/middleware/StaticFileMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/StaticFileMiddleware.ts#L37)
+Defined in: [src/middleware/StaticFileMiddleware.ts:36](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/StaticFileMiddleware.ts#L36)
 
 Handle incoming HTTP events and serve static files if applicable.
 
@@ -59,7 +59,7 @@ The incoming HTTP event.
 
 ##### next
 
-`NextPipe`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
+`NextMiddleware`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
 The next middleware in the pipeline.
 

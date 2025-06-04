@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.34**](../README.md)
+[**HTTP Core Documentation**](../README.md)
 
 ***
 
-[HTTP Core Documentation](../modules.md) / OutgoingHttpResponse
+[HTTP Core Documentation](../README.md) / OutgoingHttpResponse
 
 # OutgoingHttpResponse
 

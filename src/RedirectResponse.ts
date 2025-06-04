@@ -1,7 +1,7 @@
 import { escape } from 'lodash-es'
 import { Buffer } from 'safe-buffer'
+import { IContainer } from '@stone-js/core'
 import { HttpError } from './errors/HttpError'
-import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
 
@@ -61,7 +61,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
    * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  async prepare (event: IncomingHttpEvent, container?: Container): Promise<this> {
+  async prepare (event: IncomingHttpEvent, container?: IContainer): Promise<this> {
     this.setIncomingEventResolver(() => event)
     this.prepareRedirection()
     await super.prepare(event, container)

@@ -1,24 +1,30 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / decoratorResponseCallback
+[HTTP Core Documentation](../../README.md) / [utils](../README.md) / decoratorResponseCallback
 
 # Function: decoratorResponseCallback()
 
 > **decoratorResponseCallback**\<`TTarget`, `TFunction`, `UReturn`\>(`target`, `responseCallback`): `TFunction`
 
-Defined in: [http-core/src/utils.ts:27](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/utils.ts#L27)
+Defined in: [src/utils.ts:27](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L27)
 
 Decorator response callback.
 
 ## Type Parameters
 
-• **TTarget**
+### TTarget
 
-• **TFunction**
+`TTarget`
 
-• **UReturn** *extends* [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
+### TFunction
+
+`TFunction`
+
+### UReturn
+
+`UReturn` *extends* [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
 ## Parameters
 

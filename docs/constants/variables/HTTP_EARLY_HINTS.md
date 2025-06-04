@@ -1,11 +1,11 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [constants](../README.md) / HTTP\_EARLY\_HINTS
+[HTTP Core Documentation](../../README.md) / [constants](../README.md) / HTTP\_EARLY\_HINTS
 
 # Variable: HTTP\_EARLY\_HINTS
 
 > `const` **HTTP\_EARLY\_HINTS**: `103` = `103`
 
-Defined in: [http-core/src/constants.ts:18](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/constants.ts#L18)
+Defined in: [src/constants.ts:18](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/constants.ts#L18)

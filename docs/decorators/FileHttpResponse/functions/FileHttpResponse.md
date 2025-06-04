@@ -1,20 +1,22 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [decorators/FileHttpResponse](../README.md) / FileHttpResponse
+[HTTP Core Documentation](../../../README.md) / [decorators/FileHttpResponse](../README.md) / FileHttpResponse
 
 # Function: FileHttpResponse()
 
 > **FileHttpResponse**\<`T`\>(`statusCode`, `headers`): `MethodDecorator`
 
-Defined in: [http-core/src/decorators/FileHttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/decorators/FileHttpResponse.ts#L26)
+Defined in: [src/decorators/FileHttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/decorators/FileHttpResponse.ts#L26)
 
 Decorator to mark a class method as a file outgoing http response.
 
 ## Type Parameters
 
-• **T** *extends* `Function` = `Function`
+### T
+
+`T` *extends* `Function` = `Function`
 
 ## Parameters
 

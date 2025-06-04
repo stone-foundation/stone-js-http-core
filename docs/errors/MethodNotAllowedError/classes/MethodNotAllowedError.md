@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [errors/MethodNotAllowedError](../README.md) / MethodNotAllowedError
+[HTTP Core Documentation](../../../README.md) / [errors/MethodNotAllowedError](../README.md) / MethodNotAllowedError
 
 # Class: MethodNotAllowedError
 
-Defined in: [http-core/src/errors/MethodNotAllowedError.ts:6](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/errors/MethodNotAllowedError.ts#L6)
+Defined in: [src/errors/MethodNotAllowedError.ts:6](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/MethodNotAllowedError.ts#L6)
 
 MethodNotAllowed http error.
 
@@ -16,11 +16,11 @@ MethodNotAllowed http error.
 
 ## Constructors
 
-### new MethodNotAllowedError()
+### Constructor
 
-> **new MethodNotAllowedError**(`message`, `options`): [`MethodNotAllowedError`](MethodNotAllowedError.md)
+> **new MethodNotAllowedError**(`message`, `options`): `MethodNotAllowedError`
 
-Defined in: [http-core/src/errors/MethodNotAllowedError.ts:7](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/errors/MethodNotAllowedError.ts#L7)
+Defined in: [src/errors/MethodNotAllowedError.ts:7](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/MethodNotAllowedError.ts#L7)
 
 #### Parameters
 
@@ -34,108 +34,8 @@ Defined in: [http-core/src/errors/MethodNotAllowedError.ts:7](https://github.com
 
 #### Returns
 
-[`MethodNotAllowedError`](MethodNotAllowedError.md)
+`MethodNotAllowedError`
 
 #### Overrides
 
 `RuntimeError.constructor`
-
-## Properties
-
-### cause?
-
-> `readonly` `optional` **cause**: `Error`
-
-Defined in: core/dist/index.d.ts:3372
-
-#### Inherited from
-
-`RuntimeError.cause`
-
-***
-
-### code?
-
-> `readonly` `optional` **code**: `string`
-
-Defined in: core/dist/index.d.ts:3371
-
-#### Inherited from
-
-`RuntimeError.code`
-
-***
-
-### metadata?
-
-> `readonly` `optional` **metadata**: `unknown`
-
-Defined in: core/dist/index.d.ts:3373
-
-#### Inherited from
-
-`RuntimeError.metadata`
-
-## Methods
-
-### toString()
-
-> **toString**(`multiline`?): `string`
-
-Defined in: core/dist/index.d.ts:3394
-
-Converts the error to a formatted string representation.
-
-#### Parameters
-
-##### multiline?
-
-`boolean`
-
-Determine if output value must be multiline or not.
-
-#### Returns
-
-`string`
-
-A formatted error string.
-
-#### Inherited from
-
-`RuntimeError.toString`
-
-***
-
-### create()
-
-> `static` **create**\<`T`\>(`message`, `options`?): `T`
-
-Defined in: core/dist/index.d.ts:3380
-
-Create a RuntimeError.
-
-#### Type Parameters
-
-• **T** *extends* `RuntimeError` = `RuntimeError`
-
-#### Parameters
-
-##### message
-
-`string`
-
-##### options?
-
-`ErrorOptions`
-
-The options to create a RuntimeError.
-
-#### Returns
-
-`T`
-
-A new RuntimeError instance.
-
-#### Inherited from
-
-`RuntimeError.create`

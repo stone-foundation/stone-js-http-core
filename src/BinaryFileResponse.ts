@@ -1,9 +1,8 @@
 import { Buffer } from 'safe-buffer'
-import { IBlueprint } from '@stone-js/core'
 import { HTTP_NOT_MODIFIED } from './constants'
 import contentDisposition from 'content-disposition'
-import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
+import { IBlueprint, IContainer } from '@stone-js/core'
 import { File, FilesystemError } from '@stone-js/filesystem'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
 
@@ -169,7 +168,7 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
    * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, container?: Container): this | Promise<this> {
+  prepare (event: IncomingHttpEvent, container?: IContainer): this | Promise<this> {
     this
       .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
       .setIncomingEventResolver(() => event)

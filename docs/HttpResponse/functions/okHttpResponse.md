@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [HttpResponse](../README.md) / okHttpResponse
+[HTTP Core Documentation](../../README.md) / [HttpResponse](../README.md) / okHttpResponse
 
 # Function: okHttpResponse()
 
 > **okHttpResponse**(`content`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [http-core/src/HttpResponse.ts:39](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/HttpResponse.ts#L39)
+Defined in: [src/HttpResponse.ts:39](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/HttpResponse.ts#L39)
 
 Create a 200(OK) OutgoingHttpResponse.
 

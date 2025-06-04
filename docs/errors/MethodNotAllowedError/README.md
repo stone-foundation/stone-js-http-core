@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / errors/MethodNotAllowedError
+[HTTP Core Documentation](../../README.md) / errors/MethodNotAllowedError
 
 # errors/MethodNotAllowedError
 

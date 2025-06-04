@@ -1,11 +1,11 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [constants](../README.md) / HTTP\_NOT\_IMPLEMENTED
+[HTTP Core Documentation](../../README.md) / [constants](../README.md) / HTTP\_NOT\_IMPLEMENTED
 
 # Variable: HTTP\_NOT\_IMPLEMENTED
 
 > `const` **HTTP\_NOT\_IMPLEMENTED**: `501` = `501`
 
-Defined in: [http-core/src/constants.ts:68](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/constants.ts#L68)
+Defined in: [src/constants.ts:68](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/constants.ts#L68)

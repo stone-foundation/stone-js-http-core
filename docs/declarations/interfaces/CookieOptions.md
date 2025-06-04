@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / CookieOptions
+[HTTP Core Documentation](../../README.md) / [declarations](../README.md) / CookieOptions
 
 # Interface: CookieOptions
 
-Defined in: [http-core/src/declarations.ts:24](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L24)
+Defined in: [src/declarations.ts:24](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L24)
 
 Options for configuring a cookie.
 
@@ -16,7 +16,7 @@ Options for configuring a cookie.
 
 > `optional` **domain**: `string`
 
-Defined in: [http-core/src/declarations.ts:27](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L27)
+Defined in: [src/declarations.ts:27](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L27)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [http-core/src/declarations.ts:27](https://github.com/stonemjs/http-
 
 > `optional` **expires**: `Date`
 
-Defined in: [http-core/src/declarations.ts:26](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L26)
+Defined in: [src/declarations.ts:26](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L26)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [http-core/src/declarations.ts:26](https://github.com/stonemjs/http-
 
 > `optional` **httpOnly**: `boolean`
 
-Defined in: [http-core/src/declarations.ts:30](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L30)
+Defined in: [src/declarations.ts:30](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L30)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [http-core/src/declarations.ts:30](https://github.com/stonemjs/http-
 
 > `optional` **maxAge**: `number`
 
-Defined in: [http-core/src/declarations.ts:28](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L28)
+Defined in: [src/declarations.ts:28](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L28)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [http-core/src/declarations.ts:28](https://github.com/stonemjs/http-
 
 > `optional` **path**: `string`
 
-Defined in: [http-core/src/declarations.ts:25](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L25)
+Defined in: [src/declarations.ts:25](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L25)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [http-core/src/declarations.ts:25](https://github.com/stonemjs/http-
 
 > `optional` **sameSite**: [`CookieSameSite`](../enumerations/CookieSameSite.md)
 
-Defined in: [http-core/src/declarations.ts:31](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L31)
+Defined in: [src/declarations.ts:31](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L31)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [http-core/src/declarations.ts:31](https://github.com/stonemjs/http-
 
 > `optional` **secure**: `boolean`
 
-Defined in: [http-core/src/declarations.ts:29](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L29)
+Defined in: [src/declarations.ts:29](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L29)

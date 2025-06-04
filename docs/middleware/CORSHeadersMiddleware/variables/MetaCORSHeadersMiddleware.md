@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [middleware/CORSHeadersMiddleware](../README.md) / MetaCORSHeadersMiddleware
+[HTTP Core Documentation](../../../README.md) / [middleware/CORSHeadersMiddleware](../README.md) / MetaCORSHeadersMiddleware
 
 # Variable: MetaCORSHeadersMiddleware
 
 > `const` **MetaCORSHeadersMiddleware**: `object`
 
-Defined in: [http-core/src/middleware/CORSHeadersMiddleware.ts:38](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/CORSHeadersMiddleware.ts#L38)
+Defined in: [src/middleware/CORSHeadersMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/CORSHeadersMiddleware.ts#L37)
 
 Represents the metadata for the CORSHeadersMiddleware.
 
@@ -35,7 +35,7 @@ The configuration context containing modules and blueprint.
 
 ##### next
 
-`NextPipe`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>
+`NextMiddleware`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>
 
 The next function in the pipeline.
 

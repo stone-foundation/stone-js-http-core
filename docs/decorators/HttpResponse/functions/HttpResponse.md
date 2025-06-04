@@ -1,20 +1,22 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [decorators/HttpResponse](../README.md) / HttpResponse
+[HTTP Core Documentation](../../../README.md) / [decorators/HttpResponse](../README.md) / HttpResponse
 
 # Function: HttpResponse()
 
 > **HttpResponse**\<`T`\>(`statusCode`, `headers`): `MethodDecorator`
 
-Defined in: [http-core/src/decorators/HttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/decorators/HttpResponse.ts#L26)
+Defined in: [src/decorators/HttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/decorators/HttpResponse.ts#L26)
 
 Decorator to mark a class method as an outgoing http response.
 
 ## Type Parameters
 
-• **T** *extends* `Function` = `Function`
+### T
+
+`T` *extends* `Function` = `Function`
 
 ## Parameters
 

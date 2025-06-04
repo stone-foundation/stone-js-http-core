@@ -1,23 +1,44 @@
-**HTTP Core Documentation v0.0.34**
+**HTTP Core Documentation**
 
 ***
 
-# Stone.js: HTTP Core
+# HTTP Core Documentation
 
-[![npm](https://img.shields.io/npm/l/@stone-js/core)](https://opensource.org/licenses/MIT)
-[![npm](https://img.shields.io/npm/v/@stone-js/http-core)](https://www.npmjs.com/package/@stone-js/http-core)
-[![npm](https://img.shields.io/npm/dm/@stone-js/http-core)](https://www.npmjs.com/package/@stone-js/http-core)
-![Maintenance](https://img.shields.io/maintenance/yes/2025)
-[![Publish Package to npmjs](https://github.com/stonemjs/http-core/actions/workflows/release.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/release.yml)
-[![Dependabot Status](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg?logo=dependabot)](https://github.com/stonemjs/http-core/network/updates)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+## Modules
 
-Stone.js Pure ESM HTTP core with typings.
-
----
-
-Get started with the [documentation](https://stonejs.com/docs/essentials/incoming-event.html).
-
-## Contributing
-
-See [Contributing Guide](https://github.com/stonemjs/http-core/blob/main/CONTRIBUTING.md).
+- [BinaryFileResponse](BinaryFileResponse/README.md)
+- [constants](constants/README.md)
+- [cookies/Cookie](cookies/Cookie/README.md)
+- [cookies/CookieCollection](cookies/CookieCollection/README.md)
+- [cookies/utils](cookies/utils/README.md)
+- [declarations](declarations/README.md)
+- [decorators/FileHttpResponse](decorators/FileHttpResponse/README.md)
+- [decorators/HtmlHttpResponse](decorators/HtmlHttpResponse/README.md)
+- [decorators/HttpResponse](decorators/HttpResponse/README.md)
+- [decorators/JsonHttpResponse](decorators/JsonHttpResponse/README.md)
+- [decorators/JsonpHttpResponse](decorators/JsonpHttpResponse/README.md)
+- [decorators/NoContentHttpResponse](decorators/NoContentHttpResponse/README.md)
+- [decorators/OkHttpResponse](decorators/OkHttpResponse/README.md)
+- [decorators/RedirectHttpResponse](decorators/RedirectHttpResponse/README.md)
+- [errors/BadRequestError](errors/BadRequestError/README.md)
+- [errors/CookieError](errors/CookieError/README.md)
+- [errors/ForbiddenError](errors/ForbiddenError/README.md)
+- [errors/HttpError](errors/HttpError/README.md)
+- [errors/InternalServerError](errors/InternalServerError/README.md)
+- [errors/MethodNotAllowedError](errors/MethodNotAllowedError/README.md)
+- [errors/NotFoundError](errors/NotFoundError/README.md)
+- [errors/UnauthorizedError](errors/UnauthorizedError/README.md)
+- [hooks/EnsureCorsHeadersHook](hooks/EnsureCorsHeadersHook/README.md)
+- [HttpErrorHandler](HttpErrorHandler/README.md)
+- [HttpResponse](HttpResponse/README.md)
+- [IncomingHttpEvent](IncomingHttpEvent/README.md)
+- [JsonpResponse](JsonpResponse/README.md)
+- [JsonResponse](JsonResponse/README.md)
+- [middleware/CompressionMiddleware](middleware/CompressionMiddleware/README.md)
+- [middleware/CORSHeadersMiddleware](middleware/CORSHeadersMiddleware/README.md)
+- [middleware/HandleCorsMiddleware](middleware/HandleCorsMiddleware/README.md)
+- [middleware/StaticFileMiddleware](middleware/StaticFileMiddleware/README.md)
+- [options/HttpConfig](options/HttpConfig/README.md)
+- [OutgoingHttpResponse](OutgoingHttpResponse/README.md)
+- [RedirectResponse](RedirectResponse/README.md)
+- [utils](utils/README.md)

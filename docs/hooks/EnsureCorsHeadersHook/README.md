@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / hooks/EnsureCorsHeadersHook
+[HTTP Core Documentation](../../README.md) / hooks/EnsureCorsHeadersHook
 
 # hooks/EnsureCorsHeadersHook
 

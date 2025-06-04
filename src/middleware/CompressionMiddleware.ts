@@ -1,6 +1,5 @@
-import { isNotEmpty } from '@stone-js/core'
-import { NextPipe } from '@stone-js/pipeline'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
+import { isNotEmpty, NextMiddleware } from '@stone-js/core'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
 
 /**
@@ -14,7 +13,7 @@ export class CompressionMiddleware {
    * @param next - The next middleware in the pipeline.
    * @returns The outgoing HTTP response.
    */
-  async handle (event: IncomingHttpEvent, next: NextPipe<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
+  async handle (event: IncomingHttpEvent, next: NextMiddleware<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
     const response = await next(event)
 
     if (this.isCompressibleContent(response.content)) {

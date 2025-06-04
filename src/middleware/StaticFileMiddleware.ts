@@ -1,10 +1,9 @@
 import { join } from 'node:path'
 import { File } from '@stone-js/filesystem'
-import { NextPipe } from '@stone-js/pipeline'
-import { IBlueprint, ILogger } from '@stone-js/core'
 import { IncomingHttpEvent } from '../IncomingHttpEvent'
 import { BinaryFileResponse } from '../BinaryFileResponse'
 import { OutgoingHttpResponse } from '../OutgoingHttpResponse'
+import { IBlueprint, ILogger, NextMiddleware } from '@stone-js/core'
 
 /**
  * Kernel Middleware for serving static files from a directory.
@@ -34,7 +33,7 @@ export class StaticFileMiddleware {
    * @returns The outgoing HTTP response.
    * @throws {ForbiddenError|InternalServerError} If access to the file is forbidden.
    */
-  async handle (event: IncomingHttpEvent, next: NextPipe<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
+  async handle (event: IncomingHttpEvent, next: NextMiddleware<IncomingHttpEvent, OutgoingHttpResponse>): Promise<OutgoingHttpResponse> {
     try {
       const file = this.makeFile(event)
 

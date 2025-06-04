@@ -7,13 +7,12 @@ import contentTypeLib from 'content-type'
 import { isFunction, isString } from 'lodash-es'
 import { createHash, Encoding } from 'node:crypto'
 import { HttpJsonConfig } from './options/HttpConfig'
-import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { CookieCollection } from './cookies/CookieCollection'
 import { InternalServerError } from './errors/InternalServerError'
 import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants'
 import { HeadersType, IOutgoingHttpResponse, CookieOptions } from './declarations'
-import { IBlueprint, OutgoingResponse, OutgoingResponseOptions } from '@stone-js/core'
+import { IBlueprint, OutgoingResponse, OutgoingResponseOptions, IContainer } from '@stone-js/core'
 
 /**
  * Options for creating an Outgoing HTTP Response.
@@ -639,7 +638,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, container?: Container): this | Promise<this> {
+  prepare (event: IncomingHttpEvent, container?: IContainer): this | Promise<this> {
     return this
       .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
       .setIncomingEventResolver(() => event)

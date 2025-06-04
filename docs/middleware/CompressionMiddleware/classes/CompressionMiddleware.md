@@ -1,24 +1,24 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [middleware/CompressionMiddleware](../README.md) / CompressionMiddleware
+[HTTP Core Documentation](../../../README.md) / [middleware/CompressionMiddleware](../README.md) / CompressionMiddleware
 
 # Class: CompressionMiddleware
 
-Defined in: [http-core/src/middleware/CompressionMiddleware.ts:9](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/CompressionMiddleware.ts#L9)
+Defined in: [src/middleware/CompressionMiddleware.ts:8](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/CompressionMiddleware.ts#L8)
 
 Kernel Middleware to compress response content based on the Accept-Encoding header.
 
 ## Constructors
 
-### new CompressionMiddleware()
+### Constructor
 
-> **new CompressionMiddleware**(): [`CompressionMiddleware`](CompressionMiddleware.md)
+> **new CompressionMiddleware**(): `CompressionMiddleware`
 
 #### Returns
 
-[`CompressionMiddleware`](CompressionMiddleware.md)
+`CompressionMiddleware`
 
 ## Methods
 
@@ -26,7 +26,7 @@ Kernel Middleware to compress response content based on the Accept-Encoding head
 
 > **handle**(`event`, `next`): `Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: [http-core/src/middleware/CompressionMiddleware.ts:17](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/middleware/CompressionMiddleware.ts#L17)
+Defined in: [src/middleware/CompressionMiddleware.ts:16](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/CompressionMiddleware.ts#L16)
 
 Compress the response content based on the Accept-Encoding header.
 
@@ -40,7 +40,7 @@ The incoming HTTP event.
 
 ##### next
 
-`NextPipe`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
+`NextMiddleware`\<[`IncomingHttpEvent`](../../../IncomingHttpEvent/classes/IncomingHttpEvent.md), [`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
 The next middleware in the pipeline.
 

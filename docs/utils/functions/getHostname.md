@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getHostname
+[HTTP Core Documentation](../../README.md) / [utils](../README.md) / getHostname
 
 # Function: getHostname()
 
-> **getHostname**(`ip`, `headers`, `options`): `string` \| `undefined`
+> **getHostname**(`ip`, `headers`, `options`): `undefined` \| `string`
 
-Defined in: [http-core/src/utils.ts:128](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/utils.ts#L128)
+Defined in: [src/utils.ts:128](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L128)
 
 Get hostname.
 
@@ -44,6 +44,6 @@ Options for trusted IPs, fallback, etc.
 
 ## Returns
 
-`string` \| `undefined`
+`undefined` \| `string`
 
 The hostname from the request.

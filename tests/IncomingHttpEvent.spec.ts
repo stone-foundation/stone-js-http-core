@@ -123,7 +123,7 @@ describe('IncomingHttpEvent', () => {
     const event = IncomingHttpEvent.create({ ...mockOptions, body: null, cookies: undefined, queryString: undefined, headers: {} })
     // @ts-expect-error - Accessing private property for testing purposes
     event.url = { pathname: '%', href: 'http://localhost/test#title' }
-    expect(event.is('json')).toBe(false)
+    expect(event.isType('json')).toBe(false)
     expect(event.range(200)).toBeUndefined()
     expect(event.getUri(true)).toBe('http://localhost/')
     expect(event.cookies).toBeInstanceOf(CookieCollection)
@@ -178,40 +178,40 @@ describe('IncomingHttpEvent', () => {
 
     it('should return type from is() if acceptsTypes fails', () => {
       event.acceptsTypes = () => false
-      event.is = vi.fn(() => 'xml')
+      event.isType = vi.fn(() => 'xml')
       expect(event.preferredType(['xml'])).toBe('xml')
-      expect(event.is).toBeCalledWith('xml')
+      expect(event.isType).toBeCalledWith('xml')
     })
 
     it('should return json if isXhr is true and no accepts or content-type', () => {
-      event.is = () => false
+      event.isType = () => false
       event.acceptsTypes = () => false
       event.getHeader = () => 'xmlhttprequest'
       expect(event.preferredType()).toBe('json')
     })
 
     it('should return text if userAgent contains curl and nothing else matches', () => {
-      event.is = () => false
+      event.isType = () => false
       event.acceptsTypes = () => false
       event.getHeader = vi.fn(() => 'curl/7.64.1')
       expect(event.preferredType()).toBe('text')
     })
 
     it('should return text if userAgent contains wget and nothing else matches', () => {
-      event.is = () => false
+      event.isType = () => false
       event.acceptsTypes = () => false
       event.getHeader = () => 'wget/1.20.3'
       expect(event.preferredType()).toBe('text')
     })
 
     it('should return defaultType if nothing matches', () => {
-      event.is = () => false
+      event.isType = () => false
       event.acceptsTypes = () => false
       expect(event.preferredType(['json', 'html'], 'html')).toBe('html')
     })
 
     it('should default to json when no args are passed and nothing matches', () => {
-      event.is = () => false
+      event.isType = () => false
       event.acceptsTypes = () => false
       expect(event.preferredType()).toBe('json')
     })

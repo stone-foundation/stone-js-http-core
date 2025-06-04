@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [declarations](../README.md) / StreamFileOptions
+[HTTP Core Documentation](../../README.md) / [declarations](../README.md) / StreamFileOptions
 
 # Type Alias: StreamFileOptions
 
-> **StreamFileOptions**: `send.SendOptions` & `object`
+> **StreamFileOptions** = `send.SendOptions` & `object`
 
-Defined in: [http-core/src/declarations.ts:66](https://github.com/stonemjs/http-core/blob/31e23030575a56f9e3df3cf0d1fec6cbcbb56275/src/declarations.ts#L66)
+Defined in: [src/declarations.ts:66](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/declarations.ts#L66)
 
 Represents a file stream options.
 
