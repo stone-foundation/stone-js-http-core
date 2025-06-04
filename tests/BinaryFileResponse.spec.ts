@@ -1,9 +1,8 @@
-import { File } from '../src/file/File'
 import { IBlueprint } from '@stone-js/core'
-import { FileError } from '../src/errors/FileError'
 import { HTTP_NOT_MODIFIED } from '../src/constants'
 import contentDisposition from 'content-disposition'
 import { IncomingHttpEvent } from '../src/IncomingHttpEvent'
+import { File, FilesystemError } from '@stone-js/filesystem'
 import { BinaryFileResponse, BinaryFileResponseOptions } from '../src/BinaryFileResponse'
 
 // Mocking dependencies
@@ -18,6 +17,8 @@ describe('BinaryFileResponse', () => {
     getMimeType: vi.fn().mockReturnValue('application/octet-stream'),
     isReadable: vi.fn().mockReturnValue(true),
     getPath: vi.fn().mockReturnValue('/file/path'),
+    isCompressed: vi.fn().mockReturnValue(false),
+    getExtension: vi.fn().mockReturnValue('.gzip'),
     getContent: vi.fn().mockReturnValue(Buffer.from('file content'))
   }
 
@@ -29,6 +30,7 @@ describe('BinaryFileResponse', () => {
     it('should create a BinaryFileResponse instance with valid options', () => {
       const options: BinaryFileResponseOptions = {
         file: '/file/path',
+        autoEncoding: true,
         autoLastModified: true,
         content: ''
       }
@@ -44,7 +46,7 @@ describe('BinaryFileResponse', () => {
         content: ''
       };
       (File.create as any).mockReturnValueOnce({ ...mockFile, isReadable: () => false })
-      expect(() => new BinaryFileResponse(options)).toThrow(FileError)
+      expect(() => new BinaryFileResponse(options)).toThrow(FilesystemError)
     })
   })
 
@@ -57,6 +59,19 @@ describe('BinaryFileResponse', () => {
       }
       const response = new BinaryFileResponse(options)
       expect(response.getHeader('ETag')).toBe(`"${Buffer.from(mockFile.getHashedContent()).toString('base64')}"`)
+    })
+  })
+
+  describe('autoEncoding', () => {
+    it('should set the Content-Encoding header based on file extension', () => {
+      const options: BinaryFileResponseOptions = {
+        file: '/file/path',
+        autoEncoding: true,
+        content: ''
+      }
+      mockFile.isCompressed.mockReturnValue(true)
+      const response = new BinaryFileResponse(options)
+      expect(response.getHeader('Content-Encoding')).toBe('gzip')
     })
   })
 
@@ -175,11 +190,11 @@ describe('BinaryFileResponse', () => {
 
   it('should throw an error if no File are provided', () => {
     // @ts-expect-error - Invalid file value for testing purposes
-    expect(() => BinaryFileResponse.file({ file: undefined, content: '' })).toThrow(FileError)
+    expect(() => BinaryFileResponse.file({ file: undefined, content: '' })).toThrow(FilesystemError)
   })
 
   it('should throw an error when calling setContent with a valid value', () => {
     const response = BinaryFileResponse.file({ file: '/file/path', content: '' })
-    expect(() => response.setContent('')).toThrow(FileError)
+    expect(() => response.setContent('')).toThrow(FilesystemError)
   })
 })

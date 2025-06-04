@@ -7,13 +7,12 @@ import contentTypeLib from 'content-type'
 import { isFunction, isString } from 'lodash-es'
 import { createHash, Encoding } from 'node:crypto'
 import { HttpJsonConfig } from './options/HttpConfig'
-import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { CookieCollection } from './cookies/CookieCollection'
 import { InternalServerError } from './errors/InternalServerError'
 import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants'
 import { HeadersType, IOutgoingHttpResponse, CookieOptions } from './declarations'
-import { IBlueprint, OutgoingResponse, OutgoingResponseOptions } from '@stone-js/core'
+import { IBlueprint, OutgoingResponse, OutgoingResponseOptions, IContainer } from '@stone-js/core'
 
 /**
  * Options for creating an Outgoing HTTP Response.
@@ -32,8 +31,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
 
   protected _charset?: Encoding
   protected _formats?: Record<string, () => unknown>
-  protected _blueprintResolver?: () => IBlueprint | undefined
   protected _incomingEventResolver?: () => IncomingHttpEvent
+  protected _blueprintResolver?: () => IBlueprint | undefined
 
   protected readonly _headers: Headers
   protected readonly _cookieCollection: CookieCollection
@@ -61,7 +60,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
 
     this
       .setHeaders(options.headers ?? {})
-      .setStatus(options.statusCode ?? 500)
+      .setStatus(options.statusCode ?? 200)
   }
 
   /**
@@ -200,14 +199,31 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   }
 
   /**
-   * Get a specific header by name.
+   * Get a header value.
    *
-   * @param key - The header name.
-   * @param fallback - A fallback value if the header does not exist.
-   * @returns The value of the header or the fallback value.
+   * @param name - The header name.
+   * @returns The header value or the fallback value.
    */
-  getHeader (key: string, fallback?: string): string | undefined {
-    return this._headers.get(key) ?? fallback
+  getHeader<TReturn = string>(name: string): TReturn | undefined
+
+  /**
+   * Get a header value.
+   *
+   * @param name - The header name.
+   * @param fallback - A fallback value if the header is not found.
+   * @returns The header value or the fallback value.
+   */
+  getHeader<TReturn = string>(name: string, fallback: TReturn): TReturn
+
+  /**
+   * Get a header value.
+   *
+   * @param name - The header name.
+   * @param fallback - A fallback value if the header is not found.
+   * @returns The header value or the fallback value.
+   */
+  getHeader<TReturn = string>(name: string, fallback?: TReturn): TReturn | undefined {
+    return (this._headers.get(name) ?? fallback) as TReturn | undefined
   }
 
   /**
@@ -289,12 +305,13 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * Clear a specific cookie from the response.
    *
    * @param name - The name of the cookie to be cleared.
+   * @param options - Optional settings for the cookie.
    * @param force - Whether to force the removal of the cookie, even if it doesn't exist.
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
-  clearCookie (name: string, force = false): this {
+  clearCookie (name: string, options: CookieOptions = {}, force = false): this {
     if (!isString(name)) { throw new InternalServerError('Cookie name must be a non-empty string.') }
-    this._cookieCollection.remove(name, force)
+    this._cookieCollection.remove(name, options, force)
     return this
   }
 
@@ -621,7 +638,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  prepare (event: IncomingHttpEvent, container?: Container): this | Promise<this> {
+  prepare (event: IncomingHttpEvent, container?: IContainer): this | Promise<this> {
     return this
       .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
       .setIncomingEventResolver(() => event)
@@ -630,6 +647,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
       .setContentTypeIfNeeded()
       .handleCacheHeaders()
       .prepareContentHeaders()
+      .setPrepared(true)
   }
 
   /**
@@ -739,6 +757,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     if (this.incomingEvent.isMethod('HEAD')) {
       this.setContent(null)
     }
+
     return this
   }
 
@@ -756,7 +775,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     } else {
       this._content = Buffer.from(String(this.content), this.charset)
       this._charset = undefined
-      return (this._content as { length: number }).length
+      return (this._content as Buffer).length
     }
   }
 

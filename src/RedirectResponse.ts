@@ -1,7 +1,7 @@
 import { escape } from 'lodash-es'
 import { Buffer } from 'safe-buffer'
+import { IContainer } from '@stone-js/core'
 import { HttpError } from './errors/HttpError'
-import { Container } from '@stone-js/service-container'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
 
@@ -18,6 +18,7 @@ export interface RedirectResponseOptions extends OutgoingHttpResponseOptions {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class RedirectResponse extends OutgoingHttpResponse {
+  static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_redirect_response'
   private targetUrl?: string | URL
 
   /**
@@ -37,7 +38,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
       this.setHeader('Cache-Control', 'public, max-age=31536000')
     }
 
-    this.setTargetUrl(options.url ?? options.content)
+    this.setTargetUrl(options.url ?? (options.content as any)?.redirect ?? options.content)
   }
 
   /**
@@ -60,11 +61,11 @@ export class RedirectResponse extends OutgoingHttpResponse {
    * @param container - The service container.
    * @returns The current instance of the response for chaining.
    */
-  async prepare (event: IncomingHttpEvent, container?: Container): Promise<this> {
+  async prepare (event: IncomingHttpEvent, container?: IContainer): Promise<this> {
     this.setIncomingEventResolver(() => event)
     this.prepareRedirection()
     await super.prepare(event, container)
-    return this
+    return this.setPrepared(true)
   }
 
   /**
@@ -93,11 +94,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
     if (this.targetUrl === 'back') {
       this.targetUrl = this.incomingEvent.getHeader('Referrer', '/')
     }
-
-    const matches = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\/?]+/.exec(String(this.targetUrl))
-    const position = (matches !== null) ? matches[0].length + 1 : 0
-
-    return this.setHeader('Location', `${String(this.targetUrl).slice(0, position)}${encodeURIComponent(String(this.targetUrl).slice(position))}`)
+    return this.setHeader('Location', String(this.targetUrl))
   }
 
   /**

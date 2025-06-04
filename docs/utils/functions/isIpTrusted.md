@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / isIpTrusted
+[HTTP Core Documentation](../../README.md) / [utils](../README.md) / isIpTrusted
 
 # Function: isIpTrusted()
 
 > **isIpTrusted**(`trusted`, `untrusted`): (`ip`) => `boolean`
 
-Defined in: [src/utils.ts:88](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L88)
+Defined in: [src/utils.ts:86](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L86)
 
 Check if IP is trusted or not.
 
@@ -28,9 +28,9 @@ Array of untrusted IPs or wildcard.
 
 ## Returns
 
-`Function`
-
 A function to verify if a given IP is trusted.
+
+> (`ip`): `boolean`
 
 ### Parameters
 

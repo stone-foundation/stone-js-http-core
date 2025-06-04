@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / getType
+[HTTP Core Documentation](../../README.md) / [utils](../README.md) / getType
 
 # Function: getType()
 
 > **getType**(`value`, `fallback`): `string`
 
-Defined in: [src/utils.ts:58](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L58)
+Defined in: [src/utils.ts:56](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L56)
 
 Get message content type.
 

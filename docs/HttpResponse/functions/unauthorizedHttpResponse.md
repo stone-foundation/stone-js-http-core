@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [HttpResponse](../README.md) / unauthorizedHttpResponse
+[HTTP Core Documentation](../../README.md) / [HttpResponse](../README.md) / unauthorizedHttpResponse
 
 # Function: unauthorizedHttpResponse()
 
 > **unauthorizedHttpResponse**(`content`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpResponse.ts:71](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpResponse.ts#L71)
+Defined in: [src/HttpResponse.ts:71](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/HttpResponse.ts#L71)
 
 Create a 401(Unauthorized) OutgoingHttpResponse.
 

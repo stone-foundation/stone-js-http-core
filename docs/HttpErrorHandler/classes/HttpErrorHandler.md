@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [HttpErrorHandler](../README.md) / HttpErrorHandler
+[HTTP Core Documentation](../../README.md) / [HttpErrorHandler](../README.md) / HttpErrorHandler
 
 # Class: HttpErrorHandler
 
-Defined in: [src/HttpErrorHandler.ts:17](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L17)
+Defined in: [src/HttpErrorHandler.ts:25](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/HttpErrorHandler.ts#L25)
 
 Class representing an HttpErrorHandler.
 
@@ -16,11 +16,11 @@ Class representing an HttpErrorHandler.
 
 ## Constructors
 
-### new HttpErrorHandler()
+### Constructor
 
-> **new HttpErrorHandler**(`options`): [`HttpErrorHandler`](HttpErrorHandler.md)
+> **new HttpErrorHandler**(`options`): `HttpErrorHandler`
 
-Defined in: [src/HttpErrorHandler.ts:25](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L25)
+Defined in: [src/HttpErrorHandler.ts:33](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/HttpErrorHandler.ts#L33)
 
 Create an HttpErrorHandler.
 
@@ -34,15 +34,15 @@ HttpErrorHandler options.
 
 #### Returns
 
-[`HttpErrorHandler`](HttpErrorHandler.md)
+`HttpErrorHandler`
 
 ## Methods
 
 ### handle()
 
-> **handle**(`error`, `_event`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
+> **handle**(`error`, `event`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpErrorHandler.ts:40](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/HttpErrorHandler.ts#L40)
+Defined in: [src/HttpErrorHandler.ts:48](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/HttpErrorHandler.ts#L48)
 
 Handle an error.
 
@@ -54,7 +54,7 @@ Handle an error.
 
 The error to handle.
 
-##### \_event
+##### event
 
 [`IncomingHttpEvent`](../../IncomingHttpEvent/classes/IncomingHttpEvent.md)
 

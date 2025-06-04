@@ -48,7 +48,7 @@ describe('OutgoingHttpResponse', () => {
     const cookie2 = response._cookieCollection.get('gender')
     expect(cookie2?.options.secure).toBe(false)
     // Clear
-    response.clearCookie('surname', true)
+    response.clearCookie('surname', {}, true)
     // @ts-expect-error - Testing private property
     expect(response._cookieCollection.has('surname')).toBe(false)
     // Clear all

@@ -1,14 +1,14 @@
-[**HTTP Core Documentation v0.0.34**](../../README.md)
+[**HTTP Core Documentation**](../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../modules.md) / [utils](../README.md) / streamFile
+[HTTP Core Documentation](../../README.md) / [utils](../README.md) / streamFile
 
 # Function: streamFile()
 
 > **streamFile**(`message`, `response`, `fileResponse`, `options`): `Promise`\<`void`\>
 
-Defined in: [src/utils.ts:223](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/utils.ts#L223)
+Defined in: [src/utils.ts:230](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L230)
 
 Stream files from the file system as an HTTP response.
 
@@ -30,13 +30,13 @@ The outgoing response.
 
 ### fileResponse
 
-[`File`](../../file/File/classes/File.md)
+`File`
 
 The binary file response to be streamed.
 
 ### options
 
-`SendOptions` & `object`
+[`StreamFileOptions`](../../declarations/type-aliases/StreamFileOptions.md)
 
 The options for streaming.
 

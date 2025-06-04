@@ -1,20 +1,22 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [decorators/NoContentHttpResponse](../README.md) / NoContentHttpResponse
+[HTTP Core Documentation](../../../README.md) / [decorators/NoContentHttpResponse](../README.md) / NoContentHttpResponse
 
 # Function: NoContentHttpResponse()
 
 > **NoContentHttpResponse**\<`T`\>(`headers`): `MethodDecorator`
 
-Defined in: [src/decorators/NoContentHttpResponse.ts:24](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/decorators/NoContentHttpResponse.ts#L24)
+Defined in: [src/decorators/NoContentHttpResponse.ts:24](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/decorators/NoContentHttpResponse.ts#L24)
 
 Decorator to mark a class method as a 204 outgoing http response.
 
 ## Type Parameters
 
-• **T** *extends* `Function` = `Function`
+### T
+
+`T` *extends* `Function` = `Function`
 
 ## Parameters
 

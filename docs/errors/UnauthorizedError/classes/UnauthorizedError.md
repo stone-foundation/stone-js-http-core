@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [errors/UnauthorizedError](../README.md) / UnauthorizedError
+[HTTP Core Documentation](../../../README.md) / [errors/UnauthorizedError](../README.md) / UnauthorizedError
 
 # Class: UnauthorizedError
 
-Defined in: [src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/UnauthorizedError.ts#L6)
+Defined in: [src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/UnauthorizedError.ts#L6)
 
 Unauthorized http error.
 
@@ -16,11 +16,11 @@ Unauthorized http error.
 
 ## Constructors
 
-### new UnauthorizedError()
+### Constructor
 
-> **new UnauthorizedError**(`message`, `options`): [`UnauthorizedError`](UnauthorizedError.md)
+> **new UnauthorizedError**(`message`, `options`): `UnauthorizedError`
 
-Defined in: [src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/UnauthorizedError.ts#L7)
+Defined in: [src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/UnauthorizedError.ts#L7)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http
 
 #### Returns
 
-[`UnauthorizedError`](UnauthorizedError.md)
+`UnauthorizedError`
 
 #### Overrides
 

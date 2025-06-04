@@ -1,3 +1,7 @@
+import send from 'send'
+import { IncomingHttpHeaders } from 'node:http'
+import { IncomingHttpEvent } from './IncomingHttpEvent'
+
 /**
  * Represents the type of HTTP headers.
  *
@@ -52,8 +56,19 @@ export interface IRoute {
   uri: string
   method: HttpMethod
   params: Record<string, unknown>
+  getOptions: <TReturn = unknown>(keys: string[]) => Record<string, TReturn>
   getParam: <TReturn = unknown>(name: string, fallback?: TReturn) => TReturn | undefined
 }
+
+/**
+ * Represents a file stream options.
+ */
+export type StreamFileOptions = send.SendOptions & { headers: IncomingHttpHeaders }
+
+/**
+ * Represents an incoming HTTP event.
+ */
+export type IIncomingHttpEvent = IncomingHttpEvent
 
 /**
  * Represents an outgoing HTTP response.

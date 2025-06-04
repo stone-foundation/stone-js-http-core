@@ -1,8 +1,8 @@
-[**HTTP Core Documentation v0.0.34**](../README.md)
+[**HTTP Core Documentation**](../README.md)
 
 ***
 
-[HTTP Core Documentation](../modules.md) / declarations
+[HTTP Core Documentation](../README.md) / declarations
 
 # declarations
 
@@ -21,3 +21,5 @@
 
 - [HeadersType](type-aliases/HeadersType.md)
 - [HttpMethod](type-aliases/HttpMethod.md)
+- [IIncomingHttpEvent](type-aliases/IIncomingHttpEvent.md)
+- [StreamFileOptions](type-aliases/StreamFileOptions.md)

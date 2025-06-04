@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [options/HttpConfig](../README.md) / HttpCoreBlueprint
+[HTTP Core Documentation](../../../README.md) / [options/HttpConfig](../README.md) / HttpCoreBlueprint
 
 # Interface: HttpCoreBlueprint
 
-Defined in: [src/options/HttpConfig.ts:192](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L192)
+Defined in: [src/options/HttpConfig.ts:204](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/options/HttpConfig.ts#L204)
 
 Represents the core HTTP blueprint for the application.
 
@@ -18,13 +18,16 @@ Represents the core HTTP blueprint for the application.
 
 \[`key`: `string`\]: `unknown`
 
+Allow adding any additional custom properties.
+The value of the custom properties can be of any type, depending on user requirements.
+
 ## Properties
 
 ### stone
 
 > **stone**: [`HttpCoreConfig`](HttpCoreConfig.md)
 
-Defined in: [src/options/HttpConfig.ts:193](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/options/HttpConfig.ts#L193)
+Defined in: [src/options/HttpConfig.ts:205](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/options/HttpConfig.ts#L205)
 
 Application-level settings, including environment, middleware, logging, and service registration.
 

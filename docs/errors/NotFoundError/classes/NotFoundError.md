@@ -1,12 +1,12 @@
-[**HTTP Core Documentation v0.0.34**](../../../README.md)
+[**HTTP Core Documentation**](../../../README.md)
 
 ***
 
-[HTTP Core Documentation](../../../modules.md) / [errors/NotFoundError](../README.md) / NotFoundError
+[HTTP Core Documentation](../../../README.md) / [errors/NotFoundError](../README.md) / NotFoundError
 
 # Class: NotFoundError
 
-Defined in: [src/errors/NotFoundError.ts:6](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/NotFoundError.ts#L6)
+Defined in: [src/errors/NotFoundError.ts:6](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/NotFoundError.ts#L6)
 
 NotFound http error.
 
@@ -16,11 +16,11 @@ NotFound http error.
 
 ## Constructors
 
-### new NotFoundError()
+### Constructor
 
-> **new NotFoundError**(`message`, `options`): [`NotFoundError`](NotFoundError.md)
+> **new NotFoundError**(`message`, `options`): `NotFoundError`
 
-Defined in: [src/errors/NotFoundError.ts:7](https://github.com/stonemjs/http-core/blob/424f80742be298e137f118c0e2e80266a8a78f3c/src/errors/NotFoundError.ts#L7)
+Defined in: [src/errors/NotFoundError.ts:7](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/NotFoundError.ts#L7)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [src/errors/NotFoundError.ts:7](https://github.com/stonemjs/http-cor
 
 #### Returns
 
-[`NotFoundError`](NotFoundError.md)
+`NotFoundError`
 
 #### Overrides
 

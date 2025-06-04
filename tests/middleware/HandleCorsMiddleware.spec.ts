@@ -13,14 +13,18 @@ const makeBlueprint = (options: any): IBlueprint => {
 }
 
 describe('HandleCorsMiddleware', () => {
-  const blueprint = makeBlueprint({
-    origin: '*',
-    preflightContinue: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    successStatus: 204
-  })
+  let blueprint: any
+  let outgoingResponse: OutgoingHttpResponse
 
-  const outgoingResponse = OutgoingHttpResponse.create({ content: 'Hello World', statusCode: 200 })
+  beforeEach(() => {
+    blueprint = makeBlueprint({
+      origin: '*',
+      preflightContinue: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      successStatus: 204
+    })
+    outgoingResponse = OutgoingHttpResponse.create({ content: 'Hello World', statusCode: 200 })
+  })
 
   it('should create an instance of HandleCorsMiddleware', () => {
     const middleware = new HandleCorsMiddleware({ blueprint })
@@ -29,7 +33,7 @@ describe('HandleCorsMiddleware', () => {
 
   it('should add CORS headers to the response', async () => {
     const blueprint = makeBlueprint({
-      origin: /example.com/,
+      origin: 'https://example.com',
       credentials: true,
       exposedHeaders: 'Accept,Content-Type',
       successStatus: 204
@@ -55,23 +59,21 @@ describe('HandleCorsMiddleware', () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
       source: {} as any,
-      method: HttpMethods.GET,
+      method: HttpMethods.OPTIONS,
       url: new URL('https://example.com'),
       headers: { 'access-control-request-headers': 'Content-Type' }
     })
-    // @ts-expect-error - Testing private property
-    incomingEvent.method = 'OPTIONS'
 
     const middleware = new HandleCorsMiddleware({ blueprint })
     const next = vi.fn().mockImplementation((ctx) => outgoingResponse)
     const response = await middleware.handle(incomingEvent, next)
 
-    expect(response?.getHeader('Access-Control-Allow-Origin')).toBe('*')
-    expect(response?.getHeader('Access-Control-Max-Age')).toBe('86400')
-    expect(response?.getHeader('Access-Control-Allow-Headers')).toBe('Content-Type')
-    expect(response?.getHeader('Vary')).toBe('Origin, Access-Control-Request-Headers')
-    expect(response?.getHeader('Access-Control-Allow-Methods')).toBe('GET,HEAD,PUT,PATCH,POST,DELETE')
     expect(response?.status).toBe(200)
+    expect(response?.getHeader('Access-Control-Max-Age')).toBe('86400')
+    expect(response?.getHeader('Access-Control-Allow-Origin')).toBe('*')
+    expect(response?.getHeader('Vary')).toBe('Access-Control-Request-Headers')
+    expect(response?.getHeader('Access-Control-Allow-Headers')).toBe('Content-Type')
+    expect(response?.getHeader('Access-Control-Allow-Methods')).toBe('GET,HEAD,PUT,PATCH,POST,DELETE')
   })
 
   it('should handle OPTIONS method and set preflight headers and return the response on preflightStop', async () => {
@@ -85,22 +87,20 @@ describe('HandleCorsMiddleware', () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
       source: {} as any,
-      method: HttpMethods.GET,
+      method: HttpMethods.OPTIONS,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
     })
-    // @ts-expect-error - Testing private property
-    incomingEvent.method = 'OPTIONS'
 
     const middleware = new HandleCorsMiddleware({ blueprint })
     const next = vi.fn().mockImplementation((ctx) => outgoingResponse)
     const response = await middleware.handle(incomingEvent, next)
 
     expect(response?.status).toBe(204)
+    expect(response?.getHeader('Vary')).toBe('Origin')
     expect(response?.getHeader('Access-Control-Max-Age')).toBe('86400')
     expect(response?.getHeader('Access-Control-Allow-Methods')).toBe('GET,HEAD')
     expect(response?.getHeader('Access-Control-Allow-Headers')).toBe('Content-Type')
-    expect(response?.getHeader('Vary')).toBe('Origin, Access-Control-Request-Headers')
     expect(response?.getHeader('Access-Control-Allow-Origin')).toBe('https://example.com')
   })
 
@@ -113,12 +113,10 @@ describe('HandleCorsMiddleware', () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
       source: {} as any,
-      method: HttpMethods.GET,
+      method: HttpMethods.OPTIONS,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
     })
-    // @ts-expect-error - Testing private property
-    incomingEvent.method = 'OPTIONS'
 
     const middleware = new HandleCorsMiddleware({ blueprint })
     const next = vi.fn().mockImplementation((ctx) => outgoingResponse)
@@ -140,12 +138,10 @@ describe('HandleCorsMiddleware', () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
       source: {} as any,
-      method: HttpMethods.GET,
+      method: HttpMethods.OPTIONS,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
     })
-    // @ts-expect-error - Testing private property
-    incomingEvent.method = 'OPTIONS'
 
     const middleware = new HandleCorsMiddleware({ blueprint })
     const next = vi.fn().mockImplementation((ctx) => outgoingResponse)
@@ -165,12 +161,10 @@ describe('HandleCorsMiddleware', () => {
     const incomingEvent = IncomingHttpEvent.create({
       ip: '127.0.0.1',
       source: {} as any,
-      method: HttpMethods.GET,
+      method: HttpMethods.OPTIONS,
       url: new URL('https://example.com'),
       headers: { origin: 'https://example.com' }
     })
-    // @ts-expect-error - Testing private property
-    incomingEvent.method = 'OPTIONS'
 
     const middleware = new HandleCorsMiddleware({ blueprint })
     const next = vi.fn().mockImplementation((ctx) => outgoingResponse)
