@@ -31,7 +31,7 @@ All components are designed to be used within the **Continuum Architecture** of 
 
 ```bash
 npm install @stone-js/http-core
-````
+```
 
 > Requires Node.js v18+ and native ESM support.
 
