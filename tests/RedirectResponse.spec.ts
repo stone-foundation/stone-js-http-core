@@ -52,14 +52,8 @@ describe('RedirectResponse', () => {
   })
 
   it('should throw an error when setting an empty URL', () => {
-    const options: RedirectResponseOptions = {
-      url: 'http://example.com',
-      statusCode: 302,
-      content: 'Redirecting...'
-    }
-
-    const response = new RedirectResponse(options)
-    expect(() => response.setTargetUrl(undefined as unknown as string)).toThrow(HttpError)
+    // @ts-expect-error - ignore type checking for testing purposes
+    expect(() => RedirectResponse.to(undefined)).toThrow(HttpError)
   })
 
   it('should prepare the response correctly', async () => {

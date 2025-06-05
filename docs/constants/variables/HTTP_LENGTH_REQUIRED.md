@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_LENGTH\_REQUIRED**: `411` = `411`
 
-Defined in: [src/constants.ts:49](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/constants.ts#L49)
+Defined in: [src/constants.ts:49](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/constants.ts#L49)

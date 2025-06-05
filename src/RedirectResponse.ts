@@ -22,6 +22,17 @@ export class RedirectResponse extends OutgoingHttpResponse {
   private targetUrl?: string | URL
 
   /**
+   * Create an instance of RedirectResponse from the given path or URL.
+   *
+   * @param url - The path or URL to redirect to. If a string is provided, it will be treated as a relative path.
+   * @param statusCode - The HTTP status code for the redirect (default is 302).
+   * @returns A new instance of RedirectResponse.
+   */
+  static to (url: string | URL, statusCode: number = 302): RedirectResponse {
+    return new RedirectResponse({ url, statusCode })
+  }
+
+  /**
    * Create a RedirectResponse.
    *
    * @param options - Options for creating the RedirectResponse.
