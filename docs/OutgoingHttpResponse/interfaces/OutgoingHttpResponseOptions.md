@@ -6,7 +6,7 @@
 
 # Interface: OutgoingHttpResponseOptions
 
-Defined in: [src/OutgoingHttpResponse.ts:20](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/OutgoingHttpResponse.ts#L20)
+Defined in: [src/OutgoingHttpResponse.ts:19](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/OutgoingHttpResponse.ts#L19)
 
 Options for creating an Outgoing HTTP Response.
 
@@ -29,4 +29,4 @@ Options for creating an Outgoing HTTP Response.
 
 > `optional` **headers**: [`HeadersType`](../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [src/OutgoingHttpResponse.ts:21](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/OutgoingHttpResponse.ts#L21)
+Defined in: [src/OutgoingHttpResponse.ts:20](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/OutgoingHttpResponse.ts#L20)

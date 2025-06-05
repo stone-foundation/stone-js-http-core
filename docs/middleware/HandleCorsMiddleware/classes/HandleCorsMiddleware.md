@@ -6,7 +6,7 @@
 
 # Class: HandleCorsMiddleware
 
-Defined in: [src/middleware/HandleCorsMiddleware.ts:14](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/middleware/HandleCorsMiddleware.ts#L14)
+Defined in: [src/middleware/HandleCorsMiddleware.ts:14](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/middleware/HandleCorsMiddleware.ts#L14)
 
 Kernel Middleware for adding Cross-Origin Resource Sharing (CORS) headers to HTTP responses.
 It allows controlling how clients from different origins can access the server's resources.
@@ -29,7 +29,7 @@ Mr. Stone <evensstone@gmail.com>
 
 > **new HandleCorsMiddleware**(`blueprint`): `HandleCorsMiddleware`
 
-Defined in: [src/middleware/HandleCorsMiddleware.ts:24](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/middleware/HandleCorsMiddleware.ts#L24)
+Defined in: [src/middleware/HandleCorsMiddleware.ts:24](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/middleware/HandleCorsMiddleware.ts#L24)
 
 Construct an instance of HandleCorsMiddleware.
 
@@ -53,7 +53,7 @@ The configuration blueprint used for managing CORS settings.
 
 > **handle**(`event`, `next`): `Promise`\<[`OutgoingHttpResponse`](../../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)\>
 
-Defined in: [src/middleware/HandleCorsMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/middleware/HandleCorsMiddleware.ts#L37)
+Defined in: [src/middleware/HandleCorsMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/middleware/HandleCorsMiddleware.ts#L37)
 
 Handle CORS by modifying the response headers based on the configuration.
 

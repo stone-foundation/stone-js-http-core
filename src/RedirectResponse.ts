@@ -18,7 +18,7 @@ export interface RedirectResponseOptions extends OutgoingHttpResponseOptions {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class RedirectResponse extends OutgoingHttpResponse {
-  static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_redirect_response'
+  static readonly OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_redirect_response'
   private targetUrl?: string | URL
 
   /**

@@ -8,7 +8,7 @@
 
 > **NoContentHttpResponse**\<`T`\>(`headers`): `MethodDecorator`
 
-Defined in: [src/decorators/NoContentHttpResponse.ts:24](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/decorators/NoContentHttpResponse.ts#L24)
+Defined in: [src/decorators/NoContentHttpResponse.ts:24](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/decorators/NoContentHttpResponse.ts#L24)
 
 Decorator to mark a class method as a 204 outgoing http response.
 

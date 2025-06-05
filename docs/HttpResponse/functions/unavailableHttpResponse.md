@@ -8,7 +8,7 @@
 
 > **unavailableHttpResponse**(`content`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpResponse.ts:126](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpResponse.ts#L126)
+Defined in: [src/HttpResponse.ts:126](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/HttpResponse.ts#L126)
 
 Create a 503(Service Unavailable) OutgoingHttpResponse.
 

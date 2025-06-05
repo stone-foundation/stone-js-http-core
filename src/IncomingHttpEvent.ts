@@ -35,7 +35,7 @@ export interface IncomingHttpEventOptions extends IncomingEventOptions {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class IncomingHttpEvent extends IncomingEvent {
-  static INCOMING_HTTP_EVENT = 'stonejs@incoming_http_event'
+  static readonly INCOMING_HTTP_EVENT = 'stonejs@incoming_http_event'
 
   /** The IP address of the client making the request. */
   public readonly ip: string
@@ -127,7 +127,7 @@ export class IncomingHttpEvent extends IncomingEvent {
   get decodedPathname (): string | undefined {
     try {
       return decodeURIComponent(this.url.pathname)
-    } catch (_) {
+    } catch {
       return undefined
     }
   }

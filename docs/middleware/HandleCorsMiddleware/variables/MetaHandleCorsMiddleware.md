@@ -8,7 +8,7 @@
 
 > `const` **MetaHandleCorsMiddleware**: `object`
 
-Defined in: [src/middleware/HandleCorsMiddleware.ts:241](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/middleware/HandleCorsMiddleware.ts#L241)
+Defined in: [src/middleware/HandleCorsMiddleware.ts:241](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/middleware/HandleCorsMiddleware.ts#L241)
 
 Meta Middleware for processing CORS headers.
 

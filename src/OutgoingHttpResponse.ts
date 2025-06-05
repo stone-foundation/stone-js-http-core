@@ -1,4 +1,3 @@
-
 import vary from 'vary'
 import mime from 'mime/lite'
 import statuses from 'statuses'

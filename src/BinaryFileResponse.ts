@@ -23,7 +23,7 @@ export interface BinaryFileResponseOptions extends OutgoingHttpResponseOptions {
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class BinaryFileResponse extends OutgoingHttpResponse {
-  static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_binary_file_response'
+  static readonly OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_binary_file_response'
   public readonly file: File
   private deleteFileAfterSent = false
 

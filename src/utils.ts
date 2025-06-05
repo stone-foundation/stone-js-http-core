@@ -56,7 +56,7 @@ export function isMultipart (value: IncomingMessage | string): boolean {
 export function getType (value: IncomingMessage | string, fallback: string = 'text/plain'): string {
   try {
     return contentType.parse(value).type
-  } catch (_) {
+  } catch {
     return fallback
   }
 }
@@ -71,7 +71,7 @@ export function getType (value: IncomingMessage | string, fallback: string = 'te
 export function getCharset (value: IncomingMessage | string, fallback: string = 'utf-8'): string {
   try {
     return contentType.parse(value).parameters.charset
-  } catch (_) {
+  } catch {
     return fallback
   }
 }
@@ -161,7 +161,7 @@ export function getHostname (
 
   if (hostname === undefined) return hostname
 
-  const match = hostname.match(/\[([0-9a-fA-F:]+)\]/) ?? undefined
+  const match = /\[([0-9a-fA-F:]+)\]/.exec(hostname) ?? undefined
 
   if (match !== undefined) {
     hostname = `[${match[1]}]`
