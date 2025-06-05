@@ -5,6 +5,14 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.1.1](https://github.com/stonemjs/http-core/compare/v0.1.0...v0.1.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* fix Inefficient regular expression, add security file and configure sonar cloud ([#55](https://github.com/stonemjs/http-core/issues/55)) ([0d36986](https://github.com/stonemjs/http-core/commit/0d369869add0f1630e9b5b2cd1421e57ee8d3865))
+* fix sonar issues ([#56](https://github.com/stonemjs/http-core/issues/56)) ([b831895](https://github.com/stonemjs/http-core/commit/b831895497ad78853c6297d03ab0449b614ea055))
+
 ## [0.1.0](https://github.com/stonemjs/http-core/compare/v0.0.4...v0.1.0) (2025-06-04)
 
 
