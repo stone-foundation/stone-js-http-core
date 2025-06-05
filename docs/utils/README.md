@@ -16,4 +16,5 @@
 - [getType](functions/getType.md)
 - [isIpTrusted](functions/isIpTrusted.md)
 - [isMultipart](functions/isMultipart.md)
+- [isValidHostname](functions/isValidHostname.md)
 - [streamFile](functions/streamFile.md)

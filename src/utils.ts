@@ -118,6 +118,29 @@ export function getProtocol (
 }
 
 /**
+ * Validate hostname.
+ *
+ * @param hostname - The hostname to validate.
+ * @returns True if the hostname is valid, false otherwise.
+ */
+export function isValidHostname (hostname: string): boolean {
+  // Allow IPv6 literals in brackets
+  if (/^\[([0-9a-fA-F:]+)\]$/.test(hostname)) return true
+
+  // Reject purely numeric strings (e.g., "12345")
+  if (/^\d+$/.test(hostname)) return false
+
+  // Reject if too long
+  if (hostname.length > 255) return false
+
+  // Reject if it ends with a dot (in normalized form)
+  if (hostname.endsWith('.')) return false
+
+  // Safe hostname pattern
+  return /^(?!-)[a-zA-Z0-9-]{1,63}(?:\.(?!-)[a-zA-Z0-9-]{1,63})*$/.test(hostname)
+}
+
+/**
  * Get hostname.
  *
  * @param ip - The IP address of the request.
@@ -146,7 +169,7 @@ export function getHostname (
     hostname = hostname.trim().replace(/:\d+$/, '').toLowerCase()
   }
 
-  if (!/^[[]?(?![0-9]+$)(?!-)(?:[a-zA-Z0-9-:\]]{1,63}\.?)+$/.test(hostname)) {
+  if (!isValidHostname(hostname)) {
     throw new BadRequestError(`SuspiciousOperation: Invalid Host ${hostname} with ip(${ip})`)
   }
 

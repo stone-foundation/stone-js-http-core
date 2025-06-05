@@ -8,7 +8,7 @@
 
 > **noContentHttpResponse**(`headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpResponse.ts:49](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/HttpResponse.ts#L49)
+Defined in: [src/HttpResponse.ts:49](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpResponse.ts#L49)
 
 Create a 204(No Content) OutgoingHttpResponse.
 

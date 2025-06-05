@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_INTERNAL\_SERVER\_ERROR**: `500` = `500`
 
-Defined in: [src/constants.ts:67](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/constants.ts#L67)
+Defined in: [src/constants.ts:67](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/constants.ts#L67)

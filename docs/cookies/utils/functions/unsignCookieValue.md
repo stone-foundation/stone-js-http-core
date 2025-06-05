@@ -8,7 +8,7 @@
 
 > **unsignCookieValue**(`value`, `secret`): `string` \| `false`
 
-Defined in: [src/cookies/utils.ts:46](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/cookies/utils.ts#L46)
+Defined in: [src/cookies/utils.ts:46](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/cookies/utils.ts#L46)
 
 Unsign the cookie value.
 

@@ -8,7 +8,7 @@
 
 > **serverErrorHttpResponse**(`content`, `headers`): [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md)
 
-Defined in: [src/HttpResponse.ts:115](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/HttpResponse.ts#L115)
+Defined in: [src/HttpResponse.ts:115](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpResponse.ts#L115)
 
 Create a 500(Internal Server Error) OutgoingHttpResponse.
 

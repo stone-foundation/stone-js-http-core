@@ -6,7 +6,7 @@
 
 # Class: UnauthorizedError
 
-Defined in: [src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/errors/UnauthorizedError.ts#L6)
+Defined in: [src/errors/UnauthorizedError.ts:6](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/UnauthorizedError.ts#L6)
 
 Unauthorized http error.
 
@@ -20,7 +20,7 @@ Unauthorized http error.
 
 > **new UnauthorizedError**(`message`, `options`): `UnauthorizedError`
 
-Defined in: [src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/errors/UnauthorizedError.ts#L7)
+Defined in: [src/errors/UnauthorizedError.ts:7](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/UnauthorizedError.ts#L7)
 
 #### Parameters
 
