@@ -128,7 +128,7 @@ export function isValidHostname (hostname: string): boolean {
   if (/^\[([0-9a-fA-F:]+)\]$/.test(hostname)) return true
 
   // Reject purely numeric strings (e.g., "12345")
-  if (/^[0-9]+$/.test(hostname)) return false
+  if (/^\d+$/.test(hostname)) return false
 
   // Reject if too long
   if (hostname.length > 255) return false

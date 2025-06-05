@@ -6,7 +6,7 @@
 
 # Class: CookieError
 
-Defined in: [src/errors/CookieError.ts:6](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/errors/CookieError.ts#L6)
+Defined in: [src/errors/CookieError.ts:6](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/CookieError.ts#L6)
 
 Custom error for cookie operations.
 
@@ -20,7 +20,7 @@ Custom error for cookie operations.
 
 > **new CookieError**(`message`, `options`): `CookieError`
 
-Defined in: [src/errors/CookieError.ts:7](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/errors/CookieError.ts#L7)
+Defined in: [src/errors/CookieError.ts:7](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/CookieError.ts#L7)
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Interface: HttpErrorHandlerOptions
 
-Defined in: [src/HttpErrorHandler.ts:18](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/HttpErrorHandler.ts#L18)
+Defined in: [src/HttpErrorHandler.ts:18](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpErrorHandler.ts#L18)
 
 HttpErrorHandler options.
 
@@ -16,4 +16,4 @@ HttpErrorHandler options.
 
 > **logger**: `ILogger`
 
-Defined in: [src/HttpErrorHandler.ts:19](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/HttpErrorHandler.ts#L19)
+Defined in: [src/HttpErrorHandler.ts:19](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpErrorHandler.ts#L19)

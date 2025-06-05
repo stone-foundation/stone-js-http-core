@@ -76,10 +76,5 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-# Index
-index.html
-
-# Examples
-examples/
-
-README_docs.md
+# SonarLint (VSCode)
+.sonarlint/

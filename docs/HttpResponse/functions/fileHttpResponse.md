@@ -8,7 +8,7 @@
 
 > **fileHttpResponse**(`file`, `statusCode`, `headers`, `contentDispositionType`, `autoEtag`, `autoLastModified`): [`BinaryFileResponse`](../../BinaryFileResponse/classes/BinaryFileResponse.md)
 
-Defined in: [src/HttpResponse.ts:177](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/HttpResponse.ts#L177)
+Defined in: [src/HttpResponse.ts:177](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpResponse.ts#L177)
 
 Create a 200(OK) file OutgoingHttpResponse.
 

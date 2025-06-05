@@ -6,7 +6,7 @@
 
 # Interface: IncomingHttpEventOptions
 
-Defined in: [src/IncomingHttpEvent.ts:19](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L19)
+Defined in: [src/IncomingHttpEvent.ts:19](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L19)
 
 IncomingHttpEventOptions interface.
 
@@ -24,7 +24,7 @@ IncomingHttpEventOptions interface.
 
 > `optional` **body**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/IncomingHttpEvent.ts:27](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L27)
+Defined in: [src/IncomingHttpEvent.ts:27](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L27)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/IncomingHttpEvent.ts:27](https://github.com/stonemjs/http-core/
 
 > `optional` **cookies**: [`CookieCollection`](../../cookies/CookieCollection/classes/CookieCollection.md)
 
-Defined in: [src/IncomingHttpEvent.ts:26](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L26)
+Defined in: [src/IncomingHttpEvent.ts:26](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L26)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/IncomingHttpEvent.ts:26](https://github.com/stonemjs/http-core/
 
 > `optional` **files**: `Record`\<`string`, `UploadedFile`[]\>
 
-Defined in: [src/IncomingHttpEvent.ts:28](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L28)
+Defined in: [src/IncomingHttpEvent.ts:28](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L28)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/IncomingHttpEvent.ts:28](https://github.com/stonemjs/http-core/
 
 > `optional` **headers**: `Headers` \| `Record`\<`string`, `string`\>
 
-Defined in: [src/IncomingHttpEvent.ts:29](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L29)
+Defined in: [src/IncomingHttpEvent.ts:29](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L29)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/IncomingHttpEvent.ts:29](https://github.com/stonemjs/http-core/
 
 > **ip**: `string`
 
-Defined in: [src/IncomingHttpEvent.ts:21](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L21)
+Defined in: [src/IncomingHttpEvent.ts:21](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L21)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/IncomingHttpEvent.ts:21](https://github.com/stonemjs/http-core/
 
 > `optional` **ips**: `string`[]
 
-Defined in: [src/IncomingHttpEvent.ts:22](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L22)
+Defined in: [src/IncomingHttpEvent.ts:22](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L22)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/IncomingHttpEvent.ts:22](https://github.com/stonemjs/http-core/
 
 > `optional` **method**: [`HttpMethods`](../../declarations/enumerations/HttpMethods.md)
 
-Defined in: [src/IncomingHttpEvent.ts:24](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L24)
+Defined in: [src/IncomingHttpEvent.ts:24](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L24)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/IncomingHttpEvent.ts:24](https://github.com/stonemjs/http-core/
 
 > `optional` **protocol**: `string`
 
-Defined in: [src/IncomingHttpEvent.ts:23](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L23)
+Defined in: [src/IncomingHttpEvent.ts:23](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L23)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [src/IncomingHttpEvent.ts:23](https://github.com/stonemjs/http-core/
 
 > `optional` **queryString**: `string`
 
-Defined in: [src/IncomingHttpEvent.ts:25](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L25)
+Defined in: [src/IncomingHttpEvent.ts:25](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L25)
 
 ***
 
@@ -96,4 +96,4 @@ Defined in: [src/IncomingHttpEvent.ts:25](https://github.com/stonemjs/http-core/
 
 > **url**: `URL`
 
-Defined in: [src/IncomingHttpEvent.ts:20](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/IncomingHttpEvent.ts#L20)
+Defined in: [src/IncomingHttpEvent.ts:20](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/IncomingHttpEvent.ts#L20)

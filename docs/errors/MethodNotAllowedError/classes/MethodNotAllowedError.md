@@ -6,7 +6,7 @@
 
 # Class: MethodNotAllowedError
 
-Defined in: [src/errors/MethodNotAllowedError.ts:6](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/errors/MethodNotAllowedError.ts#L6)
+Defined in: [src/errors/MethodNotAllowedError.ts:6](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/MethodNotAllowedError.ts#L6)
 
 MethodNotAllowed http error.
 
@@ -20,7 +20,7 @@ MethodNotAllowed http error.
 
 > **new MethodNotAllowedError**(`message`, `options`): `MethodNotAllowedError`
 
-Defined in: [src/errors/MethodNotAllowedError.ts:7](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/errors/MethodNotAllowedError.ts#L7)
+Defined in: [src/errors/MethodNotAllowedError.ts:7](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/MethodNotAllowedError.ts#L7)
 
 #### Parameters
 

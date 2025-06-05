@@ -8,7 +8,7 @@
 
 > **redirectHttpResponse**(`url`, `statusCode`, `headers`): [`RedirectResponse`](../../RedirectResponse/classes/RedirectResponse.md)
 
-Defined in: [src/HttpResponse.ts:196](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/HttpResponse.ts#L196)
+Defined in: [src/HttpResponse.ts:196](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/HttpResponse.ts#L196)
 
 Create a 302(Redirect) OutgoingHttpResponse.
 

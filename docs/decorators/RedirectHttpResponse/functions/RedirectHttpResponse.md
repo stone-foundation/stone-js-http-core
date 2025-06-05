@@ -8,7 +8,7 @@
 
 > **RedirectHttpResponse**\<`T`\>(`statusCode`, `headers`): `MethodDecorator`
 
-Defined in: [src/decorators/RedirectHttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/decorators/RedirectHttpResponse.ts#L26)
+Defined in: [src/decorators/RedirectHttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/decorators/RedirectHttpResponse.ts#L26)
 
 Decorator to mark a class method as a redirect outgoing http response.
 

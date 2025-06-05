@@ -8,7 +8,7 @@
 
 > **signCookieValue**(`value`, `secret`): `string`
 
-Defined in: [src/cookies/utils.ts:25](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/cookies/utils.ts#L25)
+Defined in: [src/cookies/utils.ts:25](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/cookies/utils.ts#L25)
 
 Sign the cookie value.
 
