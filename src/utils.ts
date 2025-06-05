@@ -146,7 +146,7 @@ export function getHostname (
     hostname = hostname.trim().replace(/:\d+$/, '').toLowerCase()
   }
 
-  if (!/^[[]?(?![0-9]+$)(?!-)(?:[a-zA-Z0-9-:\]]{1,63}\.?)+$/.test(hostname)) {
+  if (!/^[[]?(?![0-9]+$)(?!-)(?:[a-zA-Z0-9:\]]|-{1,63}\.?)+$/.test(hostname)) {
     throw new BadRequestError(`SuspiciousOperation: Invalid Host ${hostname} with ip(${ip})`)
   }
 
