@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_LOOP\_DETECTED**: `508` = `508`
 
-Defined in: [src/constants.ts:75](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/constants.ts#L75)
+Defined in: [src/constants.ts:75](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/constants.ts#L75)

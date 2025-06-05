@@ -6,7 +6,7 @@
 
 # Class: InternalServerError
 
-Defined in: [src/errors/InternalServerError.ts:6](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/InternalServerError.ts#L6)
+Defined in: [src/errors/InternalServerError.ts:6](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/errors/InternalServerError.ts#L6)
 
 InternalServer http error.
 
@@ -20,7 +20,7 @@ InternalServer http error.
 
 > **new InternalServerError**(`message`, `options`): `InternalServerError`
 
-Defined in: [src/errors/InternalServerError.ts:7](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/errors/InternalServerError.ts#L7)
+Defined in: [src/errors/InternalServerError.ts:7](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/errors/InternalServerError.ts#L7)
 
 #### Parameters
 

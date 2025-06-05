@@ -8,7 +8,7 @@
 
 > `const` **MetaCORSHeadersMiddleware**: `object`
 
-Defined in: [src/middleware/CORSHeadersMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/6577700bdede2420a5df45a338635c35547070ea/src/middleware/CORSHeadersMiddleware.ts#L37)
+Defined in: [src/middleware/CORSHeadersMiddleware.ts:37](https://github.com/stonemjs/http-core/blob/0d369869add0f1630e9b5b2cd1421e57ee8d3865/src/middleware/CORSHeadersMiddleware.ts#L37)
 
 Represents the metadata for the CORSHeadersMiddleware.
 

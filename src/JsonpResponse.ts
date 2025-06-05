@@ -7,7 +7,7 @@ import { HttpError } from './errors/HttpError'
  * @author Mr. Stone <evensstone@gmail.com>
  */
 export class JsonpResponse extends JsonResponse {
-  static OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_jsonp_response'
+  static readonly OUTGOING_HTTP_RESPONSE = 'stonejs@outgoing_http_jsonp_response'
   private callback?: string
 
   /**
