@@ -8,7 +8,7 @@
 
 > **HttpResponse**\<`T`\>(`statusCode`, `headers`): `MethodDecorator`
 
-Defined in: [src/decorators/HttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/decorators/HttpResponse.ts#L26)
+Defined in: [src/decorators/HttpResponse.ts:26](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/decorators/HttpResponse.ts#L26)
 
 Decorator to mark a class method as an outgoing http response.
 

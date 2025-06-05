@@ -6,7 +6,7 @@
 
 # Class: BadRequestError
 
-Defined in: [src/errors/BadRequestError.ts:6](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/BadRequestError.ts#L6)
+Defined in: [src/errors/BadRequestError.ts:6](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/errors/BadRequestError.ts#L6)
 
 BadRequestError http error.
 
@@ -20,7 +20,7 @@ BadRequestError http error.
 
 > **new BadRequestError**(`message`, `options`): `BadRequestError`
 
-Defined in: [src/errors/BadRequestError.ts:7](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/errors/BadRequestError.ts#L7)
+Defined in: [src/errors/BadRequestError.ts:7](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/errors/BadRequestError.ts#L7)
 
 #### Parameters
 

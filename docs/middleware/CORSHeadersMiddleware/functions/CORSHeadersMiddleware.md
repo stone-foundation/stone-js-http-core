@@ -8,7 +8,7 @@
 
 > **CORSHeadersMiddleware**(`context`, `next`): `Promise`\<`IBlueprint`\>
 
-Defined in: [src/middleware/CORSHeadersMiddleware.ts:22](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/middleware/CORSHeadersMiddleware.ts#L22)
+Defined in: [src/middleware/CORSHeadersMiddleware.ts:22](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/middleware/CORSHeadersMiddleware.ts#L22)
 
 Blueprint Middleware for setting Cross-Origin Resource Sharing (CORS) headers in the HTTP response.
 

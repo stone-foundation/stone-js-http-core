@@ -8,7 +8,7 @@
 
 > **OkHttpResponse**\<`T`\>(`headers`): `MethodDecorator`
 
-Defined in: [src/decorators/OkHttpResponse.ts:24](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/decorators/OkHttpResponse.ts#L24)
+Defined in: [src/decorators/OkHttpResponse.ts:24](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/decorators/OkHttpResponse.ts#L24)
 
 Decorator to mark a class method as a 200 outgoing http response.
 

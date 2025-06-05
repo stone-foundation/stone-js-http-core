@@ -8,7 +8,7 @@
 
 > **streamFile**(`message`, `response`, `fileResponse`, `options`): `Promise`\<`void`\>
 
-Defined in: [src/utils.ts:230](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/utils.ts#L230)
+Defined in: [src/utils.ts:230](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/utils.ts#L230)
 
 Stream files from the file system as an HTTP response.
 

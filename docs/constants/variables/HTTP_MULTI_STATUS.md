@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_MULTI\_STATUS**: `207` = `207`
 
-Defined in: [src/constants.ts:26](https://github.com/stonemjs/http-core/blob/f8360abdd8e841f59cefcfadd322bcf66d52c95b/src/constants.ts#L26)
+Defined in: [src/constants.ts:26](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/constants.ts#L26)
