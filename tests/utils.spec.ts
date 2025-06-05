@@ -1,10 +1,10 @@
 import { createWriteStream } from 'node:fs'
+import { NotFoundError } from '../src/errors/NotFoundError'
 import { BadRequestError } from '../src/errors/BadRequestError'
 import { InternalServerError } from '../src/errors/InternalServerError'
 import { File, FilesystemError, UploadedFile } from '@stone-js/filesystem'
 import { IncomingMessage, IncomingHttpHeaders, OutgoingMessage } from 'http'
-import { getCharset, getHostname, getProtocol, getType, isIpTrusted, isMultipart, streamFile, getFilesUploads } from '../src/utils'
-import { NotFoundError } from '../src/errors/NotFoundError'
+import { getCharset, getHostname, getProtocol, getType, isIpTrusted, isMultipart, streamFile, getFilesUploads, isValidHostname } from '../src/utils'
 
 // Mocking values and spies
 let MockSend: any
@@ -155,6 +155,55 @@ describe('Utility Functions', () => {
     it('should return forwarded protocol if IP is trusted', () => {
       const result = getProtocol('192.168.1.1', { 'x-forwarded-proto': 'https' }, false, { trustedIp: ['*'], untrustedIp: [] })
       expect(result).toBe('https')
+    })
+  })
+
+  describe('isValidHostname', () => {
+    it('accepts simple hostnames', () => {
+      expect(isValidHostname('example.com')).toBe(true)
+      expect(isValidHostname('api.dev.example.com')).toBe(true)
+      expect(isValidHostname('localhost')).toBe(true)
+    })
+
+    it('accepts IPv6 literals in brackets', () => {
+      expect(isValidHostname('[2001:db8::1]')).toBe(true)
+      expect(isValidHostname('[fe80::1ff:fe23:4567:890a]')).toBe(true)
+    })
+
+    it('rejects malformed IPv6 in brackets', () => {
+      expect(isValidHostname('[2001:db8::1')).toBe(false) // Missing closing ]
+      expect(isValidHostname('2001:db8::1]')).toBe(false) // Missing opening [
+      expect(isValidHostname('[ghij::1234]')).toBe(false) // Invalid hex
+    })
+
+    it('rejects numeric-only strings', () => {
+      expect(isValidHostname('123')).toBe(false)
+      expect(isValidHostname('00123')).toBe(false)
+    })
+
+    it('rejects labels starting with dash', () => {
+      expect(isValidHostname('-example.com')).toBe(false)
+      expect(isValidHostname('api.-example.com')).toBe(false)
+    })
+
+    it('rejects trailing dot', () => {
+      expect(isValidHostname('example.com.')).toBe(false)
+    })
+
+    it('rejects double dots or empty labels', () => {
+      expect(isValidHostname('a..b')).toBe(false)
+      expect(isValidHostname('.example.com')).toBe(false)
+      expect(isValidHostname('example..com')).toBe(false)
+    })
+
+    it('rejects hostnames exceeding 255 characters', () => {
+      const longLabel = 'a'.repeat(64)
+      const longHost = Array(5).fill(longLabel).join('.')
+      expect(isValidHostname(longHost)).toBe(false)
+    })
+
+    it('rejects empty string', () => {
+      expect(isValidHostname('')).toBe(false)
     })
   })
 

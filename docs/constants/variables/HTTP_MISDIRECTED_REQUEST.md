@@ -8,4 +8,4 @@
 
 > `const` **HTTP\_MISDIRECTED\_REQUEST**: `421` = `421`
 
-Defined in: [src/constants.ts:57](https://github.com/stonemjs/http-core/blob/0d24f1311c8ffc69c0f21ab48badb00539c57ea4/src/constants.ts#L57)
+Defined in: [src/constants.ts:57](https://github.com/stonemjs/http-core/blob/38177eda1505fdb30323b11ec31ef2a0f0840267/src/constants.ts#L57)
