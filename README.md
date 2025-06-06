@@ -6,7 +6,7 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2025)
 [![Build Status](https://github.com/stonemjs/http-core/actions/workflows/main.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/main.yml)
 [![Publish Package to npmjs](https://github.com/stonemjs/http-core/actions/workflows/release.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/release.yml)
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=stonemjs_http-core)](https://sonarcloud.io/summary/new_code?id=stonemjs_http-core)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=stonemjs_http-core&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=stonemjs_http-core)
 [![codecov](https://codecov.io/gh/stonemjs/http-core/graph/badge.svg?token=5MKS9179YL)](https://codecov.io/gh/stonemjs/http-core)
 [![Security Policy](https://img.shields.io/badge/Security-Policy-blue.svg)](./SECURITY.md)
 [![CodeQL](https://github.com/stonemjs/http-core/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/stonemjs/http-core/security/code-scanning)
