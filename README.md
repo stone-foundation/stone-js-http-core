@@ -4,14 +4,18 @@
 [![npm](https://img.shields.io/npm/v/@stone-js/http-core)](https://www.npmjs.com/package/@stone-js/http-core)
 [![npm](https://img.shields.io/npm/dm/@stone-js/http-core)](https://www.npmjs.com/package/@stone-js/http-core)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025)
-[![Build Status](https://github.com/stonemjs/http-core/actions/workflows/main.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/main.yml)
-[![Publish Package to npmjs](https://github.com/stonemjs/http-core/actions/workflows/release.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/release.yml)
+[![Build Status (CI)](https://github.com/stonemjs/http-core/actions/workflows/main.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/main.yml)
+[![Publish Package to npmjs (CD)](https://github.com/stonemjs/http-core/actions/workflows/release.yml/badge.svg)](https://github.com/stonemjs/http-core/actions/workflows/release.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=stonemjs_http-core&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=stonemjs_http-core)
-[![codecov](https://codecov.io/gh/stonemjs/http-core/graph/badge.svg?token=5MKS9179YL)](https://codecov.io/gh/stonemjs/http-core)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=stonemjs_http-core&metric=coverage)](https://sonarcloud.io/summary/new_code?id=stonemjs_http-core)
 [![Security Policy](https://img.shields.io/badge/Security-Policy-blue.svg)](./SECURITY.md)
 [![CodeQL](https://github.com/stonemjs/http-core/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/stonemjs/http-core/security/code-scanning)
 [![Dependabot Status](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/stonemjs/http-core/network/updates)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
+Stone.js HTTP Core offers a simple, consistent API for handling HTTP requests and responses across any JavaScript runtime.
+
+---
 
 ## Overview
 
@@ -71,4 +75,3 @@ Explore the full documentation: https://stonejs.com
 ## Contributing
 
 See [Contributing Guide](https://github.com/stonemjs/http-core/blob/main/CONTRIBUTING.md)
-
