@@ -1,16 +1,16 @@
 {
   "name": "@stone-js/http-core",
   "version": "0.1.1",
-  "description": "Stone.js HTTP Core",
+  "description": "Stone.js HTTP Core offers a simple, consistent API for handling HTTP requests and responses across any JavaScript runtime.",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/stonemjs/http-core.git"
+    "url": "git+ssh://git@github.com/stone-foundation/stone-js-http-core.git"
   },
-  "homepage": "https://stonejs.com",
+  "homepage": "https://stonejs.dev",
   "bugs": {
-    "url": "https://github.com/stonemjs/http-core/issues"
+    "url": "https://github.com/stone-foundation/stone-js-http-core/issues"
   },
   "keywords": [
     "Http",
@@ -87,7 +87,7 @@
     "@types/fresh": "^0.5.3",
     "@types/lodash-es": "^4.17.12",
     "@types/mime": "^3.0.4",
-    "@types/node": "^22.15.29",
+    "@types/node": "^24.0.0",
     "@types/range-parser": "^1.2.7",
     "@types/send": "^0.17.5",
     "@types/statuses": "^2.0.5",
