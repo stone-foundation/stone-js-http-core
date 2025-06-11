@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.1.2](https://github.com/stone-foundation/stone-js-http-core/compare/v0.1.1...v0.1.2) (2025-06-11)
+
+
+### Miscellaneous Chores
+
+* set right value in sonar config ([#67](https://github.com/stone-foundation/stone-js-http-core/issues/67)) ([507fb10](https://github.com/stone-foundation/stone-js-http-core/commit/507fb10c180f8a76e1a93fdf0749d066083f525d))
+
 ## [0.1.1](https://github.com/stone-foundation/stone-js-http-core/compare/v0.1.0...v0.1.1) (2025-06-05)
 
 
