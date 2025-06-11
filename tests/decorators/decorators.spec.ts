@@ -105,13 +105,13 @@ describe('Decorators', () => {
 
   describe('RedirectHttpResponse', () => {
     it('should return a RedirectResponse', async () => {
-      const method = RedirectHttpResponse(301)(() => 'https://stonejs.com', { name: 'save', kind: 'method' } as any, {}) as () => Promise<RedirectResponse>
+      const method = RedirectHttpResponse(301)(() => 'https://stonejs.dev', { name: 'save', kind: 'method' } as any, {}) as () => Promise<RedirectResponse>
       const response = await method()
       expect(response).toBeInstanceOf(RedirectResponse)
       expect(response.statusCode).toBe(301)
       expect(response.headers.keys.length).toBe(0)
       // @ts-expect-error - ignore type checking for testing purposes
-      expect(response.targetUrl).toEqual('https://stonejs.com')
+      expect(response.targetUrl).toEqual('https://stonejs.dev')
     })
   })
 })
