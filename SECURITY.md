@@ -20,7 +20,7 @@ If you discover a security vulnerability in Stone.js or any of its official pack
 
 ### How to report
 
-- Email: **security@stonejs.com**
+- Email: **security@stonejs.dev**
 - Subject: `Security Issue: [Your short description]`
 - Include:
   - A detailed description of the vulnerability
@@ -53,7 +53,7 @@ We follow a **coordinated disclosure** policy:
 
 We deeply appreciate the responsible security researchers and users who help keep Stone.js secure.
 
-If you’d like to contribute to security audits, penetration testing, or analysis of Stone.js internals, feel free to reach out via [security@stonejs.com](mailto:security@stonejs.com).
+If you’d like to contribute to security audits, penetration testing, or analysis of Stone.js internals, feel free to reach out via [security@stonejs.dev](mailto:security@stonejs.dev).
 
 ## Thank You
 

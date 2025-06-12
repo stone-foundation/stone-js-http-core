@@ -39,8 +39,8 @@ All components are designed to be used within the **Continuum Architecture** of 
 npm install @stone-js/http-core
 ```
 
-> [!IMPORTANT]
-> Requires Node.js v18+ and native ESM support.
+> \[!IMPORTANT]
+> This package is **pure ESM**. Ensure your `package.json` includes `"type": "module"` or configure your bundler appropriately.
 
 ## Usage Example
 
