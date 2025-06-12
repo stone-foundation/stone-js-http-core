@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.1.3](https://github.com/stone-foundation/stone-js-http-core/compare/v0.1.2...v0.1.3) (2025-06-12)
+
+
+### Miscellaneous Chores
+
+* fix dependabot and sonarcloud issues ([#69](https://github.com/stone-foundation/stone-js-http-core/issues/69)) ([966e820](https://github.com/stone-foundation/stone-js-http-core/commit/966e82062ff7370a270a27b427e788d72562fafb))
+
 ## [0.1.2](https://github.com/stone-foundation/stone-js-http-core/compare/v0.1.1...v0.1.2) (2025-06-11)
 
 
