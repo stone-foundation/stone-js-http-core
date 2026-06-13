@@ -1344,7 +1344,7 @@ The URI with or without the domain.
 ### getUser()
 
 ```ts
-getUser<T>(): undefined | T;
+getUser<T>(): T;
 ```
 
 Get the user instance.
@@ -1353,11 +1353,11 @@ Get the user instance.
 
 ##### T
 
-`T`
+`T` = `undefined`
 
 #### Returns
 
-`undefined` \| `T`
+`T`
 
 The user object, resolved through a user resolver function if available.
 

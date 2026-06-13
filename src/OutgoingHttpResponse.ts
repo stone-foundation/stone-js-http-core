@@ -638,12 +638,15 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of the response for chaining.
    */
   prepare (event: IncomingHttpEvent, container?: IContainer): this | Promise<this> {
+    const blueprint = container?.make<IBlueprint>('blueprint')
+    const jsonConfig = blueprint?.get('stone.http.json', {}) ?? {}
     return this
-      .setBlueprintResolver(() => container?.make<IBlueprint>('blueprint'))
+      .setBlueprintResolver(() => blueprint)
       .setIncomingEventResolver(() => event)
       .handleContentNegotiation()
       .prepareCookies()
       .setContentTypeIfNeeded()
+      .setContent(this.content, jsonConfig) // Important Must be called after setContentTypeIfNeeded and before prepareContentHeaders
       .handleCacheHeaders()
       .prepareContentHeaders()
       .setPrepared(true)
@@ -677,21 +680,27 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of the response for chaining.
    */
   protected setContentTypeIfNeeded (): this {
+    // Skip setting content type for empty responses or responses with no content
+    if (this.statusCode === 204 || this.content === undefined || this.content === null) {
+      return this.removeHeader('Content-Type')
+    }
+
     if (!this.hasHeader('Content-Type')) {
-      switch (typeof this.content) {
-        case 'string':
+      if (Buffer.isBuffer(this.content)) {
+        this.setContentType('bin')
+      } else if (typeof this.content === 'object' && this.content !== null) {
+        this.setContentType('json')
+      } else if (typeof this.content === 'string') {
+        if (/^\s{0,50}<(?:!DOCTYPE|html|body|div|span|head|script|style|meta|title)\b/i.test(this.content)) {
           this.setContentType('html')
-          break
-        case 'object':
-        case 'number':
-        case 'boolean':
-          if (Buffer.isBuffer(this.content)) {
-            this.setContentType('bin')
-          } else {
-            this.setContentType('json')
-            this.setContent(this.content, this.blueprint?.get('stone.http.json', {}))
-          }
-          break
+        } else {
+          this.setContentType('plain')
+        }
+      } else if (typeof this.content === 'number' || typeof this.content === 'boolean') {
+        this.setContentType('plain')
+      } else {
+        // Default to application/octet-stream for unknown content types
+        this.setContentType('application/octet-stream')
       }
     }
     return this
@@ -741,7 +750,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     }
 
     if (this.content !== undefined) {
-      length = this.calculateContentLength(generateETag)
+      length = this.calculateContentLength()
       this.setHeader('Content-Length', String(length))
     }
 
@@ -754,7 +763,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     }
 
     if (this.incomingEvent.isMethod('HEAD')) {
-      this.setContent(null)
+      this.setContent(undefined)
     }
 
     return this
@@ -763,19 +772,24 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   /**
    * Calculate the content length.
    *
-   * @param generateETag - Whether to generate an ETag for the content.
    * @returns The content length.
    */
-  protected calculateContentLength (generateETag: boolean): number {
+  protected calculateContentLength (): number {
+    let data: string
+
     if (Buffer.isBuffer(this.content)) {
       return this.content.length
-    } else if (!generateETag && isString(this.content) && this.content.length < 1000) {
-      return Buffer.byteLength(this.content, this.charset)
+    } else if (typeof this.content === 'string') {
+      data = this.content
+    } else if (typeof this.content === 'object' && this.content !== null) {
+      data = this.morphToJson(this.content, this.blueprint?.get('stone.http.json', {}))
+    } else if (typeof this.content === 'number' || typeof this.content === 'boolean') {
+      data = String(this.content)
     } else {
-      this._content = Buffer.from(String(this.content), this.charset)
-      this._charset = undefined
-      return (this._content as Buffer).length
+      data = ''
     }
+
+    return Buffer.byteLength(data)
   }
 
   /**
@@ -804,7 +818,12 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns True if the content should be serialized as JSON, otherwise false.
    */
   protected shouldBeJson (content: unknown): boolean {
-    return !Buffer.isBuffer(content) && ['object', 'number', 'boolean'].includes(typeof content)
+    return (
+      typeof content === 'object' &&
+      content !== null &&
+      !Buffer.isBuffer(content) &&
+      !ArrayBuffer.isView(content)
+    )
   }
 
   /**

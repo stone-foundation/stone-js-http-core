@@ -8,6 +8,12 @@ Meta Middleware for compressing response content.
 
 ## Type declaration
 
+### global
+
+```ts
+global: boolean = true;
+```
+
 ### isClass
 
 ```ts

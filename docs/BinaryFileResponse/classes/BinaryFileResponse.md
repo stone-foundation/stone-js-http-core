@@ -472,18 +472,10 @@ The current instance for method chaining.
 ### calculateContentLength()
 
 ```ts
-protected calculateContentLength(generateETag): number;
+protected calculateContentLength(): number;
 ```
 
 Calculate the content length.
-
-#### Parameters
-
-##### generateETag
-
-`boolean`
-
-Whether to generate an ETag for the content.
 
 #### Returns
 

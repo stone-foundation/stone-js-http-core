@@ -8,6 +8,12 @@ Meta Middleware for processing CORS headers.
 
 ## Type declaration
 
+### global
+
+```ts
+global: boolean = true;
+```
+
 ### isClass
 
 ```ts

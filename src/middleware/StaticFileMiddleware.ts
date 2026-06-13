@@ -95,4 +95,4 @@ export class StaticFileMiddleware {
 /**
  * Meta Middleware for serving static files from a directory.
  */
-export const MetaStaticFileMiddleware = { module: StaticFileMiddleware, isClass: true }
+export const MetaStaticFileMiddleware = { module: StaticFileMiddleware, isClass: true, global: true }

@@ -8,6 +8,12 @@ Meta Middleware for serving static files from a directory.
 
 ## Type declaration
 
+### global
+
+```ts
+global: boolean = true;
+```
+
 ### isClass
 
 ```ts
