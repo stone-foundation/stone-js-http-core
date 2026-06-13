@@ -3,8 +3,8 @@
 ```ts
 function createHttpResponse(
    content, 
-   statusCode, 
-   headers): OutgoingHttpResponse;
+   statusCode?, 
+   headers?): OutgoingHttpResponse;
 ```
 
 Create an OutgoingHttpResponse.
@@ -17,13 +17,13 @@ Create an OutgoingHttpResponse.
 
 The content of the response.
 
-### statusCode
+### statusCode?
 
 `number` = `HTTP_OK`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

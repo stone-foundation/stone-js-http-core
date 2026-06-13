@@ -17,7 +17,7 @@ Options for creating a BinaryFile HTTP Response.
 ### autoEncoding?
 
 ```ts
-optional autoEncoding: boolean;
+optional autoEncoding?: boolean;
 ```
 
 ***
@@ -25,7 +25,7 @@ optional autoEncoding: boolean;
 ### autoEtag?
 
 ```ts
-optional autoEtag: boolean;
+optional autoEtag?: boolean;
 ```
 
 ***
@@ -33,7 +33,7 @@ optional autoEtag: boolean;
 ### autoLastModified?
 
 ```ts
-optional autoLastModified: boolean;
+optional autoLastModified?: boolean;
 ```
 
 ***
@@ -41,7 +41,7 @@ optional autoLastModified: boolean;
 ### contentDispositionType?
 
 ```ts
-optional contentDispositionType: string;
+optional contentDispositionType?: string;
 ```
 
 ***
@@ -57,7 +57,7 @@ file: string | File;
 ### headers?
 
 ```ts
-optional headers: HeadersType;
+optional headers?: HeadersType;
 ```
 
 #### Inherited from

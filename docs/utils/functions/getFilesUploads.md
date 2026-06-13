@@ -15,12 +15,13 @@ Get streamed or pre-read(not streamed) file upload.
 
 ### event
 
-The incoming event containing the file data.
-
-`IncomingMessage` | \{
-`body`: `unknown`;
-`headers`: `IncomingHttpHeaders`;
+  \| `IncomingMessage`
+  \| \{
+  `body`: `unknown`;
+  `headers`: `IncomingHttpHeaders`;
 \}
+
+The incoming event containing the file data.
 
 ### options
 

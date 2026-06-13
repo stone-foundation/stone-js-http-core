@@ -1,22 +1,39 @@
+import { EventEmitter } from 'node:events'
 import { createWriteStream } from 'node:fs'
 import { NotFoundError } from '../src/errors/NotFoundError'
 import { BadRequestError } from '../src/errors/BadRequestError'
 import { InternalServerError } from '../src/errors/InternalServerError'
 import { File, FilesystemError, UploadedFile } from '@stone-js/filesystem'
 import { IncomingMessage, IncomingHttpHeaders, OutgoingMessage } from 'http'
-import { getCharset, getHostname, getProtocol, getType, isIpTrusted, isMultipart, streamFile, getFilesUploads, isValidHostname } from '../src/utils'
+import {
+  getCharset,
+  getHostname,
+  getProtocol,
+  getType,
+  isIpTrusted,
+  isMultipart,
+  streamFile,
+  getFilesUploads,
+  isValidHostname,
+  decoratorResponseCallback
+} from '../src/utils'
 
 // Mocking values and spies
 let MockSend: any
 let MockBusboy: any
 const MockSendOnSpy = vi.fn()
 
+// Per-test upload behaviour configuration
+let writeStreamBehavior: 'close' | 'error'
+let fileStreamError: Error | null
+let busboyError: Error | null
+
 // Mocking dependencies
 vi.mock('node:fs')
 vi.mock('node:os')
 vi.mock('node:path')
-vi.mock('send', () => ({ default: (...args: any[]) => (MockSend) }))
-vi.mock('busboy', () => ({ default: (...args: any[]) => (MockBusboy) }))
+vi.mock('send', () => ({ default: (..._args: any[]) => (MockSend) }))
+vi.mock('busboy', () => ({ default: (..._args: any[]) => (MockBusboy) }))
 
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 
@@ -35,8 +52,38 @@ class MockOutgoingMessage extends OutgoingMessage {
   }
 }
 
+// Builds a write-stream-like EventEmitter. `once()` works natively on it.
+const createMockWriteStream = (): any => {
+  const ws: any = new EventEmitter()
+  ws.pipe = vi.fn()
+  ws.__behavior = writeStreamBehavior
+  return ws
+}
+
+// Builds a readable file stream that drives the write stream once the
+// source has attached its listeners (deferred via queueMicrotask).
+const createMockFileStream = (): any => {
+  const file: any = new EventEmitter()
+  file.pipe = (ws: any) => {
+    queueMicrotask(() => {
+      if (fileStreamError !== null) {
+        file.emit('error', fileStreamError)
+      } else if (ws?.__behavior === 'error') {
+        ws.emit('error', Object.assign(new Error('Disk write failed'), { code: 'EIO' }))
+      } else {
+        ws.emit('close')
+      }
+    })
+  }
+  return file
+}
+
 describe('Utility Functions', () => {
   beforeEach(() => {
+    writeStreamBehavior = 'close'
+    fileStreamError = null
+    busboyError = null
+
     MockSend = {
       listeners: {} as any,
       pipe (res: OutgoingMessage) {
@@ -60,15 +107,16 @@ describe('Utility Functions', () => {
     }
     MockBusboy = {
       listeners: {} as any,
-      pipe (req: IncomingMessage) {
+      pipe (_req?: IncomingMessage) {
+        if (busboyError !== null) {
+          this.emit('error', busboyError)
+          return
+        }
         this.emit('field', 'username', 'test')
-        this.emit('file', 'filename', {
-          pipe () {},
-          on (event: string, callback: Function) { callback() }
-        }, { filename: 'test.txt', mimeType: 'text/plain' })
+        this.emit('file', 'filename', createMockFileStream(), { filename: 'test.txt', mimeType: 'text/plain' })
         this.emit('close')
       },
-      write (data: any) {},
+      write (_data: any) {},
       end () {
         this.pipe()
       },
@@ -77,84 +125,137 @@ describe('Utility Functions', () => {
         return this
       },
       emit (event: string, ...args: any[]) {
-        this.listeners[event](...args)
+        this.listeners[event]?.(...args)
       }
     }
-    // @ts-expect-error
-    createWriteStream.mockReturnValue({ on: vi.fn(), pipe: vi.fn() })
-    UploadedFile.createFile = vi.fn().mockReturnValue({ filename: 'test.txt', mimeType: 'text/plain' })
+    vi.mocked(createWriteStream).mockImplementation(() => createMockWriteStream())
+    UploadedFile.createFile = vi.fn().mockReturnValue({ filename: 'test.txt', mimeType: 'text/plain' }) as any
+  })
+
+  describe('decoratorResponseCallback', () => {
+    it('awaits the target and forwards its result to the response callback', async () => {
+      const target = vi.fn(async (a: number, b: number) => a + b)
+      const responseCallback = vi.fn(async (content: any) => ({ content }))
+
+      const wrapped: any = decoratorResponseCallback(target as any, responseCallback as any)
+      const context = { tag: 'ctx' }
+      const result = await wrapped.call(context, 3, 4)
+
+      expect(target).toHaveBeenCalledWith(3, 4)
+      expect(target.mock.instances[0]).toBe(context)
+      expect(responseCallback).toHaveBeenCalledWith(7)
+      expect(result).toEqual({ content: 7 })
+    })
+
+    it('propagates errors thrown by the target', async () => {
+      const target = vi.fn(async () => { throw new Error('boom') })
+      const responseCallback = vi.fn(async (content: any) => ({ content }))
+
+      const wrapped: any = decoratorResponseCallback(target as any, responseCallback as any)
+
+      await expect(() => wrapped()).rejects.toThrow('boom')
+      expect(responseCallback).not.toHaveBeenCalled()
+    })
   })
 
   describe('isMultipart', () => {
     it('should return true for multipart content type string', () => {
-      const result = isMultipart('multipart/form-data')
-      expect(result).toBe(true)
+      expect(isMultipart('multipart/form-data')).toBe(true)
     })
 
     it('should return false for non-multipart content type string', () => {
-      const result = isMultipart('application/json')
-      expect(result).toBe(false)
+      expect(isMultipart('application/json')).toBe(false)
     })
 
     it('should return false for non-multipart IncomingMessage', () => {
       const message = new MockIncomingMessage({ 'content-type': 'application/json' })
-      const result = isMultipart(message)
-      expect(result).toBe(false)
+      expect(isMultipart(message)).toBe(false)
     })
   })
 
   describe('getType', () => {
     it('should return content type for IncomingMessage', () => {
       const message = new MockIncomingMessage({ 'content-type': 'application/json' })
-      const result = getType(message)
-      expect(result).toBe('application/json')
+      expect(getType(message)).toBe('application/json')
+    })
+
+    it('should return content type for a content-type string', () => {
+      expect(getType('application/json; charset=utf-8')).toBe('application/json')
     })
 
     it('should return fallback for invalid content type', () => {
-      const result = getType('invalid-content-type', 'text/plain')
-      expect(result).toBe('text/plain')
+      expect(getType('invalid-content-type', 'text/plain')).toBe('text/plain')
+    })
+
+    it('should use the default fallback when none is provided', () => {
+      expect(getType('invalid-content-type')).toBe('text/plain')
     })
   })
 
   describe('getCharset', () => {
     it('should return charset for IncomingMessage', () => {
       const message = new MockIncomingMessage({ 'content-type': 'application/json; charset=utf-8' })
-      const result = getCharset(message)
-      expect(result).toBe('utf-8')
+      expect(getCharset(message)).toBe('utf-8')
     })
 
     it('should return fallback for invalid charset', () => {
-      const result = getCharset('invalid-content-type', 'utf-8')
-      expect(result).toBe('utf-8')
+      expect(getCharset('invalid-content-type', 'utf-8')).toBe('utf-8')
+    })
+
+    it('should use the default fallback when none is provided', () => {
+      expect(getCharset('invalid-content-type')).toBe('utf-8')
     })
   })
 
   describe('isIpTrusted', () => {
     it('should return true for trusted IP', () => {
-      const isTrusted = isIpTrusted(['192.168.1.1'], [])
-      expect(isTrusted('192.168.1.1')).toBe(true)
+      expect(isIpTrusted(['192.168.1.1'], [])('192.168.1.1')).toBe(true)
     })
 
-    it('should return false for untrusted IP', () => {
-      const isTrusted = isIpTrusted(['192.168.1.1'], ['*'])
-      expect(isTrusted('192.168.1.1')).toBe(false)
+    it('should return false for untrusted IP (wildcard)', () => {
+      expect(isIpTrusted(['192.168.1.1'], ['*'])('192.168.1.1')).toBe(false)
+    })
+
+    it('should return false when IP is within an untrusted range', () => {
+      expect(isIpTrusted(['*'], ['10.0.0.0/8'])('10.1.2.3')).toBe(false)
+    })
+
+    it('should return true when IP is within a trusted range', () => {
+      expect(isIpTrusted(['10.0.0.0/8'], [])('10.1.2.3')).toBe(true)
+    })
+
+    it('should return false when IP matches no trusted entry', () => {
+      expect(isIpTrusted(['10.0.0.0/8'], [])('192.168.1.1')).toBe(false)
+    })
+
+    it('should default the untrusted list to empty', () => {
+      expect(isIpTrusted(['*'])('1.2.3.4')).toBe(true)
     })
   })
 
   describe('getProtocol', () => {
     it('should return https if encrypted', () => {
-      const result = getProtocol('192.168.1.1', {}, true, { trustedIp: [], untrustedIp: [] })
-      expect(result).toBe('https')
+      expect(getProtocol('192.168.1.1', {}, true, { trustedIp: [], untrustedIp: [] })).toBe('https')
     })
 
     it('should return http if not encrypted and IP is trusted', () => {
-      const result = getProtocol('192.168.1.1', {}, false, { trustedIp: ['*'], untrustedIp: [] })
-      expect(result).toBe('http')
+      expect(getProtocol('192.168.1.1', {}, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('http')
     })
 
-    it('should return forwarded protocol if IP is trusted', () => {
-      const result = getProtocol('192.168.1.1', { 'x-forwarded-proto': 'https' }, false, { trustedIp: ['*'], untrustedIp: [] })
-      expect(result).toBe('https')
+    it('should return forwarded protocol (lowercase header) if IP is trusted', () => {
+      expect(getProtocol('192.168.1.1', { 'x-forwarded-proto': 'https' }, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('https')
+    })
+
+    it('should return forwarded protocol (capitalized header) if IP is trusted', () => {
+      expect(getProtocol('192.168.1.1', { 'X-Forwarded-Proto': 'https' } as any, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('https')
+    })
+
+    it('should pick the first protocol when several are forwarded', () => {
+      expect(getProtocol('192.168.1.1', { 'x-forwarded-proto': 'https, http' }, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('https')
+    })
+
+    it('should ignore the forwarded protocol for an untrusted IP', () => {
+      expect(getProtocol('9.9.9.9', { 'x-forwarded-proto': 'https' }, false, { trustedIp: [], untrustedIp: ['*'] })).toBe('http')
     })
   })
 
@@ -171,9 +272,9 @@ describe('Utility Functions', () => {
     })
 
     it('rejects malformed IPv6 in brackets', () => {
-      expect(isValidHostname('[2001:db8::1')).toBe(false) // Missing closing ]
-      expect(isValidHostname('2001:db8::1]')).toBe(false) // Missing opening [
-      expect(isValidHostname('[ghij::1234]')).toBe(false) // Invalid hex
+      expect(isValidHostname('[2001:db8::1')).toBe(false)
+      expect(isValidHostname('2001:db8::1]')).toBe(false)
+      expect(isValidHostname('[ghij::1234]')).toBe(false)
     })
 
     it('rejects numeric-only strings', () => {
@@ -208,9 +309,21 @@ describe('Utility Functions', () => {
   })
 
   describe('getHostname', () => {
-    it('should return hostname from headers', () => {
+    it('should return hostname from the host header', () => {
       const headers = { host: 'example.com' }
       const result = getHostname('192.168.1.1', headers, { trusted: [/.+(ample.com)/], trustedIp: ['*'], untrustedIp: [] })
+      expect(result).toBe('example.com')
+    })
+
+    it('should read the capitalized Host header', () => {
+      const headers = { Host: 'example.com' } as any
+      const result = getHostname('1.2.3.4', headers, { trusted: [], trustedIp: [], untrustedIp: [] })
+      expect(result).toBe('example.com')
+    })
+
+    it('should strip the port and lowercase the hostname', () => {
+      const headers = { host: 'EXAMPLE.COM:8443' }
+      const result = getHostname('1.2.3.4', headers, { trusted: [], trustedIp: [], untrustedIp: [] })
       expect(result).toBe('example.com')
     })
 
@@ -220,20 +333,33 @@ describe('Utility Functions', () => {
       expect(result).toBe('[2001:0db8:85a3:0000:0000:8a2e:0370:7334]')
     })
 
+    it('should read the capitalized X-Forwarded-Host header for a trusted IP', () => {
+      const headers = { 'X-Forwarded-Host': 'fwd.example.com' } as any
+      const result = getHostname('1.2.3.4', headers, { trusted: [], trustedIp: ['*'], untrustedIp: [] })
+      expect(result).toBe('fwd.example.com')
+    })
+
+    it('should match a trusted hostname by exact string', () => {
+      const headers = { host: 'example.com' }
+      const result = getHostname('1.2.3.4', headers, { trusted: ['example.com'], trustedIp: [], untrustedIp: [] })
+      expect(result).toBe('example.com')
+    })
+
     it('should return undefined when hostname is undefined', () => {
-      const headers = {}
-      const result = getHostname('192.168.1.1', headers, { trusted: [], trustedIp: ['*'], untrustedIp: [] })
+      const result = getHostname('192.168.1.1', {}, { trusted: [], trustedIp: ['*'], untrustedIp: [] })
       expect(result).toBeUndefined()
     })
 
     it('should throw error for invalid hostname', () => {
       const headers = { host: 'invalid_hostname' }
-      expect(() => getHostname('192.168.1.1', headers, { trusted: [], trustedIp: ['*'], untrustedIp: [] })).toThrow('SuspiciousOperation: Invalid Host invalid_hostname with ip(192.168.1.1)')
+      expect(() => getHostname('192.168.1.1', headers, { trusted: [], trustedIp: ['*'], untrustedIp: [] }))
+        .toThrow('SuspiciousOperation: Invalid Host invalid_hostname with ip(192.168.1.1)')
     })
 
     it('should throw error for untrusted hostname', () => {
       const headers = { host: 'untrusted.com' }
-      expect(() => getHostname('192.168.1.1', headers, { trusted: ['trusted.com'], trustedIp: ['*'], untrustedIp: [] })).toThrow('SuspiciousOperation: Untrusted Host untrusted.com with ip(192.168.1.1)')
+      expect(() => getHostname('192.168.1.1', headers, { trusted: ['trusted.com'], trustedIp: ['*'], untrustedIp: [] }))
+        .toThrow('SuspiciousOperation: Untrusted Host untrusted.com with ip(192.168.1.1)')
     })
   })
 
@@ -250,32 +376,54 @@ describe('Utility Functions', () => {
     it('should resolve with fields and files for streamed file uploads', async () => {
       const options = { limits: { fileSize: undefined } }
       const event = new MockIncomingMessage({ 'content-type': 'multipart/form-data' })
-      event.pipe = () => MockBusboy.pipe(event)
-      event.on = vi.fn()
+      event.pipe = (() => MockBusboy.pipe(event)) as any
+      event.on = vi.fn() as any
 
       const result = await getFilesUploads(event, options)
       expect(result.fields).toEqual({ username: 'test' })
       expect(result.files).toHaveProperty('filename')
     })
 
-    it('should throw an error on streamed file uploads', async () => {
+    it('should default the limits object when none is provided', async () => {
+      const event = { headers: { 'content-type': 'multipart/form-data' }, body: 'dummy body' }
+      const result = await getFilesUploads(event, {})
+      expect(result.files).toHaveProperty('filename')
+    })
+
+    it('should use the provided prefix for temporary filenames', async () => {
+      const event = { headers: { 'content-type': 'multipart/form-data' }, body: 'dummy body' }
+      const result = await getFilesUploads(event, { prefix: 'upload' })
+      expect(result.files).toHaveProperty('filename')
+    })
+
+    it('should throw an InternalServerError on streamed request error', async () => {
       const options = { limits: { fileSize: undefined } }
       const event = new MockIncomingMessage({ 'content-type': 'multipart/form-data' })
-      event.pipe = vi.fn()
-      event.on = (event: string, handler: Function) => handler({ message: 'Error', code: 'EIO' })
+      event.pipe = vi.fn() as any
+      event.on = ((_e: string, handler: Function) => handler({ message: 'Error', code: 'EIO' })) as any
 
       await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(InternalServerError)
     })
 
-    it('should throw an error on when file cannot be saved', async () => {
-      const options = { limits: { fileSize: undefined } }
-      const event = new MockIncomingMessage({ 'content-type': 'multipart/form-data' })
-      event.pipe = () => MockBusboy.pipe(event)
-      event.on = vi.fn()
-      // @ts-expect-error
-      createWriteStream.mockReturnValue({ on: (event: string, handler: Function) => handler({ message: 'Error', code: 'EIO' }) })
+    it('should throw a FilesystemError when the write stream errors', async () => {
+      writeStreamBehavior = 'error'
+      const event = { headers: { 'content-type': 'multipart/form-data' }, body: 'dummy body' }
 
-      await expect(async () => await getFilesUploads(event, options)).rejects.toThrow(FilesystemError)
+      await expect(async () => await getFilesUploads(event, {})).rejects.toThrow(FilesystemError)
+    })
+
+    it('should throw a FilesystemError when the file stream errors', async () => {
+      fileStreamError = new Error('stream broke')
+      const event = { headers: { 'content-type': 'multipart/form-data' }, body: 'dummy body' }
+
+      await expect(async () => await getFilesUploads(event, {})).rejects.toThrow(FilesystemError)
+    })
+
+    it('should throw a FilesystemError when busboy emits an error', async () => {
+      busboyError = new Error('busboy failed')
+      const event = { headers: { 'content-type': 'multipart/form-data' }, body: 'dummy body' }
+
+      await expect(async () => await getFilesUploads(event, {})).rejects.toThrow(FilesystemError)
     })
   })
 
@@ -303,6 +451,22 @@ describe('Utility Functions', () => {
       expect(MockSendOnSpy).toHaveBeenCalled()
     })
 
+    it('should resolve when the response finishes', async () => {
+      const message = new MockIncomingMessage({})
+      const response = new MockOutgoingMessage()
+      const file = File.create('test/path', false)
+
+      MockSend = {
+        ...MockSend,
+        pipe (res: any) {
+          res.emit('finish')
+        }
+      }
+
+      const res = await streamFile(message, response, file, {} as any)
+      expect(res).toBeUndefined()
+    })
+
     it('should throw an unexpected error while handling file', async () => {
       const message = new MockIncomingMessage({})
       const response = new MockOutgoingMessage()
@@ -318,7 +482,7 @@ describe('Utility Functions', () => {
       await expect(async () => await streamFile(message, response, file, {} as any)).rejects.toThrow(InternalServerError)
     })
 
-    it('should throw a NotFoundError while acessing directory', async () => {
+    it('should throw a NotFoundError while accessing a directory', async () => {
       const message = new MockIncomingMessage({})
       const response = new MockOutgoingMessage()
       const file = File.create('test/path', false)

@@ -7,7 +7,7 @@ Options for configuring a cookie.
 ### domain?
 
 ```ts
-optional domain: string;
+optional domain?: string;
 ```
 
 ***
@@ -15,7 +15,7 @@ optional domain: string;
 ### expires?
 
 ```ts
-optional expires: Date;
+optional expires?: Date;
 ```
 
 ***
@@ -23,7 +23,7 @@ optional expires: Date;
 ### httpOnly?
 
 ```ts
-optional httpOnly: boolean;
+optional httpOnly?: boolean;
 ```
 
 ***
@@ -31,7 +31,7 @@ optional httpOnly: boolean;
 ### maxAge?
 
 ```ts
-optional maxAge: number;
+optional maxAge?: number;
 ```
 
 ***
@@ -39,7 +39,7 @@ optional maxAge: number;
 ### path?
 
 ```ts
-optional path: string;
+optional path?: string;
 ```
 
 ***
@@ -47,7 +47,7 @@ optional path: string;
 ### sameSite?
 
 ```ts
-optional sameSite: CookieSameSite;
+optional sameSite?: CookieSameSite;
 ```
 
 ***
@@ -55,5 +55,5 @@ optional sameSite: CookieSameSite;
 ### secure?
 
 ```ts
-optional secure: boolean;
+optional secure?: boolean;
 ```

@@ -6,7 +6,7 @@ const MetaCompressionMiddleware: object;
 
 Meta Middleware for compressing response content.
 
-## Type declaration
+## Type Declaration
 
 ### global
 

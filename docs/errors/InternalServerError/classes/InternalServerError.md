@@ -11,7 +11,7 @@ InternalServer http error.
 ### Constructor
 
 ```ts
-new InternalServerError(message, options): InternalServerError;
+new InternalServerError(message, options?): InternalServerError;
 ```
 
 #### Parameters
@@ -20,7 +20,7 @@ new InternalServerError(message, options): InternalServerError;
 
 `string`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 

@@ -17,7 +17,7 @@ Options for creating a Redirect HTTP Response.
 ### headers?
 
 ```ts
-optional headers: HeadersType;
+optional headers?: HeadersType;
 ```
 
 #### Inherited from

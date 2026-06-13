@@ -212,7 +212,8 @@ export async function getFilesUploads (
       .on('field', (fieldname, value) => { result.fields[fieldname] = value })
       .on('file', (fieldname, file, { filename, mimeType }) => {
         result.files[fieldname] ??= []
-        const originalExt = extname(filename) ?? '.tmp'
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        const originalExt = extname(filename) || '.tmp'
         const filepath = join(tmpdir(), `${String(options.prefix ?? 'file')}-${randomUUID()}${originalExt}`)
         const writeStream = createWriteStream(filepath)
 

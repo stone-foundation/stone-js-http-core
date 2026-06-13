@@ -1,20 +1,20 @@
 # Function: emptyHttpResponse()
 
 ```ts
-function emptyHttpResponse(statusCode, headers): OutgoingHttpResponse;
+function emptyHttpResponse(statusCode?, headers?): OutgoingHttpResponse;
 ```
 
 Create a 204(No content) empty JSON OutgoingHttpResponse.
 
 ## Parameters
 
-### statusCode
+### statusCode?
 
 `number` = `204`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

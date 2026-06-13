@@ -1,7 +1,7 @@
 # Function: serverErrorHttpResponse()
 
 ```ts
-function serverErrorHttpResponse(content, headers): OutgoingHttpResponse;
+function serverErrorHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 500(Internal Server Error) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 500(Internal Server Error) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

@@ -38,15 +38,15 @@ Options for creating the BinaryFileResponse.
 
 ## Properties
 
-### \_blueprintResolver()?
+### \_blueprintResolver?
 
 ```ts
-protected optional _blueprintResolver: () => undefined | IBlueprint;
+protected optional _blueprintResolver?: () => IBlueprint | undefined;
 ```
 
 #### Returns
 
-`undefined` \| `IBlueprint`
+`IBlueprint` \| `undefined`
 
 #### Inherited from
 
@@ -57,7 +57,7 @@ protected optional _blueprintResolver: () => undefined | IBlueprint;
 ### \_charset?
 
 ```ts
-protected optional _charset: Encoding;
+protected optional _charset?: Encoding;
 ```
 
 #### Inherited from
@@ -81,7 +81,7 @@ protected readonly _cookieCollection: CookieCollection;
 ### \_formats?
 
 ```ts
-protected optional _formats: Record<string, () => unknown>;
+protected optional _formats?: Record<string, () => unknown>;
 ```
 
 #### Inherited from
@@ -102,10 +102,10 @@ protected readonly _headers: Headers;
 
 ***
 
-### \_incomingEventResolver()?
+### \_incomingEventResolver?
 
 ```ts
-protected optional _incomingEventResolver: () => IncomingHttpEvent;
+protected optional _incomingEventResolver?: () => IncomingHttpEvent;
 ```
 
 #### Returns
@@ -143,14 +143,14 @@ readonly static OUTGOING_HTTP_RESPONSE: "stonejs@outgoing_http_binary_file_respo
 #### Get Signature
 
 ```ts
-get blueprint(): undefined | IBlueprint;
+get blueprint(): IBlueprint | undefined;
 ```
 
 Get the blueprint associated with the response.
 
 ##### Returns
 
-`undefined` \| `IBlueprint`
+`IBlueprint` \| `undefined`
 
 The blueprint or undefined if not set.
 
@@ -228,14 +228,14 @@ Whether the file should be deleted after being sent.
 #### Get Signature
 
 ```ts
-get etag(): undefined | string;
+get etag(): string | undefined;
 ```
 
 Get the ETag of the response.
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The value of the ETag header, if present.
 
@@ -298,14 +298,14 @@ The associated IncomingHttpEvent.
 #### Get Signature
 
 ```ts
-get lastModified(): undefined | string;
+get lastModified(): string | undefined;
 ```
 
 Get the Last-Modified date of the response.
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The value of the Last-Modified header, if present.
 
@@ -320,14 +320,14 @@ The value of the Last-Modified header, if present.
 #### Get Signature
 
 ```ts
-get status(): undefined | number;
+get status(): number | undefined;
 ```
 
 Get the HTTP status code.
 
 ##### Returns
 
-`undefined` \| `number`
+`number` \| `undefined`
 
 The HTTP status code.
 
@@ -342,14 +342,14 @@ The HTTP status code.
 #### Get Signature
 
 ```ts
-get vary(): undefined | string[];
+get vary(): string[] | undefined;
 ```
 
 Get the Vary header as an array of values.
 
 ##### Returns
 
-`undefined` \| `string`[]
+`string`[] \| `undefined`
 
 The Vary header values split by comma, or undefined if not present.
 
@@ -371,9 +371,9 @@ Add a field to the Vary header.
 
 ##### field
 
-The field to add to the Vary header.
+`string` \| `string`[]
 
-`string` | `string`[]
+The field to add to the Vary header.
 
 #### Returns
 
@@ -494,8 +494,8 @@ The content length.
 ```ts
 clearCookie(
    name, 
-   options, 
-   force): this;
+   options?, 
+   force?): this;
 ```
 
 Clear a specific cookie from the response.
@@ -508,13 +508,13 @@ Clear a specific cookie from the response.
 
 The name of the cookie to be cleared.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Optional settings for the cookie.
 
-##### force
+##### force?
 
 `boolean` = `false`
 
@@ -535,14 +535,14 @@ The current instance of OutgoingHttpResponse for chaining.
 ### clearCookies()
 
 ```ts
-clearCookies(force): this;
+clearCookies(force?): this;
 ```
 
 Clear all cookies from the response.
 
 #### Parameters
 
-##### force
+##### force?
 
 `boolean` = `false`
 
@@ -722,16 +722,20 @@ Get a header value.
 
 #### Param
 
+**name**
+
 The header name.
 
 #### Param
+
+**fallback**
 
 A fallback value if the header is not found.
 
 #### Call Signature
 
 ```ts
-getHeader<TReturn>(name): undefined | TReturn;
+getHeader<TReturn>(name): TReturn | undefined;
 ```
 
 Get a header value.
@@ -752,17 +756,9 @@ The header name.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The header value or the fallback value.
-
-##### Param
-
-The header name.
-
-##### Param
-
-A fallback value if the header is not found.
 
 ##### Inherited from
 
@@ -801,14 +797,6 @@ A fallback value if the header is not found.
 `TReturn`
 
 The header value or the fallback value.
-
-##### Param
-
-The header name.
-
-##### Param
-
-A fallback value if the header is not found.
 
 ##### Inherited from
 
@@ -1289,7 +1277,7 @@ True if the response has Last-Modified or ETag headers, otherwise false.
 ### morphToJson()
 
 ```ts
-protected morphToJson(content, options): string;
+protected morphToJson(content, options?): string;
 ```
 
 Convert the given content to a JSON string.
@@ -1302,7 +1290,7 @@ Convert the given content to a JSON string.
 
 The content to convert.
 
-##### options
+##### options?
 
 `Partial`\<[`HttpJsonConfig`](../../options/HttpConfig/interfaces/HttpJsonConfig.md)\> = `{}`
 
@@ -1342,7 +1330,7 @@ The incoming HTTP event.
 
 ##### container?
 
-`Container`
+`IContainer`
 
 The service container.
 
@@ -1410,9 +1398,9 @@ Remove headers from the response.
 
 ##### key
 
-The header or headers to be removed.
+`string` \| `string`[]
 
-`string` | `string`[]
+The header or headers to be removed.
 
 #### Returns
 
@@ -1429,14 +1417,14 @@ The current instance of OutgoingHttpResponse for chaining.
 ### secureCookies()
 
 ```ts
-secureCookies(value): this;
+secureCookies(value?): this;
 ```
 
 Secure all cookies by setting the "Secure" attribute.
 
 #### Parameters
 
-##### value
+##### value?
 
 `boolean` = `true`
 
@@ -1466,7 +1454,7 @@ Set the resolver for the blueprint.
 
 ##### resolver
 
-() => `undefined` \| `IBlueprint`
+() => `IBlueprint` \| `undefined`
 
 A function that returns the blueprint.
 
@@ -1644,7 +1632,7 @@ The current instance of the response for chaining.
 setCookie(
    name, 
    value, 
-   options): this;
+   options?): this;
 ```
 
 Set a cookie for the response.
@@ -1663,7 +1651,7 @@ The name of the cookie.
 
 The value of the cookie.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../declarations/interfaces/CookieOptions.md) = `{}`
 
@@ -1684,14 +1672,14 @@ The current instance of OutgoingHttpResponse for chaining.
 ### setDeleteFileAfterSent()
 
 ```ts
-setDeleteFileAfterSent(shouldDelete): this;
+setDeleteFileAfterSent(shouldDelete?): this;
 ```
 
 Set whether the file should be deleted after being sent.
 
 #### Parameters
 
-##### shouldDelete
+##### shouldDelete?
 
 `boolean` = `true`
 
@@ -1758,9 +1746,9 @@ The header name.
 
 ##### value
 
-The value of the header.
+`string` \| `string`[]
 
-`string` | `string`[]
+The value of the header.
 
 #### Returns
 

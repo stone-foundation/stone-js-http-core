@@ -1,7 +1,7 @@
 # Function: NoContentHttpResponse()
 
 ```ts
-function NoContentHttpResponse<T>(headers): MethodDecorator;
+function NoContentHttpResponse<T>(headers?): MethodDecorator;
 ```
 
 Decorator to mark a class method as a 204 outgoing http response.
@@ -14,7 +14,7 @@ Decorator to mark a class method as a 204 outgoing http response.
 
 ## Parameters
 
-### headers
+### headers?
 
 [`HeadersType`](../../../declarations/type-aliases/HeadersType.md) = `{}`
 

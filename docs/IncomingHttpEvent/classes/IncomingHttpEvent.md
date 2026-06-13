@@ -147,17 +147,17 @@ The query parameters of the request.
 ### queryString?
 
 ```ts
-readonly optional queryString: string;
+readonly optional queryString?: string;
 ```
 
 The query string of the request.
 
 ***
 
-### routeResolver()?
+### routeResolver?
 
 ```ts
-protected optional routeResolver: () => IRoute;
+protected optional routeResolver?: () => IRoute;
 ```
 
 #### Returns
@@ -176,10 +176,10 @@ The URL of the request.
 
 ***
 
-### userResolver()?
+### userResolver?
 
 ```ts
-protected optional userResolver: () => unknown;
+protected optional userResolver?: () => unknown;
 ```
 
 #### Returns
@@ -201,12 +201,12 @@ readonly static INCOMING_HTTP_EVENT: "stonejs@incoming_http_event" = 'stonejs@in
 #### Get Signature
 
 ```ts
-get charset(): undefined | string;
+get charset(): string | undefined;
 ```
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The charset specified in the content-type header.
 
@@ -249,12 +249,12 @@ The content type specified in the headers.
 #### Get Signature
 
 ```ts
-get decodedPathname(): undefined | string;
+get decodedPathname(): string | undefined;
 ```
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The decoded pathname of the URL.
 
@@ -281,12 +281,12 @@ An array of acceptable encodings for the request.
 #### Get Signature
 
 ```ts
-get etag(): undefined | string;
+get etag(): string | undefined;
 ```
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The ETag of the request, if present.
 
@@ -441,12 +441,12 @@ An array of acceptable languages for the request.
 #### Get Signature
 
 ```ts
-get params(): undefined | Record<string, unknown>;
+get params(): Record<string, unknown> | undefined;
 ```
 
 ##### Returns
 
-`undefined` \| `Record`\<`string`, `unknown`\>
+`Record`\<`string`, `unknown`\> \| `undefined`
 
 The route parameters.
 
@@ -553,12 +553,12 @@ The full URL as a string.
 #### Get Signature
 
 ```ts
-get userAgent(): undefined | string;
+get userAgent(): string | undefined;
 ```
 
 ##### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The user agent of the request.
 
@@ -723,16 +723,20 @@ Priority:
 
 #### Param
 
+**key**
+
 The key to look for.
 
 #### Param
+
+**fallback**
 
 A fallback value if the key is not found.
 
 #### Call Signature
 
 ```ts
-get<TReturn>(key): undefined | TReturn;
+get<TReturn>(key): TReturn | undefined;
 ```
 
 Get data from the request.
@@ -762,17 +766,9 @@ The key to look for.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The value of the key or the fallback.
-
-##### Param
-
-The key to look for.
-
-##### Param
-
-A fallback value if the key is not found.
 
 ##### Overrides
 
@@ -823,14 +819,6 @@ A fallback value if the key is not found.
 
 The value of the key or the fallback.
 
-##### Param
-
-The key to look for.
-
-##### Param
-
-A fallback value if the key is not found.
-
 ##### Overrides
 
 ```ts
@@ -845,12 +833,14 @@ Get the body of the request.
 
 #### Param
 
+**fallback**
+
 The fallback value if the body is not found.
 
 #### Call Signature
 
 ```ts
-getBody<TReturn>(): undefined | TReturn;
+getBody<TReturn>(): TReturn | undefined;
 ```
 
 Get the body of the request.
@@ -863,13 +853,9 @@ Get the body of the request.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The body of the request or the fallback.
-
-##### Param
-
-The fallback value if the body is not found.
 
 #### Call Signature
 
@@ -899,10 +885,6 @@ The fallback value if the body is not found.
 
 The body of the request or the fallback.
 
-##### Param
-
-The fallback value if the body is not found.
-
 ***
 
 ### getCookie()
@@ -911,16 +893,20 @@ Get a cookie value.
 
 #### Param
 
+**name**
+
 The cookie name.
 
 #### Param
+
+**fallback**
 
 A fallback value if the cookie is not found.
 
 #### Call Signature
 
 ```ts
-getCookie<TReturn>(name): undefined | TReturn;
+getCookie<TReturn>(name): TReturn | undefined;
 ```
 
 Get a cookie value.
@@ -941,17 +927,9 @@ The cookie name.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The cookie value or the fallback.
-
-##### Param
-
-The cookie name.
-
-##### Param
-
-A fallback value if the cookie is not found.
 
 #### Call Signature
 
@@ -987,20 +965,12 @@ A fallback value if the cookie is not found.
 
 The cookie value or the fallback.
 
-##### Param
-
-The cookie name.
-
-##### Param
-
-A fallback value if the cookie is not found.
-
 ***
 
 ### getFile()
 
 ```ts
-getFile(name): undefined | UploadedFile[];
+getFile(name): UploadedFile[] | undefined;
 ```
 
 Get a file by its name.
@@ -1015,7 +985,7 @@ The name of the file.
 
 #### Returns
 
-`undefined` \| `UploadedFile`[]
+`UploadedFile`[] \| `undefined`
 
 The file if it exists, otherwise undefined.
 
@@ -1024,7 +994,7 @@ The file if it exists, otherwise undefined.
 ### getFormat()
 
 ```ts
-getFormat(mimeType): undefined | string;
+getFormat(mimeType): string | undefined;
 ```
 
 Get file extension for a given MIME type.
@@ -1039,7 +1009,7 @@ The MIME type.
 
 #### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The corresponding file extension, or undefined if not found.
 
@@ -1051,9 +1021,13 @@ Get a header value.
 
 #### Param
 
+**name**
+
 The header name.
 
 #### Param
+
+**fallback**
 
 A fallback value if the header is not found.
 
@@ -1064,7 +1038,7 @@ If the header name is not a valid string.
 #### Call Signature
 
 ```ts
-getHeader<TReturn>(name): undefined | TReturn;
+getHeader<TReturn>(name): TReturn | undefined;
 ```
 
 Get a header value.
@@ -1085,21 +1059,9 @@ The header name.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The header value or the fallback value.
-
-##### Param
-
-The header name.
-
-##### Param
-
-A fallback value if the header is not found.
-
-##### Throws
-
-If the header name is not a valid string.
 
 ##### Throws
 
@@ -1139,18 +1101,6 @@ A fallback value if the header is not found.
 
 The header value or the fallback value.
 
-##### Param
-
-The header name.
-
-##### Param
-
-A fallback value if the header is not found.
-
-##### Throws
-
-If the header name is not a valid string.
-
 ##### Throws
 
 If the header name is not a valid string.
@@ -1160,7 +1110,7 @@ If the header name is not a valid string.
 ### getMimeType()
 
 ```ts
-getMimeType(format): undefined | string;
+getMimeType(format): string | undefined;
 ```
 
 Get MIME type for a given file path or extension.
@@ -1175,7 +1125,7 @@ The file path or extension.
 
 #### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The corresponding MIME type, or undefined if not found.
 
@@ -1187,16 +1137,20 @@ Retrieve a parameter from the route if it exists.
 
 #### Param
 
+**name**
+
 The name of the parameter to retrieve.
 
 #### Param
+
+**fallback**
 
 The fallback value if the parameter does not exist.
 
 #### Call Signature
 
 ```ts
-getParam<TReturn>(name): undefined | TReturn;
+getParam<TReturn>(name): TReturn | undefined;
 ```
 
 Retrieve a parameter from the route if it exists.
@@ -1217,17 +1171,9 @@ The name of the parameter to retrieve.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The value of the parameter if it exists, otherwise undefined.
-
-##### Param
-
-The name of the parameter to retrieve.
-
-##### Param
-
-The fallback value if the parameter does not exist.
 
 #### Call Signature
 
@@ -1263,20 +1209,12 @@ The fallback value if the parameter does not exist.
 
 The value of the parameter if it exists, otherwise undefined.
 
-##### Param
-
-The name of the parameter to retrieve.
-
-##### Param
-
-The fallback value if the parameter does not exist.
-
 ***
 
 ### getRoute()
 
 ```ts
-getRoute<RouteType>(): undefined | RouteType;
+getRoute<RouteType>(): RouteType | undefined;
 ```
 
 Return the current route or a route parameter.
@@ -1289,7 +1227,7 @@ Return the current route or a route parameter.
 
 #### Returns
 
-`undefined` \| `RouteType`
+`RouteType` \| `undefined`
 
 The route parameter or the route object.
 
@@ -1298,7 +1236,7 @@ The route parameter or the route object.
 ### getRouteResolver()
 
 ```ts
-getRouteResolver(): () => undefined | IRoute;
+getRouteResolver(): () => IRoute | undefined;
 ```
 
 Get the route resolver function.
@@ -1307,27 +1245,21 @@ Get the route resolver function.
 
 The route resolver function.
 
-```ts
-(): undefined | IRoute;
-```
-
-##### Returns
-
-`undefined` \| [`IRoute`](../../declarations/interfaces/IRoute.md)
+() => [`IRoute`](../../declarations/interfaces/IRoute.md) \| `undefined`
 
 ***
 
 ### getUri()
 
 ```ts
-getUri(withDomain): undefined | string;
+getUri(withDomain?): string | undefined;
 ```
 
 Get the URI with or without the domain.
 
 #### Parameters
 
-##### withDomain
+##### withDomain?
 
 `boolean` = `false`
 
@@ -1335,7 +1267,7 @@ Whether to include the domain in the URI.
 
 #### Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The URI with or without the domain.
 
@@ -1375,13 +1307,7 @@ Get the user resolver function.
 
 The user resolver function.
 
-```ts
-(): unknown;
-```
-
-##### Returns
-
-`unknown`
+() => `unknown`
 
 ***
 
@@ -1615,16 +1541,20 @@ Get a value from the JSON body.
 
 #### Param
 
+**key**
+
 The key to look for in the JSON body.
 
 #### Param
+
+**fallback**
 
 A fallback value if the key is not found.
 
 #### Call Signature
 
 ```ts
-json<TReturn>(key): undefined | TReturn;
+json<TReturn>(key): TReturn | undefined;
 ```
 
 Get a value from the JSON body.
@@ -1645,17 +1575,9 @@ The key to look for in the JSON body.
 
 ##### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 The value of the key or the fallback.
-
-##### Param
-
-The key to look for in the JSON body.
-
-##### Param
-
-A fallback value if the key is not found.
 
 #### Call Signature
 
@@ -1691,20 +1613,12 @@ A fallback value if the key is not found.
 
 The value of the key or the fallback.
 
-##### Param
-
-The key to look for in the JSON body.
-
-##### Param
-
-A fallback value if the key is not found.
-
 ***
 
 ### preferredType()
 
 ```ts
-preferredType(types, defaultType): string;
+preferredType(types?, defaultType?): string;
 ```
 
 Determines the preferred response type based on content negotiation.
@@ -1712,13 +1626,13 @@ Uses Accept, Content-Type, User-Agent, and AJAX detection.
 
 #### Parameters
 
-##### types
+##### types?
 
 `string`[] = `...`
 
 Allowed response types, in priority order.
 
-##### defaultType
+##### defaultType?
 
 `string` = `'json'`
 
@@ -1735,7 +1649,7 @@ The best response type as a string.
 ### range()
 
 ```ts
-range(size, combine): undefined | Result | Ranges;
+range(size, combine?): Result | Ranges | undefined;
 ```
 
 Get request range.
@@ -1748,7 +1662,7 @@ Get request range.
 
 The maximum size of the resource.
 
-##### combine
+##### combine?
 
 `boolean` = `false`
 
@@ -1756,7 +1670,7 @@ Specifies if overlapping & adjacent ranges should be combined.
 
 #### Returns
 
-`undefined` \| `Result` \| `Ranges`
+`Result` \| `Ranges` \| `undefined`
 
 The parsed range, or undefined if not applicable.
 

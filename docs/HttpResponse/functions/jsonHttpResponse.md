@@ -3,8 +3,8 @@
 ```ts
 function jsonHttpResponse(
    content, 
-   statusCode, 
-   headers): JsonResponse;
+   statusCode?, 
+   headers?): JsonResponse;
 ```
 
 Create a 200(OK) JSON OutgoingHttpResponse.
@@ -17,13 +17,13 @@ Create a 200(OK) JSON OutgoingHttpResponse.
 
 The content of the response.
 
-### statusCode
+### statusCode?
 
 `number` = `HTTP_OK`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

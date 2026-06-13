@@ -4,7 +4,7 @@ Describes a route definition, including its URI, method, and parameters.
 
 ## Properties
 
-### getOptions()
+### getOptions
 
 ```ts
 getOptions: <TReturn>(keys) => Record<string, TReturn>;
@@ -28,10 +28,10 @@ getOptions: <TReturn>(keys) => Record<string, TReturn>;
 
 ***
 
-### getParam()
+### getParam
 
 ```ts
-getParam: <TReturn>(name, fallback?) => undefined | TReturn;
+getParam: <TReturn>(name, fallback?) => TReturn | undefined;
 ```
 
 #### Type Parameters
@@ -52,7 +52,7 @@ getParam: <TReturn>(name, fallback?) => undefined | TReturn;
 
 #### Returns
 
-`undefined` \| `TReturn`
+`TReturn` \| `undefined`
 
 ***
 

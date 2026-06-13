@@ -6,9 +6,9 @@ const MetaCORSHeadersMiddleware: object;
 
 Represents the metadata for the CORSHeadersMiddleware.
 
-## Type declaration
+## Type Declaration
 
-### module()
+### module
 
 ```ts
 module: (context, next) => Promise<IBlueprint> = CORSHeadersMiddleware;

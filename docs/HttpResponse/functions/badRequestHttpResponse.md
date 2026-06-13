@@ -1,7 +1,7 @@
 # Function: badRequestHttpResponse()
 
 ```ts
-function badRequestHttpResponse(content, headers): OutgoingHttpResponse;
+function badRequestHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 400(Bad Request) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 400(Bad Request) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

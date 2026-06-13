@@ -694,10 +694,10 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
         if (/^\s{0,50}<(?:!DOCTYPE|html|body|div|span|head|script|style|meta|title)\b/i.test(this.content)) {
           this.setContentType('html')
         } else {
-          this.setContentType('plain')
+          this.setContentType('txt')
         }
       } else if (typeof this.content === 'number' || typeof this.content === 'boolean') {
-        this.setContentType('plain')
+        this.setContentType('txt')
       } else {
         // Default to application/octet-stream for unknown content types
         this.setContentType('application/octet-stream')
@@ -903,7 +903,7 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
     const json = JSON.stringify(value, replacer, spaces)
 
     if (escape === true) {
-      return json.replace(/[<>&]/g, (c) => ({ '<': '\u003c', '>': '\u003e', '&': '\u0026' }[c]) as string)
+      return json.replace(/[<>&]/g, (c) => ({ '<': '\\u003c', '>': '\\u003e', '&': '\\u0026' }[c]) as string)
     }
 
     return json

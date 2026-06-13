@@ -5,9 +5,13 @@ It allows controlling how clients from different origins can access the server's
 
 ## Template
 
+**TEvent**
+
 Represents the type of the incoming HTTP event.
 
 ## Template
+
+**UResponse**
 
 Represents the type of the outgoing HTTP response.
 

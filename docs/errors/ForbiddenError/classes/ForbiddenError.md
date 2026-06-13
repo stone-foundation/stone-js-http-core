@@ -11,7 +11,7 @@ Forbidden http error.
 ### Constructor
 
 ```ts
-new ForbiddenError(message, options): ForbiddenError;
+new ForbiddenError(message, options?): ForbiddenError;
 ```
 
 #### Parameters
@@ -20,7 +20,7 @@ new ForbiddenError(message, options): ForbiddenError;
 
 `string`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 

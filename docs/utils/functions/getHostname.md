@@ -4,7 +4,7 @@
 function getHostname(
    ip, 
    headers, 
-   options): undefined | string;
+   options): string | undefined;
 ```
 
 Get hostname.
@@ -41,6 +41,6 @@ Options for trusted IPs, fallback, etc.
 
 ## Returns
 
-`undefined` \| `string`
+`string` \| `undefined`
 
 The hostname from the request.

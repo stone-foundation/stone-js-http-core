@@ -1,7 +1,7 @@
 # Function: getCharset()
 
 ```ts
-function getCharset(value, fallback): string;
+function getCharset(value, fallback?): string;
 ```
 
 Get message content charset.
@@ -10,11 +10,11 @@ Get message content charset.
 
 ### value
 
+`string` \| `IncomingMessage`
+
 The incoming message or content type string.
 
-`string` | `IncomingMessage`
-
-### fallback
+### fallback?
 
 `string` = `'utf-8'`
 

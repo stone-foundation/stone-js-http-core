@@ -6,7 +6,7 @@ type StreamFileOptions = send.SendOptions & object;
 
 Represents a file stream options.
 
-## Type declaration
+## Type Declaration
 
 ### headers
 

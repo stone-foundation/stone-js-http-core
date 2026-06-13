@@ -17,9 +17,9 @@ Mr. Stone <evensstone@gmail.com>
 ```ts
 new HttpError(
    message, 
-   statusCode, 
-   headers, 
-   options): HttpError;
+   statusCode?, 
+   headers?, 
+   options?): HttpError;
 ```
 
 Create an HttpError.
@@ -32,15 +32,15 @@ Create an HttpError.
 
 The message to log.
 
-##### statusCode
+##### statusCode?
 
 `number` = `500`
 
-##### headers
+##### headers?
 
 [`HeadersType`](../../../declarations/type-aliases/HeadersType.md) = `...`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 

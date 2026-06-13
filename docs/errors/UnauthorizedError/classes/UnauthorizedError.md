@@ -11,7 +11,7 @@ Unauthorized http error.
 ### Constructor
 
 ```ts
-new UnauthorizedError(message, options): UnauthorizedError;
+new UnauthorizedError(message, options?): UnauthorizedError;
 ```
 
 #### Parameters
@@ -20,7 +20,7 @@ new UnauthorizedError(message, options): UnauthorizedError;
 
 `string`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 
