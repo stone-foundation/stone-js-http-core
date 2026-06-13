@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Http core" extension will be documented in 
 ## Unreleased
 
 
+## [0.1.4](https://github.com/stone-foundation/stone-js-http-core/compare/v0.1.3...v0.1.4) (2026-06-13)
+
+
+### Miscellaneous Chores
+
+* release new version ([#84](https://github.com/stone-foundation/stone-js-http-core/issues/84)) ([a8ddc04](https://github.com/stone-foundation/stone-js-http-core/commit/a8ddc04f556aed5b6f31acb9c6d7e43514d45252))
+
 ## [0.1.3](https://github.com/stone-foundation/stone-js-http-core/compare/v0.1.2...v0.1.3) (2025-06-12)
 
 
