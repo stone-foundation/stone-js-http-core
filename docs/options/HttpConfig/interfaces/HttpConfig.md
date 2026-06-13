@@ -93,10 +93,10 @@ etag: object;
 
 ETag-related configuration options.
 
-#### function()?
+#### function?
 
 ```ts
-optional function: (content, encoding) => string;
+optional function?: (content, encoding) => string;
 ```
 
 A custom function for generating ETags.
@@ -144,7 +144,7 @@ Configuration for file responses.
 #### extensions?
 
 ```ts
-optional extensions: string[];
+optional extensions?: string[];
 ```
 
 The list of accepted file extensions.
@@ -152,7 +152,7 @@ The list of accepted file extensions.
 #### rootDir?
 
 ```ts
-optional rootDir: string;
+optional rootDir?: string;
 ```
 
 The root directory for serving static files.

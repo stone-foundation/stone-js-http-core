@@ -7,7 +7,7 @@ Represents an outgoing HTTP response.
 ### etag
 
 ```ts
-etag: undefined | string;
+etag: string | undefined;
 ```
 
 ***
@@ -15,7 +15,7 @@ etag: undefined | string;
 ### lastModified
 
 ```ts
-lastModified: undefined | string;
+lastModified: string | undefined;
 ```
 
 ***
@@ -23,5 +23,5 @@ lastModified: undefined | string;
 ### status
 
 ```ts
-status: undefined | number;
+status: number | undefined;
 ```

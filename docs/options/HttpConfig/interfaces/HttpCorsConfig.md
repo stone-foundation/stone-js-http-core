@@ -35,7 +35,7 @@ The headers that are exposed to the client in CORS responses.
 ### maxAge
 
 ```ts
-maxAge: null | number;
+maxAge: number | null;
 ```
 
 The maximum age for preflight requests.

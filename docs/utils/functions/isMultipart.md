@@ -10,9 +10,9 @@ Check if multipart message.
 
 ### value
 
-The incoming message or content type string.
+`string` \| `IncomingMessage`
 
-`string` | `IncomingMessage`
+The incoming message or content type string.
 
 ## Returns
 

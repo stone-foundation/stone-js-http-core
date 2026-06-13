@@ -22,5 +22,5 @@ Options for creating an Outgoing HTTP Response.
 ### headers?
 
 ```ts
-optional headers: HeadersType;
+optional headers?: HeadersType;
 ```

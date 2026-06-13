@@ -10,7 +10,7 @@ Class representing a Cookie.
 protected new Cookie(
    name, 
    value, 
-   options): Cookie;
+   options?): Cookie;
 ```
 
 #### Parameters
@@ -27,7 +27,7 @@ Cookie name.
 
 Cookie value.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
@@ -66,7 +66,7 @@ readonly value: unknown;
 ### cloneWith()
 
 ```ts
-cloneWith(value, options): Cookie;
+cloneWith(value, options?): Cookie;
 ```
 
 Clone the cookie with new name, value, and options.
@@ -79,7 +79,7 @@ Clone the cookie with new name, value, and options.
 
 New cookie value.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
@@ -187,7 +187,7 @@ Whether the cookie is secure.
 static create(
    name, 
    value, 
-   options): Cookie;
+   options?): Cookie;
 ```
 
 Create a Cookie.
@@ -206,7 +206,7 @@ Cookie name.
 
 Cookie value.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 

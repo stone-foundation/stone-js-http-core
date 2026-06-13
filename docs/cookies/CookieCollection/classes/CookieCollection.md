@@ -47,7 +47,7 @@ Secret value to sign and unsign cookies.
 add(
    name, 
    value, 
-   options): this;
+   options?): this;
 ```
 
 Add a cookie to the collection.
@@ -66,7 +66,7 @@ Cookie name.
 
 Cookie value.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
@@ -81,7 +81,7 @@ Cookie options.
 ### all()
 
 ```ts
-all<S>(serialize): S extends true ? string[] : Record<string, unknown>;
+all<S>(serialize?): S extends true ? string[] : Record<string, unknown>;
 ```
 
 Get all cookies in the collection.
@@ -94,7 +94,7 @@ Get all cookies in the collection.
 
 #### Parameters
 
-##### serialize
+##### serialize?
 
 `S` = `...`
 
@@ -109,14 +109,14 @@ If true, serialize the cookies.
 ### clear()
 
 ```ts
-clear(force): this;
+clear(force?): this;
 ```
 
 Clear all cookies from the collection.
 
 #### Parameters
 
-##### force
+##### force?
 
 `boolean` = `false`
 
@@ -134,16 +134,20 @@ Get a cookie from the collection.
 
 #### Param
 
+**name**
+
 Cookie name.
 
 #### Param
+
+**fallback**
 
 Fallback value if the cookie does not exist.
 
 #### Call Signature
 
 ```ts
-get(name): undefined | Cookie;
+get(name): Cookie | undefined;
 ```
 
 Get a cookie from the collection.
@@ -158,17 +162,9 @@ Cookie name.
 
 ##### Returns
 
-`undefined` \| [`Cookie`](../../Cookie/classes/Cookie.md)
+[`Cookie`](../../Cookie/classes/Cookie.md) \| `undefined`
 
 Cookie value.
-
-##### Param
-
-Cookie name.
-
-##### Param
-
-Fallback value if the cookie does not exist.
 
 #### Call Signature
 
@@ -198,14 +194,6 @@ Fallback value if the cookie does not exist.
 
 Cookie value.
 
-##### Param
-
-Cookie name.
-
-##### Param
-
-Fallback value if the cookie does not exist.
-
 ***
 
 ### getValue()
@@ -214,16 +202,20 @@ Get a cookie value from the collection.
 
 #### Param
 
+**name**
+
 Cookie name.
 
 #### Param
+
+**fallback**
 
 Fallback value if the cookie does not exist.
 
 #### Call Signature
 
 ```ts
-getValue<ValueType>(name): undefined | ValueType;
+getValue<ValueType>(name): ValueType | undefined;
 ```
 
 Get a cookie value from the collection.
@@ -244,17 +236,9 @@ Cookie name.
 
 ##### Returns
 
-`undefined` \| `ValueType`
+`ValueType` \| `undefined`
 
 Cookie value.
-
-##### Param
-
-Cookie name.
-
-##### Param
-
-Fallback value if the cookie does not exist.
 
 #### Call Signature
 
@@ -289,14 +273,6 @@ Fallback value if the cookie does not exist.
 `ValueType`
 
 Cookie value.
-
-##### Param
-
-Cookie name.
-
-##### Param
-
-Fallback value if the cookie does not exist.
 
 ***
 
@@ -341,8 +317,8 @@ Check if the collection is empty.
 ```ts
 remove(
    name, 
-   options, 
-   force): this;
+   options?, 
+   force?): this;
 ```
 
 Remove a cookie from the collection.
@@ -355,13 +331,13 @@ Remove a cookie from the collection.
 
 Cookie name to remove.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 
 Cookie options.
 
-##### force
+##### force?
 
 `boolean` = `false`
 
@@ -376,14 +352,14 @@ If true, remove only from collection without setting expiry.
 ### secure()
 
 ```ts
-secure(value): this;
+secure(value?): this;
 ```
 
 Set secure flag for all cookies in the collection.
 
 #### Parameters
 
-##### value
+##### value?
 
 `boolean` = `false`
 
@@ -445,7 +421,7 @@ Secret value.
 update(
    name, 
    value, 
-   options): this;
+   options?): this;
 ```
 
 Update a cookie in the collection.
@@ -464,7 +440,7 @@ Cookie name.
 
 New cookie value.
 
-##### options
+##### options?
 
 [`CookieOptions`](../../../declarations/interfaces/CookieOptions.md) = `{}`
 

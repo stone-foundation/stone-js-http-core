@@ -3,11 +3,11 @@
 ```ts
 function fileHttpResponse(
    file, 
-   statusCode, 
-   headers, 
-   contentDispositionType, 
-   autoEtag, 
-   autoLastModified): BinaryFileResponse;
+   statusCode?, 
+   headers?, 
+   contentDispositionType?, 
+   autoEtag?, 
+   autoLastModified?): BinaryFileResponse;
 ```
 
 Create a 200(OK) file OutgoingHttpResponse.
@@ -16,35 +16,35 @@ Create a 200(OK) file OutgoingHttpResponse.
 
 ### file
 
+`string` \| `File`
+
 The file to send as the response.
 
-`string` | `File`
-
-### statusCode
+### statusCode?
 
 `number` = `HTTP_OK`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 
 The headers for the response.
 
-### contentDispositionType
+### contentDispositionType?
+
+`string` \| `null`
 
 The content disposition type (e.g., "inline" or "attachment").
 
-`null` | `string`
-
-### autoEtag
+### autoEtag?
 
 `boolean` = `false`
 
 Whether to automatically generate an ETag.
 
-### autoLastModified
+### autoLastModified?
 
 `boolean` = `true`
 

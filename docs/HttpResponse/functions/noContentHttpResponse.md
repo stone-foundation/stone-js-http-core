@@ -1,14 +1,14 @@
 # Function: noContentHttpResponse()
 
 ```ts
-function noContentHttpResponse(headers): OutgoingHttpResponse;
+function noContentHttpResponse(headers?): OutgoingHttpResponse;
 ```
 
 Create a 204(No Content) OutgoingHttpResponse.
 
 ## Parameters
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

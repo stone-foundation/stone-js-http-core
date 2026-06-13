@@ -17,7 +17,7 @@ IncomingHttpEventOptions interface.
 ### body?
 
 ```ts
-optional body: Record<string, unknown>;
+optional body?: Record<string, unknown>;
 ```
 
 ***
@@ -25,7 +25,7 @@ optional body: Record<string, unknown>;
 ### cookies?
 
 ```ts
-optional cookies: CookieCollection;
+optional cookies?: CookieCollection;
 ```
 
 ***
@@ -33,7 +33,7 @@ optional cookies: CookieCollection;
 ### files?
 
 ```ts
-optional files: Record<string, UploadedFile[]>;
+optional files?: Record<string, UploadedFile[]>;
 ```
 
 ***
@@ -41,7 +41,7 @@ optional files: Record<string, UploadedFile[]>;
 ### headers?
 
 ```ts
-optional headers: Headers | Record<string, string>;
+optional headers?: Headers | Record<string, string>;
 ```
 
 ***
@@ -57,7 +57,7 @@ ip: string;
 ### ips?
 
 ```ts
-optional ips: string[];
+optional ips?: string[];
 ```
 
 ***
@@ -65,7 +65,7 @@ optional ips: string[];
 ### method?
 
 ```ts
-optional method: HttpMethods;
+optional method?: HttpMethods;
 ```
 
 ***
@@ -73,7 +73,7 @@ optional method: HttpMethods;
 ### protocol?
 
 ```ts
-optional protocol: string;
+optional protocol?: string;
 ```
 
 ***
@@ -81,7 +81,7 @@ optional protocol: string;
 ### queryString?
 
 ```ts
-optional queryString: string;
+optional queryString?: string;
 ```
 
 ***

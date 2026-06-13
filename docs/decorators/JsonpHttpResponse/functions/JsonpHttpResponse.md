@@ -1,7 +1,7 @@
 # Function: JsonpHttpResponse()
 
 ```ts
-function JsonpHttpResponse<T>(statusCode, headers): MethodDecorator;
+function JsonpHttpResponse<T>(statusCode?, headers?): MethodDecorator;
 ```
 
 Decorator to mark a class method as a JsonP outgoing http response.
@@ -14,13 +14,13 @@ Decorator to mark a class method as a JsonP outgoing http response.
 
 ## Parameters
 
-### statusCode
+### statusCode?
 
 `number` = `HTTP_OK`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../../declarations/type-aliases/HeadersType.md) = `{}`
 

@@ -97,4 +97,4 @@ export class CompressionMiddleware {
 /**
  * Meta Middleware for compressing response content.
  */
-export const MetaCompressionMiddleware = { module: CompressionMiddleware, isClass: true }
+export const MetaCompressionMiddleware = { module: CompressionMiddleware, isClass: true, global: true }

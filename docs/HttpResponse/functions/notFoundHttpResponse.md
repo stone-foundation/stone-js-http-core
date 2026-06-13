@@ -1,7 +1,7 @@
 # Function: notFoundHttpResponse()
 
 ```ts
-function notFoundHttpResponse(content, headers): OutgoingHttpResponse;
+function notFoundHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 404(Not Found) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 404(Not Found) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

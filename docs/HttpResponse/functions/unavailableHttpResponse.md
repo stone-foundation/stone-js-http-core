@@ -1,7 +1,7 @@
 # Function: unavailableHttpResponse()
 
 ```ts
-function unavailableHttpResponse(content, headers): OutgoingHttpResponse;
+function unavailableHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 503(Service Unavailable) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 503(Service Unavailable) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

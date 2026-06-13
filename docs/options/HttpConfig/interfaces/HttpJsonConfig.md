@@ -12,10 +12,10 @@ Whether to escape HTML characters in JSON output.
 
 ***
 
-### replacer()?
+### replacer?
 
 ```ts
-optional replacer: (this, key, value) => unknown;
+optional replacer?: (this, key, value) => unknown;
 ```
 
 A custom replacer function for JSON serialization.

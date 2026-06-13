@@ -6,7 +6,13 @@ const MetaStaticFileMiddleware: object;
 
 Meta Middleware for serving static files from a directory.
 
-## Type declaration
+## Type Declaration
+
+### global
+
+```ts
+global: boolean = true;
+```
 
 ### isClass
 

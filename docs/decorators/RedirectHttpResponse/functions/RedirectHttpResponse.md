@@ -1,7 +1,7 @@
 # Function: RedirectHttpResponse()
 
 ```ts
-function RedirectHttpResponse<T>(statusCode, headers): MethodDecorator;
+function RedirectHttpResponse<T>(statusCode?, headers?): MethodDecorator;
 ```
 
 Decorator to mark a class method as a redirect outgoing http response.
@@ -14,13 +14,13 @@ Decorator to mark a class method as a redirect outgoing http response.
 
 ## Parameters
 
-### statusCode
+### statusCode?
 
 `number` = `HTTP_OK`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../../declarations/type-aliases/HeadersType.md) = `{}`
 

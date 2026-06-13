@@ -11,7 +11,7 @@ NotFound http error.
 ### Constructor
 
 ```ts
-new NotFoundError(message, options): NotFoundError;
+new NotFoundError(message, options?): NotFoundError;
 ```
 
 #### Parameters
@@ -20,7 +20,7 @@ new NotFoundError(message, options): NotFoundError;
 
 `string`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 

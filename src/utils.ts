@@ -2,10 +2,11 @@ import send from 'send'
 import bytes from 'bytes'
 import Busboy from 'busboy'
 import typeIs from 'type-is'
-import { join } from 'node:path'
 import { tmpdir } from 'node:os'
+import { once } from 'node:events'
 import contentType from 'content-type'
 import { randomUUID } from 'node:crypto'
+import { extname, join } from 'node:path'
 import ipRangeCheck from 'ip-range-check'
 import { createWriteStream } from 'node:fs'
 import { IncomingHttpHeaders } from 'node:http'
@@ -203,35 +204,41 @@ export async function getFilesUploads (
     options.limits.fieldSize = bytes.parse(options.limits.fieldSize) ?? Infinity
     options.limits.fieldNameSize = bytes.parse(options.limits.fieldNameSize) ?? Infinity
 
+    const writePromises: Array<Promise<void>> = []
     const busboy = Busboy({ headers: event.headers, ...options })
     const result: { files: Record<string, UploadedFile[]>, fields: Record<string, string> } = { files: {}, fields: {} }
 
     busboy
-      .on('close', () => resolve(result))
-      .on('error', (error: any) => reject(new FilesystemError(error.message, { cause: error })))
       .on('field', (fieldname, value) => { result.fields[fieldname] = value })
-      .on('file', (fieldname, file, info) => {
+      .on('file', (fieldname, file, { filename, mimeType }) => {
         result.files[fieldname] ??= []
-        const { filename, mimeType } = info
-        const filepath = join(tmpdir(), `${String(options.prefix ?? 'file')}-${randomUUID()}`)
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        const originalExt = extname(filename) || '.tmp'
+        const filepath = join(tmpdir(), `${String(options.prefix ?? 'file')}-${randomUUID()}${originalExt}`)
         const writeStream = createWriteStream(filepath)
 
-        file.on('close', () => {
+        const writePromise = once(writeStream, 'close').then(() => {
           result.files[fieldname].push(UploadedFile.createFile(filepath, filename, mimeType))
         })
 
-        writeStream.on('error', (error: any) => {
-          reject(new FilesystemError(error.message, { cause: error }))
-        })
+        writePromises.push(writePromise)
 
         file.pipe(writeStream)
+
+        file.on('error', error => reject(new FilesystemError(error.message, { cause: error })))
+        writeStream.on('error', error => reject(new FilesystemError(error.message, { cause: error })))
+      })
+      .on('error', (error: any) => reject(new FilesystemError(error.message, { cause: error })))
+      .on('close', () => {
+        Promise
+          .all(writePromises)
+          .then(() => resolve(result))
+          .catch((error: any) => reject(new FilesystemError('Error while completing file writes', { cause: error })))
       })
 
     if (event instanceof IncomingMessage) { // Handle streamed file uploads.
       event.pipe(busboy)
-      event.on('error', (error: any) => {
-        reject(new InternalServerError(error.message, { cause: error }))
-      })
+      event.on('error', (error: any) => reject(new InternalServerError(error.message, { cause: error })))
     } else { // Handle pre-read file uploads.
       busboy.write(event.body)
       busboy.end()

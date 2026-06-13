@@ -3,8 +3,8 @@
 ```ts
 function redirectHttpResponse(
    url, 
-   statusCode, 
-   headers): RedirectResponse;
+   statusCode?, 
+   headers?): RedirectResponse;
 ```
 
 Create a 302(Redirect) OutgoingHttpResponse.
@@ -13,17 +13,17 @@ Create a 302(Redirect) OutgoingHttpResponse.
 
 ### url
 
+`string` \| `URL`
+
 The URL to redirect to.
 
-`string` | `URL`
-
-### statusCode
+### statusCode?
 
 `number` = `302`
 
 The status code of the redirect response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

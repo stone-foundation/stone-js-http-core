@@ -6,7 +6,13 @@ const MetaHandleCorsMiddleware: object;
 
 Meta Middleware for processing CORS headers.
 
-## Type declaration
+## Type Declaration
+
+### global
+
+```ts
+global: boolean = true;
+```
 
 ### isClass
 

@@ -11,7 +11,7 @@ BadRequestError http error.
 ### Constructor
 
 ```ts
-new BadRequestError(message, options): BadRequestError;
+new BadRequestError(message, options?): BadRequestError;
 ```
 
 #### Parameters
@@ -20,7 +20,7 @@ new BadRequestError(message, options): BadRequestError;
 
 `string`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 

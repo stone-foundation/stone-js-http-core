@@ -25,7 +25,8 @@ describe('HttpResponse', () => {
     expect(response).toBeInstanceOf(OutgoingHttpResponse)
     expect(response.statusCode).toBe(HTTP_OK)
     expect(response.content).toBe('Hello World')
-    expect(response.headers.get('Content-Type')).toBe('text/html; charset=utf-8')
+    // 'Hello World' has no HTML markup, so it is now served as text/plain
+    expect(response.headers.get('Content-Type')).toBe('text/plain; charset=utf-8')
   })
 
   it('should create an OK response', async () => {
@@ -125,6 +126,13 @@ describe('HttpResponse', () => {
     expect(response).toBeInstanceOf(RedirectResponse)
     expect(response.statusCode).toBe(302)
     expect(response.headers.get('Location')).toBe('http://example.com')
+  })
+
+  it('should detect HTML markup in a string and set text/html', async () => {
+    const response = await okHttpResponse('<div>Hello</div>').prepare(event)
+    expect(response.statusCode).toBe(HTTP_OK)
+    expect(response.content).toBe('<div>Hello</div>')
+    expect(response.headers.get('Content-Type')).toBe('text/html; charset=utf-8')
   })
 
   it('should create a Server Error response', async () => {

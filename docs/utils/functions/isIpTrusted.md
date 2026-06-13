@@ -1,7 +1,7 @@
 # Function: isIpTrusted()
 
 ```ts
-function isIpTrusted(trusted, untrusted): (ip) => boolean;
+function isIpTrusted(trusted, untrusted?): (ip) => boolean;
 ```
 
 Check if IP is trusted or not.
@@ -10,30 +10,18 @@ Check if IP is trusted or not.
 
 ### trusted
 
+`string` \| `string`[]
+
 Array of trusted IPs or wildcard.
 
-`string` | `string`[]
+### untrusted?
 
-### untrusted
+`string` \| `string`[]
 
 Array of untrusted IPs or wildcard.
-
-`string` | `string`[]
 
 ## Returns
 
 A function to verify if a given IP is trusted.
 
-```ts
-(ip): boolean;
-```
-
-### Parameters
-
-#### ip
-
-`string`
-
-### Returns
-
-`boolean`
+(`ip`) => `boolean`

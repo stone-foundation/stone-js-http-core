@@ -1,7 +1,7 @@
 # Function: forbiddenHttpResponse()
 
 ```ts
-function forbiddenHttpResponse(content, headers): OutgoingHttpResponse;
+function forbiddenHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 403(Forbidden) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 403(Forbidden) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

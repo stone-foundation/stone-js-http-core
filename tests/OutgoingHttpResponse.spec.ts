@@ -118,14 +118,17 @@ describe('OutgoingHttpResponse', () => {
     // @ts-expect-error - Testing private method
     response.setContentTypeIfNeeded()
     expect(response.headers.get('Content-Type')).toBe('application/json; charset=utf-8')
-    expect(response.content).toBe('{"message":"<Hello World != />"}')
+    // Serialization is no longer done by setContentTypeIfNeeded; it now happens in setContent (sequenced by prepare).
+    response.setContent(response.content, blueprint.get('stone.http.json', {}))
+    expect(response.content).toBe('{"message":"\\u003cHello World != /\\u003e"}')
 
     // @ts-expect-error - Testing private property
     response._content = 1
     response.removeHeader('Content-Type')
     // @ts-expect-error - Testing private method
     response.setContentTypeIfNeeded()
-    expect(response.content).toBe('1')
+    // Numbers are no longer treated as JSON, so the type is text/plain.
+    expect(response.headers.get('Content-Type')).toBe('text/plain; charset=utf-8')
   })
 
   it('should set status as HTTP_NOT_MODIFIED when invoking handleCacheHeaders when event is fresh', () => {
@@ -173,6 +176,58 @@ describe('OutgoingHttpResponse', () => {
     // @ts-expect-error - Testing private method
     const length = response.calculateContentLength()
     expect(length).toBe(11)
+  })
+
+  it('should calculate length for object, number, boolean and unknown content', () => {
+    // Object content with no blueprint (optional-chaining short-circuit)
+    response.setBlueprintResolver(() => undefined)
+    // @ts-expect-error - Testing private property
+    response._content = { a: 1 }
+    // @ts-expect-error - Testing private method
+    expect(response.calculateContentLength()).toBe(Buffer.byteLength('{"a":1}'))
+
+    // Object content with a blueprint present (optional-chaining resolves)
+    const blueprint = { get: vi.fn((_k: string, d: unknown) => d) } as unknown as IBlueprint
+    response.setBlueprintResolver(() => blueprint)
+    // @ts-expect-error - Testing private property
+    response._content = { a: 1 }
+    // @ts-expect-error - Testing private method
+    expect(response.calculateContentLength()).toBe(Buffer.byteLength('{"a":1}'))
+    expect(blueprint.get).toHaveBeenCalledWith('stone.http.json', {})
+
+    // @ts-expect-error - Testing private property
+    response._content = 1234
+    // @ts-expect-error - Testing private method
+    expect(response.calculateContentLength()).toBe(4)
+
+    // @ts-expect-error - Testing private property
+    response._content = true
+    // @ts-expect-error - Testing private method
+    expect(response.calculateContentLength()).toBe(4)
+
+    // Unknown types (e.g. symbol) fall back to an empty string (length 0)
+    // @ts-expect-error - Testing private property
+    response._content = Symbol('x')
+    // @ts-expect-error - Testing private method
+    expect(response.calculateContentLength()).toBe(0)
+  })
+
+  it('should set text/plain for boolean content via setContentTypeIfNeeded', () => {
+    // @ts-expect-error - Testing private property
+    response._content = true
+    response.removeHeader('Content-Type')
+    // @ts-expect-error - Testing private method
+    response.setContentTypeIfNeeded()
+    expect(response.headers.get('Content-Type')).toBe('text/plain; charset=utf-8')
+  })
+
+  it('should default to application/octet-stream for unknown content via setContentTypeIfNeeded', () => {
+    // @ts-expect-error - Testing private property
+    response._content = Symbol('x')
+    response.removeHeader('Content-Type')
+    // @ts-expect-error - Testing private method
+    response.setContentTypeIfNeeded()
+    expect(response.headers.get('Content-Type')).toBe('application/octet-stream; charset=utf-8')
   })
 
   it('should invoke ensureCharset with invalid value', () => {

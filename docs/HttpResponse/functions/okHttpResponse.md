@@ -1,7 +1,7 @@
 # Function: okHttpResponse()
 
 ```ts
-function okHttpResponse(content, headers): OutgoingHttpResponse;
+function okHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 200(OK) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 200(OK) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

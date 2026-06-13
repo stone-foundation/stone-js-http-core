@@ -1,7 +1,7 @@
 # Function: getType()
 
 ```ts
-function getType(value, fallback): string;
+function getType(value, fallback?): string;
 ```
 
 Get message content type.
@@ -10,11 +10,11 @@ Get message content type.
 
 ### value
 
+`string` \| `IncomingMessage`
+
 The incoming message or content type string.
 
-`string` | `IncomingMessage`
-
-### fallback
+### fallback?
 
 `string` = `'text/plain'`
 

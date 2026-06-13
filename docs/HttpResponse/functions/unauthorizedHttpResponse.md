@@ -1,7 +1,7 @@
 # Function: unauthorizedHttpResponse()
 
 ```ts
-function unauthorizedHttpResponse(content, headers): OutgoingHttpResponse;
+function unauthorizedHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 401(Unauthorized) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 401(Unauthorized) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 

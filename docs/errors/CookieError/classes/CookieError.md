@@ -11,7 +11,7 @@ Custom error for cookie operations.
 ### Constructor
 
 ```ts
-new CookieError(message, options): CookieError;
+new CookieError(message, options?): CookieError;
 ```
 
 #### Parameters
@@ -20,7 +20,7 @@ new CookieError(message, options): CookieError;
 
 `string`
 
-##### options
+##### options?
 
 `ErrorOptions` = `{}`
 

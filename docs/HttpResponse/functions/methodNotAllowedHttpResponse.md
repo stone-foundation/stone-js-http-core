@@ -1,7 +1,7 @@
 # Function: methodNotAllowedHttpResponse()
 
 ```ts
-function methodNotAllowedHttpResponse(content, headers): OutgoingHttpResponse;
+function methodNotAllowedHttpResponse(content, headers?): OutgoingHttpResponse;
 ```
 
 Create a 405(Method Not Allowed) OutgoingHttpResponse.
@@ -14,7 +14,7 @@ Create a 405(Method Not Allowed) OutgoingHttpResponse.
 
 The content of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../declarations/type-aliases/HeadersType.md) = `{}`
 
