@@ -1,9 +1,7 @@
 import vary from 'vary'
 import mime from 'mime/lite'
 import statuses from 'statuses'
-import { Buffer } from 'safe-buffer'
 import contentTypeLib from 'content-type'
-import { isFunction, isString } from 'lodash-es'
 import { createHash, Encoding } from 'node:crypto'
 import { HttpJsonConfig } from './options/HttpConfig'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
@@ -11,7 +9,7 @@ import { CookieCollection } from './cookies/CookieCollection'
 import { InternalServerError } from './errors/InternalServerError'
 import { HTTP_NOT_ACCEPTABLE, HTTP_NOT_MODIFIED } from './constants'
 import { HeadersType, IOutgoingHttpResponse, CookieOptions } from './declarations'
-import { IBlueprint, OutgoingResponse, OutgoingResponseOptions, IContainer } from '@stone-js/core'
+import { IBlueprint, OutgoingResponse, OutgoingResponseOptions, IContainer, isFunction, isString } from '@stone-js/core'
 
 /**
  * Options for creating an Outgoing HTTP Response.
@@ -171,6 +169,8 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    */
   setHeader (key: string, value: string | string[]): this {
     if (Array.isArray(value)) {
+      // Append each element via the native Headers.append (keeps multiple Set-Cookie separate and
+      // merges other multi-value headers like Vary).
       value.forEach((v) => this.appendHeader(key, v))
     } else if (key.toLowerCase() === 'content-type') {
       this.ensureCharset(value)
@@ -188,12 +188,10 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
    * @returns The current instance of OutgoingHttpResponse for chaining.
    */
   appendHeader (key: string, value: string): this {
-    const existingValue = this._headers.get(key)
-    if (existingValue !== null) {
-      this._headers.set(key, `${existingValue}, ${value}`)
-    } else {
-      this._headers.set(key, value)
-    }
+    // Delegate to the native Headers.append: it correctly keeps repeated `Set-Cookie` entries
+    // separate (retrievable via getSetCookie) and combines other headers with `", "`. The old
+    // manual concat corrupted cookies whose serialized value contains commas (e.g. `Expires`).
+    this._headers.append(key, value)
     return this
   }
 
@@ -850,7 +848,10 @@ export class OutgoingHttpResponse extends OutgoingResponse implements IOutgoingH
   protected prepareCookies (): this {
     if (!this._cookieCollection.isEmpty()) {
       this._cookieCollection
-        .setSecret(this.blueprint?.get('stone.secret') ?? '')
+        // Read the cookie secret from the dedicated key first, falling back to the app-wide
+        // secret — the SAME resolution the adapters use to read incoming cookies, so outgoing and
+        // incoming signatures always use the same key.
+        .setSecret(this.blueprint?.get('stone.http.cookie.secret') ?? this.blueprint?.get('stone.secret') ?? '')
         .setOptions(this.blueprint?.get('stone.http.cookie.options') ?? {})
 
       if (this.incomingEvent.isSecure) {

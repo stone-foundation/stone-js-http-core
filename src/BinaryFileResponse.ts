@@ -1,4 +1,3 @@
-import { Buffer } from 'safe-buffer'
 import { HTTP_NOT_MODIFIED } from './constants'
 import contentDisposition from 'content-disposition'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
@@ -196,12 +195,14 @@ export class BinaryFileResponse extends OutgoingHttpResponse {
     const fileSize = this.file.getSize()
     if (fileSize === undefined) return this
 
-    const etagFn = this.blueprint?.get('stone.http.etag.function', this.defaultEtagFn.bind(this))
-
     this.removeHeader('Transfer-Encoding').setHeader('Content-Length', String(fileSize))
 
-    if (!this.hasHeader('ETag') && typeof etagFn === 'function') {
-      this.setEtag(etagFn(this.file.getContent(), 'utf-8'))
+    // Weak validator from size + mtime — never read the whole file into memory to hash it (that
+    // would defeat streaming for large files). Callers wanting a strong content hash can call
+    // `autoEtag()` explicitly.
+    if (!this.hasHeader('ETag')) {
+      const mtime = this.file.getMTime() ?? 0
+      this.setEtag(`${String(fileSize)}-${String(mtime)}`, true)
     }
 
     if (!this.hasHeader('Content-Type')) {

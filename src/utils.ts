@@ -8,6 +8,7 @@ import contentType from 'content-type'
 import { randomUUID } from 'node:crypto'
 import { extname, join } from 'node:path'
 import ipRangeCheck from 'ip-range-check'
+import { rm } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
 import { IncomingHttpHeaders } from 'node:http'
 import { StreamFileOptions } from './declarations'
@@ -112,7 +113,9 @@ export function getProtocol (
   let protocol = encrypted ? 'https' : 'http'
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
-    protocol = (headers['X-Forwarded-Proto'] as string ?? headers['x-forwarded-proto'] as string)?.split(',').shift()?.trim() ?? protocol
+    // Incoming header names are always lower-cased (Node, Fetch Headers). The old mixed-case
+    // read (`X-Forwarded-Proto`) was dead code.
+    protocol = (headers['x-forwarded-proto'] as string)?.split(',').shift()?.trim() ?? protocol
   }
 
   return protocol
@@ -154,10 +157,11 @@ export function getHostname (
   headers: IncomingHttpHeaders,
   { trusted, trustedIp, untrustedIp }: { trusted: Array<string | RegExp>, trustedIp: string[], untrustedIp: string[] }
 ): string | undefined {
-  let hostname = (headers.host ?? headers.Host) as string | undefined
+  let hostname = headers.host
 
   if (isIpTrusted(trustedIp, untrustedIp)(ip)) {
-    hostname = (headers['X-Forwarded-Host'] as string ?? headers['x-forwarded-host'] as string)?.split(',').shift() ?? hostname
+    // Header names are always lower-cased; the mixed-case reads were dead code.
+    hostname = (headers['x-forwarded-host'] as string)?.split(',').shift() ?? hostname
   }
 
   if (hostname === undefined) return hostname
@@ -199,14 +203,30 @@ export async function getFilesUploads (
   options: Record<string, any>
 ): Promise<{ files: Record<string, UploadedFile[]>, fields: Record<string, string> }> {
   return await new Promise((resolve, reject) => {
-    options.limits ??= {}
-    options.limits.fileSize = bytes.parse(options.limits.fileSize) ?? Infinity
-    options.limits.fieldSize = bytes.parse(options.limits.fieldSize) ?? Infinity
-    options.limits.fieldNameSize = bytes.parse(options.limits.fieldNameSize) ?? Infinity
+    // Secure-by-default limits: a multipart upload is NOT bounded by the global `body.limit`, so
+    // without these an attacker could stream an arbitrarily large file and exhaust the disk (DoS).
+    // Callers can raise/lower each via `stone.http.files.upload.limits`.
+    options.limits = {
+      fileSize: bytes.parse(options.limits?.fileSize) ?? bytes.parse('10mb'),
+      fieldSize: bytes.parse(options.limits?.fieldSize) ?? bytes.parse('1mb'),
+      fieldNameSize: bytes.parse(options.limits?.fieldNameSize) ?? 100,
+      files: options.limits?.files ?? 20,
+      fields: options.limits?.fields ?? 1000,
+      parts: options.limits?.parts ?? 1020,
+      ...options.limits
+    }
 
+    const createdFiles: string[] = []
     const writePromises: Array<Promise<void>> = []
     const busboy = Busboy({ headers: event.headers, ...options })
     const result: { files: Record<string, UploadedFile[]>, fields: Record<string, string> } = { files: {}, fields: {} }
+
+    // Best-effort removal of every temp file already written, so a failed/aborted upload never
+    // leaks files on disk (combined with the limits above, prevents disk exhaustion).
+    const cleanup = async (): Promise<void> => {
+      await Promise.all(createdFiles.map(async (path) => await rm(path, { force: true }).catch(() => {})))
+    }
+    const fail = (error: Error): void => { void cleanup().finally(() => reject(error)) }
 
     busboy
       .on('field', (fieldname, value) => { result.fields[fieldname] = value })
@@ -216,6 +236,7 @@ export async function getFilesUploads (
         const originalExt = extname(filename) || '.tmp'
         const filepath = join(tmpdir(), `${String(options.prefix ?? 'file')}-${randomUUID()}${originalExt}`)
         const writeStream = createWriteStream(filepath)
+        createdFiles.push(filepath)
 
         const writePromise = once(writeStream, 'close').then(() => {
           result.files[fieldname].push(UploadedFile.createFile(filepath, filename, mimeType))
@@ -225,20 +246,25 @@ export async function getFilesUploads (
 
         file.pipe(writeStream)
 
-        file.on('error', error => reject(new FilesystemError(error.message, { cause: error })))
-        writeStream.on('error', error => reject(new FilesystemError(error.message, { cause: error })))
+        // Busboy emits `limit` on the file stream when `fileSize` is exceeded: reject loudly.
+        file.on('limit', () => fail(new BadRequestError(`Uploaded file "${filename}" exceeds the allowed size limit.`)))
+        file.on('error', error => fail(new FilesystemError(error.message, { cause: error })))
+        writeStream.on('error', error => fail(new FilesystemError(error.message, { cause: error })))
       })
-      .on('error', (error: any) => reject(new FilesystemError(error.message, { cause: error })))
+      .on('filesLimit', () => fail(new BadRequestError('Too many files uploaded.')))
+      .on('fieldsLimit', () => fail(new BadRequestError('Too many form fields.')))
+      .on('partsLimit', () => fail(new BadRequestError('Too many multipart parts.')))
+      .on('error', (error: any) => fail(new FilesystemError(error.message, { cause: error })))
       .on('close', () => {
         Promise
           .all(writePromises)
           .then(() => resolve(result))
-          .catch((error: any) => reject(new FilesystemError('Error while completing file writes', { cause: error })))
+          .catch((error: any) => fail(new FilesystemError('Error while completing file writes', { cause: error })))
       })
 
     if (event instanceof IncomingMessage) { // Handle streamed file uploads.
       event.pipe(busboy)
-      event.on('error', (error: any) => reject(new InternalServerError(error.message, { cause: error })))
+      event.on('error', (error: any) => fail(new InternalServerError(error.message, { cause: error })))
     } else { // Handle pre-read file uploads.
       busboy.write(event.body)
       busboy.end()

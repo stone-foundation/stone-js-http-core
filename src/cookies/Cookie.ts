@@ -68,7 +68,10 @@ export class Cookie {
       value = typeof value === 'object' ? `$$j$$:${JSON.stringify(value)}` : String(value)
     }
 
-    if (!isCookieValueSigned(value) && secret !== undefined) {
+    // Sign only when a secret is intended. No secret (undefined/empty) → cookies are left
+    // unsigned instead of being signed with a forgeable empty key. A set-but-weak secret makes
+    // `signCookieValue` throw loudly rather than silently producing a weak signature.
+    if (!isCookieValueSigned(value) && secret !== undefined && secret !== '') {
       value = signCookieValue(value, secret)
     }
 

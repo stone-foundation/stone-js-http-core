@@ -114,6 +114,38 @@ The list of IP addresses, typically for proxies.
 
 ***
 
+### locale
+
+```ts
+readonly locale: string;
+```
+
+The locale of the event.
+
+#### Inherited from
+
+```ts
+IncomingEvent.locale
+```
+
+***
+
+### metadata
+
+```ts
+readonly metadata: Record<string, unknown>;
+```
+
+The metadata associated with the event.
+
+#### Inherited from
+
+```ts
+IncomingEvent.metadata
+```
+
+***
+
 ### method
 
 ```ts
@@ -163,6 +195,54 @@ protected optional routeResolver?: () => IRoute;
 #### Returns
 
 [`IRoute`](../../declarations/interfaces/IRoute.md)
+
+***
+
+### source
+
+```ts
+readonly source: IncomingEventSource;
+```
+
+The source of the event.
+
+#### Inherited from
+
+```ts
+IncomingEvent.source
+```
+
+***
+
+### timeStamp
+
+```ts
+readonly timeStamp: number;
+```
+
+The timestamp of the event creation.
+
+#### Inherited from
+
+```ts
+IncomingEvent.timeStamp
+```
+
+***
+
+### type
+
+```ts
+readonly type: string;
+```
+
+The type of the event.
+
+#### Inherited from
+
+```ts
+IncomingEvent.type
+```
 
 ***
 
@@ -484,6 +564,30 @@ The pathname of the URL.
 
 ***
 
+### platform
+
+#### Get Signature
+
+```ts
+get platform(): string | symbol;
+```
+
+Get the platform of the event source.
+
+##### Returns
+
+`string` \| `symbol`
+
+The platform of the event source.
+
+#### Inherited from
+
+```ts
+IncomingEvent.platform
+```
+
+***
+
 ### scheme
 
 #### Get Signature
@@ -660,6 +764,39 @@ The first accepted type, or false if none are accepted.
 
 ***
 
+### clone()
+
+```ts
+clone<T>(): T;
+```
+
+Return a cloned instance.
+
+The `metadata` container is deep-copied (plain objects and arrays are recreated,
+special values kept by reference) so that mutating the clone's metadata — e.g. via
+middleware — never leaks back into the original event. This is what makes the
+Kernel's `originalEvent` snapshot a faithful pre-middleware copy.
+
+#### Type Parameters
+
+##### T
+
+`T` *extends* `IncomingHttpEvent`
+
+#### Returns
+
+`T`
+
+A cloned instance of the current class.
+
+#### Inherited from
+
+```ts
+IncomingEvent.clone
+```
+
+***
+
 ### filterFiles()
 
 ```ts
@@ -710,16 +847,15 @@ The generated fingerprint as a base64 string.
 
 ### get()
 
-Get data from the request.
+Get request DATA by key, across the request-data sources only.
 
-Priority:
-1. Route params
-2. Body
-3. Query params
-4. Headers
-5. Cookies
-6. Metadata
-7. Fallback value
+Priority: route params → body → query → metadata → fallback.
+
+SECURITY: `get()` deliberately does NOT read headers or cookies. Mixing trust levels
+(route params are kernel-trusted; body/query are attacker-controlled) in one lookup let an
+attacker spoof a header value — e.g. `event.get('authorization')` could be satisfied by
+`?authorization=...`. Read trusted transport values through the dedicated, unspoofable
+accessors [getHeader](#getheader) and [getCookie](#getcookie) instead.
 
 #### Param
 
@@ -739,16 +875,9 @@ A fallback value if the key is not found.
 get<TReturn>(key): TReturn | undefined;
 ```
 
-Get data from the request.
+Get request DATA by key (route params → body → query → metadata).
 
-Priority:
-1. Route params
-2. Body
-3. Query params
-4. Headers
-5. Cookies
-6. Metadata
-7. Fallback value
+SECURITY: does NOT read headers or cookies — use [getHeader](#getheader)/[getCookie](#getcookie).
 
 ##### Type Parameters
 
@@ -768,7 +897,7 @@ The key to look for.
 
 `TReturn` \| `undefined`
 
-The value of the key or the fallback.
+The value of the key, or undefined.
 
 ##### Overrides
 
@@ -782,16 +911,9 @@ IncomingEvent.get
 get<TReturn>(key, fallback): TReturn;
 ```
 
-Get data from the request.
+Get request DATA by key with a fallback (route params → body → query → metadata).
 
-Priority:
-1. Route params
-2. Body
-3. Query params
-4. Headers
-5. Cookies
-6. Metadata
-7. Fallback value
+SECURITY: does NOT read headers or cookies — use [getHeader](#getheader)/[getCookie](#getcookie).
 
 ##### Type Parameters
 
@@ -1107,6 +1229,84 @@ If the header name is not a valid string.
 
 ***
 
+### getMetadataValue()
+
+#### Call Signature
+
+```ts
+getMetadataValue<TReturn>(key): TReturn | undefined;
+```
+
+Get data from metadata.
+
+##### Type Parameters
+
+###### TReturn
+
+`TReturn` = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to retrieve from metadata.
+
+##### Returns
+
+`TReturn` \| `undefined`
+
+The value associated with the key or the fallback.
+
+##### Inherited from
+
+```ts
+IncomingEvent.getMetadataValue
+```
+
+#### Call Signature
+
+```ts
+getMetadataValue<TReturn>(key, fallback): TReturn;
+```
+
+Get data from metadata.
+
+##### Type Parameters
+
+###### TReturn
+
+`TReturn` = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to retrieve from metadata.
+
+###### fallback
+
+`TReturn`
+
+The fallback value if the key is not found.
+
+##### Returns
+
+`TReturn`
+
+The value associated with the key or the fallback.
+
+##### Inherited from
+
+```ts
+IncomingEvent.getMetadataValue
+```
+
+***
+
 ### getMimeType()
 
 ```ts
@@ -1407,6 +1607,42 @@ True if the key exists, otherwise false.
 
 ***
 
+### is()
+
+```ts
+is(key, value): boolean;
+```
+
+Check if the given value is equal to the specified value.
+
+#### Parameters
+
+##### key
+
+`string`
+
+The key to check.
+
+##### value
+
+`unknown`
+
+The value to compare against.
+
+#### Returns
+
+`boolean`
+
+True if the key's value is equal to the specified value, false otherwise.
+
+#### Inherited from
+
+```ts
+IncomingEvent.is
+```
+
+***
+
 ### isFresh()
 
 ```ts
@@ -1484,6 +1720,36 @@ Check if the current event method is considered safe.
 `boolean`
 
 True if the method is safe, otherwise false.
+
+***
+
+### isPlatform()
+
+```ts
+isPlatform(platform): boolean;
+```
+
+Check if the event source is from a platform.
+
+#### Parameters
+
+##### platform
+
+`string` \| `symbol`
+
+The platform to check.
+
+#### Returns
+
+`boolean`
+
+True if the event source is from the platform, false otherwise.
+
+#### Inherited from
+
+```ts
+IncomingEvent.isPlatform
+```
 
 ***
 
@@ -1676,6 +1942,42 @@ The parsed range, or undefined if not applicable.
 
 ***
 
+### setMetadataValue()
+
+```ts
+setMetadataValue(key, value?): this;
+```
+
+Add data to metadata.
+
+#### Parameters
+
+##### key
+
+`string` \| `Record`\<`string`, `unknown`\>
+
+The key or object to add to metadata.
+
+##### value?
+
+`unknown`
+
+The value to associate with the key.
+
+#### Returns
+
+`this`
+
+This Event instance.
+
+#### Inherited from
+
+```ts
+IncomingEvent.setMetadataValue
+```
+
+***
+
 ### setRouteResolver()
 
 ```ts
@@ -1780,4 +2082,22 @@ A new instance of IncomingHttpEvent.
 
 ```ts
 IncomingEvent.create
+```
+
+## Events
+
+### INCOMING\_EVENT
+
+```ts
+static INCOMING_EVENT: string;
+```
+
+INCOMING_EVENT Event name, fires on platform message.
+
+ IncomingEvent#INCOMING_EVENT
+
+#### Inherited from
+
+```ts
+IncomingEvent.INCOMING_EVENT
 ```

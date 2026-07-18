@@ -246,8 +246,10 @@ describe('Utility Functions', () => {
       expect(getProtocol('192.168.1.1', { 'x-forwarded-proto': 'https' }, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('https')
     })
 
-    it('should return forwarded protocol (capitalized header) if IP is trusted', () => {
-      expect(getProtocol('192.168.1.1', { 'X-Forwarded-Proto': 'https' } as any, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('https')
+    it('should ignore a capitalized forwarded header (headers are always lower-cased)', () => {
+      // Node/Fetch normalize header names to lower-case; a mixed-case key is never present, so it
+      // must NOT be read — the protocol falls back to the connection default.
+      expect(getProtocol('192.168.1.1', { 'X-Forwarded-Proto': 'https' } as any, false, { trustedIp: ['*'], untrustedIp: [] })).toBe('http')
     })
 
     it('should pick the first protocol when several are forwarded', () => {
@@ -315,10 +317,10 @@ describe('Utility Functions', () => {
       expect(result).toBe('example.com')
     })
 
-    it('should read the capitalized Host header', () => {
+    it('should ignore a capitalized Host header (headers are always lower-cased)', () => {
       const headers = { Host: 'example.com' } as any
       const result = getHostname('1.2.3.4', headers, { trusted: [], trustedIp: [], untrustedIp: [] })
-      expect(result).toBe('example.com')
+      expect(result).toBeUndefined()
     })
 
     it('should strip the port and lowercase the hostname', () => {
@@ -333,10 +335,11 @@ describe('Utility Functions', () => {
       expect(result).toBe('[2001:0db8:85a3:0000:0000:8a2e:0370:7334]')
     })
 
-    it('should read the capitalized X-Forwarded-Host header for a trusted IP', () => {
-      const headers = { 'X-Forwarded-Host': 'fwd.example.com' } as any
+    it('should ignore a capitalized X-Forwarded-Host header (headers are always lower-cased)', () => {
+      const headers = { 'X-Forwarded-Host': 'fwd.example.com', host: 'example.com' } as any
       const result = getHostname('1.2.3.4', headers, { trusted: [], trustedIp: ['*'], untrustedIp: [] })
-      expect(result).toBe('fwd.example.com')
+      // The capitalized forwarded header is ignored; falls back to the (lower-cased) Host.
+      expect(result).toBe('example.com')
     })
 
     it('should match a trusted hostname by exact string', () => {

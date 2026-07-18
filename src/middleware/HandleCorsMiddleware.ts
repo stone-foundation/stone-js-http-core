@@ -101,17 +101,37 @@ export class HandleCorsMiddleware {
    * @param event - The incoming event.
    * @returns The middleware instance for method chaining.
    */
-  private configureOrigin ({ origin }: Partial<HttpCorsConfig>, event: IncomingHttpEvent): this {
-    if (isEmpty(origin) || origin === '*') {
+  private configureOrigin ({ origin, credentials }: Partial<HttpCorsConfig>, event: IncomingHttpEvent): this {
+    // Explicit wildcard: allowed, but never with credentials (browsers reject it, and it would
+    // expose credentialed responses to any site). Fail loud on the misconfiguration.
+    if (origin === '*') {
+      if (credentials === true) {
+        throw new Error(
+          'CORS misconfiguration: `origin: "*"` cannot be combined with `credentials: true`. ' +
+          'List the exact allowed origins instead.'
+        )
+      }
       this.setHeader('Access-Control-Allow-Origin', '*')
-    } else if (typeof origin === 'string') {
+      return this
+    }
+
+    // Unconfigured (empty): stay same-origin — emit NO Access-Control-Allow-Origin header so the
+    // browser enforces the same-origin policy. An unconfigured app is never opened cross-origin.
+    if (isEmpty(origin)) {
+      return this
+    }
+
+    // A single configured origin.
+    if (typeof origin === 'string') {
       this.addVary('Origin').setHeader('Access-Control-Allow-Origin', origin)
-    } else {
-      const reqOrigin = event.getHeader('origin', '')
-      this.addVary('Origin').setHeader(
-        'Access-Control-Allow-Origin',
-        this.isOriginAllowed(reqOrigin, origin) ? reqOrigin : 'false'
-      )
+      return this
+    }
+
+    // An allow-list: reflect the request origin only when it matches; otherwise emit no header.
+    const reqOrigin = event.getHeader<string>('origin', '')
+    this.addVary('Origin')
+    if (isNotEmpty<string>(reqOrigin) && this.isOriginAllowed(reqOrigin, origin)) {
+      this.setHeader('Access-Control-Allow-Origin', reqOrigin)
     }
 
     return this
@@ -227,9 +247,8 @@ export class HandleCorsMiddleware {
    * @returns An object containing the default CORS options.
    */
   private getDefaults (): Record<string, string | boolean> {
+    // No default origin: an unconfigured app must stay same-origin (see `configureOrigin`).
     return {
-      origin: '*',
-      preflightStop: true,
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
     }
   }

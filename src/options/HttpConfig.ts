@@ -116,9 +116,11 @@ export interface HttpConfig {
    */
   cookie: {
     /**
-     * The secret used for signing cookies.
+     * The secret used for signing cookies. Undefined by default: cookies are NOT signed unless a
+     * strong secret (>= 32 chars) is configured. A weak/empty secret is rejected rather than
+     * silently producing a forgeable signature.
      */
-    secret: string
+    secret?: string
     /**
      * Additional cookie options.
      */
@@ -232,7 +234,9 @@ export const httpCoreBlueprint: HttpCoreBlueprint = {
       },
       cache: {},
       cookie: {
-        secret: '',
+        // No secret by default → cookies are not signed (rather than signed with a forgeable
+        // empty key). Set a strong secret (>= 32 chars) to enable signing.
+        secret: undefined,
         options: {}
       },
       json: {

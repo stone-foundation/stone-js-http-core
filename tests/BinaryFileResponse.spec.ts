@@ -155,10 +155,20 @@ describe('BinaryFileResponse', () => {
 
       await response.removeHeader('Content-Type').prepare(event, { make: () => blueprint } as any)
 
-      // @ts-expect-error - Accessing private method for testing purposes
-      expect(response.getHeader('ETag')).toBe(`"${response.defaultEtagFn(mockFile.getContent())}"`)
+      // Weak validator from size + mtime — never reads the whole file to hash it.
+      expect(response.getHeader('ETag')).toBe('W/"1024-1234567890"')
       expect(response.getHeader('Content-Type')).toBe('application/octet-stream; charset=utf-8')
       expect(response.getHeader('Content-Disposition')).toBe(contentDisposition(mockFile.getPath(), { type: 'attachment' }))
+    })
+
+    it('should build a weak ETag with mtime 0 when the file has no mtime', async () => {
+      const event = { isFresh: () => false } as unknown as IncomingHttpEvent;
+      (File.create as any).mockReturnValueOnce({ ...mockFile, getMTime: vi.fn().mockReturnValue(undefined) })
+
+      const response = BinaryFileResponse.download({ file: '/file/path', contentDispositionType: 'attachment', content: '' })
+      await response.prepare(event, { make: () => ({ get: vi.fn() }) } as any)
+
+      expect(response.getHeader('ETag')).toBe('W/"1024-0"')
     })
   })
 

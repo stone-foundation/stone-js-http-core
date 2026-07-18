@@ -71,6 +71,20 @@ protected optional _charset?: Encoding;
 
 ***
 
+### \_content
+
+```ts
+protected _content: unknown;
+```
+
+The content of the response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`_content`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#_content)
+
+***
+
 ### \_cookieCollection
 
 ```ts
@@ -120,6 +134,118 @@ protected optional _incomingEventResolver?: () => IncomingHttpEvent;
 #### Inherited from
 
 [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`_incomingEventResolver`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#_incomingeventresolver)
+
+***
+
+### \_statusCode?
+
+```ts
+protected optional _statusCode?: number;
+```
+
+The status code of the response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`_statusCode`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#_statuscode)
+
+***
+
+### \_statusMessage?
+
+```ts
+protected optional _statusMessage?: string;
+```
+
+The status message of the response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`_statusMessage`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#_statusmessage)
+
+***
+
+### metadata
+
+```ts
+readonly metadata: Record<string, unknown>;
+```
+
+The metadata associated with the event.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`metadata`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#metadata)
+
+***
+
+### originalContent
+
+```ts
+readonly originalContent: unknown;
+```
+
+The original content of the response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`originalContent`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#originalcontent)
+
+***
+
+### prepared
+
+```ts
+protected prepared: boolean;
+```
+
+The prepared status of the response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`prepared`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#prepared)
+
+***
+
+### source?
+
+```ts
+readonly optional source?: object;
+```
+
+The source of the event.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`source`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#source)
+
+***
+
+### timeStamp
+
+```ts
+readonly timeStamp: number;
+```
+
+The timestamp of the event creation.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`timeStamp`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#timestamp)
+
+***
+
+### type
+
+```ts
+readonly type: string;
+```
+
+The type of the event.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`type`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#type)
 
 ***
 
@@ -202,6 +328,28 @@ The regular expression for matching charset in content type.
 
 ***
 
+### content
+
+#### Get Signature
+
+```ts
+get content(): unknown;
+```
+
+Gets the content of the outgoing response.
+
+##### Returns
+
+`unknown`
+
+The content of the outgoing response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`content`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#content)
+
+***
+
 ### etag
 
 #### Get Signature
@@ -272,6 +420,28 @@ The associated IncomingHttpEvent.
 
 ***
 
+### isPrepared
+
+#### Get Signature
+
+```ts
+get isPrepared(): boolean;
+```
+
+Gets the prepared status of the outgoing response.
+
+##### Returns
+
+`boolean`
+
+The prepared status of the response.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`isPrepared`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#isprepared)
+
+***
+
 ### lastModified
 
 #### Get Signature
@@ -313,6 +483,50 @@ The HTTP status code.
 #### Inherited from
 
 [`BinaryFileResponse`](../../BinaryFileResponse/classes/BinaryFileResponse.md).[`status`](../../BinaryFileResponse/classes/BinaryFileResponse.md#status)
+
+***
+
+### statusCode
+
+#### Get Signature
+
+```ts
+get statusCode(): number | undefined;
+```
+
+Gets the status code of the outgoing response.
+
+##### Returns
+
+`number` \| `undefined`
+
+The status code of the response, or undefined if not set.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`statusCode`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#statuscode)
+
+***
+
+### statusMessage
+
+#### Get Signature
+
+```ts
+get statusMessage(): string | undefined;
+```
+
+Gets the status message of the outgoing response.
+
+##### Returns
+
+`string` \| `undefined`
+
+The status message of the response, or undefined if not set.
+
+#### Inherited from
+
+[`BinaryFileResponse`](../../BinaryFileResponse/classes/BinaryFileResponse.md).[`statusMessage`](../../BinaryFileResponse/classes/BinaryFileResponse.md#statusmessage)
 
 ***
 
@@ -491,6 +705,37 @@ The current instance of OutgoingHttpResponse for chaining.
 
 ***
 
+### clone()
+
+```ts
+clone<T>(): T;
+```
+
+Return a cloned instance.
+
+The `metadata` container is deep-copied (plain objects and arrays are recreated,
+special values kept by reference) so that mutating the clone's metadata — e.g. via
+middleware — never leaks back into the original event. This is what makes the
+Kernel's `originalEvent` snapshot a faithful pre-middleware copy.
+
+#### Type Parameters
+
+##### T
+
+`T` *extends* `JsonResponse`
+
+#### Returns
+
+`T`
+
+A cloned instance of the current class.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`clone`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#clone)
+
+***
+
 ### defaultEtagFn()
 
 ```ts
@@ -578,6 +823,80 @@ The current instance of OutgoingHttpResponse for chaining.
 #### Inherited from
 
 [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`format`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#format)
+
+***
+
+### get()
+
+#### Call Signature
+
+```ts
+get<TReturn>(key): TReturn | undefined;
+```
+
+Get data from metadata.
+
+##### Type Parameters
+
+###### TReturn
+
+`TReturn` = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to retrieve from metadata.
+
+##### Returns
+
+`TReturn` \| `undefined`
+
+The value associated with the key or the fallback.
+
+##### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`get`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#get)
+
+#### Call Signature
+
+```ts
+get<TReturn>(key, fallback): TReturn;
+```
+
+Get data from metadata.
+
+##### Type Parameters
+
+###### TReturn
+
+`TReturn` = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to retrieve from metadata.
+
+###### fallback
+
+`TReturn`
+
+The fallback value if the key is not found.
+
+##### Returns
+
+`TReturn`
+
+The value associated with the key or the fallback.
+
+##### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`get`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#get)
 
 ***
 
@@ -723,6 +1042,80 @@ An array of all header names.
 
 ***
 
+### getMetadataValue()
+
+#### Call Signature
+
+```ts
+getMetadataValue<TReturn>(key): TReturn | undefined;
+```
+
+Get data from metadata.
+
+##### Type Parameters
+
+###### TReturn
+
+`TReturn` = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to retrieve from metadata.
+
+##### Returns
+
+`TReturn` \| `undefined`
+
+The value associated with the key or the fallback.
+
+##### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`getMetadataValue`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#getmetadatavalue)
+
+#### Call Signature
+
+```ts
+getMetadataValue<TReturn>(key, fallback): TReturn;
+```
+
+Get data from metadata.
+
+##### Type Parameters
+
+###### TReturn
+
+`TReturn` = `unknown`
+
+##### Parameters
+
+###### key
+
+`string`
+
+The key to retrieve from metadata.
+
+###### fallback
+
+`TReturn`
+
+The fallback value if the key is not found.
+
+##### Returns
+
+`TReturn`
+
+The value associated with the key or the fallback.
+
+##### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`getMetadataValue`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#getmetadatavalue)
+
+***
+
 ### handleCacheHeaders()
 
 ```ts
@@ -788,6 +1181,40 @@ True if the header exists, false otherwise.
 #### Inherited from
 
 [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`hasHeader`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#hasheader)
+
+***
+
+### is()
+
+```ts
+is(key, value): boolean;
+```
+
+Check if the given value is equal to the specified value.
+
+#### Parameters
+
+##### key
+
+`string`
+
+The key to check.
+
+##### value
+
+`unknown`
+
+The value to compare against.
+
+#### Returns
+
+`boolean`
+
+True if the key's value is equal to the specified value, false otherwise.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`is`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#is)
 
 ***
 
@@ -1744,6 +2171,68 @@ The current instance of OutgoingHttpResponse for chaining.
 
 ***
 
+### setMetadataValue()
+
+```ts
+setMetadataValue(key, value?): this;
+```
+
+Add data to metadata.
+
+#### Parameters
+
+##### key
+
+`string` \| `Record`\<`string`, `unknown`\>
+
+The key or object to add to metadata.
+
+##### value?
+
+`unknown`
+
+The value to associate with the key.
+
+#### Returns
+
+`this`
+
+This Event instance.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`setMetadataValue`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#setmetadatavalue)
+
+***
+
+### setPrepared()
+
+```ts
+setPrepared(prepared): this;
+```
+
+Set the prepared status of the response.
+
+#### Parameters
+
+##### prepared
+
+`boolean`
+
+The prepared status to set.
+
+#### Returns
+
+`this`
+
+This OutgoingResponse instance.
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`setPrepared`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#setprepared)
+
+***
+
 ### setStatus()
 
 ```ts
@@ -1920,3 +2409,19 @@ A new instance of OutgoingHttpResponse.
 #### Inherited from
 
 [`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`create`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#create)
+
+## Events
+
+### OUTGOING\_RESPONSE
+
+```ts
+static OUTGOING_RESPONSE: string;
+```
+
+OUTGOING_RESPONSE Event name, fires on response to the incoming event.
+
+ OutgoingResponse#OUTGOING_RESPONSE
+
+#### Inherited from
+
+[`OutgoingHttpResponse`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md).[`OUTGOING_RESPONSE`](../../OutgoingHttpResponse/classes/OutgoingHttpResponse.md#outgoing_response)

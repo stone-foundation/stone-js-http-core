@@ -1,9 +1,16 @@
-import { escape } from 'lodash-es'
-import { Buffer } from 'safe-buffer'
 import { IContainer } from '@stone-js/core'
 import { HttpError } from './errors/HttpError'
 import { IncomingHttpEvent } from './IncomingHttpEvent'
 import { OutgoingHttpResponse, OutgoingHttpResponseOptions } from './OutgoingHttpResponse'
+
+/**
+ * Escape HTML special characters so a URL cannot inject markup into the redirect body.
+ *
+ * @param value - The raw value.
+ * @returns The escaped value.
+ */
+const escapeHtml = (value: string): string =>
+  value.replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char] ?? char))
 
 /**
  * Options for creating a Redirect HTTP Response.
@@ -85,7 +92,7 @@ export class RedirectResponse extends OutgoingHttpResponse {
    * @returns The current instance for method chaining.
    */
   private prepareRedirection (): this {
-    const url = escape(this.location().getHeader('Location', '/'))
+    const url = escapeHtml(this.location().getHeader('Location', '/'))
 
     return this
       .format({
@@ -103,9 +110,32 @@ export class RedirectResponse extends OutgoingHttpResponse {
    */
   private location (): this {
     if (this.targetUrl === 'back') {
-      this.targetUrl = this.incomingEvent.getHeader('Referrer', '/')
+      // `back` uses the Referer, which is client-controlled. Only honour a SAME-ORIGIN referer to
+      // avoid an open redirect off-site; otherwise fall back to the app root.
+      this.targetUrl = this.resolveSafeBackUrl()
     }
     return this.setHeader('Location', String(this.targetUrl))
+  }
+
+  /**
+   * Resolve a safe `back` target: the Referer only when it points to the same origin, else `/`.
+   *
+   * @returns The safe back URL.
+   */
+  private resolveSafeBackUrl (): string {
+    const referer = this.incomingEvent.getHeader<string>('referer', '')
+
+    if (referer === '') { return '/' }
+
+    // A relative referer ("/path") is always same-origin and safe.
+    if (referer.startsWith('/') && !referer.startsWith('//')) { return referer }
+
+    try {
+      const target = new URL(referer)
+      return target.host === this.incomingEvent.host ? referer : '/'
+    } catch {
+      return '/'
+    }
   }
 
   /**

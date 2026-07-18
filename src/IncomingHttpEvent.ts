@@ -6,7 +6,7 @@ import { URL } from 'node:url'
 import rangeParser from 'range-parser'
 import { Cookie } from './cookies/Cookie'
 import contentTypeLib from 'content-type'
-import { get, has, isArray } from 'lodash-es'
+import { getPath, hasPath } from '@stone-js/config'
 import { HttpError } from './errors/HttpError'
 import { UploadedFile } from '@stone-js/filesystem'
 import { CookieCollection } from './cookies/CookieCollection'
@@ -199,7 +199,10 @@ export class IncomingHttpEvent extends IncomingEvent {
 
   /** @returns Whether the request was prefetch. */
   get isPrefetch (): boolean {
-    return ['prefetch'].includes(this.getHeader('Purpose') ?? this.getHeader('Sec-Purpose') ?? '')
+    // `Purpose: prefetch` (legacy) or the modern `Sec-Purpose`, whose value is a token list such
+    // as `prefetch;prerender` — match the token, not the whole string.
+    const purpose = (this.getHeader<string>('Sec-Purpose') ?? this.getHeader<string>('Purpose') ?? '').toLowerCase()
+    return purpose.includes('prefetch') || purpose.includes('prerender')
   }
 
   /** @returns The ETag of the request, if present. */
@@ -238,33 +241,19 @@ export class IncomingHttpEvent extends IncomingEvent {
   }
 
   /**
-   * Get data from the request.
+   * Get request DATA by key (route params → body → query → metadata).
    *
-   * Priority:
-   * 1. Route params
-   * 2. Body
-   * 3. Query params
-   * 4. Headers
-   * 5. Cookies
-   * 6. Metadata
-   * 7. Fallback value
+   * SECURITY: does NOT read headers or cookies — use {@link getHeader}/{@link getCookie}.
    *
    * @param key - The key to look for.
-   * @returns The value of the key or the fallback.
+   * @returns The value of the key, or undefined.
   */
   get<TReturn = unknown>(key: string): TReturn | undefined
 
   /**
-   * Get data from the request.
+   * Get request DATA by key with a fallback (route params → body → query → metadata).
    *
-   * Priority:
-   * 1. Route params
-   * 2. Body
-   * 3. Query params
-   * 4. Headers
-   * 5. Cookies
-   * 6. Metadata
-   * 7. Fallback value
+   * SECURITY: does NOT read headers or cookies — use {@link getHeader}/{@link getCookie}.
    *
    * @param key - The key to look for.
    * @param fallback - A fallback value if the key is not found.
@@ -273,16 +262,15 @@ export class IncomingHttpEvent extends IncomingEvent {
   get<TReturn = unknown>(key: string, fallback: TReturn): TReturn
 
   /**
-   * Get data from the request.
+   * Get request DATA by key, across the request-data sources only.
    *
-   * Priority:
-   * 1. Route params
-   * 2. Body
-   * 3. Query params
-   * 4. Headers
-   * 5. Cookies
-   * 6. Metadata
-   * 7. Fallback value
+   * Priority: route params → body → query → metadata → fallback.
+   *
+   * SECURITY: `get()` deliberately does NOT read headers or cookies. Mixing trust levels
+   * (route params are kernel-trusted; body/query are attacker-controlled) in one lookup let an
+   * attacker spoof a header value — e.g. `event.get('authorization')` could be satisfied by
+   * `?authorization=...`. Read trusted transport values through the dedicated, unspoofable
+   * accessors {@link getHeader} and {@link getCookie} instead.
    *
    * @param key - The key to look for.
    * @param fallback - A fallback value if the key is not found.
@@ -293,8 +281,6 @@ export class IncomingHttpEvent extends IncomingEvent {
       this.getParam(key) ??
       this.getFromBody(key) ??
       this.getFromQueryParams(key) ??
-      this.getFromHeaders(key) ??
-      this.getFromCookies(key) ??
       this.getMetadataValue(key, fallback)
     ) as TReturn | undefined
   }
@@ -490,7 +476,7 @@ export class IncomingHttpEvent extends IncomingEvent {
   preferredType (types: string[] = ['json', 'html', 'xml', 'text'], defaultType: string = 'json'): string {
     // 1. Check Accept header (highest priority)
     const acceptType = this.acceptsTypes(...types)
-    if (acceptType !== false) return isArray(acceptType) ? acceptType[0] : acceptType
+    if (acceptType !== false) return Array.isArray(acceptType) ? acceptType[0] : acceptType
 
     // 2. Check Content-Type (valid if the request is sending data)
     const contentType = this.isType(...types)
@@ -544,7 +530,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   json<TReturn = unknown>(key: string, fallback?: TReturn): TReturn | undefined {
     if (this.hasJson(key)) {
-      return get(this.body, key, fallback) as TReturn | undefined
+      return getPath<TReturn>(this.body, key, fallback)
     }
     return fallback
   }
@@ -556,7 +542,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns True if the key exists, otherwise false.
    */
   hasJson (key: string): boolean {
-    return this.isType('json') === 'json' && has(this.body, key)
+    return this.isType('json') === 'json' && hasPath(this.body, key)
   }
 
   /**
@@ -768,7 +754,7 @@ export class IncomingHttpEvent extends IncomingEvent {
    * @returns The value from the body if it exists, otherwise undefined.
    */
   private getFromBody (key: string): unknown {
-    return has(this.body, key) ? get(this.body, key) : undefined
+    return hasPath(this.body, key) ? getPath(this.body, key) : undefined
   }
 
   /**
@@ -779,26 +765,6 @@ export class IncomingHttpEvent extends IncomingEvent {
    */
   private getFromQueryParams (key: string): unknown {
     return this.query.get(key) ?? undefined
-  }
-
-  /**
-   * Retrieve a value from the request headers.
-   *
-   * @param key - The name of the header to retrieve.
-   * @returns The value of the header if it exists, otherwise undefined.
-   */
-  private getFromHeaders (key: string): string | undefined {
-    return this.hasHeader(key) ? this.getHeader(key) : undefined
-  }
-
-  /**
-   * Retrieve a value from the cookies.
-   *
-   * @param key - The name of the cookie to retrieve.
-   * @returns The value of the cookie if it exists, otherwise undefined.
-   */
-  private getFromCookies (key: string): unknown {
-    return this.getCookie(key)?.value ?? undefined
   }
 
   /**

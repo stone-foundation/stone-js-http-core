@@ -76,15 +76,37 @@ describe('RedirectResponse', () => {
     expect(response._content).toBe('')
   })
 
-  it('should handle "back" as target URL and use the Referrer header', async () => {
-    const options: RedirectResponseOptions = {
-      url: 'back',
-      statusCode: 302,
-      content: 'Redirecting...'
-    }
+  it('should follow "back" to a SAME-ORIGIN referer', async () => {
+    const event = IncomingHttpEvent.create({
+      url: new URL('http://example.com'),
+      ip: '127.0.0.1',
+      source: {} as any,
+      headers: { referrer: 'http://example.com/dashboard' }
+    })
+    const response = await RedirectResponse.create<RedirectResponse>({ url: 'back', statusCode: 302, content: 'x' }).prepare(event)
+    expect(response.getHeader('Location')).toBe('http://example.com/dashboard')
+  })
 
-    const response = await RedirectResponse.create<RedirectResponse>(options).prepare(mockIncomingEvent)
-    expect(response.getHeader('Location')).toBe('http://example.com')
+  it('should NOT follow "back" to a cross-origin referer (open-redirect protection)', async () => {
+    const event = IncomingHttpEvent.create({
+      url: new URL('http://localhost'),
+      ip: '127.0.0.1',
+      source: {} as any,
+      headers: { referrer: 'http://evil.example.com/phish' }
+    })
+    const response = await RedirectResponse.create<RedirectResponse>({ url: 'back', statusCode: 302, content: 'x' }).prepare(event)
+    expect(response.getHeader('Location')).toBe('/')
+  })
+
+  it('should follow "back" to a relative referer', async () => {
+    const event = IncomingHttpEvent.create({
+      url: new URL('http://localhost'),
+      ip: '127.0.0.1',
+      source: {} as any,
+      headers: { referrer: '/previous' }
+    })
+    const response = await RedirectResponse.create<RedirectResponse>({ url: 'back', statusCode: 302, content: 'x' }).prepare(event)
+    expect(response.getHeader('Location')).toBe('/previous')
   })
 
   it('should keep user defined cache-control header for moved permanently', async () => {

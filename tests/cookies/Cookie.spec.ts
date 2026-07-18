@@ -33,14 +33,14 @@ describe('Cookie', () => {
 
   it('should serialize and sign the cookie value', () => {
     const cookie = Cookie.create('test', 'value')
-    const secret = 'mySecret'
+    const secret = '0123456789abcdef0123456789abcdef'
     const serialized = cookie.serialize(secret)
     expect(serialized).toContain(`test=${encodeURIComponent('$$s$$:')}`)
   })
 
   it('should serialize and sign the cookie object value', () => {
     const cookie = Cookie.create('test', { key: 'value' })
-    const secret = 'mySecret'
+    const secret = '0123456789abcdef0123456789abcdef'
     const serialized = cookie.serialize(secret)
     expect(serialized).toContain(`test=${encodeURIComponent('$$s$$:')}`)
   })

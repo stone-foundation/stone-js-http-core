@@ -28,7 +28,9 @@ export class CompressionMiddleware {
       }
 
       response.removeHeader('Content-Length')
-      response.setHeader('Vary', 'Accept-Encoding')
+      // Merge into Vary (never overwrite): a prior `Vary: Accept` from content negotiation must
+      // survive, otherwise a shared cache can serve a wrongly-encoded/negotiated response.
+      response.addVary('Accept-Encoding')
     }
 
     return response

@@ -65,13 +65,15 @@ options: CookieOptions;
 
 Additional cookie options.
 
-#### secret
+#### secret?
 
 ```ts
-secret: string;
+optional secret?: string;
 ```
 
-The secret used for signing cookies.
+The secret used for signing cookies. Undefined by default: cookies are NOT signed unless a
+strong secret (>= 32 chars) is configured. A weak/empty secret is rejected rather than
+silently producing a forgeable signature.
 
 ***
 

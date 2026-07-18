@@ -148,7 +148,7 @@ describe('HandleCorsMiddleware', () => {
     const response = await middleware.handle(incomingEvent, next)
 
     expect(response?.getHeader('Vary')).toContain('Origin')
-    expect(response?.getHeader('Access-Control-Allow-Origin')).toBe('false')
+    expect(response?.getHeader('Access-Control-Allow-Origin')).toBeUndefined()
     expect(response?.getHeader('Access-Control-Expose-Headers')).toBe('X-Custom-Header')
   })
 
@@ -172,6 +172,6 @@ describe('HandleCorsMiddleware', () => {
 
     expect(response?.getHeader('Vary')).toContain('Origin')
     expect(response?.getHeader('Access-Control-Max-Age')).toBe('600')
-    expect(response?.getHeader('Access-Control-Allow-Origin')).toBe('false')
+    expect(response?.getHeader('Access-Control-Allow-Origin')).toBeUndefined()
   })
 })

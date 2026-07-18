@@ -7,7 +7,7 @@ import { CookieCollection } from '../../src/cookies/CookieCollection'
  * Unit tests for the CookieCollection class.
  */
 describe('CookieCollection', () => {
-  const mockSecret = 'secretKey'
+  const mockSecret = '0123456789abcdef0123456789abcdef'
   const mockOptions: CookieOptions = { path: '/', secure: true }
   const mockCookieString = 'test=value; anotherTest=anotherValue'
 
@@ -85,9 +85,9 @@ describe('CookieCollection', () => {
 
   it('should set a secret for signing and unsigning cookies', () => {
     const collection = CookieCollection.create(mockCookieString, mockOptions)
-    collection.setSecret('newSecret')
+    collection.setSecret('0123456789abcdef0123456789abcdef-new')
     // @ts-expect-error Testing private property
-    expect(collection.secret).toBe('newSecret')
+    expect(collection.secret).toBe('0123456789abcdef0123456789abcdef-new')
   })
 
   it('should set options for all cookies in the collection', () => {
@@ -100,7 +100,7 @@ describe('CookieCollection', () => {
   })
 
   it('should deserialize a signed and serialized value', () => {
-    const secret = 'mySecret'
+    const secret = '0123456789abcdef0123456789abcdef'
     const value = { key: 'value' }
     const collection = CookieCollection.create()
     // @ts-expect-error Testing private method
@@ -111,6 +111,6 @@ describe('CookieCollection', () => {
   it('should throw error if trying to deserialize modified-signed value', () => {
     const collection = CookieCollection.create()
     // @ts-expect-error Testing private method
-    expect(() => collection.deserializeCookieValue('test', '$$s$$:value.djdjdkdkd', {}, 'mySecret')).toThrow(CookieError)
+    expect(() => collection.deserializeCookieValue('test', '$$s$$:value.djdjdkdkd', {}, '0123456789abcdef0123456789abcdef')).toThrow(CookieError)
   })
 })

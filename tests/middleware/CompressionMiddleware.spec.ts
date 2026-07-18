@@ -18,6 +18,7 @@ describe('CompressionMiddleware', () => {
       content: 'This is a test content that is larger than 1KB.'.repeat(50), // >1KB
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     })
 
@@ -29,7 +30,7 @@ describe('CompressionMiddleware', () => {
     expect(eventMock.getHeader).toHaveBeenCalledWith('accept-encoding', '')
     expect(nextMock).toHaveBeenCalled()
     expect(gzip).toHaveBeenCalled()
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
     expect(response.setHeader).toHaveBeenCalledWith('Content-Encoding', 'gzip')
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
     expect(response.setContent).toHaveBeenCalledWith(compressedBuffer)
@@ -41,6 +42,7 @@ describe('CompressionMiddleware', () => {
       content: Buffer.from('This is compressible content.'),
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     })
 
@@ -52,7 +54,7 @@ describe('CompressionMiddleware', () => {
     expect(eventMock.getHeader).toHaveBeenCalledWith('accept-encoding', '')
     expect(nextMock).toHaveBeenCalled()
     expect(brotliCompress).toHaveBeenCalled()
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
     expect(response.setHeader).toHaveBeenCalledWith('Content-Encoding', 'br')
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
     expect(response.setContent).toHaveBeenCalledWith(compressedBuffer)
@@ -64,6 +66,7 @@ describe('CompressionMiddleware', () => {
       content: Buffer.from('This is compressible content.'),
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     })
 
@@ -73,7 +76,7 @@ describe('CompressionMiddleware', () => {
     expect(nextMock).toHaveBeenCalled()
     expect(response.setContent).not.toHaveBeenCalled()
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
   })
 
   it('should skip compression for content smaller than 1KB', async () => {
@@ -97,6 +100,7 @@ describe('CompressionMiddleware', () => {
       content: compressedBuffer,
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     });
 
@@ -107,7 +111,7 @@ describe('CompressionMiddleware', () => {
     expect(nextMock).toHaveBeenCalled()
     expect(gzip).toHaveBeenCalled()
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
   })
 
   it('should handle errors during compression gracefully for deflate', async () => {
@@ -117,6 +121,7 @@ describe('CompressionMiddleware', () => {
       content: compressedBuffer,
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     });
 
@@ -127,7 +132,7 @@ describe('CompressionMiddleware', () => {
     expect(nextMock).toHaveBeenCalled()
     expect(deflate).toHaveBeenCalled()
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
   })
 
   it('should handle errors during compression gracefully for br', async () => {
@@ -137,6 +142,7 @@ describe('CompressionMiddleware', () => {
       content: compressedBuffer,
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     });
 
@@ -147,7 +153,7 @@ describe('CompressionMiddleware', () => {
     expect(nextMock).toHaveBeenCalled()
     expect(brotliCompress).toHaveBeenCalled()
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
   })
 
   it('should compress content using deflate if the client supports it', async () => {
@@ -156,6 +162,7 @@ describe('CompressionMiddleware', () => {
       content: Buffer.from('This is compressible content.'),
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     })
 
@@ -167,7 +174,7 @@ describe('CompressionMiddleware', () => {
     expect(eventMock.getHeader).toHaveBeenCalledWith('accept-encoding', '')
     expect(nextMock).toHaveBeenCalled()
     expect(deflate).toHaveBeenCalled()
-    expect(response.setHeader).toHaveBeenCalledWith('Vary', 'Accept-Encoding')
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
     expect(response.setHeader).toHaveBeenCalledWith('Content-Encoding', 'deflate')
     expect(response.removeHeader).toHaveBeenCalledWith('Content-Length')
     expect(response.setContent).toHaveBeenCalledWith(compressedBuffer)
@@ -179,6 +186,7 @@ describe('CompressionMiddleware', () => {
       content: Buffer.from('This is compressible content.'),
       setHeader: vi.fn(),
       setContent: vi.fn(),
+      addVary: vi.fn(),
       removeHeader: vi.fn()
     })
 
@@ -190,7 +198,9 @@ describe('CompressionMiddleware', () => {
     expect(eventMock.getHeader).toHaveBeenCalledWith('accept-encoding', '')
     expect(nextMock).toHaveBeenCalled()
     expect(gzip).not.toHaveBeenCalled()
-    expect(response.setHeader).toHaveBeenCalled()
+    // No encoding negotiated → no Content-Encoding, but Vary is still merged and Content-Length dropped.
+    expect(response.setHeader).not.toHaveBeenCalledWith('Content-Encoding', expect.anything())
+    expect(response.addVary).toHaveBeenCalledWith('Accept-Encoding')
     expect(response.removeHeader).toHaveBeenCalled()
     expect(response.setContent).not.toHaveBeenCalled()
   })

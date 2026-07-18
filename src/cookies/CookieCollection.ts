@@ -2,7 +2,7 @@ import { parse } from 'cookie'
 import { Cookie } from './Cookie'
 import { CookieOptions } from '../declarations'
 import { CookieError } from '../errors/CookieError'
-import { isCookieValueSerialized, isCookieValueSigned, unsignCookieValue } from './utils'
+import { isCookieValueSerialized, isCookieValueSigned, isSignableCookieSecret, unsignCookieValue } from './utils'
 
 /**
  * Class representing a collection of Cookies.
@@ -234,7 +234,9 @@ export class CookieCollection {
   private deserializeCookieValue (name: string, rawValue: unknown, options: CookieOptions, secret?: string): Cookie {
     let value = rawValue
 
-    if (secret !== undefined && isCookieValueSigned(value)) {
+    // Only verify a signature when a strong secret is present; otherwise the signed value is
+    // left opaque (never unsigned with a weak/empty key).
+    if (isSignableCookieSecret(secret) && isCookieValueSigned(value)) {
       value = unsignCookieValue(value, secret)
       if (value === false) {
         throw new CookieError('Failed to unsign the value.')

@@ -149,14 +149,17 @@ describe('IncomingHttpEvent', () => {
       expect(event.get('name')).toBe('Stone.js')
     })
 
-    it('should correctly return the value from the headers', () => {
+    it('should NOT read headers via get() (security): use getHeader() instead', () => {
       const event = IncomingHttpEvent.create({ ...mockOptions })
-      expect(event.get('content-type')).toBe('application/json; charset=utf-8')
+      // get() must not fall through to headers — that let query/body spoof header lookups.
+      expect(event.get('content-type')).toBeUndefined()
+      expect(event.getHeader('content-type')).toBe('application/json; charset=utf-8')
     })
 
-    it('should correctly return the value from the cookies', () => {
+    it('should NOT read cookies via get() (security): use getCookie() instead', () => {
       const event = IncomingHttpEvent.create({ ...mockOptions })
-      expect(event.get<string>('test')).toBe('value')
+      expect(event.get<string>('test')).toBeUndefined()
+      expect(event.getCookie('test')?.value).toBe('value')
     })
 
     it('should correctly return the value from the metadata', () => {
