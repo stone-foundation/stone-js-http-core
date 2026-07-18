@@ -239,6 +239,34 @@ The name of the JSONP callback parameter.
 
 ***
 
+### limits
+
+```ts
+limits: object;
+```
+
+Request limits — defence-in-depth against denial-of-service via oversized requests.
+Applied by `RequestLimitsMiddleware` (and effective across every adapter, incl. serverless
+where the Node server knobs are unavailable). Set a value to `0` to disable that check.
+
+#### maxCookies
+
+```ts
+maxCookies: number;
+```
+
+Maximum number of cookies accepted in the request (0 = unlimited). Default 50.
+
+#### maxHeaders
+
+```ts
+maxHeaders: number;
+```
+
+Maximum number of distinct request headers accepted (0 = unlimited). Default 100.
+
+***
+
 ### proxies
 
 ```ts

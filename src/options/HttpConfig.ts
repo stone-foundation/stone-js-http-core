@@ -91,6 +91,17 @@ export interface HttpConfig {
     untrustedIp: string[]
   }
   /**
+   * Request limits — defence-in-depth against denial-of-service via oversized requests.
+   * Applied by `RequestLimitsMiddleware` (and effective across every adapter, incl. serverless
+   * where the Node server knobs are unavailable). Set a value to `0` to disable that check.
+   */
+  limits: {
+    /** Maximum number of distinct request headers accepted (0 = unlimited). Default 100. */
+    maxHeaders: number
+    /** Maximum number of cookies accepted in the request (0 = unlimited). Default 50. */
+    maxCookies: number
+  }
+  /**
    * Configuration for request body parsing.
    */
   body: {
@@ -226,6 +237,10 @@ export const httpCoreBlueprint: HttpCoreBlueprint = {
       proxies: {
         trustedIp: [],
         untrustedIp: []
+      },
+      limits: {
+        maxHeaders: 100,
+        maxCookies: 50
       },
       body: {
         limit: '100kb',

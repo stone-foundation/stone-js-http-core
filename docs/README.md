@@ -33,6 +33,7 @@
 - [middleware/CompressionMiddleware](middleware/CompressionMiddleware/README.md)
 - [middleware/CORSHeadersMiddleware](middleware/CORSHeadersMiddleware/README.md)
 - [middleware/HandleCorsMiddleware](middleware/HandleCorsMiddleware/README.md)
+- [middleware/RequestLimitsMiddleware](middleware/RequestLimitsMiddleware/README.md)
 - [middleware/StaticFileMiddleware](middleware/StaticFileMiddleware/README.md)
 - [options/HttpConfig](options/HttpConfig/README.md)
 - [OutgoingHttpResponse](OutgoingHttpResponse/README.md)
